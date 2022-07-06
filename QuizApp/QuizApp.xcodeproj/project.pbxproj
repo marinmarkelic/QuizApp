@@ -82,6 +82,7 @@
 				F7919A64650124D8BE27829B /* Pods-QuizApp.debug.xcconfig */,
 				332B80C01469DB84682B237F /* Pods-QuizApp.release.xcconfig */,
 			);
+			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -96,7 +97,6 @@
 				9C195363287584750051CEC6 /* Sources */,
 				9C195364287584750051CEC6 /* Frameworks */,
 				9C195365287584750051CEC6 /* Resources */,
-				9C19537E2875C0F70051CEC6 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -153,23 +153,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		9C19537E2875C0F70051CEC6 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
-		};
 		C1409DC4A36CBCA61E283431 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
