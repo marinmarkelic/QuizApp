@@ -11,15 +11,19 @@
 		9C19536F287584750051CEC6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C19536E287584750051CEC6 /* ViewController.swift */; };
 		9C195374287584770051CEC6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C195373287584770051CEC6 /* Assets.xcassets */; };
 		9C195377287584770051CEC6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C195375287584770051CEC6 /* LaunchScreen.storyboard */; };
+		EA2CCC183DC4F53CCE734E09 /* Pods_QuizApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAFEFBB8508253B67AD244C1 /* Pods_QuizApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		332B80C01469DB84682B237F /* Pods-QuizApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuizApp.release.xcconfig"; path = "Target Support Files/Pods-QuizApp/Pods-QuizApp.release.xcconfig"; sourceTree = "<group>"; };
 		9C195367287584750051CEC6 /* QuizApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuizApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C19536A287584750051CEC6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9C19536E287584750051CEC6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9C195373287584770051CEC6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9C195376287584770051CEC6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9C195378287584770051CEC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EAFEFBB8508253B67AD244C1 /* Pods_QuizApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_QuizApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F7919A64650124D8BE27829B /* Pods-QuizApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-QuizApp.debug.xcconfig"; path = "Target Support Files/Pods-QuizApp/Pods-QuizApp.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,17 +31,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA2CCC183DC4F53CCE734E09 /* Pods_QuizApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		84CC0C4BA285FDFD51653B4B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EAFEFBB8508253B67AD244C1 /* Pods_QuizApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9C19535E287584750051CEC6 = {
 			isa = PBXGroup;
 			children = (
 				9C195369287584750051CEC6 /* QuizApp */,
 				9C195368287584750051CEC6 /* Products */,
+				E4A8ECD883112D3719A7584B /* Pods */,
+				84CC0C4BA285FDFD51653B4B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -61,6 +76,16 @@
 			path = QuizApp;
 			sourceTree = "<group>";
 		};
+		E4A8ECD883112D3719A7584B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F7919A64650124D8BE27829B /* Pods-QuizApp.debug.xcconfig */,
+				332B80C01469DB84682B237F /* Pods-QuizApp.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -68,6 +93,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9C19537B287584770051CEC6 /* Build configuration list for PBXNativeTarget "QuizApp" */;
 			buildPhases = (
+				C1409DC4A36CBCA61E283431 /* [CP] Check Pods Manifest.lock */,
 				9C195363287584750051CEC6 /* Sources */,
 				9C195364287584750051CEC6 /* Frameworks */,
 				9C195365287584750051CEC6 /* Resources */,
@@ -125,6 +151,31 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C1409DC4A36CBCA61E283431 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-QuizApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9C195363287584750051CEC6 /* Sources */ = {
@@ -266,6 +317,7 @@
 		};
 		9C19537C287584770051CEC6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F7919A64650124D8BE27829B /* Pods-QuizApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -293,6 +345,7 @@
 		};
 		9C19537D287584770051CEC6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 332B80C01469DB84682B237F /* Pods-QuizApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
