@@ -20,6 +20,9 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let tapGestureBackground = UITapGestureRecognizer(target: self, action: #selector(self.backgroundTapped(_:)))
+        self.view.addGestureRecognizer(tapGestureBackground)
+
         createViews()
         styleViews()
         defineLayoutForViews()
@@ -97,5 +100,11 @@ class LoginViewController: UIViewController {
             $0.trailing.equalToSuperview().offset(-32)
             $0.bottom.equalToSuperview()
         }
+    }
+
+    @objc
+    func backgroundTapped(_ sender: UITapGestureRecognizer) {
+        emailView.endEditing(true)
+        passwordView.endEditing(true)
     }
 }
