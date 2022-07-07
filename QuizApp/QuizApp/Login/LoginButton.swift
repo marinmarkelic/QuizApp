@@ -8,6 +8,10 @@ class LoginButton: UIButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
+        styleViews()
+    }
+
+    func styleViews() {
         layer.cornerRadius = 20
         clipsToBounds = true
 

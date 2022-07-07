@@ -11,21 +11,30 @@ class PasswordView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        buildViews()
-        addConstraints()
+        createViews()
+        styleViews()
+        defineLayoutForViews()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func buildViews() {
+    func createViews() {
+        textField = UITextField()
+        visibilityButton = UIButton()
+
+        addSubview(textField)
+        addSubview(visibilityButton)
+
+    }
+
+    func styleViews() {
         backgroundColor = .white.withAlphaComponent(0.3)
         layer.cornerRadius = 20
         layer.borderColor =  UIColor.white.cgColor
         clipsToBounds = true
 
-        textField = UITextField()
         textField.delegate = self
         textField.attributedPlaceholder = NSAttributedString(
             string: "Password",
@@ -33,14 +42,10 @@ class PasswordView: UIView {
         textField.textColor = .white
         textField.isSecureTextEntry = true
 
-        visibilityButton = UIButton()
         visibilityButton.tintColor = .white
         visibilityButton.setBackgroundImage(UIImage(systemName: "eye.fill"), for: .normal)
         visibilityButton.isHidden = true
         visibilityButton.addTarget(self, action: #selector(visibilityButtonTap), for: .touchUpInside)
-
-        addSubview(textField)
-        addSubview(visibilityButton)
     }
 
     @objc
@@ -50,10 +55,11 @@ class PasswordView: UIView {
         delegate.passwordViewText(self, hasValidInput: false)
     }
 
-    func addConstraints() {
+    func defineLayoutForViews() {
         textField.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(21)
             $0.top.equalToSuperview().offset(10)
+            $0.trailing.equalToSuperview().offset(-10)
             $0.bottom.equalToSuperview().offset(-10)
         }
 

@@ -20,11 +20,12 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        buildViews()
-        addConstraints()
+        createViews()
+        styleViews()
+        defineLayoutForViews()
     }
 
-    func buildViews() {
+    func createViews() {
         gradientView = GradientView()
 
         mainView = UIView()
@@ -33,17 +34,15 @@ class LoginViewController: UIViewController {
         contentView = UIView()
 
         label = UILabel()
-        label.text = "PopQuiz"
-        label.textColor = .white
-        label.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 32), size: 32)
 
         stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.alignment = .fill
-        stackView.distribution = .fillEqually
-        stackView.spacing = 18
+        emailView = EmailView()
+        passwordView = PasswordView()
+        loginButton = LoginButton()
 
-        addViewsToStackView()
+        stackView.addArrangedSubview(emailView)
+        stackView.addArrangedSubview(passwordView)
+        stackView.addArrangedSubview(loginButton)
 
         view.addSubview(gradientView)
         gradientView.addSubview(mainView)
@@ -53,20 +52,21 @@ class LoginViewController: UIViewController {
         contentView.addSubview(stackView)
     }
 
-    func addViewsToStackView() {
-        emailView = EmailView()
-        passwordView = PasswordView()
-        loginButton = LoginButton()
+    func styleViews() {
+        label.text = "PopQuiz"
+        label.textColor = .white
+        label.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 32), size: 32)
+
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .fillEqually
+        stackView.spacing = 18
 
         emailView.delegate = loginButton
         passwordView.delegate = loginButton
-
-        stackView.addArrangedSubview(emailView)
-        stackView.addArrangedSubview(passwordView)
-        stackView.addArrangedSubview(loginButton)
     }
 
-    func addConstraints() {
+    func defineLayoutForViews() {
         gradientView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
