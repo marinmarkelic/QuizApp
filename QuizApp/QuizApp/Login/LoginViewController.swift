@@ -4,8 +4,11 @@ import SnapKit
 class LoginViewController: UIViewController {
 
     var gradientView: GradientView!
-
     var mainView: UIView!
+
+    var scrollView: UIScrollView!
+    var contentView: UIView!
+
     var label: UILabel!
 
     var stackView: UIStackView!
@@ -23,16 +26,11 @@ class LoginViewController: UIViewController {
 
     func buildViews() {
         gradientView = GradientView()
-//        gradientBackground.frame = view.bounds
-//        gradientBackground.colors = [
-//            CGColor(red: 116/255, green: 79/255, blue: 163/255, alpha: 1.0),
-//            CGColor(red: 39/255, green: 47/255, blue: 118/255, alpha: 1.0)]
-//        gradientBackground.frame = view.bounds
-//
-//        view.layer.insertSublayer(gradientBackground, at: 0)
-//        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
         mainView = UIView()
+
+        scrollView = UIScrollView()
+        contentView = UIView()
 
         label = UILabel()
         label.text = "PopQuiz"
@@ -50,7 +48,9 @@ class LoginViewController: UIViewController {
         view.addSubview(gradientView)
         gradientView.addSubview(mainView)
         mainView.addSubview(label)
-        mainView.addSubview(stackView)
+        mainView.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(stackView)
     }
 
     func addViewsToStackView() {
@@ -76,14 +76,26 @@ class LoginViewController: UIViewController {
         }
 
         label.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(10)
             $0.centerX.equalTo(gradientView)
+        }
+
+        scrollView.snp.makeConstraints {
+            $0.top.equalTo(label.snp.bottom)
+            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+
+        contentView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+            $0.width.equalToSuperview()
         }
 
         stackView.snp.makeConstraints {
             $0.centerX.equalTo(gradientView)
-            $0.top.equalTo(label.snp.bottom).offset(20)
+            $0.centerY.equalTo(mainView)
             $0.leading.equalToSuperview().offset(32)
             $0.trailing.equalToSuperview().offset(-32)
+            $0.bottom.equalToSuperview()
         }
     }
 }
