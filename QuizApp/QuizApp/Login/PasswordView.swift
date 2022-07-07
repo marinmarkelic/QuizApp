@@ -20,6 +20,7 @@ class PasswordView: UIView {
     func buildViews() {
         backgroundColor = .white.withAlphaComponent(0.3)
         layer.cornerRadius = 20
+        layer.borderColor =  UIColor.white.cgColor
         clipsToBounds = true
 
         textField = UITextField()
@@ -61,6 +62,14 @@ class PasswordView: UIView {
 }
 
 extension PasswordView: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        layer.borderWidth = 1
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        layer.borderWidth = 0
+    }
+
     func textField(
         _ textField: UITextField,
         shouldChangeCharactersIn range: NSRange,

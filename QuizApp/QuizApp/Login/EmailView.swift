@@ -19,9 +19,11 @@ class EmailView: UIView {
     func buildViews() {
         backgroundColor = .white.withAlphaComponent(0.3)
         layer.cornerRadius = 20
+        layer.borderColor = UIColor.white.cgColor
         clipsToBounds = true
 
         textField = UITextField()
+        textField.delegate = self
         textField.attributedPlaceholder = NSAttributedString(
             string: "Email",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7)])
@@ -36,5 +38,15 @@ class EmailView: UIView {
             $0.top.equalToSuperview().offset(10)
             $0.bottom.equalToSuperview().offset(-10)
         }
+    }
+}
+
+extension EmailView: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        layer.borderWidth = 1
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        layer.borderWidth = 0
     }
 }
