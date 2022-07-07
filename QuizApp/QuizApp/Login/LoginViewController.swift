@@ -30,7 +30,7 @@ class LoginViewController: UIViewController {
     }
 
     private func addActions() {
-        let tapGestureBackground = UITapGestureRecognizer(target: self, action: #selector(self.backgroundTapped(_:)))
+        let tapGestureBackground = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped(_:)))
         view.addGestureRecognizer(tapGestureBackground)
     }
 

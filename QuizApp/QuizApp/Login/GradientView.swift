@@ -24,7 +24,7 @@ extension GradientView: ConstructViewsProtocol {
     func styleViews() {
         autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
-        guard let theLayer = self.layer as? CAGradientLayer else {
+        guard let theLayer = layer as? CAGradientLayer else {
             return
         }
 
@@ -32,7 +32,7 @@ extension GradientView: ConstructViewsProtocol {
             CGColor(red: 116 / 255, green: 79 / 255, blue: 163 / 255, alpha: 1.0),
             CGColor(red: 39 / 255, green: 47 / 255, blue: 118 / 255, alpha: 1.0)]
         theLayer.locations = [0.0, 1.0]
-        theLayer.frame = self.bounds
+        theLayer.frame = bounds
     }
 
     func defineLayoutForViews() {}
