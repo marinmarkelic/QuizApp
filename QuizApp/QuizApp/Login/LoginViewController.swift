@@ -109,7 +109,7 @@ extension LoginViewController: ConstructViewsProtocol {
         stackView.snp.makeConstraints {
             $0.center.equalTo(gradientView)
             $0.leading.equalToSuperview().offset(32)
-            $0.trailing.equalToSuperview().offset(-32)
+            $0.trailing.equalToSuperview().inset(32)
             $0.bottom.equalToSuperview()
         }
     }
