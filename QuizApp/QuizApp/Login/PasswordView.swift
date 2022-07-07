@@ -3,7 +3,7 @@ import SnapKit
 
 class PasswordView: TextFieldView {
 
-    weak var delegate: PasswordViewDelegate!
+    weak var delegate: PasswordViewDelegate?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,7 +22,7 @@ class PasswordView: TextFieldView {
         replacementString string: String
     ) -> Bool {
         let hasValidInput = range.lowerBound != 0 || range.upperBound <= 0
-        delegate.passwordViewText(self, hasValidInput: hasValidInput)
+        delegate?.passwordViewText(self, hasValidInput: hasValidInput)
         visibilityButton.isHidden = !hasValidInput
 
         return true

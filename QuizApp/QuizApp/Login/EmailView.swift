@@ -3,7 +3,7 @@ import SnapKit
 
 class EmailView: TextFieldView {
 
-    weak var delegate: EmailViewDelegate!
+    weak var delegate: EmailViewDelegate?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -21,7 +21,7 @@ class EmailView: TextFieldView {
         replacementString string: String
     ) -> Bool {
         let hasValidInput = range.lowerBound != 0 || range.upperBound <= 0
-        delegate.emailViewText(self, hasValidInput: hasValidInput)
+        delegate?.emailViewText(self, hasValidInput: hasValidInput)
 
         return true
     }
