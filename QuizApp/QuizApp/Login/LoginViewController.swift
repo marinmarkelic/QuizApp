@@ -35,7 +35,7 @@ class LoginViewController: UIViewController {
         label = UILabel()
         label.text = "PopQuiz"
         label.textColor = .white
-        label.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro", size: 32), size: 32)
+        label.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 32), size: 32)
 
         stackView = UIStackView()
         stackView.axis = .vertical
