@@ -46,9 +46,11 @@ class EmailView: UIView {
             $0.bottom.equalToSuperview().offset(-10)
         }
     }
+    
 }
 
 extension EmailView: UITextFieldDelegate {
+
     func textFieldDidBeginEditing(_ textField: UITextField) {
         layer.borderWidth = 1
     }
@@ -70,8 +72,11 @@ extension EmailView: UITextFieldDelegate {
 
         return true
     }
+
 }
 
 protocol EmailViewDelegate: AnyObject {
+
     func emailViewText(_ emailView: EmailView, hasValidInput: Bool)
+
 }

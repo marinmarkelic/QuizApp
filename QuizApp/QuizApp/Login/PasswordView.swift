@@ -50,8 +50,8 @@ class PasswordView: UIView {
 
     @objc
     func visibilityButtonTap() {
-        textField.text = ""
-        visibilityButton.isHidden = true
+        textField.isSecureTextEntry = !textField.isSecureTextEntry
+
         delegate.passwordViewText(self, hasValidInput: false)
     }
 
@@ -68,9 +68,11 @@ class PasswordView: UIView {
             $0.trailing.equalToSuperview().offset(-18)
         }
     }
+
 }
 
 extension PasswordView: UITextFieldDelegate {
+
     func textFieldDidBeginEditing(_ textField: UITextField) {
         layer.borderWidth = 1
     }
@@ -94,8 +96,11 @@ extension PasswordView: UITextFieldDelegate {
 
         return true
     }
+
 }
 
 protocol PasswordViewDelegate: AnyObject {
+
     func passwordViewText(_ passwordView: PasswordView, hasValidInput: Bool)
+    
 }

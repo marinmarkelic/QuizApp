@@ -34,9 +34,11 @@ class LoginButton: UIButton {
             isEnabled = false
         }
     }
+
 }
 
 extension LoginButton: EmailViewDelegate, PasswordViewDelegate {
+
     func passwordViewText(_ passwordView: PasswordView, hasValidInput: Bool) {
         hasValidInputForPassword = hasValidInput
         enableButtonIfPossible()
@@ -46,4 +48,5 @@ extension LoginButton: EmailViewDelegate, PasswordViewDelegate {
         hasValidInputForEmail = hasValidInput
         enableButtonIfPossible()
     }
+
 }
