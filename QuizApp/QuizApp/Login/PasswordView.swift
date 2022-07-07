@@ -26,7 +26,6 @@ class PasswordView: UIView {
 
         addSubview(textField)
         addSubview(visibilityButton)
-
     }
 
     func styleViews() {
@@ -102,5 +101,5 @@ extension PasswordView: UITextFieldDelegate {
 protocol PasswordViewDelegate: AnyObject {
 
     func passwordViewText(_ passwordView: PasswordView, hasValidInput: Bool)
-    
+
 }

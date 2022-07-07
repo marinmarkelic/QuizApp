@@ -46,7 +46,7 @@ class EmailView: UIView {
             $0.bottom.equalToSuperview().offset(-10)
         }
     }
-    
+
 }
 
 extension EmailView: UITextFieldDelegate {
