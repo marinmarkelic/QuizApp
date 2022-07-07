@@ -3,56 +3,69 @@ import SnapKit
 
 class LoginViewController: UIViewController {
 
-    var gradientView: GradientView!
-    var mainView: UIView!
+    private var gradientView: GradientView!
+    private var mainView: UIView!
 
-    var scrollView: UIScrollView!
-    var contentView: UIView!
+    private var scrollView: UIScrollView!
+    private var contentView: UIView!
 
-    var label: UILabel!
+    private var label: UILabel!
 
-    var stackView: UIStackView!
+    private var stackView: UIStackView!
 
-    var emailView: EmailView!
-    var passwordView: PasswordView!
-    var loginButton: LoginButton!
+    private var emailView: EmailView!
+    private var passwordView: PasswordView!
+    private var loginButton: LoginButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let tapGestureBackground = UITapGestureRecognizer(target: self, action: #selector(self.backgroundTapped(_:)))
-        self.view.addGestureRecognizer(tapGestureBackground)
-
+        addActions()
         createViews()
         styleViews()
         defineLayoutForViews()
     }
 
+    private func addActions() {
+        let tapGestureBackground = UITapGestureRecognizer(target: self, action: #selector(self.backgroundTapped(_:)))
+        view.addGestureRecognizer(tapGestureBackground)
+    }
+
+    @objc
+    private func backgroundTapped(_ sender: UITapGestureRecognizer) {
+        emailView.endEditing(true)
+        passwordView.endEditing(true)
+    }
+
+}
+
+extension LoginViewController: ConstructViewsProtocol {
+
     func createViews() {
         gradientView = GradientView()
+        view.addSubview(gradientView)
 
         mainView = UIView()
+        gradientView.addSubview(mainView)
 
         scrollView = UIScrollView()
+        mainView.addSubview(scrollView)
+
         contentView = UIView()
+        scrollView.addSubview(contentView)
 
         label = UILabel()
+        mainView.addSubview(label)
 
         stackView = UIStackView()
-        emailView = EmailView()
-        passwordView = PasswordView()
-        loginButton = LoginButton()
-
-        stackView.addArrangedSubview(emailView)
-        stackView.addArrangedSubview(passwordView)
-        stackView.addArrangedSubview(loginButton)
-
-        view.addSubview(gradientView)
-        gradientView.addSubview(mainView)
-        mainView.addSubview(label)
-        mainView.addSubview(scrollView)
-        scrollView.addSubview(contentView)
         contentView.addSubview(stackView)
+
+        emailView = EmailView()
+        stackView.addArrangedSubview(emailView)
+        passwordView = PasswordView()
+        stackView.addArrangedSubview(passwordView)
+        loginButton = LoginButton()
+        stackView.addArrangedSubview(loginButton)
     }
 
     func styleViews() {
@@ -94,18 +107,11 @@ class LoginViewController: UIViewController {
         }
 
         stackView.snp.makeConstraints {
-            $0.centerX.equalTo(gradientView)
-            $0.centerY.equalTo(mainView)
+            $0.center.equalTo(gradientView)
             $0.leading.equalToSuperview().offset(32)
             $0.trailing.equalToSuperview().offset(-32)
             $0.bottom.equalToSuperview()
         }
-    }
-
-    @objc
-    func backgroundTapped(_ sender: UITapGestureRecognizer) {
-        emailView.endEditing(true)
-        passwordView.endEditing(true)
     }
 
 }

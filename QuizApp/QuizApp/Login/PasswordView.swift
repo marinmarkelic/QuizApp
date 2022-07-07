@@ -5,8 +5,8 @@ class PasswordView: UIView {
 
     var delegate: PasswordViewDelegate!
 
-    var textField: UITextField!
-    var visibilityButton: UIButton!
+    private var textField: UITextField!
+    private var visibilityButton: UIButton!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,11 +20,20 @@ class PasswordView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    @objc
+    private func visibilityButtonTap() {
+        textField.isSecureTextEntry = !textField.isSecureTextEntry
+    }
+
+}
+
+extension PasswordView: ConstructViewsProtocol {
+
     func createViews() {
         textField = UITextField()
-        visibilityButton = UIButton()
-
         addSubview(textField)
+
+        visibilityButton = UIButton()
         addSubview(visibilityButton)
     }
 
@@ -47,22 +56,19 @@ class PasswordView: UIView {
         visibilityButton.addTarget(self, action: #selector(visibilityButtonTap), for: .touchUpInside)
     }
 
-    @objc
-    func visibilityButtonTap() {
-        textField.isSecureTextEntry = !textField.isSecureTextEntry
-    }
-
     func defineLayoutForViews() {
         textField.snp.makeConstraints {
             $0.leading.equalToSuperview().offset(21)
             $0.top.equalToSuperview().offset(10)
-            $0.trailing.equalToSuperview().offset(-10)
-            $0.bottom.equalToSuperview().offset(-10)
+            $0.trailing.equalToSuperview().inset(10)
+            $0.bottom.equalToSuperview().inset(10)
         }
 
         visibilityButton.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.trailing.equalToSuperview().offset(-18)
+            $0.trailing.equalToSuperview().inset(18)
+            $0.width.equalTo(20)
+            $0.height.equalTo(18)
         }
     }
 
@@ -81,15 +87,10 @@ extension PasswordView: UITextFieldDelegate {
     func textField(
         _ textField: UITextField,
         shouldChangeCharactersIn range: NSRange,
-        replacementString string: String)
-    -> Bool {
-        if range.lowerBound == 0 && range.upperBound > 0 {
-            visibilityButton.isHidden = true
-            delegate.passwordViewText(self, hasValidInput: false)
-        } else {
-            visibilityButton.isHidden = false
-            delegate.passwordViewText(self, hasValidInput: true)
-        }
+        replacementString string: String
+    ) -> Bool {
+        let hasValidInput = range.lowerBound != 0 && range.upperBound <= 0
+        delegate.passwordViewText(self, hasValidInput: hasValidInput)
 
         return true
     }

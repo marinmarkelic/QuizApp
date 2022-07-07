@@ -17,6 +17,7 @@
 		9C19539A2876DD7D0051CEC6 /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1953992876DD7D0051CEC6 /* LoginButton.swift */; };
 		9C19539C2876F1ED0051CEC6 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C19539B2876F1ED0051CEC6 /* GradientView.swift */; };
 		9C1953A72876FB6A0051CEC6 /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9C1953A62876FB430051CEC6 /* SourceSansPro-Regular.ttf */; };
+		9C1953A9287716FE0051CEC6 /* ConstructViewsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1953A8287716FE0051CEC6 /* ConstructViewsProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		9C1953992876DD7D0051CEC6 /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
 		9C19539B2876F1ED0051CEC6 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		9C1953A62876FB430051CEC6 /* SourceSansPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Regular.ttf"; sourceTree = "<group>"; };
+		9C1953A8287716FE0051CEC6 /* ConstructViewsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructViewsProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 				9C195373287584770051CEC6 /* Assets.xcassets */,
 				9C195375287584770051CEC6 /* LaunchScreen.storyboard */,
 				9C195378287584770051CEC6 /* Info.plist */,
+				9C1953A8287716FE0051CEC6 /* ConstructViewsProtocol.swift */,
 			);
 			path = QuizApp;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 				9C19539C2876F1ED0051CEC6 /* GradientView.swift in Sources */,
 				9C19536B287584750051CEC6 /* AppDelegate.swift in Sources */,
 				9C1953942876D3860051CEC6 /* EmailView.swift in Sources */,
+				9C1953A9287716FE0051CEC6 /* ConstructViewsProtocol.swift in Sources */,
 				9C1953962876D65C0051CEC6 /* PasswordView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

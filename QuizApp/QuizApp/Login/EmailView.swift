@@ -5,7 +5,7 @@ class EmailView: UIView {
 
     var delegate: EmailViewDelegate!
 
-    var textField: UITextField!
+    private var textField: UITextField!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -19,9 +19,12 @@ class EmailView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+}
+
+extension EmailView: ConstructViewsProtocol {
+
     func createViews() {
         textField = UITextField()
-
         addSubview(textField)
     }
 
@@ -40,10 +43,10 @@ class EmailView: UIView {
 
     func defineLayoutForViews() {
         textField.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(21)
+            $0.leading.equalToSuperview().offset(20)
             $0.top.equalToSuperview().offset(10)
-            $0.trailing.equalToSuperview().offset(-10)
-            $0.bottom.equalToSuperview().offset(-10)
+            $0.trailing.equalToSuperview().inset(10)
+            $0.bottom.equalToSuperview().inset(10)
         }
     }
 
@@ -62,13 +65,10 @@ extension EmailView: UITextFieldDelegate {
     func textField(
         _ textField: UITextField,
         shouldChangeCharactersIn range: NSRange,
-        replacementString string: String)
-    -> Bool {
-        if range.lowerBound == 0 && range.upperBound > 0 {
-            delegate.emailViewText(self, hasValidInput: false)
-        } else {
-            delegate.emailViewText(self, hasValidInput: true)
-        }
+        replacementString string: String
+    ) -> Bool {
+        let hasValidInput = range.lowerBound != 0 && range.upperBound <= 0
+        delegate.emailViewText(self, hasValidInput: hasValidInput)
 
         return true
     }
