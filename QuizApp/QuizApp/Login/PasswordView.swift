@@ -50,8 +50,6 @@ class PasswordView: UIView {
     @objc
     func visibilityButtonTap() {
         textField.isSecureTextEntry = !textField.isSecureTextEntry
-
-        delegate.passwordViewText(self, hasValidInput: false)
     }
 
     func defineLayoutForViews() {
