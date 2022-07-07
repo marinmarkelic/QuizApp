@@ -13,6 +13,7 @@
 		9C195377287584770051CEC6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C195375287584770051CEC6 /* LaunchScreen.storyboard */; };
 		9C19538E2876CF720051CEC6 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9C19538D2876CF720051CEC6 /* SnapKit */; };
 		9C1953942876D3860051CEC6 /* EmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1953932876D3860051CEC6 /* EmailView.swift */; };
+		9C1953962876D65C0051CEC6 /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1953952876D65C0051CEC6 /* PasswordView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		9C195376287584770051CEC6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9C195378287584770051CEC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9C1953932876D3860051CEC6 /* EmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailView.swift; sourceTree = "<group>"; };
+		9C1953952876D65C0051CEC6 /* PasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 			children = (
 				9C19536E287584750051CEC6 /* LoginViewController.swift */,
 				9C1953932876D3860051CEC6 /* EmailView.swift */,
+				9C1953952876D65C0051CEC6 /* PasswordView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -174,6 +177,7 @@
 				9C19536F287584750051CEC6 /* LoginViewController.swift in Sources */,
 				9C19536B287584750051CEC6 /* AppDelegate.swift in Sources */,
 				9C1953942876D3860051CEC6 /* EmailView.swift in Sources */,
+				9C1953962876D65C0051CEC6 /* PasswordView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -19,15 +19,12 @@ class EmailView: UIView {
     func buildViews() {
         backgroundColor = .white.withAlphaComponent(0.3)
         layer.cornerRadius = 20
-        layer.borderWidth = 1
-        layer.borderColor = UIColor.white.cgColor
         clipsToBounds = true
 
         textField = UITextField()
         textField.attributedPlaceholder = NSAttributedString(
             string: "Email",
-            attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.5)])
-        textField.placeholder = "Email"
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7)])
         textField.textColor = .white
 
         addSubview(textField)

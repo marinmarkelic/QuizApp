@@ -53,6 +53,7 @@ class LoginViewController: UIViewController {
 
     func addViewsToStackView() {
         stackView.addArrangedSubview(EmailView())
+        stackView.addArrangedSubview(PasswordView())
     }
 
     func addConstraints() {
