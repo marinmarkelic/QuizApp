@@ -8,18 +8,33 @@
 
 /* Begin PBXBuildFile section */
 		9C19536B287584750051CEC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C19536A287584750051CEC6 /* AppDelegate.swift */; };
-		9C19536F287584750051CEC6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C19536E287584750051CEC6 /* ViewController.swift */; };
+		9C19536F287584750051CEC6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C19536E287584750051CEC6 /* LoginViewController.swift */; };
 		9C195374287584770051CEC6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C195373287584770051CEC6 /* Assets.xcassets */; };
 		9C195377287584770051CEC6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9C195375287584770051CEC6 /* LaunchScreen.storyboard */; };
+		9C19538E2876CF720051CEC6 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 9C19538D2876CF720051CEC6 /* SnapKit */; };
+		9C1953942876D3860051CEC6 /* EmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1953932876D3860051CEC6 /* EmailView.swift */; };
+		9C1953962876D65C0051CEC6 /* PasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1953952876D65C0051CEC6 /* PasswordView.swift */; };
+		9C19539A2876DD7D0051CEC6 /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1953992876DD7D0051CEC6 /* LoginButton.swift */; };
+		9C19539C2876F1ED0051CEC6 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C19539B2876F1ED0051CEC6 /* GradientView.swift */; };
+		9C1953A72876FB6A0051CEC6 /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9C1953A62876FB430051CEC6 /* SourceSansPro-Regular.ttf */; };
+		9C1953A9287716FE0051CEC6 /* ConstructViewsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1953A8287716FE0051CEC6 /* ConstructViewsProtocol.swift */; };
+		9C1953AB287725590051CEC6 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1953AA287725590051CEC6 /* TextFieldView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9C195367287584750051CEC6 /* QuizApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuizApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C19536A287584750051CEC6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9C19536E287584750051CEC6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		9C19536E287584750051CEC6 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		9C195373287584770051CEC6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9C195376287584770051CEC6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9C195378287584770051CEC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9C1953932876D3860051CEC6 /* EmailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailView.swift; sourceTree = "<group>"; };
+		9C1953952876D65C0051CEC6 /* PasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordView.swift; sourceTree = "<group>"; };
+		9C1953992876DD7D0051CEC6 /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
+		9C19539B2876F1ED0051CEC6 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		9C1953A62876FB430051CEC6 /* SourceSansPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Regular.ttf"; sourceTree = "<group>"; };
+		9C1953A8287716FE0051CEC6 /* ConstructViewsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructViewsProtocol.swift; sourceTree = "<group>"; };
+		9C1953AA287725590051CEC6 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -27,6 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C19538E2876CF720051CEC6 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,13 +68,36 @@
 		9C195369287584750051CEC6 /* QuizApp */ = {
 			isa = PBXGroup;
 			children = (
+				9C1953A32876F9A70051CEC6 /* Fonts */,
+				9C19538F2876D03B0051CEC6 /* Login */,
 				9C19536A287584750051CEC6 /* AppDelegate.swift */,
-				9C19536E287584750051CEC6 /* ViewController.swift */,
 				9C195373287584770051CEC6 /* Assets.xcassets */,
 				9C195375287584770051CEC6 /* LaunchScreen.storyboard */,
 				9C195378287584770051CEC6 /* Info.plist */,
+				9C1953A8287716FE0051CEC6 /* ConstructViewsProtocol.swift */,
 			);
 			path = QuizApp;
+			sourceTree = "<group>";
+		};
+		9C19538F2876D03B0051CEC6 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				9C19536E287584750051CEC6 /* LoginViewController.swift */,
+				9C1953932876D3860051CEC6 /* EmailView.swift */,
+				9C1953952876D65C0051CEC6 /* PasswordView.swift */,
+				9C1953992876DD7D0051CEC6 /* LoginButton.swift */,
+				9C19539B2876F1ED0051CEC6 /* GradientView.swift */,
+				9C1953AA287725590051CEC6 /* TextFieldView.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		9C1953A32876F9A70051CEC6 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				9C1953A62876FB430051CEC6 /* SourceSansPro-Regular.ttf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -78,6 +117,9 @@
 			dependencies = (
 			);
 			name = QuizApp;
+			packageProductDependencies = (
+				9C19538D2876CF720051CEC6 /* SnapKit */,
+			);
 			productName = QuizApp;
 			productReference = 9C195367287584750051CEC6 /* QuizApp.app */;
 			productType = "com.apple.product-type.application";
@@ -106,6 +148,9 @@
 				Base,
 			);
 			mainGroup = 9C19535E287584750051CEC6;
+			packageReferences = (
+				9C19538C2876CF720051CEC6 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 9C195368287584750051CEC6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -120,6 +165,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C1953A72876FB6A0051CEC6 /* SourceSansPro-Regular.ttf in Resources */,
 				9C195377287584770051CEC6 /* LaunchScreen.storyboard in Resources */,
 				9C195374287584770051CEC6 /* Assets.xcassets in Resources */,
 			);
@@ -152,8 +198,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9C19536F287584750051CEC6 /* ViewController.swift in Sources */,
+				9C19539A2876DD7D0051CEC6 /* LoginButton.swift in Sources */,
+				9C19536F287584750051CEC6 /* LoginViewController.swift in Sources */,
+				9C1953AB287725590051CEC6 /* TextFieldView.swift in Sources */,
+				9C19539C2876F1ED0051CEC6 /* GradientView.swift in Sources */,
 				9C19536B287584750051CEC6 /* AppDelegate.swift in Sources */,
+				9C1953942876D3860051CEC6 /* EmailView.swift in Sources */,
+				9C1953A9287716FE0051CEC6 /* ConstructViewsProtocol.swift in Sources */,
+				9C1953962876D65C0051CEC6 /* PasswordView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,6 +413,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		9C19538C2876CF720051CEC6 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		9C19538D2876CF720051CEC6 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9C19538C2876CF720051CEC6 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9C19535F287584750051CEC6 /* Project object */;
 }
