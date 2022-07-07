@@ -3,7 +3,7 @@ import SnapKit
 
 class LoginViewController: UIViewController {
 
-    var gradientBackground: CAGradientLayer!
+    var gradientView: GradientView!
 
     var mainView: UIView!
     var label: UILabel!
@@ -14,25 +14,23 @@ class LoginViewController: UIViewController {
     var passwordView: PasswordView!
     var loginButton: LoginButton!
 
-    init() {
-        super.init(nibName: nil, bundle: nil)
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
         buildViews()
         addConstraints()
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
     func buildViews() {
-        gradientBackground = CAGradientLayer()
-        gradientBackground.frame = view.bounds
-        gradientBackground.colors = [
-            CGColor(red: 116/255, green: 79/255, blue: 163/255, alpha: 1.0),
-            CGColor(red: 39/255, green: 47/255, blue: 118/255, alpha: 1.0)]
-
-        view.layer.insertSublayer(gradientBackground, at: 0)
+        gradientView = GradientView()
+//        gradientBackground.frame = view.bounds
+//        gradientBackground.colors = [
+//            CGColor(red: 116/255, green: 79/255, blue: 163/255, alpha: 1.0),
+//            CGColor(red: 39/255, green: 47/255, blue: 118/255, alpha: 1.0)]
+//        gradientBackground.frame = view.bounds
+//
+//        view.layer.insertSublayer(gradientBackground, at: 0)
+//        view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
         mainView = UIView()
 
@@ -49,7 +47,8 @@ class LoginViewController: UIViewController {
 
         addViewsToStackView()
 
-        view.addSubview(mainView)
+        view.addSubview(gradientView)
+        gradientView.addSubview(mainView)
         mainView.addSubview(label)
         mainView.addSubview(stackView)
     }
@@ -68,16 +67,20 @@ class LoginViewController: UIViewController {
     }
 
     func addConstraints() {
+        gradientView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+
         mainView.snp.makeConstraints {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
 
         label.snp.makeConstraints {
-            $0.centerX.equalTo(mainView)
+            $0.centerX.equalTo(gradientView)
         }
 
         stackView.snp.makeConstraints {
-            $0.centerX.equalTo(mainView)
+            $0.centerX.equalTo(gradientView)
             $0.top.equalTo(label.snp.bottom).offset(20)
             $0.leading.equalToSuperview().offset(32)
             $0.trailing.equalToSuperview().offset(-32)
