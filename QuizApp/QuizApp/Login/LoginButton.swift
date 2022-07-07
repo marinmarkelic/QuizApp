@@ -18,20 +18,20 @@ class LoginButton: UIButton {
         setTitle("Login", for: .normal)
         setTitleColor(UIColor(red: 99/255, green: 41/255, blue: 222/255, alpha: 1.0), for: .normal)
 
-        enableButton()
+        enableButtonIfPossible()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func enableButton() {
+    func enableButtonIfPossible() {
         if hasValidInputForEmail && hasValidInputForPassword {
             backgroundColor = .white
             isEnabled = true
         } else {
             backgroundColor = UIColor(red: 176/255, green: 167/255, blue: 204/255, alpha: 1.0)
-            isEnabled = true
+            isEnabled = false
         }
     }
 }
@@ -39,11 +39,11 @@ class LoginButton: UIButton {
 extension LoginButton: EmailViewDelegate, PasswordViewDelegate {
     func passwordViewText(_ passwordView: PasswordView, hasValidInput: Bool) {
         hasValidInputForPassword = hasValidInput
-        enableButton()
+        enableButtonIfPossible()
     }
 
     func emailViewText(_ emailView: EmailView, hasValidInput: Bool) {
         hasValidInputForEmail = hasValidInput
-        enableButton()
+        enableButtonIfPossible()
     }
 }
