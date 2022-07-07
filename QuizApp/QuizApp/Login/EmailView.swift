@@ -68,9 +68,8 @@ extension EmailView: UITextFieldDelegate {
         replacementString string: String
     ) -> Bool {
         let hasValidInput = range.lowerBound != 0 || range.upperBound <= 0
+        delegate.emailViewText(self, hasValidInput: hasValidInput)
 
-        delegate.passwordViewText(self, hasValidInput: hasValidInput)
-        visibilityButton.isHidden = !hasValidInput
         return true
     }
 

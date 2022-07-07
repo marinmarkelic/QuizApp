@@ -90,7 +90,7 @@ extension PasswordView: UITextFieldDelegate {
         replacementString string: String
     ) -> Bool {
         let hasValidInput = range.lowerBound != 0 || range.upperBound <= 0
-        
+
         delegate.passwordViewText(self, hasValidInput: hasValidInput)
         visibilityButton.isHidden = !hasValidInput
 

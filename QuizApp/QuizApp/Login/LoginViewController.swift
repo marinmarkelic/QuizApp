@@ -3,6 +3,9 @@ import SnapKit
 
 class LoginViewController: UIViewController {
 
+    private var hasValidInputForEmail = false
+    private var hasValidInputForPassword = false
+
     private var gradientView: GradientView!
     private var mainView: UIView!
 
@@ -78,8 +81,8 @@ extension LoginViewController: ConstructViewsProtocol {
         stackView.distribution = .fillEqually
         stackView.spacing = 18
 
-        emailView.delegate = loginButton
-        passwordView.delegate = loginButton
+        emailView.delegate = self
+        passwordView.delegate = self
     }
 
     func defineLayoutForViews() {
@@ -112,6 +115,30 @@ extension LoginViewController: ConstructViewsProtocol {
             $0.trailing.equalToSuperview().inset(32)
             $0.bottom.equalToSuperview()
         }
+    }
+
+    private func enableLoginButtonIfPossible() {
+        if hasValidInputForEmail && hasValidInputForPassword {
+            loginButton.backgroundColor = .white
+            loginButton.isEnabled = true
+        } else {
+            loginButton.backgroundColor = .white.withAlphaComponent(0.6)
+            loginButton.isEnabled = false
+        }
+    }
+
+}
+
+extension LoginViewController: EmailViewDelegate, PasswordViewDelegate {
+
+    func passwordViewText(_ passwordView: PasswordView, hasValidInput: Bool) {
+        hasValidInputForPassword = hasValidInput
+        enableLoginButtonIfPossible()
+    }
+
+    func emailViewText(_ emailView: EmailView, hasValidInput: Bool) {
+        hasValidInputForEmail = hasValidInput
+        enableLoginButtonIfPossible()
     }
 
 }
