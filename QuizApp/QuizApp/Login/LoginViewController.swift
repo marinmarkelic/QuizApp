@@ -52,6 +52,7 @@ class LoginViewController: UIViewController {
     }
 
     func addViewsToStackView() {
+        stackView.addArrangedSubview(EmailView())
     }
 
     func addConstraints() {
@@ -66,6 +67,8 @@ class LoginViewController: UIViewController {
         stackView.snp.makeConstraints {
             $0.centerX.equalTo(mainView)
             $0.top.equalTo(label.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().offset(32)
+            $0.trailing.equalToSuperview().offset(-32)
         }
     }
 }
