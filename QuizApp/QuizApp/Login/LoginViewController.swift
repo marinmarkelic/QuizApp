@@ -6,10 +6,13 @@ class LoginViewController: UIViewController {
     var gradientBackground: CAGradientLayer!
 
     var mainView: UIView!
-
     var label: UILabel!
 
     var stackView: UIStackView!
+
+    var emailView: EmailView!
+    var passwordView: PasswordView!
+    var loginButton: LoginButton!
 
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -52,8 +55,16 @@ class LoginViewController: UIViewController {
     }
 
     func addViewsToStackView() {
-        stackView.addArrangedSubview(EmailView())
-        stackView.addArrangedSubview(PasswordView())
+        emailView = EmailView()
+        passwordView = PasswordView()
+        loginButton = LoginButton()
+
+        emailView.delegate = loginButton
+        passwordView.delegate = loginButton
+
+        stackView.addArrangedSubview(emailView)
+        stackView.addArrangedSubview(passwordView)
+        stackView.addArrangedSubview(loginButton)
     }
 
     func addConstraints() {

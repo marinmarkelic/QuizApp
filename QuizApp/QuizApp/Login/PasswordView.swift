@@ -3,6 +3,8 @@ import SnapKit
 
 class PasswordView: UIView {
 
+    var delegate: PasswordViewDelegate!
+
     var textField: UITextField!
     var visibilityButton: UIButton!
 
@@ -45,6 +47,7 @@ class PasswordView: UIView {
     func visibilityButtonTap() {
         textField.text = ""
         visibilityButton.isHidden = true
+        delegate.passwordViewText(self, hasValidInput: false)
     }
 
     func addConstraints() {
@@ -75,12 +78,18 @@ extension PasswordView: UITextFieldDelegate {
         shouldChangeCharactersIn range: NSRange,
         replacementString string: String)
     -> Bool {
-        visibilityButton.isHidden = false
-
         if range.lowerBound == 0 && range.upperBound > 0 {
             visibilityButton.isHidden = true
+            delegate.passwordViewText(self, hasValidInput: false)
+        } else {
+            visibilityButton.isHidden = false
+            delegate.passwordViewText(self, hasValidInput: true)
         }
 
         return true
     }
+}
+
+protocol PasswordViewDelegate: AnyObject {
+    func passwordViewText(_ passwordView: PasswordView, hasValidInput: Bool)
 }
