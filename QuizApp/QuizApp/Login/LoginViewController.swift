@@ -23,10 +23,10 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        addActions()
         createViews()
         styleViews()
         defineLayoutForViews()
+        addActions()
     }
 
     private func addActions() {
@@ -65,8 +65,10 @@ extension LoginViewController: ConstructViewsProtocol {
 
         emailView = EmailView()
         stackView.addArrangedSubview(emailView)
+
         passwordView = PasswordView()
         stackView.addArrangedSubview(passwordView)
+
         loginButton = LoginButton()
         stackView.addArrangedSubview(loginButton)
     }
@@ -117,7 +119,7 @@ extension LoginViewController: ConstructViewsProtocol {
         }
     }
 
-    private func enableLoginButtonIfPossible() {
+    private func redrawButtons() {
         if hasValidInputForEmail && hasValidInputForPassword {
             loginButton.backgroundColor = .white
             loginButton.isEnabled = true
@@ -133,12 +135,12 @@ extension LoginViewController: EmailViewDelegate, PasswordViewDelegate {
 
     func passwordViewText(_ passwordView: PasswordView, hasValidInput: Bool) {
         hasValidInputForPassword = hasValidInput
-        enableLoginButtonIfPossible()
+        redrawButtons()
     }
 
     func emailViewText(_ emailView: EmailView, hasValidInput: Bool) {
         hasValidInputForEmail = hasValidInput
-        enableLoginButtonIfPossible()
+        redrawButtons()
     }
 
 }

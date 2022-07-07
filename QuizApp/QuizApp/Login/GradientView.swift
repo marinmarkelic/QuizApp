@@ -19,14 +19,13 @@ class GradientView: UIView {
 }
 
 extension GradientView: ConstructViewsProtocol {
+
     func createViews() {}
 
     func styleViews() {
         autoresizingMask = [.flexibleWidth, .flexibleHeight]
 
-        guard let theLayer = layer as? CAGradientLayer else {
-            return
-        }
+        guard let theLayer = layer as? CAGradientLayer else { return }
 
         theLayer.colors = [
             CGColor(red: 116 / 255, green: 79 / 255, blue: 163 / 255, alpha: 1.0),

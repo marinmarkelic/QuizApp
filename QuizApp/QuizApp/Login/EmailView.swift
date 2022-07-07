@@ -3,7 +3,7 @@ import SnapKit
 
 class EmailView: TextFieldView {
 
-    var delegate: EmailViewDelegate!
+    weak var delegate: EmailViewDelegate!
 
     override init(frame: CGRect) {
         super.init(frame: frame)

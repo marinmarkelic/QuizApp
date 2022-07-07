@@ -3,7 +3,7 @@ import SnapKit
 
 class PasswordView: TextFieldView {
 
-    var delegate: PasswordViewDelegate!
+    weak var delegate: PasswordViewDelegate!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
