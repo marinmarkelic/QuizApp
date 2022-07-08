@@ -12,11 +12,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let window = UIWindow(frame: UIScreen.main.bounds)
         let navigationController = UINavigationController()
 
-        let appRouter = AppRouter(navigationController: navigationController)
-        appRouter.showLogin()
-
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
+
+        let appRouter = AppRouter(navigationController: navigationController)
+        appRouter.showLogin()
 
         self.window = window
         return true
