@@ -8,7 +8,7 @@ class PasswordView: TextFieldView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        setPlaceholder(withText: "Password")
+        setPlaceholder(with: "Password")
         setSecure(true)
     }
 
@@ -16,22 +16,19 @@ class PasswordView: TextFieldView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func textField(
-        _ textField: UITextField,
-        shouldChangeCharactersIn range: NSRange,
-        replacementString string: String
-    ) -> Bool {
-        let hasValidInput = range.lowerBound != 0 || range.upperBound <= 0
-        delegate?.passwordViewText(self, hasValidInput: hasValidInput)
-        visibilityButton.isHidden = !hasValidInput
+    @objc
+    override func textFieldDidChange(sender: UITextField) {
+        guard let text=sender.text else { return }
 
-        return true
+        delegate?.passwordViewText(self, text: text)
+
+        toggleVisibilityButton(isVisible: !text.isEmpty)
     }
 
 }
 
 protocol PasswordViewDelegate: AnyObject {
 
-    func passwordViewText(_ passwordView: PasswordView, hasValidInput: Bool)
+    func passwordViewText(_ passwordView: PasswordView, text: String)
 
 }

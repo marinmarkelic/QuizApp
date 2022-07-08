@@ -1,3 +1,4 @@
+import Combine
 import UIKit
 import SnapKit
 
@@ -5,6 +6,8 @@ class LoginViewController: UIViewController {
 
     private var hasValidInputForEmail = false
     private var hasValidInputForPassword = false
+
+    private var viewModel: LoginViewModel!
 
     private var gradientView: GradientView!
     private var mainView: UIView!
@@ -20,6 +23,10 @@ class LoginViewController: UIViewController {
     private var passwordView: PasswordView!
     private var loginButton: LoginButton!
 
+    private var errorLabel: ErrorLabel!
+
+    private var cancellables = Set<AnyCancellable>()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,6 +34,17 @@ class LoginViewController: UIViewController {
         styleViews()
         defineLayoutForViews()
         addActions()
+        bindViewModel()
+    }
+
+     init(viewModel: LoginViewModel) {
+        super.init(nibName: nil, bundle: nil)
+
+        self.viewModel = viewModel
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     private func addActions() {
@@ -38,6 +56,44 @@ class LoginViewController: UIViewController {
     private func backgroundTapped(_ sender: UITapGestureRecognizer) {
         emailView.endEditing(true)
         passwordView.endEditing(true)
+    }
+
+    private func bindViewModel() {
+        viewModel
+            .$isLoginButtonEnabled
+            .sink { [weak self] isLoginEnabled in
+                self?.redrawButtons(shouldEnable: isLoginEnabled)
+            }
+            .store(in: &cancellables)
+
+        viewModel
+            .$errorText
+            .removeDuplicates()
+            .sink { [weak self] errorText in
+                self?.showErrorText(with: errorText)
+            }
+            .store(in: &cancellables)
+    }
+
+    private func showErrorText(with errorText: String) {
+        errorLabel.setErrorText(errorText)
+
+        UIView.animate(
+            withDuration: 0.2,
+            animations: {
+                self.errorLabel.isHidden = errorText.isEmpty
+
+                if errorText.isEmpty {
+                    self.stackView.setCustomSpacing(35, after: self.passwordView)
+                } else {
+                    self.stackView.setCustomSpacing(20, after: self.passwordView)
+                }
+            })
+    }
+
+    @objc
+    private func pressedLoginButton() {
+        viewModel.pressedLoginButton()
     }
 
 }
@@ -69,6 +125,9 @@ extension LoginViewController: ConstructViewsProtocol {
         passwordView = PasswordView()
         stackView.addArrangedSubview(passwordView)
 
+        errorLabel = ErrorLabel()
+        stackView.addArrangedSubview(errorLabel)
+
         loginButton = LoginButton()
         stackView.addArrangedSubview(loginButton)
     }
@@ -82,6 +141,9 @@ extension LoginViewController: ConstructViewsProtocol {
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
         stackView.spacing = 18
+        stackView.setCustomSpacing(35, after: passwordView)
+
+        loginButton.addTarget(self, action: #selector(pressedLoginButton), for: .touchUpInside)
 
         emailView.delegate = self
         passwordView.delegate = self
@@ -112,15 +174,19 @@ extension LoginViewController: ConstructViewsProtocol {
         }
 
         stackView.snp.makeConstraints {
-            $0.center.equalTo(gradientView)
+            $0.centerX.equalTo(gradientView)
             $0.leading.equalToSuperview().offset(32)
             $0.trailing.equalToSuperview().inset(32)
             $0.bottom.equalToSuperview()
         }
+
+        passwordView.snp.makeConstraints {
+            $0.centerY.equalTo(gradientView)
+        }
     }
 
-    private func redrawButtons() {
-        if hasValidInputForEmail && hasValidInputForPassword {
+    private func redrawButtons(shouldEnable: Bool) {
+        if shouldEnable {
             loginButton.backgroundColor = .white
             loginButton.isEnabled = true
         } else {
@@ -133,14 +199,12 @@ extension LoginViewController: ConstructViewsProtocol {
 
 extension LoginViewController: EmailViewDelegate, PasswordViewDelegate {
 
-    func passwordViewText(_ passwordView: PasswordView, hasValidInput: Bool) {
-        hasValidInputForPassword = hasValidInput
-        redrawButtons()
+    func passwordViewText(_ passwordView: PasswordView, text: String) {
+        viewModel.updatedPassword(with: text)
     }
 
-    func emailViewText(_ emailView: EmailView, hasValidInput: Bool) {
-        hasValidInputForEmail = hasValidInput
-        redrawButtons()
+    func emailViewText(_ emailView: EmailView, text: String) {
+        viewModel.updatedEmail(with: text)
     }
 
 }
