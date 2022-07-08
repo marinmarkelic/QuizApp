@@ -76,19 +76,17 @@ class LoginViewController: UIViewController {
     }
 
     private func showErrorText(with errorText: String) {
-        self.errorLabel.setErrorText(errorText)
+        errorLabel.setErrorText(errorText)
 
         UIView.animate(
             withDuration: 0.2,
             animations: {
-                guard let passwordView = self.passwordView else { return }
-
                 self.errorLabel.isHidden = errorText.isEmpty
 
                 if errorText.isEmpty {
-                    self.stackView.setCustomSpacing(35, after: passwordView)
+                    self.stackView.setCustomSpacing(35, after: self.passwordView)
                 } else {
-                    self.stackView.setCustomSpacing(20, after: passwordView)
+                    self.stackView.setCustomSpacing(20, after: self.passwordView)
                 }
             })
     }
