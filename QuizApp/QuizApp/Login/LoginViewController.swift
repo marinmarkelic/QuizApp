@@ -130,6 +130,7 @@ extension LoginViewController: ConstructViewsProtocol {
 
         emailView.delegate = self
         passwordView.delegate = self
+        loginButton.delegate = self
     }
 
     func defineLayoutForViews() {
@@ -180,7 +181,11 @@ extension LoginViewController: ConstructViewsProtocol {
 
 }
 
-extension LoginViewController: EmailViewDelegate, PasswordViewDelegate {
+extension LoginViewController: EmailViewDelegate, PasswordViewDelegate, LoginButtonDelegate {
+
+    func pressedButton(_ loginButton: LoginButton) {
+        viewModel.pressedLoginButton()
+    }
 
     func passwordViewText(_ passwordView: PasswordView, text: String) {
         viewModel.updatedPassword(with: text)

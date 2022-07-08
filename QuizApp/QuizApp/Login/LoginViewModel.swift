@@ -19,14 +19,16 @@ class LoginViewModel {
         checkInputValidity()
     }
 
-    private func checkInputValidity() {
-        isLoginButtonEnabled = !password.isEmpty && !email.isEmpty
-
+    func pressedLoginButton() {
         if isValidEmail(email) {
             errorText = ""
         } else {
             errorText = "Invalid Email"
         }
+    }
+
+    private func checkInputValidity() {
+        isLoginButtonEnabled = !password.isEmpty && !email.isEmpty
     }
 
     private func isValidEmail(_ email: String) -> Bool {
