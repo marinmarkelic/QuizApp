@@ -70,6 +70,14 @@ class LoginViewController: UIViewController {
             .$errorText
             .sink { [weak self] errorText in
                 self?.errorLabel.setErrorText(with: errorText)
+
+                guard let passwordView = self?.passwordView else { return }
+
+                if errorText.isEmpty {
+                    self?.stackView.setCustomSpacing(35, after: passwordView)
+                } else {
+                    self?.stackView.setCustomSpacing(20, after: passwordView)
+                }
             }.store(in: &cancellables)
     }
 
@@ -118,6 +126,7 @@ extension LoginViewController: ConstructViewsProtocol {
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
         stackView.spacing = 18
+        stackView.setCustomSpacing(35, after: passwordView)
 
         emailView.delegate = self
         passwordView.delegate = self

@@ -12,6 +12,9 @@ class LoginButton: UIButton {
         fatalError("init(coder:) has not been implemented")
     }
 
+    @objc
+    func buttonClicked(sender: UIButton) {}
+
 }
 
 extension LoginButton: ConstructViewsProtocol {
@@ -28,6 +31,7 @@ extension LoginButton: ConstructViewsProtocol {
         setTitleColor(UIColor(red: 99 / 255, green: 41 / 255, blue: 222 / 255, alpha: 1.0), for: .normal)
         backgroundColor = .white.withAlphaComponent(0.6)
         isEnabled = false
+        addTarget(self, action: #selector(buttonClicked), for: .touchUpInside)
     }
 
 }
