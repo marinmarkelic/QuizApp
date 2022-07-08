@@ -13,7 +13,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navigationController = UINavigationController()
 
         let appRouter = AppRouter(navigationController: navigationController)
-        appRouter.showLogin(in: window)
+        appRouter.showLogin()
+
+        window.rootViewController = navigationController
+        window.makeKeyAndVisible()
 
         self.window = window
         return true

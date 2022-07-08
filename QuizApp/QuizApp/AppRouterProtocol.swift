@@ -2,6 +2,6 @@ import UIKit
 
 protocol AppRouterProtocol {
 
-    func showLogin(in window: UIWindow?)
+    func showLogin()
 
 }

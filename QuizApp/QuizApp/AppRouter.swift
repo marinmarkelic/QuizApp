@@ -8,13 +8,10 @@ class AppRouter: AppRouterProtocol {
         self.navigationController = navigationController
     }
 
-    func showLogin(in window: UIWindow?) {
+    func showLogin() {
         let loginVC = LoginViewController(viewModel: LoginViewModel())
 
         navigationController.pushViewController(loginVC, animated: false)
-
-        window?.rootViewController = navigationController
-        window?.makeKeyAndVisible()
     }
 
 }
