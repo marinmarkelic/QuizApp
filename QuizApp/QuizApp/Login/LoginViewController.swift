@@ -68,6 +68,7 @@ class LoginViewController: UIViewController {
 
         viewModel
             .$errorText
+            .removeDuplicates()
             .sink { [weak self] errorText in
                 self?.showErrorText(with: errorText)
             }
