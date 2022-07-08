@@ -12,13 +12,14 @@ class ErrorLabel: UILabel {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setErrorText(with text: String) {
+    func setErrorText(_ text: String) {
         self.text = text
     }
 
 }
 
 extension ErrorLabel: ConstructViewsProtocol {
+
     func createViews() {}
 
     func styleViews() {
