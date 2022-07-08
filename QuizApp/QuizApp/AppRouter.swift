@@ -10,7 +10,6 @@ class AppRouter: AppRouterProtocol {
 
     func showLogin() {
         let loginVC = LoginViewController(viewModel: LoginViewModel())
-
         navigationController.pushViewController(loginVC, animated: false)
     }
 
