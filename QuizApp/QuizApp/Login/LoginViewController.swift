@@ -32,8 +32,17 @@ class LoginViewController: UIViewController {
         styleViews()
         defineLayoutForViews()
         addActions()
-        setupViewModel()
         bindViewModel()
+    }
+
+     init(viewModel: LoginViewModel) {
+        super.init(nibName: nil, bundle: nil)
+
+        self.viewModel = viewModel
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     private func addActions() {
@@ -45,10 +54,6 @@ class LoginViewController: UIViewController {
     private func backgroundTapped(_ sender: UITapGestureRecognizer) {
         emailView.endEditing(true)
         passwordView.endEditing(true)
-    }
-
-    private func setupViewModel() {
-        viewModel = LoginViewModel()
     }
 
     private func bindViewModel() {
