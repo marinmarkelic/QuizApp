@@ -16,18 +16,6 @@ class PasswordView: TextFieldView {
         fatalError("init(coder:) has not been implemented")
     }
 
-//    func textField(
-//        _ textField: UITextField,
-//        shouldChangeCharactersIn range: NSRange,
-//        replacementString string: String
-//    ) -> Bool {
-//        let hasValidInput = range.lowerBound != 0 || range.upperBound <= 0
-//        delegate?.passwordViewText(self, hasValidInput: hasValidInput)
-//        visibilityButton.isHidden = !hasValidInput
-//
-//        return true
-//    }
-
     @objc
     override func textFieldDidChange(sender: UITextField) {
         guard let text=sender.text else { return }
