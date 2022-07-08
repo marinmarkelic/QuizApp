@@ -133,14 +133,12 @@ extension LoginViewController: ConstructViewsProtocol {
 
 extension LoginViewController: EmailViewDelegate, PasswordViewDelegate {
 
-    func passwordViewText(_ passwordView: PasswordView, hasValidInput: Bool) {
-        hasValidInputForPassword = hasValidInput
-        redrawButtons()
+    func passwordViewText(_ passwordView: PasswordView, text: String) {
+        print(text)
     }
 
-    func emailViewText(_ emailView: EmailView, hasValidInput: Bool) {
-        hasValidInputForEmail = hasValidInput
-        redrawButtons()
+    func emailViewText(_ emailView: EmailView, text: String) {
+        print(text)
     }
 
 }

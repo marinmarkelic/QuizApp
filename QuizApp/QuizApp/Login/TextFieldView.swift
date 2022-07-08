@@ -49,6 +49,7 @@ extension TextFieldView: ConstructViewsProtocol {
 
         textField.textColor = .white
         textField.delegate = self
+        textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
 
         visibilityButton.tintColor = .white
         visibilityButton.setBackgroundImage(UIImage(systemName: "eye.fill"), for: .normal)
@@ -76,6 +77,9 @@ extension TextFieldView: ConstructViewsProtocol {
     private func visibilityButtonTap() {
         textField.isSecureTextEntry = !textField.isSecureTextEntry
     }
+
+    @objc
+    func textFieldDidChange(sender: UITextField) {}
 
 }
 
