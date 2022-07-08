@@ -21,8 +21,9 @@ class LoginViewController: UIViewController {
 
     private var emailView: EmailView!
     private var passwordView: PasswordView!
-    private var errorLabel: ErrorLabel!
     private var loginButton: LoginButton!
+
+    private var errorLabel: ErrorLabel!
 
     private var cancellables = Set<AnyCancellable>()
 
@@ -101,11 +102,11 @@ extension LoginViewController: ConstructViewsProtocol {
         passwordView = PasswordView()
         stackView.addArrangedSubview(passwordView)
 
+        errorLabel = ErrorLabel()
+        stackView.addArrangedSubview(errorLabel)
+
         loginButton = LoginButton()
         stackView.addArrangedSubview(loginButton)
-
-        errorLabel = ErrorLabel()
-        contentView.addSubview(errorLabel)
     }
 
     func styleViews() {
@@ -147,16 +148,14 @@ extension LoginViewController: ConstructViewsProtocol {
         }
 
         stackView.snp.makeConstraints {
-            $0.center.equalTo(gradientView)
-            $0.leading.equalToSuperview().offset(32)
-            $0.trailing.equalToSuperview().inset(32)
-        }
-
-        errorLabel.snp.makeConstraints {
-            $0.top.equalTo(stackView.snp.bottom).offset(18)
+            $0.centerX.equalTo(gradientView)
             $0.leading.equalToSuperview().offset(32)
             $0.trailing.equalToSuperview().inset(32)
             $0.bottom.equalToSuperview()
+        }
+
+        passwordView.snp.makeConstraints {
+            $0.centerY.equalTo(gradientView)
         }
     }
 

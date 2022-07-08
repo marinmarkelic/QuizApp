@@ -13,7 +13,11 @@ class ErrorLabel: UILabel {
     }
 
     func setErrorText(with text: String) {
-        isHidden = text.isEmpty
+        UIView.animate(
+            withDuration: 0.3,
+            animations: {
+            self.isHidden = text.isEmpty
+        })
 
         self.text = text
     }
