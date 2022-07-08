@@ -10,9 +10,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         let window = UIWindow(frame: UIScreen.main.bounds)
+        let navigationController = UINavigationController()
 
-        window.rootViewController = LoginViewController(viewModel: LoginViewModel())
-        window.makeKeyAndVisible()
+        let appRouter = AppRouter(navigationController: navigationController)
+        appRouter.setStartScreen(in: window)
 
         self.window = window
         return true
