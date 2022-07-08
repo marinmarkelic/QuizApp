@@ -21,6 +21,8 @@ class PasswordView: TextFieldView {
         guard let text=sender.text else { return }
 
         delegate?.passwordViewText(self, text: text)
+
+        toggleVisibilityButton(isVisible: !text.isEmpty)
     }
 
 }

@@ -78,8 +78,8 @@ extension TextFieldView: ConstructViewsProtocol {
         textField.isSecureTextEntry = !textField.isSecureTextEntry
     }
 
-    func toggleVisibilityButton() {
-        visibilityButton.isHidden = !visibilityButton.isHidden
+    func toggleVisibilityButton(isVisible: Bool) {
+        visibilityButton.isHidden = !isVisible
     }
 
     @objc
