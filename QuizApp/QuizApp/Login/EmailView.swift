@@ -8,7 +8,7 @@ class EmailView: TextFieldView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        setPlaceholder(withText: "Email")
+        setPlaceholder(with: "Email")
     }
 
     required init?(coder: NSCoder) {
@@ -18,6 +18,7 @@ class EmailView: TextFieldView {
     @objc
     override func textFieldDidChange(sender: UITextField) {
         guard let text=sender.text else { return }
+
         delegate?.emailViewText(self, text: text)
     }
 

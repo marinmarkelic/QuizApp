@@ -8,7 +8,7 @@ class PasswordView: TextFieldView {
     override init(frame: CGRect) {
         super.init(frame: frame)
 
-        setPlaceholder(withText: "Password")
+        setPlaceholder(with: "Password")
         setSecure(true)
     }
 
@@ -19,6 +19,7 @@ class PasswordView: TextFieldView {
     @objc
     override func textFieldDidChange(sender: UITextField) {
         guard let text=sender.text else { return }
+
         delegate?.passwordViewText(self, text: text)
     }
 

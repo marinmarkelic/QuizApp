@@ -1,3 +1,4 @@
+import Combine
 import UIKit
 import SnapKit
 
@@ -6,7 +7,7 @@ class LoginViewController: UIViewController {
     private var hasValidInputForEmail = false
     private var hasValidInputForPassword = false
 
-    private var loginViewModel: LoginViewModel!
+    private var viewModel: LoginViewModel!
 
     private var gradientView: GradientView!
     private var mainView: UIView!
@@ -22,15 +23,17 @@ class LoginViewController: UIViewController {
     private var passwordView: PasswordView!
     private var loginButton: LoginButton!
 
+    private var cancellables = Set<AnyCancellable>()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        loginViewModel = LoginViewModel()
 
         createViews()
         styleViews()
         defineLayoutForViews()
         addActions()
+        setupViewModel()
+        bindViewModel()
     }
 
     private func addActions() {
@@ -42,6 +45,19 @@ class LoginViewController: UIViewController {
     private func backgroundTapped(_ sender: UITapGestureRecognizer) {
         emailView.endEditing(true)
         passwordView.endEditing(true)
+    }
+
+    private func setupViewModel() {
+        viewModel = LoginViewModel()
+    }
+
+    private func bindViewModel() {
+        viewModel
+            .$isLoginButtonEnabled
+            .sink { [weak self] isLoginEnabled in
+                self?.redrawButtons(shouldEnable: isLoginEnabled)
+            }
+            .store(in: &cancellables)
     }
 
 }
@@ -123,8 +139,8 @@ extension LoginViewController: ConstructViewsProtocol {
         }
     }
 
-    private func redrawButtons() {
-        if hasValidInputForEmail && hasValidInputForPassword {
+    private func redrawButtons(shouldEnable: Bool) {
+        if shouldEnable {
             loginButton.backgroundColor = .white
             loginButton.isEnabled = true
         } else {
@@ -138,11 +154,11 @@ extension LoginViewController: ConstructViewsProtocol {
 extension LoginViewController: EmailViewDelegate, PasswordViewDelegate {
 
     func passwordViewText(_ passwordView: PasswordView, text: String) {
-        loginViewModel.updatedPassword(withText: text)
+        viewModel.updatedPassword(with: text)
     }
 
     func emailViewText(_ emailView: EmailView, text: String) {
-        loginViewModel.updatedEmail(withText: text)
+        viewModel.updatedEmail(with: text)
     }
 
 }

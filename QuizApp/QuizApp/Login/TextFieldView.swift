@@ -19,7 +19,7 @@ class TextFieldView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setPlaceholder(withText text: String) {
+    func setPlaceholder(with text: String) {
         textField.attributedPlaceholder = NSAttributedString(
             string: text,
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.white.withAlphaComponent(0.7)])
@@ -76,6 +76,10 @@ extension TextFieldView: ConstructViewsProtocol {
     @objc
     private func visibilityButtonTap() {
         textField.isSecureTextEntry = !textField.isSecureTextEntry
+    }
+
+    func toggleVisibilityButton() {
+        visibilityButton.isHidden = !visibilityButton.isHidden
     }
 
     @objc

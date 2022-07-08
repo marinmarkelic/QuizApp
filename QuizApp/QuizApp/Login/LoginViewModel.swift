@@ -4,18 +4,15 @@ class LoginViewModel {
 
     @Published var isLoginButtonEnabled = false
 
-    private var isLoginEmailValid = false
-    private var isLoginPasswordValid = false
-
     private var email = ""
     private var password = ""
 
-    func updatedEmail(withText text: String) {
+    func updatedEmail(with text: String) {
         email = text
         checkInputValidity()
     }
 
-    func updatedPassword(withText text: String) {
+    func updatedPassword(with text: String) {
         password = text
         checkInputValidity()
     }
