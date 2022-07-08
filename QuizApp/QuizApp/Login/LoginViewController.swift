@@ -92,6 +92,11 @@ class LoginViewController: UIViewController {
             })
     }
 
+    @objc
+    private func pressedLoginButton() {
+        viewModel.pressedLoginButton()
+    }
+
 }
 
 extension LoginViewController: ConstructViewsProtocol {
@@ -139,9 +144,10 @@ extension LoginViewController: ConstructViewsProtocol {
         stackView.spacing = 18
         stackView.setCustomSpacing(35, after: passwordView)
 
+        loginButton.addTarget(self, action: #selector(pressedLoginButton), for: .touchUpInside)
+
         emailView.delegate = self
         passwordView.delegate = self
-        loginButton.delegate = self
     }
 
     func defineLayoutForViews() {
@@ -192,11 +198,7 @@ extension LoginViewController: ConstructViewsProtocol {
 
 }
 
-extension LoginViewController: EmailViewDelegate, PasswordViewDelegate, LoginButtonDelegate {
-
-    func pressedButton(_ loginButton: LoginButton) {
-        viewModel.pressedLoginButton()
-    }
+extension LoginViewController: EmailViewDelegate, PasswordViewDelegate {
 
     func passwordViewText(_ passwordView: PasswordView, text: String) {
         viewModel.updatedPassword(with: text)
