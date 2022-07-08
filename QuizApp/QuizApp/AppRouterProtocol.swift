@@ -2,6 +2,6 @@ import UIKit
 
 protocol AppRouterProtocol {
 
-    func setStartScreen(in window: UIWindow?)
+    func showLogin(in window: UIWindow?)
 
 }

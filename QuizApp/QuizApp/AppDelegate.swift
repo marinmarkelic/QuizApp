@@ -13,7 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let navigationController = UINavigationController()
 
         let appRouter = AppRouter(navigationController: navigationController)
-        appRouter.setStartScreen(in: window)
+        appRouter.showLogin(in: window)
 
         self.window = window
         return true

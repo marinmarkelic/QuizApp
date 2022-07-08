@@ -8,7 +8,7 @@ class AppRouter: AppRouterProtocol {
         self.navigationController = navigationController
     }
 
-    func setStartScreen(in window: UIWindow?) {
+    func showLogin(in window: UIWindow?) {
         let loginVC = LoginViewController(viewModel: LoginViewModel())
 
         navigationController.pushViewController(loginVC, animated: false)
