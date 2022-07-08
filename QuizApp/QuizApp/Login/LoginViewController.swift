@@ -69,16 +69,27 @@ class LoginViewController: UIViewController {
         viewModel
             .$errorText
             .sink { [weak self] errorText in
-                self?.errorLabel.setErrorText(with: errorText)
-
-                guard let passwordView = self?.passwordView else { return }
+                guard
+                    let self = self,
+                    let passwordView = self.passwordView
+                else { return }
 
                 if errorText.isEmpty {
-                    self?.stackView.setCustomSpacing(35, after: passwordView)
+                    self.stackView.setCustomSpacing(35, after: passwordView)
                 } else {
-                    self?.stackView.setCustomSpacing(20, after: passwordView)
+                    self.stackView.setCustomSpacing(20, after: passwordView)
                 }
-            }.store(in: &cancellables)
+
+                UIView.animate(
+                    withDuration: 0.2,
+                    animations: {
+                        self.errorLabel.isHidden = errorText.isEmpty
+                    },
+                    completion: {_ in
+                        self.errorLabel.setErrorText(with: errorText)
+                    })
+            }
+            .store(in: &cancellables)
     }
 
 }
