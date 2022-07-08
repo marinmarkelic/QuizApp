@@ -6,6 +6,8 @@ class LoginViewController: UIViewController {
     private var hasValidInputForEmail = false
     private var hasValidInputForPassword = false
 
+    private var loginViewModel: LoginViewModel!
+
     private var gradientView: GradientView!
     private var mainView: UIView!
 
@@ -22,6 +24,8 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        loginViewModel = LoginViewModel()
 
         createViews()
         styleViews()
@@ -134,11 +138,11 @@ extension LoginViewController: ConstructViewsProtocol {
 extension LoginViewController: EmailViewDelegate, PasswordViewDelegate {
 
     func passwordViewText(_ passwordView: PasswordView, text: String) {
-        print(text)
+        loginViewModel.updatedPassword(withText: text)
     }
 
     func emailViewText(_ emailView: EmailView, text: String) {
-        print(text)
+        loginViewModel.updatedEmail(withText: text)
     }
 
 }

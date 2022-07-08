@@ -10,12 +10,12 @@ class LoginViewModel {
     private var email = ""
     private var password = ""
 
-    func updatedEmail(withText text: String){
+    func updatedEmail(withText text: String) {
         email = text
         checkInputValidity()
     }
 
-    func updatedPassword(withText text: String){
+    func updatedPassword(withText text: String) {
         password = text
         checkInputValidity()
     }
