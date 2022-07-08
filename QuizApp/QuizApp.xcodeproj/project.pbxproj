@@ -19,6 +19,7 @@
 		9C1953A72876FB6A0051CEC6 /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9C1953A62876FB430051CEC6 /* SourceSansPro-Regular.ttf */; };
 		9C1953A9287716FE0051CEC6 /* ConstructViewsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1953A8287716FE0051CEC6 /* ConstructViewsProtocol.swift */; };
 		9C1953AB287725590051CEC6 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1953AA287725590051CEC6 /* TextFieldView.swift */; };
+		9C1953AF287826BD0051CEC6 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1953AE287826BD0051CEC6 /* LoginViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		9C1953A62876FB430051CEC6 /* SourceSansPro-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Regular.ttf"; sourceTree = "<group>"; };
 		9C1953A8287716FE0051CEC6 /* ConstructViewsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructViewsProtocol.swift; sourceTree = "<group>"; };
 		9C1953AA287725590051CEC6 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
+		9C1953AE287826BD0051CEC6 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +90,7 @@
 				9C1953992876DD7D0051CEC6 /* LoginButton.swift */,
 				9C19539B2876F1ED0051CEC6 /* GradientView.swift */,
 				9C1953AA287725590051CEC6 /* TextFieldView.swift */,
+				9C1953AE287826BD0051CEC6 /* LoginViewModel.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -206,6 +209,7 @@
 				9C1953942876D3860051CEC6 /* EmailView.swift in Sources */,
 				9C1953A9287716FE0051CEC6 /* ConstructViewsProtocol.swift in Sources */,
 				9C1953962876D65C0051CEC6 /* PasswordView.swift in Sources */,
+				9C1953AF287826BD0051CEC6 /* LoginViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
