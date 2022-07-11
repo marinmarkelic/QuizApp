@@ -1,6 +1,7 @@
 import Combine
 import UIKit
 
+@MainActor
 class LoginViewModel {
 
     @Published var isLoginButtonEnabled = false
@@ -19,6 +20,7 @@ class LoginViewModel {
         checkInputValidity()
     }
 
+//    @MainActor
     func pressedLoginButton() {
         if isValidEmail(email) {
             errorText = ""
@@ -29,23 +31,22 @@ class LoginViewModel {
                     print(result["accessToken"] ?? "--")
 
                 } catch let error as RequestError {
-                    DispatchQueue.main.async { [weak self] in
-                        var errorStr: String
+                    var errorStr: String
 
-                        switch error {
-                        case .notFoundError:
-                            errorStr = "404 Not Found"
-                        case .forbiddenError:
-                            errorStr = "403 Forbidden"
-                        case .unauthorisedError:
-                            errorStr = "Username or password is wrong"
-                        default:
-                            errorStr = "Error logging in"
-                        }
-
-                        self?.errorText = errorStr
+                    switch error {
+                    case .notFoundError:
+                        errorStr = "404 Not Found"
+                    case .forbiddenError:
+                        errorStr = "403 Forbidden"
+                    case .unauthorisedError:
+                        errorStr = "Username or password is wrong"
+                    default:
+                        errorStr = "Error logging in"
                     }
+
+                    errorText = errorStr
                 }
+
             }
 
         } else {
