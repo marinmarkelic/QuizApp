@@ -11,7 +11,7 @@ class AppRouter: AppRouterProtocol {
 
     func showLogin() {
         let loginViewController = LoginViewController(
-            viewModel: LoginViewModel(loginClient: appDependencies.loginClient))
+            viewModel: LoginViewModel(loginUseCase: appDependencies.loginUseCase))
         navigationController.pushViewController(loginViewController, animated: true)
     }
 

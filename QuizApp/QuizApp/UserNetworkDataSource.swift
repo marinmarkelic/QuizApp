@@ -1,4 +1,4 @@
-class UserNetworkDataSource {
+class UserNetworkDataSource: UserNetworkDataSourceProtocol {
 
     private var loginClient: LoginClientProtocol
 
@@ -20,5 +20,11 @@ struct LoginResponseData {
     init(_ loginResponse: LoginResponse) {
         accessToken = loginResponse.accessToken
     }
+
+}
+
+protocol UserNetworkDataSourceProtocol {
+
+    func logIn(username: String, password: String) async throws -> LoginResponseData
 
 }

@@ -9,10 +9,10 @@ class LoginViewModel {
     private var email = ""
     private var password = ""
 
-    private let loginClient: LoginClientProtocol
+    private let loginUseCase: LoginUseCaseProtocol
 
-    init(loginClient: LoginClientProtocol) {
-        self.loginClient = loginClient
+    init(loginUseCase: LoginUseCaseProtocol) {
+        self.loginUseCase = loginUseCase
     }
 
     func updatedEmail(with text: String) {
@@ -30,7 +30,7 @@ class LoginViewModel {
         errorText = ""
         Task {
             do {
-                let response = try await loginClient.logIn(username: email, password: password)
+                let response = try await loginUseCase.logIn(username: email, password: password)
                 print(response.accessToken)
             } catch let error as RequestError {
                 showError(error)
