@@ -9,6 +9,12 @@ class LoginViewModel {
     private var email = ""
     private var password = ""
 
+    private let loginUseCase: LoginUseCaseProtocol
+
+    init(loginUseCase: LoginUseCaseProtocol) {
+        self.loginUseCase = loginUseCase
+    }
+
     func updatedEmail(with text: String) {
         email = text
         checkInputValidity()
@@ -19,16 +25,30 @@ class LoginViewModel {
         checkInputValidity()
     }
 
+    @MainActor
     func pressedLoginButton() {
-        if isValidEmail(email) {
-            errorText = ""
-        } else {
-            errorText = "Invalid Email"
+        errorText = ""
+        Task {
+            do {
+                let response = try await loginUseCase.logIn(username: email, password: password)
+                print(response.accessToken)
+            } catch let error as RequestError {
+                showError(error)
+            }
+        }
+    }
+
+    private func showError(_ error: RequestError) {
+        switch error {
+        case .unauthorisedError:
+            errorText = "Invalid credentials!"
+        default:
+            errorText = "Error logging in!"
         }
     }
 
     private func checkInputValidity() {
-        isLoginButtonEnabled = !password.isEmpty && !email.isEmpty
+        isLoginButtonEnabled = !password.isEmpty && isValidEmail(email)
         errorText = ""
     }
 
