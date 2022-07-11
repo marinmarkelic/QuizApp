@@ -1,31 +1,33 @@
+protocol UserNetworkDataSourceProtocol {
+
+    func logIn(username: String, password: String) async throws -> LoginResponseDataModel
+
+}
+
 class UserNetworkDataSource: UserNetworkDataSourceProtocol {
 
-    private var loginClient: LoginClientProtocol
-
-    private var loginResponseData: LoginResponseData!
+    private let loginClient: LoginClientProtocol
 
     init(loginClient: LoginClientProtocol) {
         self.loginClient = loginClient
     }
 
-    func logIn(username: String, password: String) async throws -> LoginResponseData {
-        return LoginResponseData(try await loginClient.logIn(username: username, password: password))
+    func logIn(username: String, password: String) async throws -> LoginResponseDataModel {
+        LoginResponseDataModel(try await loginClient.logIn(username: username, password: password))
     }
 
 }
 
-struct LoginResponseData {
+struct LoginResponseDataModel {
 
     let accessToken: String
+
+}
+
+extension LoginResponseDataModel {
 
     init(_ loginResponse: LoginResponse) {
         accessToken = loginResponse.accessToken
     }
-
-}
-
-protocol UserNetworkDataSourceProtocol {
-
-    func logIn(username: String, password: String) async throws -> LoginResponseData
 
 }
