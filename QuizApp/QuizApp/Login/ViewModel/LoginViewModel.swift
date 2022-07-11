@@ -9,6 +9,12 @@ class LoginViewModel {
     private var email = ""
     private var password = ""
 
+    private let loginClient: LoginClientProtocol
+
+    init(loginClient: LoginClientProtocol) {
+        self.loginClient = loginClient
+    }
+
     func updatedEmail(with text: String) {
         email = text
         checkInputValidity()
@@ -21,44 +27,28 @@ class LoginViewModel {
 
     @MainActor
     func pressedLoginButton() {
-        if isValidEmail(email) {
-            errorText = ""
-
-            Task {
-                do {
-                    let result = try await checkLoginInfo()
-                    print(result["accessToken"] ?? "--")
-
-                } catch let error as RequestError {
-                    var errorStr: String
-
-                    switch error {
-                    case .notFoundError:
-                        errorStr = "404 Not Found"
-                    case .forbiddenError:
-                        errorStr = "403 Forbidden"
-                    case .unauthorisedError:
-                        errorStr = "Username or password is wrong"
-                    default:
-                        errorStr = "Error logging in"
-                    }
-
-                    errorText = errorStr
-                }
-
+        errorText = ""
+        Task {
+            do {
+                let response = try await loginClient.logIn(username: email, password: password)
+                print(response.accessToken)
+            } catch let error as RequestError {
+                showError(error)
             }
-
-        } else {
-            errorText = "Invalid Email"
         }
     }
 
-    private func checkLoginInfo() async throws -> [String: String] {
-        return try await LoginService().checkLoginInfo(username: email, password: password)
+    private func showError(_ error: RequestError) {
+        switch error {
+        case .unauthorisedError:
+            errorText = "Invalid credentials!"
+        default:
+            errorText = "Error logging in!"
+        }
     }
 
     private func checkInputValidity() {
-        isLoginButtonEnabled = !password.isEmpty && !email.isEmpty
+        isLoginButtonEnabled = !password.isEmpty && isValidEmail(email)
         errorText = ""
     }
 

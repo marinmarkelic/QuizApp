@@ -47,6 +47,8 @@ extension TextFieldView: ConstructViewsProtocol {
         layer.borderColor = UIColor.white.cgColor
         clipsToBounds = true
 
+        textField.autocorrectionType = .no
+        textField.autocapitalizationType = .none
         textField.textColor = .white
         textField.delegate = self
         textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
