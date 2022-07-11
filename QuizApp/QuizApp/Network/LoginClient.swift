@@ -3,7 +3,7 @@ import Foundation
 struct LoginRequest: Encodable {
 
     let username: String
-    let passsword: String
+    let password: String
 
 }
 
@@ -27,12 +27,10 @@ class LoginClient: LoginClientProtocol {
         self.baseUrl = baseUrl
     }
 
-    private let loginUrl = "https://five-ios-quiz-app.herokuapp.com/api/v1/login"
-
     func logIn(username: String, password: String) async throws -> LoginResponse {
         guard let url = URL(string: "\(baseUrl)/v1/login") else { throw RequestError.invalidURLError }
 
-        guard let jsonData = try? JSONEncoder().encode(LoginRequest(username: username, passsword: password)) else {
+        guard let jsonData = try? JSONEncoder().encode(LoginRequest(username: username, password: password)) else {
             throw RequestError.dataDecodingError
         }
 
