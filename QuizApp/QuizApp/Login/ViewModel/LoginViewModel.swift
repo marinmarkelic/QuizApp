@@ -1,7 +1,6 @@
 import Combine
 import UIKit
 
-@MainActor
 class LoginViewModel {
 
     @Published var isLoginButtonEnabled = false
@@ -20,7 +19,7 @@ class LoginViewModel {
         checkInputValidity()
     }
 
-//    @MainActor
+    @MainActor
     func pressedLoginButton() {
         if isValidEmail(email) {
             errorText = ""
