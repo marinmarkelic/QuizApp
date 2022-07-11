@@ -11,6 +11,7 @@ class UserNetworkDataSource: UserNetworkDataSourceProtocol {
     func logIn(username: String, password: String) async throws -> LoginResponseData {
         return LoginResponseData(try await loginClient.logIn(username: username, password: password))
     }
+
 }
 
 struct LoginResponseData {
