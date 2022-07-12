@@ -16,13 +16,13 @@ class UserRepository: UserRepositoryProtocol {
 
     func logIn(username: String, password: String) async throws -> LoginResponseDataModel {
         let responseDataModel = try await userNetworkDataSource.logIn(username: username, password: password)
-        storeAccessToken(accessToken: responseDataModel.accessToken)
+        save(accessToken: responseDataModel.accessToken)
 
         return responseDataModel
     }
 
-    private func storeAccessToken(accessToken: String) {
-        userDatabaseDataSource.storeAccessToken(accessToken: accessToken)
+    private func save(accessToken: String) {
+        userDatabaseDataSource.save(accessToken: accessToken)
     }
 
 }
