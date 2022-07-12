@@ -26,6 +26,7 @@
 		9CC33B22287D6848002E9853 /* UserDatabaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC33B21287D6848002E9853 /* UserDatabaseDataSource.swift */; };
 		9CC33B24287D6889002E9853 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC33B23287D6889002E9853 /* UserRepository.swift */; };
 		9CC33B26287D6E2B002E9853 /* SecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC33B25287D6E2B002E9853 /* SecureStorage.swift */; };
+		9CC33B2B287D77E5002E9853 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9CC33B2A287D77E5002E9853 /* KeychainSwift */; };
 		9CC4D6D6287C10450061F149 /* LoginClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4D6D5287C10450061F149 /* LoginClient.swift */; };
 		9CC4D6DD287C1C6B0061F149 /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4D6DC287C1C6B0061F149 /* RequestError.swift */; };
 		9CC4D6E0287C5A720061F149 /* AppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4D6DF287C5A720061F149 /* AppDependencies.swift */; };
@@ -66,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CC33B2B287D77E5002E9853 /* KeychainSwift in Frameworks */,
 				9C19538E2876CF720051CEC6 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -106,7 +108,6 @@
 				9C1953B2287871CC0051CEC6 /* AppRouter.swift */,
 				9CC4D6DF287C5A720061F149 /* AppDependencies.swift */,
 				9CC33B23287D6889002E9853 /* UserRepository.swift */,
-				9CC33B25287D6E2B002E9853 /* SecureStorage.swift */,
 			);
 			path = QuizApp;
 			sourceTree = "<group>";
@@ -131,6 +132,7 @@
 		9CC33B20287D6832002E9853 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
+				9CC33B25287D6E2B002E9853 /* SecureStorage.swift */,
 				9CC33B21287D6848002E9853 /* UserDatabaseDataSource.swift */,
 			);
 			path = Storage;
@@ -195,6 +197,7 @@
 			name = QuizApp;
 			packageProductDependencies = (
 				9C19538D2876CF720051CEC6 /* SnapKit */,
+				9CC33B2A287D77E5002E9853 /* KeychainSwift */,
 			);
 			productName = QuizApp;
 			productReference = 9C195367287584750051CEC6 /* QuizApp.app */;
@@ -226,6 +229,7 @@
 			mainGroup = 9C19535E287584750051CEC6;
 			packageReferences = (
 				9C19538C2876CF720051CEC6 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				9CC33B29287D77E5002E9853 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 			);
 			productRefGroup = 9C195368287584750051CEC6 /* Products */;
 			projectDirPath = "";
@@ -511,6 +515,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		9CC33B29287D77E5002E9853 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -518,6 +530,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9C19538C2876CF720051CEC6 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		9CC33B2A287D77E5002E9853 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9CC33B29287D77E5002E9853 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

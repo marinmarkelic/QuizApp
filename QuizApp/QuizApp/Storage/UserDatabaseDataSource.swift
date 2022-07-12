@@ -8,11 +8,7 @@ protocol UserDatabaseDataSourceProtocol {
 class UserDatabaseDataSource: UserDatabaseDataSourceProtocol {
 
     func storeAccessToken(accessToken: String) {
-        do {
-            try SecureStorage.save(accessToken: accessToken)
-        } catch let error {
-            print(error)
-        }
+        SecureStorage.save(accessToken: accessToken)
 
         do {
             print(try SecureStorage.fetchAccessToken())
@@ -20,4 +16,5 @@ class UserDatabaseDataSource: UserDatabaseDataSourceProtocol {
             print(error)
         }
     }
+    
 }
