@@ -11,13 +11,13 @@ protocol SecureStorageProtocol {
 
 class SecureStorage: SecureStorageProtocol {
 
+    private let keychain = KeychainSwift()
+
     func fetchAccessToken() -> String? {
-        let keychain = KeychainSwift()
-        return keychain.get("AccessToken")
+        keychain.get("AccessToken")
     }
 
     func save(accessToken: String) {
-        let keychain = KeychainSwift()
         keychain.set(accessToken, forKey: "AccessToken")
     }
 
