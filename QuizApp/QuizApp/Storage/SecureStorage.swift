@@ -10,7 +10,7 @@ protocol SecureStorageProtocol {
 }
 
 class SecureStorage: SecureStorageProtocol {
-    
+
     static func fetchAccessToken() throws -> String {
         let keychain = KeychainSwift()
 
