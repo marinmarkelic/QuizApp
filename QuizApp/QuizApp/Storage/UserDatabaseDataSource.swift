@@ -1,20 +1,20 @@
-import CoreFoundation
 protocol UserDatabaseDataSourceProtocol {
 
     func save(accessToken: String)
+    func fetchAccessToken() -> String?
 
 }
 
 class UserDatabaseDataSource: UserDatabaseDataSourceProtocol {
 
-    func save(accessToken: String) {
-        SecureStorage.save(accessToken: accessToken)
+    private let secureStorage = SecureStorage()
 
-        do {
-            print(try SecureStorage.fetchAccessToken())
-        } catch let error {
-            print(error)
-        }
+    func save(accessToken: String) {
+        secureStorage.save(accessToken: accessToken)
+    }
+
+    func fetchAccessToken() -> String? {
+        secureStorage.fetchAccessToken()
     }
 
 }

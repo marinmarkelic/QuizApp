@@ -1,6 +1,6 @@
 protocol LoginUseCaseProtocol {
 
-    func logIn(username: String, password: String) async throws -> LoginResponseUseCase
+    func logIn(username: String, password: String) async throws -> LoginResponseModel
 
 }
 
@@ -12,21 +12,21 @@ class LoginUseCase: LoginUseCaseProtocol {
         self.userRepository = userRepository
     }
 
-    func logIn(username: String, password: String) async throws -> LoginResponseUseCase {
-        LoginResponseUseCase(try await userRepository.logIn(username: username, password: password))
+    func logIn(username: String, password: String) async throws -> LoginResponseModel {
+        LoginResponseModel(try await userRepository.logIn(username: username, password: password))
     }
 
 }
 
-struct LoginResponseUseCase {
+struct LoginResponseModel {
 
     let accessToken: String
 
 }
 
-extension LoginResponseUseCase {
+extension LoginResponseModel {
 
-    init(_ loginResponse: LoginResponseDataModel) {
+    init(_ loginResponse: LoginResponseRepoModel) {
         accessToken = loginResponse.accessToken
     }
 

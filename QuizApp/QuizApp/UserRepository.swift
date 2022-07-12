@@ -1,6 +1,6 @@
 protocol UserRepositoryProtocol {
 
-    func logIn(username: String, password: String) async throws -> LoginResponseDataModel
+    func logIn(username: String, password: String) async throws -> LoginResponseRepoModel
 
 }
 
@@ -14,15 +14,30 @@ class UserRepository: UserRepositoryProtocol {
         self.userDatabaseDataSource = userDatabaseDataSource
     }
 
-    func logIn(username: String, password: String) async throws -> LoginResponseDataModel {
-        let responseDataModel = try await userNetworkDataSource.logIn(username: username, password: password)
-        save(accessToken: responseDataModel.accessToken)
+    func logIn(username: String, password: String) async throws -> LoginResponseRepoModel {
+        let responseRepoModel = LoginResponseRepoModel(
+            try await userNetworkDataSource.logIn(username: username, password: password))
+        save(accessToken: responseRepoModel.accessToken)
 
-        return responseDataModel
+        return responseRepoModel
     }
 
     private func save(accessToken: String) {
         userDatabaseDataSource.save(accessToken: accessToken)
+    }
+
+}
+
+struct LoginResponseRepoModel {
+
+    var accessToken: String
+
+}
+
+extension LoginResponseRepoModel {
+
+    init(_ responseDataModel: LoginResponseDataModel) {
+        accessToken = responseDataModel.accessToken
     }
 
 }

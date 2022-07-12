@@ -4,24 +4,19 @@ import KeychainSwift
 
 protocol SecureStorageProtocol {
 
-    static func save(accessToken: String)
-    static func fetchAccessToken() throws -> String
+    func save(accessToken: String)
+    func fetchAccessToken() -> String?
 
 }
 
 class SecureStorage: SecureStorageProtocol {
 
-    static func fetchAccessToken() throws -> String {
+    func fetchAccessToken() -> String? {
         let keychain = KeychainSwift()
-
-        guard let accessToken = keychain.get("AccessToken") else {
-            throw KeychainError.itemNotFound
-        }
-
-        return accessToken
+        return keychain.get("AccessToken")
     }
 
-    static func save(accessToken: String) {
+    func save(accessToken: String) {
         let keychain = KeychainSwift()
         keychain.set(accessToken, forKey: "AccessToken")
     }
