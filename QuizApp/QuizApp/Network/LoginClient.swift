@@ -31,7 +31,7 @@ class LoginClient: LoginClientProtocol {
         guard let url = URL(string: "\(baseUrl)/v1/login") else { throw RequestError.invalidURLError }
 
         guard let jsonData = try? JSONEncoder().encode(LoginRequest(username: username, password: password)) else {
-            throw RequestError.dataDecodingError
+            throw RequestError.dataCodingError
         }
 
         var urlRequest = URLRequest(url: url)
@@ -60,7 +60,7 @@ class LoginClient: LoginClientProtocol {
         }
 
         guard let value = try? JSONDecoder().decode(LoginResponse.self, from: data) else {
-            throw RequestError.dataDecodingError
+            throw RequestError.dataCodingError
         }
 
         return value
