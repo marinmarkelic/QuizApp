@@ -19,33 +19,18 @@ protocol LoginNetworkClientProtocol {
 
 }
 
-class LoginNetworkClient: NetworkClient, LoginNetworkClientProtocol {
+class LoginNetworkClient: LoginNetworkClientProtocol {
 
-    private let baseUrl: String
+    private let networkClient: NetworkClient
 
-    init(baseUrl: String) {
-        self.baseUrl = baseUrl
+    init(networkClient: NetworkClient) {
+        self.networkClient = networkClient
     }
 
     func logIn(username: String, password: String) async throws -> LoginResponse {
-        guard let url = URL(string: "\(baseUrl)/v1/login") else { throw RequestError.invalidURLError }
-
-        guard let jsonData = try? JSONEncoder().encode(LoginRequest(username: username, password: password)) else {
-            throw RequestError.dataCodingError
-        }
-
-        var urlRequest = URLRequest(url: url)
-        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        urlRequest.httpMethod = "POST"
-        urlRequest.httpBody = jsonData
-
-        let (data, _) = try await handle(urlRequest: urlRequest)
-
-        guard let value = try? JSONDecoder().decode(LoginResponse.self, from: data) else {
-            throw RequestError.dataCodingError
-        }
-
-        return value
+        try await networkClient.post(
+            path: "/v1/login",
+            body: LoginRequest(username: username, password: password))
     }
 
 }

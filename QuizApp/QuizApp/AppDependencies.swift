@@ -2,6 +2,8 @@ class AppDependencies {
 
     private let baseUrl = "https://five-ios-quiz-app.herokuapp.com/api"
 
+    lazy var secureStorage = SecureStorage()
+
     lazy var loginUseCase: LoginUseCaseProtocol = {
         LoginUseCase(userRepository: userRepository)
     }()
@@ -17,11 +19,15 @@ class AppDependencies {
     }()
 
     lazy var loginClient: LoginNetworkClientProtocol = {
-        LoginNetworkClient(baseUrl: baseUrl)
+        LoginNetworkClient(networkClient: networkClient)
     }()
 
     lazy var checkNetworkClient: CheckNetworkClientProtocol = {
-        CheckNetworkClient(baseUrl: baseUrl)
+        CheckNetworkClient(networkClient: networkClient)
+    }()
+
+    lazy var networkClient: NetworkClient = {
+        NetworkClient(secureStorage: secureStorage, baseUrl: baseUrl)
     }()
 
 }

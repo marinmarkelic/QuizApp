@@ -6,35 +6,16 @@ protocol CheckNetworkClientProtocol {
 
 }
 
-class CheckNetworkClient: NetworkClient, CheckNetworkClientProtocol {
+class CheckNetworkClient: CheckNetworkClientProtocol {
 
-    private let baseUrl: String
+    private let networkClient: NetworkClient
 
-    init(baseUrl: String) {
-        self.baseUrl = baseUrl
+    init(networkClient: NetworkClient) {
+        self.networkClient = networkClient
     }
 
     func check() async throws {
-        guard let url = URL(string: "\(baseUrl)/v1/check") else {
-            throw RequestError.invalidURLError
-        }
-
-        guard let accessToken = SecureStorage().fetchAccessToken() else {
-            throw CheckNetworkError.noAccessTokenError
-        }
-
-        var urlRequest = URLRequest(url: url)
-        urlRequest.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
-        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        urlRequest.httpMethod = "GET"
-
-        let (_, _) = try await handle(urlRequest: urlRequest)
+        try await networkClient.get(path: "/v1/check")
     }
-
-}
-
-enum CheckNetworkError: Error {
-
-    case noAccessTokenError
 
 }
