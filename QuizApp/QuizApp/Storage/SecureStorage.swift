@@ -22,9 +22,3 @@ class SecureStorage: SecureStorageProtocol {
     }
 
 }
-
-enum KeychainError: Error {
-
-    case itemNotFound
-
-}
