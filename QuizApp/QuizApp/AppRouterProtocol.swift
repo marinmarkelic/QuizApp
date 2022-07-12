@@ -1,5 +1,5 @@
 protocol AppRouterProtocol {
 
-    func showLogin()
+    func setStartController()
 
 }

@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window.makeKeyAndVisible()
 
         let appRouter = AppRouter(navigationController: navigationController)
-        appRouter.showLogin()
+        appRouter.setStartController()
 
         self.window = window
         return true

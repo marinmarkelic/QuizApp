@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class UserViewController: UIViewController{
+class UserViewController: UIViewController {
 
     private var gradientView: GradientView!
 
