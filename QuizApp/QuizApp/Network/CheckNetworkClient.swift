@@ -33,12 +33,6 @@ class CheckNetworkClient: NetworkClient, CheckNetworkClientProtocol {
 
 }
 
-struct CheckRequest: Encodable {
-
-    let accessToken: String
-
-}
-
 enum CheckNetworkError: Error {
 
     case noAccessTokenError
