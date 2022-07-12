@@ -30,7 +30,7 @@ class LoginViewModel {
         errorText = ""
         Task {
             do {
-                try await loginUseCase.logIn(username: email, password: password)
+                _ = try await loginUseCase.logIn(username: email, password: password)
             } catch let error as RequestError {
                 showError(error)
             }
