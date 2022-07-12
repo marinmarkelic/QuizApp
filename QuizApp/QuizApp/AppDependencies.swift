@@ -12,7 +12,9 @@ class AppDependencies {
         UserNetworkDataSource(loginClient: loginClient, checkNetworkClient: checkNetworkClient)
     }()
 
-    lazy var userDatabaseDataSource: UserDatabaseDataSource = UserDatabaseDataSource()
+    lazy var userDatabaseDataSource: UserDatabaseDataSource = {
+        UserDatabaseDataSource(secureStorage: secureStorage)
+    }()
 
     lazy var userRepository: UserRepository = {
         UserRepository(userNetworkDataSource: userNetworkDataSource, userDatabaseDataSource: userDatabaseDataSource)

@@ -8,7 +8,11 @@ protocol UserDatabaseDataSourceProtocol {
 
 class UserDatabaseDataSource: UserDatabaseDataSourceProtocol {
 
-    private let secureStorage = SecureStorage()
+    private let secureStorage: SecureStorage
+
+    init(secureStorage: SecureStorage) {
+        self.secureStorage = secureStorage
+    }
 
     func save(accessToken: String) {
         secureStorage.save(accessToken: accessToken)
