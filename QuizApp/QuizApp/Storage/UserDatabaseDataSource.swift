@@ -2,20 +2,24 @@ protocol UserDatabaseDataSourceProtocol {
 
     func save(accessToken: String)
 
-    func fetchAccessToken() -> String?
+    var accessToken: String? { get }
 
 }
 
 class UserDatabaseDataSource: UserDatabaseDataSourceProtocol {
 
-    private let secureStorage = SecureStorage()
+    private let secureStorage: SecureStorage
+
+    init(secureStorage: SecureStorage) {
+        self.secureStorage = secureStorage
+    }
 
     func save(accessToken: String) {
         secureStorage.save(accessToken: accessToken)
     }
 
-    func fetchAccessToken() -> String? {
-        secureStorage.fetchAccessToken()
+    var accessToken: String? {
+        secureStorage.accessToken
     }
 
 }

@@ -27,7 +27,9 @@
 		9CC33B24287D6889002E9853 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC33B23287D6889002E9853 /* UserRepository.swift */; };
 		9CC33B26287D6E2B002E9853 /* SecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC33B25287D6E2B002E9853 /* SecureStorage.swift */; };
 		9CC33B2B287D77E5002E9853 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9CC33B2A287D77E5002E9853 /* KeychainSwift */; };
-		9CC4D6D6287C10450061F149 /* LoginClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4D6D5287C10450061F149 /* LoginClient.swift */; };
+		9CC33B31287D9F59002E9853 /* CheckNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC33B30287D9F59002E9853 /* CheckNetworkClient.swift */; };
+		9CC33B33287DA19F002E9853 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC33B32287DA19F002E9853 /* NetworkClient.swift */; };
+		9CC4D6D6287C10450061F149 /* LoginNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4D6D5287C10450061F149 /* LoginNetworkClient.swift */; };
 		9CC4D6DD287C1C6B0061F149 /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4D6DC287C1C6B0061F149 /* RequestError.swift */; };
 		9CC4D6E0287C5A720061F149 /* AppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4D6DF287C5A720061F149 /* AppDependencies.swift */; };
 		9CC4D6E2287C6AB30061F149 /* UserNetworkDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4D6E1287C6AB30061F149 /* UserNetworkDataSource.swift */; };
@@ -55,7 +57,9 @@
 		9CC33B21287D6848002E9853 /* UserDatabaseDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDatabaseDataSource.swift; sourceTree = "<group>"; };
 		9CC33B23287D6889002E9853 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		9CC33B25287D6E2B002E9853 /* SecureStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStorage.swift; sourceTree = "<group>"; };
-		9CC4D6D5287C10450061F149 /* LoginClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginClient.swift; sourceTree = "<group>"; };
+		9CC33B30287D9F59002E9853 /* CheckNetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNetworkClient.swift; sourceTree = "<group>"; };
+		9CC33B32287DA19F002E9853 /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
+		9CC4D6D5287C10450061F149 /* LoginNetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginNetworkClient.swift; sourceTree = "<group>"; };
 		9CC4D6DC287C1C6B0061F149 /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
 		9CC4D6DF287C5A720061F149 /* AppDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependencies.swift; sourceTree = "<group>"; };
 		9CC4D6E1287C6AB30061F149 /* UserNetworkDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNetworkDataSource.swift; sourceTree = "<group>"; };
@@ -165,7 +169,9 @@
 			children = (
 				9CC4D6E1287C6AB30061F149 /* UserNetworkDataSource.swift */,
 				9CC4D6DC287C1C6B0061F149 /* RequestError.swift */,
-				9CC4D6D5287C10450061F149 /* LoginClient.swift */,
+				9CC4D6D5287C10450061F149 /* LoginNetworkClient.swift */,
+				9CC33B30287D9F59002E9853 /* CheckNetworkClient.swift */,
+				9CC33B32287DA19F002E9853 /* NetworkClient.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -281,6 +287,7 @@
 				9C19539A2876DD7D0051CEC6 /* LoginButton.swift in Sources */,
 				9C19536F287584750051CEC6 /* LoginViewController.swift in Sources */,
 				9CC4D6E4287C6C8C0061F149 /* LoginUseCase.swift in Sources */,
+				9CC33B33287DA19F002E9853 /* NetworkClient.swift in Sources */,
 				9C1953AB287725590051CEC6 /* TextFieldView.swift in Sources */,
 				9CC4D6E0287C5A720061F149 /* AppDependencies.swift in Sources */,
 				9C1953B12878366A0051CEC6 /* ErrorLabel.swift in Sources */,
@@ -288,11 +295,12 @@
 				9C19536B287584750051CEC6 /* AppDelegate.swift in Sources */,
 				9C1953942876D3860051CEC6 /* EmailView.swift in Sources */,
 				9C1953B3287871CC0051CEC6 /* AppRouter.swift in Sources */,
-				9CC4D6D6287C10450061F149 /* LoginClient.swift in Sources */,
+				9CC4D6D6287C10450061F149 /* LoginNetworkClient.swift in Sources */,
 				9CC4D6E2287C6AB30061F149 /* UserNetworkDataSource.swift in Sources */,
 				9CC33B22287D6848002E9853 /* UserDatabaseDataSource.swift in Sources */,
 				9C1953A9287716FE0051CEC6 /* ConstructViewsProtocol.swift in Sources */,
 				9CC4D6DD287C1C6B0061F149 /* RequestError.swift in Sources */,
+				9CC33B31287D9F59002E9853 /* CheckNetworkClient.swift in Sources */,
 				9C1953962876D65C0051CEC6 /* PasswordView.swift in Sources */,
 				9C1953B5287871E20051CEC6 /* AppRouterProtocol.swift in Sources */,
 				9CC33B24287D6889002E9853 /* UserRepository.swift in Sources */,

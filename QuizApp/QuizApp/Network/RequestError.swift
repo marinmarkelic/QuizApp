@@ -1,7 +1,7 @@
 enum RequestError: Error {
 
     case invalidURLError
-    case dataDecodingError
+    case dataCodingError
     case unauthorisedError
     case forbiddenError
     case notFoundError
