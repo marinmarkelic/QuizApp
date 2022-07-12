@@ -16,8 +16,8 @@ class AppDependencies {
         UserRepository(userNetworkDataSource: userNetworkDataSource, userDatabaseDataSource: userDatabaseDataSource)
     }()
 
-    lazy var loginClient: LoginClientProtocol = {
-        LoginClient(baseUrl: baseUrl)
+    lazy var loginClient: LoginNetworkClientProtocol = {
+        LoginNetworkClient(baseUrl: baseUrl)
     }()
 
     lazy var checkNetworkClient: CheckNetworkClientProtocol = {

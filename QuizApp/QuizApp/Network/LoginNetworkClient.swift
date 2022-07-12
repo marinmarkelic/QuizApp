@@ -13,13 +13,13 @@ struct LoginResponse: Decodable {
 
 }
 
-protocol LoginClientProtocol {
+protocol LoginNetworkClientProtocol {
 
     func logIn(username: String, password: String) async throws -> LoginResponse
 
 }
 
-class LoginClient: LoginClientProtocol {
+class LoginNetworkClient: LoginNetworkClientProtocol {
 
     private let baseUrl: String
 

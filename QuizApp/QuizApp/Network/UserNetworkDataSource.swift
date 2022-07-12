@@ -8,10 +8,10 @@ protocol UserNetworkDataSourceProtocol {
 
 class UserNetworkDataSource: UserNetworkDataSourceProtocol {
 
-    private let loginClient: LoginClientProtocol
+    private let loginClient: LoginNetworkClientProtocol
     private let checkNetworkClient: CheckNetworkClientProtocol
 
-    init(loginClient: LoginClientProtocol, checkNetworkClient: CheckNetworkClientProtocol) {
+    init(loginClient: LoginNetworkClientProtocol, checkNetworkClient: CheckNetworkClientProtocol) {
         self.loginClient = loginClient
         self.checkNetworkClient = checkNetworkClient
     }
