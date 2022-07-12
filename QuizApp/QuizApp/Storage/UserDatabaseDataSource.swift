@@ -1,6 +1,7 @@
 protocol UserDatabaseDataSourceProtocol {
 
     func save(accessToken: String)
+
     func fetchAccessToken() -> String?
 
 }
