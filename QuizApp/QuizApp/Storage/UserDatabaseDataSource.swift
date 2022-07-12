@@ -19,7 +19,7 @@ class UserDatabaseDataSource: UserDatabaseDataSourceProtocol {
     }
 
     func fetchAccessToken() -> String? {
-        secureStorage.fetchAccessToken()
+        secureStorage.accessToken
     }
 
 }

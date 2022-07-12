@@ -15,7 +15,7 @@ class NetworkClient {
             throw RequestError.invalidURLError
         }
 
-        let accessToken = secureStorage.fetchAccessToken() ?? ""
+        let accessToken = secureStorage.accessToken ?? ""
 
         var urlRequest = URLRequest(url: url)
         urlRequest.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
@@ -30,7 +30,7 @@ class NetworkClient {
             throw RequestError.invalidURLError
         }
 
-        let accessToken = secureStorage.fetchAccessToken() ?? ""
+        let accessToken = secureStorage.accessToken ?? ""
 
         var urlRequest = URLRequest(url: url)
         urlRequest.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")

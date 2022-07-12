@@ -4,7 +4,7 @@ protocol SecureStorageProtocol {
 
     func save(accessToken: String)
 
-    func fetchAccessToken() -> String?
+    var accessToken: String? { get }
 
 }
 
@@ -14,7 +14,7 @@ class SecureStorage: SecureStorageProtocol {
 
     private let accessTokenKey = "AccessToken"
 
-    func fetchAccessToken() -> String? {
+    var accessToken: String? {
         keychain.get(accessTokenKey)
     }
 
