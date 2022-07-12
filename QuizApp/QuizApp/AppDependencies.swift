@@ -7,7 +7,7 @@ class AppDependencies {
     }()
 
     lazy var userNetworkDataSource: UserNetworkDataSourceProtocol = {
-        UserNetworkDataSource(loginClient: loginClient)
+        UserNetworkDataSource(loginClient: loginClient, checkNetworkClient: checkNetworkClient)
     }()
 
     lazy var userDatabaseDataSource: UserDatabaseDataSource = UserDatabaseDataSource()
@@ -18,6 +18,10 @@ class AppDependencies {
 
     lazy var loginClient: LoginClientProtocol = {
         LoginClient(baseUrl: baseUrl)
+    }()
+
+    lazy var checkNetworkClient: CheckNetworkClientProtocol = {
+        CheckNetworkClient(baseUrl: baseUrl)
     }()
 
 }
