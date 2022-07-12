@@ -23,6 +23,10 @@
 		9C1953B12878366A0051CEC6 /* ErrorLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1953B02878366A0051CEC6 /* ErrorLabel.swift */; };
 		9C1953B3287871CC0051CEC6 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1953B2287871CC0051CEC6 /* AppRouter.swift */; };
 		9C1953B5287871E20051CEC6 /* AppRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1953B4287871E20051CEC6 /* AppRouterProtocol.swift */; };
+		9CC33B22287D6848002E9853 /* UserDatabaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC33B21287D6848002E9853 /* UserDatabaseDataSource.swift */; };
+		9CC33B24287D6889002E9853 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC33B23287D6889002E9853 /* UserRepository.swift */; };
+		9CC33B26287D6E2B002E9853 /* SecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC33B25287D6E2B002E9853 /* SecureStorage.swift */; };
+		9CC33B2B287D77E5002E9853 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9CC33B2A287D77E5002E9853 /* KeychainSwift */; };
 		9CC4D6D6287C10450061F149 /* LoginClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4D6D5287C10450061F149 /* LoginClient.swift */; };
 		9CC4D6DD287C1C6B0061F149 /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4D6DC287C1C6B0061F149 /* RequestError.swift */; };
 		9CC4D6E0287C5A720061F149 /* AppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4D6DF287C5A720061F149 /* AppDependencies.swift */; };
@@ -48,6 +52,9 @@
 		9C1953B02878366A0051CEC6 /* ErrorLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorLabel.swift; sourceTree = "<group>"; };
 		9C1953B2287871CC0051CEC6 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		9C1953B4287871E20051CEC6 /* AppRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouterProtocol.swift; sourceTree = "<group>"; };
+		9CC33B21287D6848002E9853 /* UserDatabaseDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDatabaseDataSource.swift; sourceTree = "<group>"; };
+		9CC33B23287D6889002E9853 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
+		9CC33B25287D6E2B002E9853 /* SecureStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStorage.swift; sourceTree = "<group>"; };
 		9CC4D6D5287C10450061F149 /* LoginClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginClient.swift; sourceTree = "<group>"; };
 		9CC4D6DC287C1C6B0061F149 /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
 		9CC4D6DF287C5A720061F149 /* AppDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependencies.swift; sourceTree = "<group>"; };
@@ -60,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9CC33B2B287D77E5002E9853 /* KeychainSwift in Frameworks */,
 				9C19538E2876CF720051CEC6 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -86,6 +94,7 @@
 		9C195369287584750051CEC6 /* QuizApp */ = {
 			isa = PBXGroup;
 			children = (
+				9CC33B20287D6832002E9853 /* Storage */,
 				9CC4D6E5287C70170061F149 /* UseCase */,
 				9CC4D6DE287C552A0061F149 /* Network */,
 				9C1953A32876F9A70051CEC6 /* Fonts */,
@@ -98,6 +107,7 @@
 				9C1953B4287871E20051CEC6 /* AppRouterProtocol.swift */,
 				9C1953B2287871CC0051CEC6 /* AppRouter.swift */,
 				9CC4D6DF287C5A720061F149 /* AppDependencies.swift */,
+				9CC33B23287D6889002E9853 /* UserRepository.swift */,
 			);
 			path = QuizApp;
 			sourceTree = "<group>";
@@ -117,6 +127,15 @@
 				9C1953A62876FB430051CEC6 /* SourceSansPro-Regular.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		9CC33B20287D6832002E9853 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				9CC33B25287D6E2B002E9853 /* SecureStorage.swift */,
+				9CC33B21287D6848002E9853 /* UserDatabaseDataSource.swift */,
+			);
+			path = Storage;
 			sourceTree = "<group>";
 		};
 		9CC4D6D8287C10F40061F149 /* View */ = {
@@ -178,6 +197,7 @@
 			name = QuizApp;
 			packageProductDependencies = (
 				9C19538D2876CF720051CEC6 /* SnapKit */,
+				9CC33B2A287D77E5002E9853 /* KeychainSwift */,
 			);
 			productName = QuizApp;
 			productReference = 9C195367287584750051CEC6 /* QuizApp.app */;
@@ -209,6 +229,7 @@
 			mainGroup = 9C19535E287584750051CEC6;
 			packageReferences = (
 				9C19538C2876CF720051CEC6 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				9CC33B29287D77E5002E9853 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 			);
 			productRefGroup = 9C195368287584750051CEC6 /* Products */;
 			projectDirPath = "";
@@ -269,10 +290,13 @@
 				9C1953B3287871CC0051CEC6 /* AppRouter.swift in Sources */,
 				9CC4D6D6287C10450061F149 /* LoginClient.swift in Sources */,
 				9CC4D6E2287C6AB30061F149 /* UserNetworkDataSource.swift in Sources */,
+				9CC33B22287D6848002E9853 /* UserDatabaseDataSource.swift in Sources */,
 				9C1953A9287716FE0051CEC6 /* ConstructViewsProtocol.swift in Sources */,
 				9CC4D6DD287C1C6B0061F149 /* RequestError.swift in Sources */,
 				9C1953962876D65C0051CEC6 /* PasswordView.swift in Sources */,
 				9C1953B5287871E20051CEC6 /* AppRouterProtocol.swift in Sources */,
+				9CC33B24287D6889002E9853 /* UserRepository.swift in Sources */,
+				9CC33B26287D6E2B002E9853 /* SecureStorage.swift in Sources */,
 				9C1953AF287826BD0051CEC6 /* LoginViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -491,6 +515,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		9CC33B29287D77E5002E9853 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/evgenyneu/keychain-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -498,6 +530,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9C19538C2876CF720051CEC6 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		9CC33B2A287D77E5002E9853 /* KeychainSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9CC33B29287D77E5002E9853 /* XCRemoteSwiftPackageReference "keychain-swift" */;
+			productName = KeychainSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
