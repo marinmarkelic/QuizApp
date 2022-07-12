@@ -19,7 +19,7 @@ protocol LoginNetworkClientProtocol {
 
 }
 
-class LoginNetworkClient: LoginNetworkClientProtocol {
+class LoginNetworkClient: NetworkClient, LoginNetworkClientProtocol {
 
     private let baseUrl: String
 
@@ -39,25 +39,7 @@ class LoginNetworkClient: LoginNetworkClientProtocol {
         urlRequest.httpMethod = "POST"
         urlRequest.httpBody = jsonData
 
-        guard let (data, response) = try? await URLSession.shared.data(for: urlRequest) else {
-            throw RequestError.serverError
-        }
-
-        if
-            let httpResponse = response as? HTTPURLResponse,
-            (300...503).contains(httpResponse.statusCode)
-        {
-            switch httpResponse.statusCode {
-            case 401:
-                throw RequestError.unauthorisedError
-            case 403:
-                throw RequestError.forbiddenError
-            case 404:
-                throw RequestError.notFoundError
-            default:
-                throw RequestError.serverError
-            }
-        }
+        let (data, _) = try await handle(urlRequest: urlRequest)
 
         guard let value = try? JSONDecoder().decode(LoginResponse.self, from: data) else {
             throw RequestError.dataCodingError

@@ -5,7 +5,7 @@ protocol CheckNetworkClientProtocol {
 
 }
 
-class CheckNetworkClient: CheckNetworkClientProtocol {
+class CheckNetworkClient: NetworkClient, CheckNetworkClientProtocol {
 
     private let baseUrl: String
 
@@ -27,25 +27,7 @@ class CheckNetworkClient: CheckNetworkClientProtocol {
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRequest.httpMethod = "GET"
 
-        guard let (_, response) = try? await URLSession.shared.data(for: urlRequest) else {
-            throw RequestError.serverError
-        }
-
-        if
-            let httpResponse = response as? HTTPURLResponse,
-            (300...503).contains(httpResponse.statusCode)
-        {
-            switch httpResponse.statusCode {
-            case 401:
-                throw RequestError.unauthorisedError
-            case 403:
-                throw RequestError.forbiddenError
-            case 404:
-                throw RequestError.notFoundError
-            default:
-                throw RequestError.serverError
-            }
-        }
+        let (_, _) = try await handle(urlRequest: urlRequest)
     }
 
 }
