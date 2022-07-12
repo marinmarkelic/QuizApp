@@ -2,7 +2,7 @@ protocol UserDatabaseDataSourceProtocol {
 
     func save(accessToken: String)
 
-    func fetchAccessToken() -> String?
+    var accessToken: String? { get }
 
 }
 
@@ -18,7 +18,7 @@ class UserDatabaseDataSource: UserDatabaseDataSourceProtocol {
         secureStorage.save(accessToken: accessToken)
     }
 
-    func fetchAccessToken() -> String? {
+    var accessToken: String? {
         secureStorage.accessToken
     }
 
