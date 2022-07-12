@@ -4,6 +4,9 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    private var appRouter: AppRouterProtocol!
+
+    private let appDependencies = AppDependencies()
 
     func application(
         _ application: UIApplication,
@@ -15,11 +18,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
 
-        let appRouter = AppRouter(navigationController: navigationController)
-        appRouter.setStartController()
+        appRouter = AppRouter(navigationController: navigationController, appDependencies: appDependencies)
+
+        setViewController()
 
         self.window = window
         return true
+    }
+
+    private func setViewController() {
+        appDependencies.secureStorage.deleteAccessToken()
+        Task {
+            do {
+                try await appDependencies.userNetworkDataSource.check()
+
+                DispatchQueue.main.async { [weak self] in
+                    self?.appRouter.showUser()
+                }
+            } catch {
+                DispatchQueue.main.async { [weak self] in
+                    self?.appRouter.showLogin()
+                }
+            }
+        }
     }
 
 }

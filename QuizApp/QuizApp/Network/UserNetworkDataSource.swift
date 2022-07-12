@@ -2,7 +2,7 @@ protocol UserNetworkDataSourceProtocol {
 
     func logIn(username: String, password: String) async throws -> LoginResponseDataModel
 
-    func check()
+    func check() async throws
 
 }
 
@@ -20,14 +20,8 @@ class UserNetworkDataSource: UserNetworkDataSourceProtocol {
         LoginResponseDataModel(try await loginClient.logIn(username: username, password: password))
     }
 
-    func check() {
-        Task {
-            do {
-                try await checkNetworkClient.check()
-            } catch let error {
-                print(error)
-            }
-        }
+    func check() async throws {
+        try await checkNetworkClient.check()
     }
 
 }

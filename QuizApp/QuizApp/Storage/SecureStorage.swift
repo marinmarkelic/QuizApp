@@ -22,4 +22,8 @@ class SecureStorage: SecureStorageProtocol {
         keychain.set(accessToken, forKey: accessTokenKey)
     }
 
+    func deleteAccessToken() {
+        keychain.delete(accessTokenKey)
+    }
+
 }

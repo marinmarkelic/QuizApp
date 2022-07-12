@@ -2,30 +2,35 @@ import UIKit
 
 class AppRouter: AppRouterProtocol {
 
-    private let appDependencies = AppDependencies()
+    private let appDependencies: AppDependencies
     private let navigationController: UINavigationController
 
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, appDependencies: AppDependencies) {
         self.navigationController = navigationController
+        self.appDependencies = appDependencies
     }
 
-    func setStartController() {
-        if appDependencies.secureStorage.accessToken != nil {
-            showUser()
-        } else {
-            showLogin()
-        }
-    }
-
-    private func showLogin() {
+    func showLogin() {
         let loginViewController = LoginViewController(
-            viewModel: LoginViewModel(loginUseCase: appDependencies.loginUseCase))
+            viewModel: LoginViewModel(loginUseCase: appDependencies.loginUseCase, appRouter: self))
         navigationController.pushViewController(loginViewController, animated: true)
     }
 
-    private func showUser() {
+    func showUser() {
         let userViewControlleer = UserViewController()
-        navigationController.pushViewController(userViewControlleer, animated: true)
+
+        print(navigationController.viewControllers)
+
+        if navigationController.viewControllers.isEmpty {
+            navigationController.pushViewController(userViewControlleer, animated: true)
+        } else {
+            navigationController.dismiss(animated: false)
+            navigationController.popViewController(animated: false)
+            print(navigationController.viewControllers)
+
+            navigationController.pushViewController(userViewControlleer, animated: true)
+            print(navigationController.viewControllers)
+        }
     }
 
 }
