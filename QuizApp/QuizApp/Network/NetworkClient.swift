@@ -25,4 +25,5 @@ class NetworkClient {
 
         return (data, response)
     }
+
 }

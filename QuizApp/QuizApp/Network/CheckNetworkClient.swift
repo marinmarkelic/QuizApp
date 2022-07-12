@@ -1,4 +1,5 @@
 import Foundation
+
 protocol CheckNetworkClientProtocol {
 
     func check() async throws
@@ -14,9 +15,9 @@ class CheckNetworkClient: NetworkClient, CheckNetworkClientProtocol {
     }
 
     func check() async throws {
-        guard let
-                url = URL(string: "\(baseUrl)/v1/check")
-        else { throw RequestError.invalidURLError }
+        guard let url = URL(string: "\(baseUrl)/v1/check") else {
+            throw RequestError.invalidURLError
+        }
 
         guard let accessToken = SecureStorage().fetchAccessToken() else {
             throw CheckNetworkError.noAccessTokenError
