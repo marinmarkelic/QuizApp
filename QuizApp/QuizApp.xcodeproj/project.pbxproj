@@ -90,7 +90,7 @@
 		9C195369287584750051CEC6 /* QuizApp */ = {
 			isa = PBXGroup;
 			children = (
-				9CC33B20287D6832002E9853 /* Database */,
+				9CC33B20287D6832002E9853 /* Storage */,
 				9CC4D6E5287C70170061F149 /* UseCase */,
 				9CC4D6DE287C552A0061F149 /* Network */,
 				9C1953A32876F9A70051CEC6 /* Fonts */,
@@ -125,12 +125,12 @@
 			path = Fonts;
 			sourceTree = "<group>";
 		};
-		9CC33B20287D6832002E9853 /* Database */ = {
+		9CC33B20287D6832002E9853 /* Storage */ = {
 			isa = PBXGroup;
 			children = (
 				9CC33B21287D6848002E9853 /* UserDatabaseDataSource.swift */,
 			);
-			path = Database;
+			path = Storage;
 			sourceTree = "<group>";
 		};
 		9CC4D6D8287C10F40061F149 /* View */ = {
