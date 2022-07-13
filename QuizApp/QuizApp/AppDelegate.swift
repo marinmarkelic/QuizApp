@@ -27,7 +27,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     private func setViewController() {
-        appDependencies.secureStorage.deleteAccessToken()
         Task {
             do {
                 try await appDependencies.userNetworkDataSource.check()

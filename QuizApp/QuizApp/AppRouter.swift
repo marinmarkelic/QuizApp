@@ -17,19 +17,12 @@ class AppRouter: AppRouterProtocol {
     }
 
     func showUser() {
-        let userViewControlleer = UserViewController()
-
-        print(navigationController.viewControllers)
+        let userViewController = UserViewController()
 
         if navigationController.viewControllers.isEmpty {
-            navigationController.pushViewController(userViewControlleer, animated: true)
+            navigationController.pushViewController(userViewController, animated: true)
         } else {
-            navigationController.dismiss(animated: false)
-            navigationController.popViewController(animated: false)
-            print(navigationController.viewControllers)
-
-            navigationController.pushViewController(userViewControlleer, animated: true)
-            print(navigationController.viewControllers)
+            navigationController.setViewControllers([userViewController], animated: true)
         }
     }
 
