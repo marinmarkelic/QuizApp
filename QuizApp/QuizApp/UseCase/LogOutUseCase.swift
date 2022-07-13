@@ -1,6 +1,7 @@
 protocol LogOutUseCaseProtocol {
 
     func logOut()
+
 }
 
 class LogOutUseCase: LogOutUseCaseProtocol {
@@ -13,4 +14,6 @@ class LogOutUseCase: LogOutUseCaseProtocol {
 
     func logOut() {
         userRepository.logOut()
-    }}
+    }
+
+}
