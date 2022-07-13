@@ -2,6 +2,8 @@ import UIKit
 
 class TabBarController: UITabBarController, ConstructViewsProtocol {
 
+    private var quizViewController: QuizViewController!
+    private var searchViewController: SearchViewController!
     private var userViewController: UserViewController!
 
     override func viewDidLoad() {
@@ -15,11 +17,16 @@ class TabBarController: UITabBarController, ConstructViewsProtocol {
     }
 
     func createViews() {
-        userViewController = UserViewController()
+        quizViewController = QuizViewController()
+        quizViewController.tabBarItem = UITabBarItem(title: "Quiz", image: nil, selectedImage: nil)
 
+        searchViewController = SearchViewController()
+        searchViewController.tabBarItem = UITabBarItem(title: "Search", image: nil, selectedImage: nil)
+
+        userViewController = UserViewController()
         userViewController.tabBarItem = UITabBarItem(title: "Settings", image: nil, selectedImage: nil)
 
-        viewControllers = [userViewController]
+        viewControllers = [quizViewController, searchViewController, userViewController]
     }
 
     func styleViews() {
