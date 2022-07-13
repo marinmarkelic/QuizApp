@@ -16,6 +16,8 @@ class UserDatabaseDataSource: UserDatabaseDataSourceProtocol {
 
     private let secureStorage: SecureStorage
 
+    private let userDefaults = UserDefaults()
+
     init(secureStorage: SecureStorage) {
         self.secureStorage = secureStorage
     }
@@ -25,7 +27,7 @@ class UserDatabaseDataSource: UserDatabaseDataSourceProtocol {
     }
 
     func save(userInfo: UserInfoRepoModel) {
-        UserDefaults().set(userInfo.username, forKey: "Username")
+        userDefaults.set(userInfo.username, forKey: "Username")
     }
 
     var accessToken: String? {
@@ -33,7 +35,7 @@ class UserDatabaseDataSource: UserDatabaseDataSourceProtocol {
     }
 
     var userInfo: UserInfoDatabaseModel {
-        UserInfoDatabaseModel(username: UserDefaults().string(forKey: "Username") ?? "")
+        UserInfoDatabaseModel(username: userDefaults.string(forKey: "Username") ?? "")
     }
 
 }

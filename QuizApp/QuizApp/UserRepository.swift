@@ -71,4 +71,5 @@ extension UserInfoRepoModel {
     init(_ userInfo: UserInfoDatabaseModel) {
         username = userInfo.username
     }
+
 }

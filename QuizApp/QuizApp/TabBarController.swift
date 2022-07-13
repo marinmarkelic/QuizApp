@@ -23,8 +23,6 @@ class TabBarController: UITabBarController, ConstructViewsProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        delegate = self
-
         createViews()
         styleViews()
         defineLayoutForViews()
@@ -50,9 +48,5 @@ class TabBarController: UITabBarController, ConstructViewsProtocol {
     }
 
     func defineLayoutForViews() {}
-
-}
-
-extension TabBarController: UITabBarControllerDelegate {
 
 }

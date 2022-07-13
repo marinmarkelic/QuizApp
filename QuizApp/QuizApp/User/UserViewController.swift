@@ -54,7 +54,7 @@ class UserViewController: UIViewController, ConstructViewsProtocol {
         textField.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 20), size: 20)
         textField.textColor = .white
         textField.autocorrectionType = .no
-        textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        textField.addTarget(self, action: #selector(textFieldEndedEditing), for: .editingDidEnd)
         textField.text = userViewModel.username
     }
 
@@ -90,7 +90,7 @@ class UserViewController: UIViewController, ConstructViewsProtocol {
     }
 
     @objc
-    private func textFieldDidChange() {
+    private func textFieldEndedEditing() {
         userViewModel.save(username: textField.text ?? "")
     }
 
