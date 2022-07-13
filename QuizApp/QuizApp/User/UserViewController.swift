@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class UserViewController: UIViewController {
+class UserViewController: UIViewController, ConstructViewsProtocol {
 
     private var gradientView: GradientView!
 
@@ -34,4 +34,5 @@ class UserViewController: UIViewController {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
     }
+
 }
