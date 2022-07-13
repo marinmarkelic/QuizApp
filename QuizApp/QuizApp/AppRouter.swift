@@ -16,9 +16,9 @@ class AppRouter: AppRouterProtocol {
         navigationController.setViewControllers([loginViewController], animated: true)
     }
 
-    func showUser() {
-        let userViewController = UserViewController()
-        navigationController.setViewControllers([userViewController], animated: true)
+    func showHome() {
+        let tabBarController = TabBarController()
+        navigationController.setViewControllers([tabBarController], animated: true)
     }
 
 }

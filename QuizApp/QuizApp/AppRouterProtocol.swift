@@ -2,6 +2,6 @@ protocol AppRouterProtocol {
 
     func showLogin()
 
-    func showUser()
+    func showHome()
 
 }

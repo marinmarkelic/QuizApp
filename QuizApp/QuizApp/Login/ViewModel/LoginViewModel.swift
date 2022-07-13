@@ -35,7 +35,7 @@ class LoginViewModel {
             do {
                 _ = try await loginUseCase.logIn(username: email, password: password)
 
-                appRouter.showUser()
+                appRouter.showHome()
             } catch let error as RequestError {
                 showError(error)
             }
