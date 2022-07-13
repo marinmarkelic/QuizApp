@@ -8,6 +8,10 @@ class AppDependencies {
         LoginUseCase(userRepository: userRepository)
     }()
 
+    lazy var userUseCase: UserUseCase = {
+        UserUseCase(userRepository: userRepository)
+    }()
+
     lazy var userNetworkDataSource: UserNetworkDataSourceProtocol = {
         UserNetworkDataSource(loginClient: loginClient, checkNetworkClient: checkNetworkClient)
     }()

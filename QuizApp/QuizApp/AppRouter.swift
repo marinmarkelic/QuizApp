@@ -17,7 +17,7 @@ class AppRouter: AppRouterProtocol {
     }
 
     func showHome() {
-        let tabBarController = TabBarController()
+        let tabBarController = TabBarController(appRouter: self, appDependencies: appDependencies)
         navigationController.setViewControllers([tabBarController], animated: true)
     }
 

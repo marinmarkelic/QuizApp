@@ -4,14 +4,13 @@ import UIKit
 class LoginViewModel {
 
     private let appRouter: AppRouterProtocol
+    private let loginUseCase: LoginUseCaseProtocol
 
     @Published var isLoginButtonEnabled = false
     @Published var errorText = ""
 
     private var email = ""
     private var password = ""
-
-    private let loginUseCase: LoginUseCaseProtocol
 
     init(loginUseCase: LoginUseCaseProtocol, appRouter: AppRouterProtocol) {
         self.loginUseCase = loginUseCase

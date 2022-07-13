@@ -3,12 +3,24 @@ import SnapKit
 
 class UserViewController: UIViewController, ConstructViewsProtocol {
 
+    private var userViewModel: UserViewModel
+
     private var gradientView: GradientView!
 
     private var mainView: UIView!
 
     private var label: UILabel!
     private var textField: UITextField!
+
+    init(userViewModel: UserViewModel) {
+        self.userViewModel = userViewModel
+
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +55,7 @@ class UserViewController: UIViewController, ConstructViewsProtocol {
         textField.textColor = .white
         textField.autocorrectionType = .no
         textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        textField.text = userViewModel.username
     }
 
     func defineLayoutForViews() {
@@ -78,7 +91,7 @@ class UserViewController: UIViewController, ConstructViewsProtocol {
 
     @objc
     private func textFieldDidChange() {
-        print(textField.text)
+        userViewModel.save(username: textField.text ?? "")
     }
 
 }

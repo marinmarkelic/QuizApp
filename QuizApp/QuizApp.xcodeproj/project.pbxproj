@@ -26,6 +26,8 @@
 		9C20BAC8287EE642009378FB /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C20BAC7287EE642009378FB /* TabBarController.swift */; };
 		9C20BACB287EEA1F009378FB /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C20BACA287EEA1F009378FB /* QuizViewController.swift */; };
 		9C20BACE287EEA4F009378FB /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C20BACD287EEA4F009378FB /* SearchViewController.swift */; };
+		9C20BAD0287EF1DB009378FB /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C20BACF287EF1DB009378FB /* UserViewModel.swift */; };
+		9C20BAD2287EF25D009378FB /* UserUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C20BAD1287EF25D009378FB /* UserUseCase.swift */; };
 		9CC33B22287D6848002E9853 /* UserDatabaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC33B21287D6848002E9853 /* UserDatabaseDataSource.swift */; };
 		9CC33B24287D6889002E9853 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC33B23287D6889002E9853 /* UserRepository.swift */; };
 		9CC33B26287D6E2B002E9853 /* SecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC33B25287D6E2B002E9853 /* SecureStorage.swift */; };
@@ -61,6 +63,8 @@
 		9C20BAC7287EE642009378FB /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		9C20BACA287EEA1F009378FB /* QuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
 		9C20BACD287EEA4F009378FB /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		9C20BACF287EF1DB009378FB /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
+		9C20BAD1287EF25D009378FB /* UserUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUseCase.swift; sourceTree = "<group>"; };
 		9CC33B21287D6848002E9853 /* UserDatabaseDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDatabaseDataSource.swift; sourceTree = "<group>"; };
 		9CC33B23287D6889002E9853 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		9CC33B25287D6E2B002E9853 /* SecureStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStorage.swift; sourceTree = "<group>"; };
@@ -175,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				9CC33B35287DBCB1002E9853 /* UserViewController.swift */,
+				9C20BACF287EF1DB009378FB /* UserViewModel.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -224,6 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				9CC4D6E3287C6C8C0061F149 /* LoginUseCase.swift */,
+				9C20BAD1287EF25D009378FB /* UserUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -336,6 +342,7 @@
 				9C1953AB287725590051CEC6 /* TextFieldView.swift in Sources */,
 				9CC4D6E0287C5A720061F149 /* AppDependencies.swift in Sources */,
 				9C1953B12878366A0051CEC6 /* ErrorLabel.swift in Sources */,
+				9C20BAD2287EF25D009378FB /* UserUseCase.swift in Sources */,
 				9C20BACE287EEA4F009378FB /* SearchViewController.swift in Sources */,
 				9C19539C2876F1ED0051CEC6 /* GradientView.swift in Sources */,
 				9C19536B287584750051CEC6 /* AppDelegate.swift in Sources */,
@@ -353,6 +360,7 @@
 				9CC33B24287D6889002E9853 /* UserRepository.swift in Sources */,
 				9CC33B36287DBCB1002E9853 /* UserViewController.swift in Sources */,
 				9CC33B26287D6E2B002E9853 /* SecureStorage.swift in Sources */,
+				9C20BAD0287EF1DB009378FB /* UserViewModel.swift in Sources */,
 				9C1953AF287826BD0051CEC6 /* LoginViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
