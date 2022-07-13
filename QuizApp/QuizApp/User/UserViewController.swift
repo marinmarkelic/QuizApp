@@ -11,6 +11,7 @@ class UserViewController: UIViewController, ConstructViewsProtocol {
 
     private var label: UILabel!
     private var textField: UITextField!
+    private var button: CustomButton!
 
     init(userViewModel: UserViewModel) {
         self.userViewModel = userViewModel
@@ -43,6 +44,9 @@ class UserViewController: UIViewController, ConstructViewsProtocol {
 
         textField = UITextField()
         mainView.addSubview(textField)
+
+        button = CustomButton()
+        mainView.addSubview(button)
     }
 
     func styleViews() {
@@ -56,6 +60,10 @@ class UserViewController: UIViewController, ConstructViewsProtocol {
         textField.autocorrectionType = .no
         textField.addTarget(self, action: #selector(textFieldEndedEditing), for: .editingDidEnd)
         textField.text = userViewModel.username
+
+        button.setTitle("Log out", for: .normal)
+        button.setTitleColor(.red, for: .normal)
+        button.backgroundColor = .white
     }
 
     func defineLayoutForViews() {
@@ -76,6 +84,13 @@ class UserViewController: UIViewController, ConstructViewsProtocol {
             $0.top.equalTo(label.snp.bottom).offset(4)
             $0.leading.equalTo(label)
             $0.trailing.equalToSuperview().inset(20)
+        }
+
+        button.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().inset(20)
+            $0.bottom.equalToSuperview().inset(30)
+            $0.height.equalTo(45)
         }
     }
 
