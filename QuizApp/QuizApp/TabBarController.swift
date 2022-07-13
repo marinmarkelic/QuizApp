@@ -33,15 +33,25 @@ class TabBarController: UITabBarController {
 extension TabBarController: ConstructViewsProtocol {
 
     func createViews() {
-        quizViewController = QuizViewController()
-        quizViewController.tabBarItem = UITabBarItem(title: "Quiz", image: nil, selectedImage: nil)
+        let config = UIImage.SymbolConfiguration(scale: .medium)
 
+        quizViewController = QuizViewController()
+        quizViewController.tabBarItem = UITabBarItem(
+            title: "Quiz",
+            image: UIImage(systemName: "rectangle.grid.2x2", withConfiguration: config),
+            selectedImage: UIImage(systemName: "rectangle.grid.2x2.fill", withConfiguration: config))
         searchViewController = SearchViewController()
-        searchViewController.tabBarItem = UITabBarItem(title: "Search", image: nil, selectedImage: nil)
+        searchViewController.tabBarItem = UITabBarItem(
+            title: "Search",
+            image: UIImage(systemName: "magnifyingglass", withConfiguration: config),
+            selectedImage: UIImage(systemName: "magnifyingglass", withConfiguration: config))
 
         userViewController = UserViewController(
             userViewModel: UserViewModel(appRouter: appRouter, userUseCase: appDependencies.userUseCase))
-        userViewController.tabBarItem = UITabBarItem(title: "Settings", image: nil, selectedImage: nil)
+        userViewController.tabBarItem = UITabBarItem(
+            title: "Settings",
+            image: UIImage(systemName: "gearshape", withConfiguration: config),
+            selectedImage: UIImage(systemName: "gearshape.fill", withConfiguration: config))
 
         viewControllers = [quizViewController, searchViewController, userViewController]
     }
