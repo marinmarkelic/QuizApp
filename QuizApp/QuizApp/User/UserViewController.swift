@@ -64,6 +64,7 @@ class UserViewController: UIViewController, ConstructViewsProtocol {
         button.setTitle("Log out", for: .normal)
         button.setTitleColor(.red, for: .normal)
         button.backgroundColor = .white
+        button.addTarget(self, action: #selector(pressedLogoutButton), for: .touchUpInside)
     }
 
     func defineLayoutForViews() {
@@ -92,6 +93,11 @@ class UserViewController: UIViewController, ConstructViewsProtocol {
             $0.bottom.equalToSuperview().inset(30)
             $0.height.equalTo(45)
         }
+    }
+
+    @objc
+    private func pressedLogoutButton() {
+        userViewModel.logOut()
     }
 
     private func addActions() {

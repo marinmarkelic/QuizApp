@@ -6,6 +6,8 @@ protocol UserDatabaseDataSourceProtocol {
 
     func save(userInfo: UserInfoRepoModel)
 
+    func deleteAccessToken()
+
     var accessToken: String? { get }
 
     var userInfo: UserInfoDatabaseModel { get }
@@ -24,6 +26,10 @@ class UserDatabaseDataSource: UserDatabaseDataSourceProtocol {
 
     func save(accessToken: String) {
         secureStorage.save(accessToken: accessToken)
+    }
+
+    func deleteAccessToken() {
+        secureStorage.deleteAccessToken()
     }
 
     func save(userInfo: UserInfoRepoModel) {

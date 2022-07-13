@@ -20,6 +20,12 @@ class UserViewModel {
         UserInfo(userUseCase.userInfo)
     }
 
+    func logOut() {
+        save(username: "")
+        userUseCase.logOut()
+        appRouter.showLogin()
+    }
+
 }
 
 struct UserInfo {

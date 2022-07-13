@@ -21,8 +21,6 @@ extension CustomButton: ConstructViewsProtocol {
     func styleViews() {
         layer.cornerRadius = 23
         clipsToBounds = true
-
-        isEnabled = false
     }
 
     func defineLayoutForViews() {}

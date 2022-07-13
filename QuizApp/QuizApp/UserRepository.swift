@@ -2,6 +2,8 @@ protocol UserRepositoryProtocol {
 
     func logIn(username: String, password: String) async throws -> LoginResponseRepoModel
 
+    func logOut()
+
     var userInfo: UserInfoRepoModel { get }
 
 }
@@ -22,6 +24,10 @@ class UserRepository: UserRepositoryProtocol {
         save(accessToken: responseRepoModel.accessToken)
 
         return responseRepoModel
+    }
+
+    func logOut() {
+        userDatabaseDataSource.deleteAccessToken()
     }
 
     private func save(accessToken: String) {
