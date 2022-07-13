@@ -10,20 +10,15 @@ class AppRouter: AppRouterProtocol {
         self.appDependencies = appDependencies
     }
 
-    func showLogin() {
+    func showLoginViewController() {
         let loginViewController = LoginViewController(
             viewModel: LoginViewModel(loginUseCase: appDependencies.loginUseCase, appRouter: self))
-        navigationController.pushViewController(loginViewController, animated: true)
+        navigationController.setViewControllers([loginViewController], animated: true)
     }
 
-    func showUser() {
+    func showUserViewController() {
         let userViewController = UserViewController()
-
-        if navigationController.viewControllers.isEmpty {
-            navigationController.pushViewController(userViewController, animated: true)
-        } else {
-            navigationController.setViewControllers([userViewController], animated: true)
-        }
+        navigationController.setViewControllers([userViewController], animated: true)
     }
 
 }

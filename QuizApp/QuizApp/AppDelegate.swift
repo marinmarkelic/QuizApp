@@ -3,10 +3,10 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var window: UIWindow?
+    private let appDependencies = AppDependencies()
     private var appRouter: AppRouterProtocol!
 
-    private let appDependencies = AppDependencies()
+    var window: UIWindow?
 
     func application(
         _ application: UIApplication,
@@ -20,23 +20,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         appRouter = AppRouter(navigationController: navigationController, appDependencies: appDependencies)
 
-        setViewController()
+        showInitialViewController()
 
         self.window = window
         return true
     }
 
-    private func setViewController() {
+    private func showInitialViewController() {
+        appDependencies.secureStorage.deleteAccessToken()
         Task {
             do {
                 try await appDependencies.userNetworkDataSource.check()
 
                 DispatchQueue.main.async { [weak self] in
-                    self?.appRouter.showUser()
+                    self?.appRouter.showUserViewController()
                 }
             } catch {
+                appDependencies.secureStorage.deleteAccessToken()
+
                 DispatchQueue.main.async { [weak self] in
-                    self?.appRouter.showLogin()
+                    self?.appRouter.showLoginViewController()
                 }
             }
         }
