@@ -3,6 +3,8 @@ import UIKit
 
 class LoginViewModel {
 
+    private let appRouter: AppRouterProtocol
+
     @Published var isLoginButtonEnabled = false
     @Published var errorText = ""
 
@@ -11,8 +13,9 @@ class LoginViewModel {
 
     private let loginUseCase: LoginUseCaseProtocol
 
-    init(loginUseCase: LoginUseCaseProtocol) {
+    init(loginUseCase: LoginUseCaseProtocol, appRouter: AppRouterProtocol) {
         self.loginUseCase = loginUseCase
+        self.appRouter = appRouter
     }
 
     func updatedEmail(with text: String) {
@@ -31,6 +34,8 @@ class LoginViewModel {
         Task {
             do {
                 _ = try await loginUseCase.logIn(username: email, password: password)
+
+                appRouter.showUser()
             } catch let error as RequestError {
                 showError(error)
             }

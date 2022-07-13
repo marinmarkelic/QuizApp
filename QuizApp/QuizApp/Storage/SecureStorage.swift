@@ -2,9 +2,11 @@ import KeychainSwift
 
 protocol SecureStorageProtocol {
 
+    var accessToken: String? { get }
+
     func save(accessToken: String)
 
-    var accessToken: String? { get }
+    func deleteAccessToken()
 
 }
 
@@ -20,6 +22,10 @@ class SecureStorage: SecureStorageProtocol {
 
     func save(accessToken: String) {
         keychain.set(accessToken, forKey: accessTokenKey)
+    }
+
+    func deleteAccessToken() {
+        keychain.delete(accessTokenKey)
     }
 
 }
