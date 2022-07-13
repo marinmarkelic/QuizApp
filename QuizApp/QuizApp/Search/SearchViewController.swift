@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class SearchViewController: UIViewController, ConstructViewsProtocol {
+class SearchViewController: UIViewController {
 
     private var gradientView: GradientView!
 
@@ -14,6 +14,10 @@ class SearchViewController: UIViewController, ConstructViewsProtocol {
         styleViews()
         defineLayoutForViews()
     }
+
+}
+
+extension SearchViewController: ConstructViewsProtocol {
 
     func createViews() {
         gradientView = GradientView()

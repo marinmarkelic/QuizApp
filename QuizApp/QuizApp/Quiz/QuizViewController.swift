@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class QuizViewController: UIViewController, ConstructViewsProtocol {
+class QuizViewController: UIViewController {
 
     private var gradientView: GradientView!
 
@@ -14,6 +14,10 @@ class QuizViewController: UIViewController, ConstructViewsProtocol {
         styleViews()
         defineLayoutForViews()
     }
+
+}
+
+extension QuizViewController: ConstructViewsProtocol {
 
     func createViews() {
         gradientView = GradientView()

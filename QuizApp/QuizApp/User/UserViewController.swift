@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 
-class UserViewController: UIViewController, ConstructViewsProtocol {
+class UserViewController: UIViewController {
 
     private var userViewModel: UserViewModel
 
@@ -31,6 +31,30 @@ class UserViewController: UIViewController, ConstructViewsProtocol {
         defineLayoutForViews()
         addActions()
     }
+
+    @objc
+    private func pressedLogoutButton() {
+        userViewModel.logOut()
+    }
+
+    private func addActions() {
+        let tapGestureBackground = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped(_:)))
+        view.addGestureRecognizer(tapGestureBackground)
+    }
+
+    @objc
+    private func backgroundTapped(_ sender: UITapGestureRecognizer) {
+        textField.endEditing(true)
+    }
+
+    @objc
+    private func textFieldEndedEditing() {
+        userViewModel.save(username: textField.text ?? "")
+    }
+
+}
+
+extension UserViewController: ConstructViewsProtocol {
 
     func createViews() {
         gradientView = GradientView()
@@ -93,26 +117,6 @@ class UserViewController: UIViewController, ConstructViewsProtocol {
             $0.bottom.equalToSuperview().inset(30)
             $0.height.equalTo(45)
         }
-    }
-
-    @objc
-    private func pressedLogoutButton() {
-        userViewModel.logOut()
-    }
-
-    private func addActions() {
-        let tapGestureBackground = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped(_:)))
-        view.addGestureRecognizer(tapGestureBackground)
-    }
-
-    @objc
-    private func backgroundTapped(_ sender: UITapGestureRecognizer) {
-        textField.endEditing(true)
-    }
-
-    @objc
-    private func textFieldEndedEditing() {
-        userViewModel.save(username: textField.text ?? "")
     }
 
 }

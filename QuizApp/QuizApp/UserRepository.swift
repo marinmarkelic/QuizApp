@@ -28,6 +28,7 @@ class UserRepository: UserRepositoryProtocol {
 
     func logOut() {
         userDatabaseDataSource.deleteAccessToken()
+        userDatabaseDataSource.deleteUsername()
     }
 
     private func save(accessToken: String) {

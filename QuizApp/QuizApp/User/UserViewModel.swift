@@ -21,7 +21,6 @@ class UserViewModel {
     }
 
     func logOut() {
-        save(username: "")
         userUseCase.logOut()
         appRouter.showLogin()
     }
