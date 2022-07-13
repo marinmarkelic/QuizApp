@@ -27,7 +27,7 @@ extension QuizViewController: ConstructViewsProtocol {
         gradientView.addSubview(mainView)
     }
 
-    func styleViews() { }
+    func styleViews() {}
 
     func defineLayoutForViews() {
         gradientView.snp.makeConstraints {

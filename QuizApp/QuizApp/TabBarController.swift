@@ -1,6 +1,6 @@
 import UIKit
 
-class TabBarController: UITabBarController, ConstructViewsProtocol {
+class TabBarController: UITabBarController {
 
     private let appRouter: AppRouterProtocol
     private let appDependencies: AppDependencies
@@ -27,6 +27,10 @@ class TabBarController: UITabBarController, ConstructViewsProtocol {
         styleViews()
         defineLayoutForViews()
     }
+
+}
+
+extension TabBarController: ConstructViewsProtocol {
 
     func createViews() {
         quizViewController = QuizViewController()
