@@ -32,13 +32,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 try await appDependencies.userNetworkDataSource.check()
 
                 DispatchQueue.main.async { [weak self] in
-                    self?.appRouter.showUserViewController()
+                    self?.appRouter.showUser()
                 }
             } catch {
                 appDependencies.secureStorage.deleteAccessToken()
 
                 DispatchQueue.main.async { [weak self] in
-                    self?.appRouter.showLoginViewController()
+                    self?.appRouter.showLogin()
                 }
             }
         }

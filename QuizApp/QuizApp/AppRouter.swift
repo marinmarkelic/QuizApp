@@ -10,13 +10,13 @@ class AppRouter: AppRouterProtocol {
         self.appDependencies = appDependencies
     }
 
-    func showLoginViewController() {
+    func showLogin() {
         let loginViewController = LoginViewController(
             viewModel: LoginViewModel(loginUseCase: appDependencies.loginUseCase, appRouter: self))
         navigationController.setViewControllers([loginViewController], animated: true)
     }
 
-    func showUserViewController() {
+    func showUser() {
         let userViewController = UserViewController()
         navigationController.setViewControllers([userViewController], animated: true)
     }

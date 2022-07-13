@@ -1,7 +1,7 @@
 protocol AppRouterProtocol {
 
-    func showLoginViewController()
+    func showLogin()
 
-    func showUserViewController()
+    func showUser()
 
 }
