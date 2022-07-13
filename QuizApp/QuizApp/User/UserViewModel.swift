@@ -2,10 +2,12 @@ class UserViewModel {
 
     private let appRouter: AppRouterProtocol
     private let userUseCase: UserUseCaseProtocol
+    private let logoutUseCase: LogOutUseCaseProtocol
 
-    init(appRouter: AppRouterProtocol, userUseCase: UserUseCaseProtocol) {
+    init(appRouter: AppRouterProtocol, userUseCase: UserUseCaseProtocol, logoutUseCase: LogOutUseCaseProtocol) {
         self.appRouter = appRouter
         self.userUseCase = userUseCase
+        self.logoutUseCase = logoutUseCase
     }
 
     func save(username: String) {
@@ -21,7 +23,7 @@ class UserViewModel {
     }
 
     func logOut() {
-        userUseCase.logOut()
+        logoutUseCase.logOut()
         appRouter.showLogin()
     }
 

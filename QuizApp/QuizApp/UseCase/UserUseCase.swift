@@ -2,8 +2,6 @@ protocol UserUseCaseProtocol {
 
     func save(userInfo: UserInfo)
 
-    func logOut()
-
     var userInfo: UserInfoModel { get }
 
 }
@@ -18,10 +16,6 @@ class UserUseCase: UserUseCaseProtocol {
 
     func save(userInfo: UserInfo) {
         userRepository.save(userInfo: UserInfoModel(userInfo))
-    }
-
-    func logOut() {
-        userRepository.logOut()
     }
 
     var userInfo: UserInfoModel {

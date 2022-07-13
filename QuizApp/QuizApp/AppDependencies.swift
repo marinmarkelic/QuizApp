@@ -8,8 +8,12 @@ class AppDependencies {
         LoginUseCase(userRepository: userRepository)
     }()
 
-    lazy var userUseCase: UserUseCase = {
+    lazy var userUseCase: UserUseCaseProtocol = {
         UserUseCase(userRepository: userRepository)
+    }()
+
+    lazy var logoutUseCase: LogOutUseCaseProtocol = {
+        LogOutUseCase(userRepository: userRepository)
     }()
 
     lazy var userNetworkDataSource: UserNetworkDataSourceProtocol = {

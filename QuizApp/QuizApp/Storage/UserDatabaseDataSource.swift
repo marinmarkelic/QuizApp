@@ -4,15 +4,15 @@ protocol UserDatabaseDataSourceProtocol {
 
     func save(accessToken: String)
 
-    func save(userInfo: UserInfoRepoModel)
+    func save(userInfo: UserInfoDataSourceModel)
 
     func deleteAccessToken()
 
-    func deleteUsername()
+    func deleteUserInfo()
 
     var accessToken: String? { get }
 
-    var userInfo: UserInfoDatabaseModel { get }
+    var userInfo: UserInfoDataSourceModel { get }
 
 }
 
@@ -21,6 +21,8 @@ class UserDatabaseDataSource: UserDatabaseDataSourceProtocol {
     private let secureStorage: SecureStorage
 
     private let userDefaults = UserDefaults()
+
+    private let usernameKey = "Username"
 
     init(secureStorage: SecureStorage) {
         self.secureStorage = secureStorage
@@ -34,26 +36,34 @@ class UserDatabaseDataSource: UserDatabaseDataSourceProtocol {
         secureStorage.deleteAccessToken()
     }
 
-    func deleteUsername() {
-        userDefaults.set("", forKey: "Username")
+    func deleteUserInfo() {
+        userDefaults.set("", forKey: usernameKey)
     }
 
-    func save(userInfo: UserInfoRepoModel) {
-        userDefaults.set(userInfo.username, forKey: "Username")
+    func save(userInfo: UserInfoDataSourceModel) {
+        userDefaults.set(userInfo.username, forKey: usernameKey)
     }
 
     var accessToken: String? {
         secureStorage.accessToken
     }
 
-    var userInfo: UserInfoDatabaseModel {
-        UserInfoDatabaseModel(username: userDefaults.string(forKey: "Username") ?? "")
+    var userInfo: UserInfoDataSourceModel {
+        UserInfoDataSourceModel(username: userDefaults.string(forKey: usernameKey) ?? "")
     }
 
 }
 
-struct UserInfoDatabaseModel {
+struct UserInfoDataSourceModel {
 
     let username: String
+
+}
+
+extension UserInfoDataSourceModel {
+
+    init(_ userInfo: UserInfoModel) {
+        username = userInfo.username
+    }
 
 }

@@ -2,16 +2,10 @@ import UIKit
 
 class TabBarController: UITabBarController {
 
-    private let appRouter: AppRouterProtocol
-    private let appDependencies: AppDependencies
+    private var userViewController: UserViewController
 
-    private var quizViewController: QuizViewController!
-    private var searchViewController: SearchViewController!
-    private var userViewController: UserViewController!
-
-    init(appRouter: AppRouterProtocol, appDependencies: AppDependencies) {
-        self.appRouter = appRouter
-        self.appDependencies = appDependencies
+    init(userViewController: UserViewController) {
+        self.userViewController = userViewController
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -33,27 +27,7 @@ class TabBarController: UITabBarController {
 extension TabBarController: ConstructViewsProtocol {
 
     func createViews() {
-        let config = UIImage.SymbolConfiguration(scale: .medium)
-
-        quizViewController = QuizViewController()
-        quizViewController.tabBarItem = UITabBarItem(
-            title: "Quiz",
-            image: UIImage(systemName: "rectangle.grid.2x2", withConfiguration: config),
-            selectedImage: UIImage(systemName: "rectangle.grid.2x2.fill", withConfiguration: config))
-        searchViewController = SearchViewController()
-        searchViewController.tabBarItem = UITabBarItem(
-            title: "Search",
-            image: UIImage(systemName: "magnifyingglass", withConfiguration: config),
-            selectedImage: UIImage(systemName: "magnifyingglass", withConfiguration: config))
-
-        userViewController = UserViewController(
-            userViewModel: UserViewModel(appRouter: appRouter, userUseCase: appDependencies.userUseCase))
-        userViewController.tabBarItem = UITabBarItem(
-            title: "Settings",
-            image: UIImage(systemName: "gearshape", withConfiguration: config),
-            selectedImage: UIImage(systemName: "gearshape.fill", withConfiguration: config))
-
-        viewControllers = [quizViewController, searchViewController, userViewController]
+        viewControllers = [userViewController]
     }
 
     func styleViews() {

@@ -28,7 +28,7 @@ class UserRepository: UserRepositoryProtocol {
 
     func logOut() {
         userDatabaseDataSource.deleteAccessToken()
-        userDatabaseDataSource.deleteUsername()
+        userDatabaseDataSource.deleteUserInfo()
     }
 
     private func save(accessToken: String) {
@@ -36,7 +36,7 @@ class UserRepository: UserRepositoryProtocol {
     }
 
     func save(userInfo: UserInfoModel) {
-        userDatabaseDataSource.save(userInfo: UserInfoRepoModel(userInfo))
+        userDatabaseDataSource.save(userInfo: UserInfoDataSourceModel(userInfo))
     }
 
     var userInfo: UserInfoRepoModel {
@@ -67,15 +67,7 @@ struct UserInfoRepoModel {
 
 extension UserInfoRepoModel {
 
-    init(_ userInfo: UserInfoModel) {
-        username = userInfo.username
-    }
-
-}
-
-extension UserInfoRepoModel {
-
-    init(_ userInfo: UserInfoDatabaseModel) {
+    init(_ userInfo: UserInfoDataSourceModel) {
         username = userInfo.username
     }
 

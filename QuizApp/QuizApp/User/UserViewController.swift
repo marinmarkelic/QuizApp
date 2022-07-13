@@ -74,6 +74,13 @@ extension UserViewController: ConstructViewsProtocol {
     }
 
     func styleViews() {
+        let config = UIImage.SymbolConfiguration(scale: .medium)
+
+        tabBarItem = UITabBarItem(
+            title: "Settings",
+            image: UIImage(systemName: "gearshape", withConfiguration: config),
+            selectedImage: UIImage(systemName: "gearshape.fill", withConfiguration: config))
+
         label.text = "USERNAME"
         label.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 12), size: 12)
         label.textColor = .white
