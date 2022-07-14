@@ -41,4 +41,5 @@ struct UserInfoNetworkDataModel: Decodable {
 struct UserInfoNetworkRequestModel: Encodable {
 
     let name: String
+    
 }
