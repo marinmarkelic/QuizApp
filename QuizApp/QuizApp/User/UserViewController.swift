@@ -1,3 +1,4 @@
+import Combine
 import UIKit
 import SnapKit
 
@@ -12,6 +13,8 @@ class UserViewController: UIViewController {
     private var label: UILabel!
     private var textField: UITextField!
     private var button: CustomButton!
+
+    private var cancellables = Set<AnyCancellable>()
 
     init(
         appRouter: AppRouterProtocol,
@@ -39,6 +42,7 @@ class UserViewController: UIViewController {
         styleViews()
         defineLayoutForViews()
         addActions()
+        bindViewModel()
     }
 
     @objc
@@ -68,6 +72,14 @@ class UserViewController: UIViewController {
             title: "Settings",
             image: UIImage(systemName: "gearshape", withConfiguration: config),
             selectedImage: UIImage(systemName: "gearshape.fill", withConfiguration: config))
+    }
+
+    private func bindViewModel() {
+        userViewModel
+            .$userInfo
+            .sink { [weak self] userInfo in
+                self?.textField.text = userInfo.username
+            }.store(in: &cancellables)
     }
 
 }
@@ -101,7 +113,6 @@ extension UserViewController: ConstructViewsProtocol {
         textField.textColor = .white
         textField.autocorrectionType = .no
         textField.addTarget(self, action: #selector(textFieldEndedEditing), for: .editingDidEnd)
-        textField.text = userViewModel.username
 
         button.setTitle("Log out", for: .normal)
         button.setTitleColor(.red, for: .normal)

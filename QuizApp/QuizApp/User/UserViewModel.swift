@@ -1,21 +1,19 @@
+import Combine
+
 class UserViewModel {
 
     private let appRouter: AppRouterProtocol
     private let userUseCase: UserUseCaseProtocol
     private let logoutUseCase: LogOutUseCaseProtocol
 
-    var username: String {
-        userInfo.username
-    }
-
-    var userInfo: UserInfo {
-        UserInfo(userUseCase.userInfo)
-    }
+    @Published var userInfo: UserInfo = UserInfo(username: "")
 
     init(appRouter: AppRouterProtocol, userUseCase: UserUseCaseProtocol, logoutUseCase: LogOutUseCaseProtocol) {
         self.appRouter = appRouter
         self.userUseCase = userUseCase
         self.logoutUseCase = logoutUseCase
+
+        getUserInfo()
     }
 
     func save(username: String) {
@@ -25,6 +23,10 @@ class UserViewModel {
     func logOut() {
         logoutUseCase.logOut()
         appRouter.showLogin()
+    }
+
+    func getUserInfo() {
+        userInfo = UserInfo(userUseCase.userInfo)
     }
 
 }
