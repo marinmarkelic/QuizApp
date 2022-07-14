@@ -9,8 +9,12 @@ class UserViewController: UIViewController {
 
     private var mainView: UIView!
 
-    private var label: UILabel!
-    private var textField: UITextField!
+    private var usernameLabel: UILabel!
+    private var usernameTextField: UITextField!
+
+    private var nameLabel: UILabel!
+    private var nameTextField: UITextField!
+
     private var button: CustomButton!
 
     init(
@@ -53,12 +57,12 @@ class UserViewController: UIViewController {
 
     @objc
     private func backgroundTapped(_ sender: UITapGestureRecognizer) {
-        textField.endEditing(true)
+        usernameTextField.endEditing(true)
     }
 
     @objc
     private func textFieldEndedEditing() {
-        userViewModel.save(username: textField.text ?? "")
+        userViewModel.save(username: usernameTextField.text ?? "")
     }
 
     private func styleTabBarItem() {
@@ -81,27 +85,43 @@ extension UserViewController: ConstructViewsProtocol {
         mainView = UIView()
         gradientView.addSubview(mainView)
 
-        label = UILabel()
-        mainView.addSubview(label)
+        usernameLabel = UILabel()
+        mainView.addSubview(usernameLabel)
 
-        textField = UITextField()
-        mainView.addSubview(textField)
+        usernameTextField = UITextField()
+        mainView.addSubview(usernameTextField)
+
+        nameLabel = UILabel()
+        mainView.addSubview(nameLabel)
+
+        nameTextField = UITextField()
+        mainView.addSubview(nameTextField)
 
         button = CustomButton()
         mainView.addSubview(button)
     }
 
     func styleViews() {
-        label.text = "USERNAME"
-        label.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 12), size: 12)
-        label.textColor = .white
+        usernameLabel.text = "USERNAME"
+        usernameLabel.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 12), size: 12)
+        usernameLabel.textColor = .white
 
-        textField.attributedPlaceholder = NSAttributedString("Username")
-        textField.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 20), size: 20)
-        textField.textColor = .white
-        textField.autocorrectionType = .no
-        textField.addTarget(self, action: #selector(textFieldEndedEditing), for: .editingDidEnd)
-        textField.text = userViewModel.username
+        usernameTextField.attributedPlaceholder = NSAttributedString("Username")
+        usernameTextField.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 20), size: 20)
+        usernameTextField.textColor = .white
+        usernameTextField.autocorrectionType = .no
+        usernameTextField.addTarget(self, action: #selector(textFieldEndedEditing), for: .editingDidEnd)
+        usernameTextField.text = userViewModel.username
+
+        nameLabel.text = "NAME"
+        nameLabel.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 12), size: 12)
+        nameLabel.textColor = .white
+
+        nameTextField.attributedPlaceholder = NSAttributedString("Name")
+        nameTextField.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 20), size: 20)
+        nameTextField.textColor = .white
+        nameTextField.autocorrectionType = .no
+        nameTextField.text = userViewModel.username
 
         button.setTitle("Log out", for: .normal)
         button.setTitleColor(.red, for: .normal)
@@ -118,15 +138,27 @@ extension UserViewController: ConstructViewsProtocol {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
 
-        label.snp.makeConstraints {
+        usernameLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(50)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().inset(20)
         }
 
-        textField.snp.makeConstraints {
-            $0.top.equalTo(label.snp.bottom).offset(4)
-            $0.leading.equalTo(label)
+        usernameTextField.snp.makeConstraints {
+            $0.top.equalTo(usernameLabel.snp.bottom).offset(4)
+            $0.leading.equalTo(usernameLabel)
+            $0.trailing.equalToSuperview().inset(20)
+        }
+
+        nameLabel.snp.makeConstraints {
+            $0.top.equalTo(usernameTextField.snp.bottom).offset(40)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().inset(20)
+        }
+
+        nameTextField.snp.makeConstraints {
+            $0.top.equalTo(nameLabel.snp.bottom).offset(4)
+            $0.leading.equalTo(usernameLabel)
             $0.trailing.equalToSuperview().inset(20)
         }
 
