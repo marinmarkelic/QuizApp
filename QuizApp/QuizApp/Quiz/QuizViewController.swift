@@ -17,6 +17,7 @@ class QuizViewController: UIViewController {
 }
 
 extension QuizViewController: ConstructViewsProtocol {
+
     func createViews() {
         gradientView = GradientView()
         view.addSubview(gradientView)
@@ -29,7 +30,7 @@ extension QuizViewController: ConstructViewsProtocol {
         let config = UIImage.SymbolConfiguration(scale: .medium)
 
         tabBarItem = UITabBarItem(
-            title: "Settings",
+            title: "Quiz",
             image: UIImage(systemName: "rectangle.3.offgrid", withConfiguration: config),
             selectedImage: UIImage(systemName: "rectangle.3.offgrid.fill", withConfiguration: config))
     }

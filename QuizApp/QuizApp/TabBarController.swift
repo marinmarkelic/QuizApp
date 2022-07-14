@@ -2,14 +2,10 @@ import UIKit
 
 class TabBarController: UITabBarController {
 
-    private var userViewController: UserViewController
-    private var quizViewController: QuizViewController
-
-    init(userViewController: UserViewController, quizViewController: QuizViewController) {
-        self.userViewController = userViewController
-        self.quizViewController = quizViewController
-
+    init(viewControllers: [UIViewController]) {
         super.init(nibName: nil, bundle: nil)
+
+        self.viewControllers = viewControllers
     }
 
     required init?(coder: NSCoder) {
@@ -28,9 +24,7 @@ class TabBarController: UITabBarController {
 
 extension TabBarController: ConstructViewsProtocol {
 
-    func createViews() {
-        viewControllers = [quizViewController, userViewController]
-    }
+    func createViews() {}
 
     func styleViews() {
         tabBar.backgroundColor = .white

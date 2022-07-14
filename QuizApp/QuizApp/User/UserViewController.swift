@@ -13,8 +13,15 @@ class UserViewController: UIViewController {
     private var textField: UITextField!
     private var button: CustomButton!
 
-    init(userViewModel: UserViewModel) {
-        self.userViewModel = userViewModel
+    init(
+        appRouter: AppRouterProtocol,
+        userUseCase: UserUseCaseProtocol,
+        logoutUseCase: LogOutUseCaseProtocol
+    ) {
+        self.userViewModel = UserViewModel(
+            appRouter: appRouter,
+            userUseCase: userUseCase,
+            logoutUseCase: logoutUseCase)
 
         super.init(nibName: nil, bundle: nil)
     }

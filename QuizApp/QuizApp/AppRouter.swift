@@ -17,13 +17,15 @@ class AppRouter: AppRouterProtocol {
     }
 
     func showHome() {
-        let tabBarController = TabBarController(
-            userViewController: UserViewController(
-                userViewModel: UserViewModel(
-                    appRouter: self,
-                    userUseCase: appDependencies.userUseCase,
-                    logoutUseCase: appDependencies.logoutUseCase)),
-            quizViewController: QuizViewController())
+        let userViewController = UserViewController(
+            appRouter: self,
+            userUseCase: appDependencies.userUseCase,
+            logoutUseCase: appDependencies.logoutUseCase)
+        let quizViewController = QuizViewController()
+
+        let viewControllers = [quizViewController, userViewController]
+
+        let tabBarController = TabBarController(viewControllers: viewControllers)
 
         navigationController.setViewControllers([tabBarController], animated: true)
     }
