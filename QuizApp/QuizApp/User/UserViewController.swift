@@ -79,7 +79,8 @@ class UserViewController: UIViewController {
             .$userInfo
             .sink { [weak self] userInfo in
                 self?.textField.text = userInfo.username
-            }.store(in: &cancellables)
+            }
+            .store(in: &cancellables)
     }
 
 }
