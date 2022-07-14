@@ -62,7 +62,7 @@ struct UserInfoDataSourceModel {
 
 extension UserInfoDataSourceModel {
 
-    init(_ userInfo: UserInfoModel) {
+    init(_ userInfo: UserInfoRepoModel) {
         username = userInfo.username
     }
 

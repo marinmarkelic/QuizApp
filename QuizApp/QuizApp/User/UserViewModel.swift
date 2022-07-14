@@ -11,7 +11,7 @@ class UserViewModel {
     }
 
     func save(username: String) {
-        userUseCase.save(userInfo: UserInfo(username: username))
+        userUseCase.save(userInfo: UserInfoModel(username: username))
     }
 
     var username: String {

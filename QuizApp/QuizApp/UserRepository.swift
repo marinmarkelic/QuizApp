@@ -35,7 +35,7 @@ class UserRepository: UserRepositoryProtocol {
         userDatabaseDataSource.save(accessToken: accessToken)
     }
 
-    func save(userInfo: UserInfoModel) {
+    func save(userInfo: UserInfoRepoModel) {
         userDatabaseDataSource.save(userInfo: UserInfoDataSourceModel(userInfo))
     }
 
@@ -66,6 +66,10 @@ struct UserInfoRepoModel {
 }
 
 extension UserInfoRepoModel {
+
+    init(_ userInfo: UserInfoModel) {
+        username = userInfo.username
+    }
 
     init(_ userInfo: UserInfoDataSourceModel) {
         username = userInfo.username

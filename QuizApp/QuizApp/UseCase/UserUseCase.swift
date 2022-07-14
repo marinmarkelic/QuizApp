@@ -1,6 +1,6 @@
 protocol UserUseCaseProtocol {
 
-    func save(userInfo: UserInfo)
+    func save(userInfo: UserInfoModel)
 
     var userInfo: UserInfoModel { get }
 
@@ -14,8 +14,8 @@ class UserUseCase: UserUseCaseProtocol {
         self.userRepository = userRepository
     }
 
-    func save(userInfo: UserInfo) {
-        userRepository.save(userInfo: UserInfoModel(userInfo))
+    func save(userInfo: UserInfoModel) {
+        userRepository.save(userInfo: UserInfoRepoModel(userInfo))
     }
 
     var userInfo: UserInfoModel {
