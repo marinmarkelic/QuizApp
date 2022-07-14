@@ -43,6 +43,7 @@ class UserViewController: UIViewController {
         styleViews()
         defineLayoutForViews()
         addActions()
+        fetchData()
     }
 
     @objc
@@ -72,6 +73,13 @@ class UserViewController: UIViewController {
             title: "Settings",
             image: UIImage(systemName: "gearshape", withConfiguration: config),
             selectedImage: UIImage(systemName: "gearshape.fill", withConfiguration: config))
+    }
+
+    private func fetchData() {
+        Task {
+            usernameTextField.text = await userViewModel.username
+            nameTextField.text = await userViewModel.username
+        }
     }
 
 }
@@ -111,7 +119,6 @@ extension UserViewController: ConstructViewsProtocol {
         usernameTextField.textColor = .white
         usernameTextField.autocorrectionType = .no
         usernameTextField.addTarget(self, action: #selector(textFieldEndedEditing), for: .editingDidEnd)
-        usernameTextField.text = userViewModel.username
 
         nameLabel.text = "NAME"
         nameLabel.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 12), size: 12)
@@ -121,7 +128,6 @@ extension UserViewController: ConstructViewsProtocol {
         nameTextField.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 20), size: 20)
         nameTextField.textColor = .white
         nameTextField.autocorrectionType = .no
-        nameTextField.text = userViewModel.username
 
         button.setTitle("Log out", for: .normal)
         button.setTitleColor(.red, for: .normal)

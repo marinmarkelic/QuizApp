@@ -1,6 +1,6 @@
 protocol UserRepositoryProtocol {
 
-    var userInfo: UserInfoRepoModel { get }
+    var userInfo: UserInfoRepoModel { get async throws }
 
     func logIn(username: String, password: String) async throws -> LoginResponseRepoModel
 
@@ -14,7 +14,11 @@ class UserRepository: UserRepositoryProtocol {
     private let userDatabaseDataSource: UserDatabaseDataSourceProtocol
 
     var userInfo: UserInfoRepoModel {
-        UserInfoRepoModel(userDatabaseDataSource.userInfo)
+        get async throws {
+            UserInfoRepoModel(
+                username: userDatabaseDataSource.userInfo.username,
+                name: try await userNetworkDataSource.userInfo.name)
+        }
     }
 
     init(userNetworkDataSource: UserNetworkDataSourceProtocol, userDatabaseDataSource: UserDatabaseDataSourceProtocol) {

@@ -1,3 +1,5 @@
+import Foundation
+
 class UserViewModel {
 
     private let appRouter: AppRouterProtocol
@@ -5,11 +7,28 @@ class UserViewModel {
     private let logoutUseCase: LogOutUseCaseProtocol
 
     var username: String {
-        userInfo.username
+        get async {
+            await userInfo?.username ?? ""
+        }
     }
 
-    var userInfo: UserInfo {
-        UserInfo(userUseCase.userInfo)
+    var name: String {
+        get async {
+            await userInfo?.name ?? ""
+        }
+    }
+
+    var userInfo: UserInfo? {
+        get async {
+            do {
+                return try await UserInfo(userUseCase.userInfo)
+            } catch let error{
+                print(error)
+                logOut()
+            }
+
+            return nil
+        }
     }
 
     init(appRouter: AppRouterProtocol, userUseCase: UserUseCaseProtocol, logoutUseCase: LogOutUseCaseProtocol) {
@@ -23,8 +42,10 @@ class UserViewModel {
     }
 
     func logOut() {
-        logoutUseCase.logOut()
-        appRouter.showLogin()
+        DispatchQueue.main.async { [weak self] in
+            self?.logoutUseCase.logOut()
+            self?.appRouter.showLogin()
+        }
     }
 
 }
