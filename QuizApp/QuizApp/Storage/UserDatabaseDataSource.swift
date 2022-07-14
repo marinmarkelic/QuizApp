@@ -24,6 +24,14 @@ class UserDatabaseDataSource: UserDatabaseDataSourceProtocol {
 
     private let usernameKey = "Username"
 
+    var accessToken: String? {
+        secureStorage.accessToken
+    }
+
+    var userInfo: UserInfoDataSourceModel {
+        UserInfoDataSourceModel(username: userDefaults.string(forKey: usernameKey) ?? "")
+    }
+
     init(secureStorage: SecureStorage) {
         self.secureStorage = secureStorage
     }
@@ -44,26 +52,10 @@ class UserDatabaseDataSource: UserDatabaseDataSourceProtocol {
         userDefaults.set(userInfo.username, forKey: usernameKey)
     }
 
-    var accessToken: String? {
-        secureStorage.accessToken
-    }
-
-    var userInfo: UserInfoDataSourceModel {
-        UserInfoDataSourceModel(username: userDefaults.string(forKey: usernameKey) ?? "")
-    }
-
 }
 
 struct UserInfoDataSourceModel {
 
     let username: String
-
-}
-
-extension UserInfoDataSourceModel {
-
-    init(_ userInfo: UserInfoRepoModel) {
-        username = userInfo.username
-    }
 
 }

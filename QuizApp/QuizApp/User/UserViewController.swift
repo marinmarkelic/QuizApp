@@ -110,6 +110,7 @@ extension UserViewController: ConstructViewsProtocol {
         label.snp.makeConstraints {
             $0.top.equalToSuperview().offset(50)
             $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().inset(20)
         }
 
         textField.snp.makeConstraints {

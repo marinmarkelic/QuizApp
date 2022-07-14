@@ -4,6 +4,14 @@ class UserViewModel {
     private let userUseCase: UserUseCaseProtocol
     private let logoutUseCase: LogOutUseCaseProtocol
 
+    var username: String {
+        userInfo.username
+    }
+
+    var userInfo: UserInfo {
+        UserInfo(userUseCase.userInfo)
+    }
+
     init(appRouter: AppRouterProtocol, userUseCase: UserUseCaseProtocol, logoutUseCase: LogOutUseCaseProtocol) {
         self.appRouter = appRouter
         self.userUseCase = userUseCase
@@ -12,14 +20,6 @@ class UserViewModel {
 
     func save(username: String) {
         userUseCase.save(userInfo: UserInfoModel(username: username))
-    }
-
-    var username: String {
-        userInfo.username
-    }
-
-    var userInfo: UserInfo {
-        UserInfo(userUseCase.userInfo)
     }
 
     func logOut() {
@@ -38,6 +38,14 @@ struct UserInfo {
 extension UserInfo {
 
     init(_ userInfo: UserInfoModel) {
+        username = userInfo.username
+    }
+
+}
+
+extension UserInfoModel {
+
+    init(_ userInfo: UserInfo) {
         username = userInfo.username
     }
 
