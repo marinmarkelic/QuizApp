@@ -22,7 +22,8 @@ class AppRouter: AppRouterProtocol {
                 userViewModel: UserViewModel(
                     appRouter: self,
                     userUseCase: appDependencies.userUseCase,
-                    logoutUseCase: appDependencies.logoutUseCase)))
+                    logoutUseCase: appDependencies.logoutUseCase)),
+            quizViewController: QuizViewController())
 
         navigationController.setViewControllers([tabBarController], animated: true)
     }

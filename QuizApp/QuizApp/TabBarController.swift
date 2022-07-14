@@ -3,9 +3,11 @@ import UIKit
 class TabBarController: UITabBarController {
 
     private var userViewController: UserViewController
+    private var quizViewController: QuizViewController
 
-    init(userViewController: UserViewController) {
+    init(userViewController: UserViewController, quizViewController: QuizViewController) {
         self.userViewController = userViewController
+        self.quizViewController = quizViewController
 
         super.init(nibName: nil, bundle: nil)
     }
@@ -27,7 +29,7 @@ class TabBarController: UITabBarController {
 extension TabBarController: ConstructViewsProtocol {
 
     func createViews() {
-        viewControllers = [userViewController]
+        viewControllers = [quizViewController, userViewController]
     }
 
     func styleViews() {
