@@ -46,6 +46,35 @@ class NetworkClient {
         return value
     }
 
+    func patch<RequestModel: Encodable, Response: Decodable>(
+        path: String,
+        body: RequestModel
+    ) async throws -> Response {
+        guard let url = URL(string: "\(baseUrl)\(path)") else {
+            throw RequestError.invalidURLError
+        }
+
+        guard let jsonData = try? JSONEncoder().encode(body) else {
+            throw RequestError.dataCodingError
+        }
+
+        let accessToken = secureStorage.accessToken ?? ""
+
+        var urlRequest = URLRequest(url: url)
+        urlRequest.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+        urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        urlRequest.httpMethod = "PATCH"
+        urlRequest.httpBody = jsonData
+
+        let (data, _) = try await handle(urlRequest: urlRequest)
+
+        guard let value = try? JSONDecoder().decode(Response.self, from: data) else {
+            throw RequestError.dataCodingError
+        }
+
+        return value
+    }
+
     func post<RequestModel: Encodable, Response: Decodable>(
         path: String,
         body: RequestModel

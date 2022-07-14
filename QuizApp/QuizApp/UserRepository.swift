@@ -43,8 +43,9 @@ class UserRepository: UserRepositoryProtocol {
         userDatabaseDataSource.save(accessToken: accessToken)
     }
 
-    func save(userInfo: UserInfoRepoModel) {
+    func save(userInfo: UserInfoRepoModel) async throws {
         userDatabaseDataSource.save(userInfo: UserInfoDataSourceModel(userInfo))
+        _ = try await userNetworkDataSource.save(name: userInfo.name)
     }
 
 }

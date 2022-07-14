@@ -22,8 +22,7 @@ class UserViewModel {
         get async {
             do {
                 return try await UserInfo(userUseCase.userInfo)
-            } catch let error{
-                print(error)
+            } catch {
                 logOut()
             }
 
@@ -37,8 +36,12 @@ class UserViewModel {
         self.logoutUseCase = logoutUseCase
     }
 
-    func save(username: String, name: String) {
-        userUseCase.save(userInfo: UserInfoModel(username: username, name: name))
+    func save(username: String, name: String) async {
+        do {
+            try await userUseCase.save(userInfo: UserInfoModel(username: username, name: name))
+        } catch {
+            logOut()
+        }
     }
 
     func logOut() {

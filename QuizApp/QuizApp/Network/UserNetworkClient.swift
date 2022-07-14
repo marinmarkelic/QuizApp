@@ -2,7 +2,7 @@ protocol UserNetworkClientProtocol {
 
     var userInfo: UserInfoNetworkDataModel { get async throws }
 
-//    func save(name: String) async throws
+    func save(name: String) async throws -> UserInfoNetworkDataModel
 
 }
 
@@ -22,14 +22,23 @@ class UserNetworkClient: UserNetworkClientProtocol {
         self.networkClient = networkClient
     }
 
-//    func save(name: String) async throws{
-//        try await networkClient.
-//    }
+    func save(name: String) async throws -> UserInfoNetworkDataModel {
+        try await networkClient.patch(
+            path: accountUrlExtension,
+            body: UserInfoNetworkRequestModel(name: name))
+    }
 
 }
 
 struct UserInfoNetworkDataModel: Decodable {
 
+    let email: String
+    let id: Int
     let name: String
 
+}
+
+struct UserInfoNetworkRequestModel: Encodable {
+
+    let name: String
 }

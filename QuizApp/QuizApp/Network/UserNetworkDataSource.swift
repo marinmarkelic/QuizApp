@@ -6,6 +6,8 @@ protocol UserNetworkDataSourceProtocol {
 
     func check() async throws
 
+    func save(name: String) async throws -> UserInfoDataModel
+
 }
 
 class UserNetworkDataSource: UserNetworkDataSourceProtocol {
@@ -38,6 +40,10 @@ class UserNetworkDataSource: UserNetworkDataSourceProtocol {
         try await checkNetworkClient.check()
     }
 
+    func save(name: String) async throws -> UserInfoDataModel {
+        return try await UserInfoDataModel(userNetworkClient.save(name: name))
+    }
+
 }
 
 struct LoginResponseDataModel {
@@ -56,6 +62,8 @@ extension LoginResponseDataModel {
 
 struct UserInfoDataModel {
 
+    let email: String
+    let id: Int
     let name: String
 
 }
@@ -63,6 +71,8 @@ struct UserInfoDataModel {
 extension UserInfoDataModel {
 
     init(_ userData: UserInfoNetworkDataModel) {
+        email = userData.email
+        id = userData.id
         name = userData.name
     }
 

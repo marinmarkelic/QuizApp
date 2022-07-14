@@ -59,11 +59,16 @@ class UserViewController: UIViewController {
     @objc
     private func backgroundTapped(_ sender: UITapGestureRecognizer) {
         usernameTextField.endEditing(true)
+        nameTextField.endEditing(true)
     }
 
     @objc
     private func textFieldEndedEditing() {
-        userViewModel.save(username: usernameTextField.text ?? "", name: "")
+        Task {
+            await userViewModel.save(
+                username: usernameTextField.text ?? "",
+                name: nameTextField.text ?? "")
+        }
     }
 
     private func styleTabBarItem() {
@@ -78,7 +83,7 @@ class UserViewController: UIViewController {
     private func fetchData() {
         Task {
             usernameTextField.text = await userViewModel.username
-            nameTextField.text = await userViewModel.username
+            nameTextField.text = await userViewModel.name
         }
     }
 
@@ -128,6 +133,7 @@ extension UserViewController: ConstructViewsProtocol {
         nameTextField.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 20), size: 20)
         nameTextField.textColor = .white
         nameTextField.autocorrectionType = .no
+        nameTextField.addTarget(self, action: #selector(textFieldEndedEditing), for: .editingDidEnd)
 
         button.setTitle("Log out", for: .normal)
         button.setTitleColor(.red, for: .normal)
