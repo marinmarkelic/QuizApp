@@ -62,6 +62,7 @@ extension LoginResponseRepoModel {
 struct UserInfoRepoModel {
 
     let username: String
+    let name: String
 
 }
 
@@ -69,6 +70,7 @@ extension UserInfoRepoModel {
 
     init(_ userInfo: UserInfoDataSourceModel) {
         username = userInfo.username
+        name = userInfo.name
     }
 
 }
@@ -77,6 +79,7 @@ extension UserInfoDataSourceModel {
 
     init(_ userInfo: UserInfoRepoModel) {
         username = userInfo.username
+        name = userInfo.name
     }
 
 }

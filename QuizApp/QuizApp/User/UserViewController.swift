@@ -62,7 +62,7 @@ class UserViewController: UIViewController {
 
     @objc
     private func textFieldEndedEditing() {
-        userViewModel.save(username: usernameTextField.text ?? "")
+        userViewModel.save(username: usernameTextField.text ?? "", name: "")
     }
 
     private func styleTabBarItem() {

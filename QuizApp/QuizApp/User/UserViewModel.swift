@@ -18,8 +18,8 @@ class UserViewModel {
         self.logoutUseCase = logoutUseCase
     }
 
-    func save(username: String) {
-        userUseCase.save(userInfo: UserInfoModel(username: username))
+    func save(username: String, name: String) {
+        userUseCase.save(userInfo: UserInfoModel(username: username, name: name))
     }
 
     func logOut() {
@@ -32,6 +32,7 @@ class UserViewModel {
 struct UserInfo {
 
     let username: String
+    let name: String
 
 }
 
@@ -39,6 +40,7 @@ extension UserInfo {
 
     init(_ userInfo: UserInfoModel) {
         username = userInfo.username
+        name = userInfo.name
     }
 
 }
@@ -47,6 +49,7 @@ extension UserInfoModel {
 
     init(_ userInfo: UserInfo) {
         username = userInfo.username
+        name = userInfo.name
     }
 
 }

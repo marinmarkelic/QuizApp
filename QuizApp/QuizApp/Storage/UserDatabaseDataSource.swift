@@ -29,7 +29,7 @@ class UserDatabaseDataSource: UserDatabaseDataSourceProtocol {
     }
 
     var userInfo: UserInfoDataSourceModel {
-        UserInfoDataSourceModel(username: userDefaults.string(forKey: usernameKey) ?? "")
+        UserInfoDataSourceModel(username: userDefaults.string(forKey: usernameKey) ?? "", name: "")
     }
 
     init(secureStorage: SecureStorage) {
@@ -57,5 +57,6 @@ class UserDatabaseDataSource: UserDatabaseDataSourceProtocol {
 struct UserInfoDataSourceModel {
 
     let username: String
+    let name: String
 
 }
