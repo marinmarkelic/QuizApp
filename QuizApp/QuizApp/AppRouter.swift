@@ -17,11 +17,11 @@ class AppRouter: AppRouterProtocol {
     }
 
     func showHome() {
+        let quizViewController = QuizViewController()
         let userViewController = UserViewController(
             appRouter: self,
             userUseCase: appDependencies.userUseCase,
             logoutUseCase: appDependencies.logoutUseCase)
-        let quizViewController = QuizViewController()
 
         let viewControllers = [quizViewController, userViewController]
 
