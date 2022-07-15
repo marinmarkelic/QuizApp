@@ -11,7 +11,7 @@ class UserViewController: UIViewController {
     private var mainView: UIView!
 
     private var usernameLabel: UILabel!
-    private var usernameTextField: UITextField!
+    private var usernameText: UILabel!
 
     private var nameLabel: UILabel!
     private var nameTextField: UITextField!
@@ -61,14 +61,13 @@ class UserViewController: UIViewController {
 
     @objc
     private func backgroundTapped(_ sender: UITapGestureRecognizer) {
-        usernameTextField.endEditing(true)
         nameTextField.endEditing(true)
     }
 
     @objc
     private func textFieldEndedEditing() {
         Task {
-            await userViewModel.save(username: usernameTextField.text ?? "", name: nameTextField.text ?? "")
+            await userViewModel.save(username: usernameText.text ?? "", name: nameTextField.text ?? "")
         }
     }
 
@@ -88,7 +87,7 @@ class UserViewController: UIViewController {
                 guard let self = self else { return }
 
                 DispatchQueue.main.async {
-                    self.usernameTextField.text = userInfo.username
+                    self.usernameText.text = userInfo.username
                     self.nameTextField.text = userInfo.name
                 }
             }
@@ -109,8 +108,8 @@ extension UserViewController: ConstructViewsProtocol {
         usernameLabel = UILabel()
         mainView.addSubview(usernameLabel)
 
-        usernameTextField = UITextField()
-        mainView.addSubview(usernameTextField)
+        usernameText = UILabel()
+        mainView.addSubview(usernameText)
 
         nameLabel = UILabel()
         mainView.addSubview(nameLabel)
@@ -127,11 +126,8 @@ extension UserViewController: ConstructViewsProtocol {
         usernameLabel.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 12), size: 12)
         usernameLabel.textColor = .white
 
-        usernameTextField.attributedPlaceholder = NSAttributedString("Username")
-        usernameTextField.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 20), size: 20)
-        usernameTextField.textColor = .white
-        usernameTextField.autocorrectionType = .no
-        usernameTextField.addTarget(self, action: #selector(textFieldEndedEditing), for: .editingDidEnd)
+        usernameText.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 20), size: 20)
+        usernameText.textColor = .white
 
         nameLabel.text = "NAME"
         nameLabel.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 12), size: 12)
@@ -164,14 +160,14 @@ extension UserViewController: ConstructViewsProtocol {
             $0.trailing.equalToSuperview().inset(20)
         }
 
-        usernameTextField.snp.makeConstraints {
+        usernameText.snp.makeConstraints {
             $0.top.equalTo(usernameLabel.snp.bottom).offset(4)
             $0.leading.equalTo(usernameLabel)
             $0.trailing.equalToSuperview().inset(20)
         }
 
         nameLabel.snp.makeConstraints {
-            $0.top.equalTo(usernameTextField.snp.bottom).offset(40)
+            $0.top.equalTo(usernameText.snp.bottom).offset(40)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().inset(20)
         }
