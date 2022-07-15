@@ -8,6 +8,8 @@ class QuizViewController: UIViewController {
 
     private var titleView: UILabel!
 
+    private var categorySlider: CategorySlider!
+
     init() {
         super.init(nibName: nil, bundle: nil)
 
@@ -47,6 +49,9 @@ extension QuizViewController: ConstructViewsProtocol {
         gradientView.addSubview(mainView)
 
         titleView = UILabel()
+
+        categorySlider = CategorySlider()
+        mainView.addSubview(categorySlider)
     }
 
     func styleViews() {
@@ -54,7 +59,6 @@ extension QuizViewController: ConstructViewsProtocol {
         titleView.textColor = .white
         titleView.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 24), size: 24)
         tabBarController?.navigationItem.titleView = titleView
-
     }
 
     func defineLayoutForViews() {
@@ -64,6 +68,11 @@ extension QuizViewController: ConstructViewsProtocol {
 
         mainView.snp.makeConstraints {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+
+        categorySlider.snp.makeConstraints {
+            $0.leading.top.trailing.equalToSuperview()
+            $0.height.equalTo(30)
         }
     }
 

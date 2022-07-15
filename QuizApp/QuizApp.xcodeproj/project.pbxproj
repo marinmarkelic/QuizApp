@@ -30,6 +30,9 @@
 		9C20BAD2287EF25D009378FB /* UserUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C20BAD1287EF25D009378FB /* UserUseCase.swift */; };
 		9C20BAD6287F01AC009378FB /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C20BAD5287F01AC009378FB /* CustomButton.swift */; };
 		9C20BAD8287F17F2009378FB /* LogOutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C20BAD7287F17F2009378FB /* LogOutUseCase.swift */; };
+		9C42E0BC2881994900B2B9FF /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C42E0BB2881994900B2B9FF /* MockData.swift */; };
+		9C42E0BE28819B1300B2B9FF /* CategorySlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C42E0BD28819B1300B2B9FF /* CategorySlider.swift */; };
+		9C42E0C028819E0200B2B9FF /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C42E0BF28819E0200B2B9FF /* CategoryCell.swift */; };
 		9CC33B22287D6848002E9853 /* UserDatabaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC33B21287D6848002E9853 /* UserDatabaseDataSource.swift */; };
 		9CC33B24287D6889002E9853 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC33B23287D6889002E9853 /* UserRepository.swift */; };
 		9CC33B26287D6E2B002E9853 /* SecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC33B25287D6E2B002E9853 /* SecureStorage.swift */; };
@@ -69,6 +72,9 @@
 		9C20BAD1287EF25D009378FB /* UserUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUseCase.swift; sourceTree = "<group>"; };
 		9C20BAD5287F01AC009378FB /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		9C20BAD7287F17F2009378FB /* LogOutUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutUseCase.swift; sourceTree = "<group>"; };
+		9C42E0BB2881994900B2B9FF /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
+		9C42E0BD28819B1300B2B9FF /* CategorySlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySlider.swift; sourceTree = "<group>"; };
+		9C42E0BF28819E0200B2B9FF /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		9CC33B21287D6848002E9853 /* UserDatabaseDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDatabaseDataSource.swift; sourceTree = "<group>"; };
 		9CC33B23287D6889002E9853 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		9CC33B25287D6E2B002E9853 /* SecureStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStorage.swift; sourceTree = "<group>"; };
@@ -114,6 +120,7 @@
 		9C195369287584750051CEC6 /* QuizApp */ = {
 			isa = PBXGroup;
 			children = (
+				9C42E0BA2881993C00B2B9FF /* Mock */,
 				9CC33B20287D6832002E9853 /* Storage */,
 				9CC4D6E5287C70170061F149 /* UseCase */,
 				9CC4D6DE287C552A0061F149 /* Network */,
@@ -158,6 +165,8 @@
 			isa = PBXGroup;
 			children = (
 				9C1C76D028802471006217A9 /* QuizViewController.swift */,
+				9C42E0BD28819B1300B2B9FF /* CategorySlider.swift */,
+				9C42E0BF28819E0200B2B9FF /* CategoryCell.swift */,
 			);
 			path = Quiz;
 			sourceTree = "<group>";
@@ -167,6 +176,14 @@
 			children = (
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		9C42E0BA2881993C00B2B9FF /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				9C42E0BB2881994900B2B9FF /* MockData.swift */,
+			);
+			path = Mock;
 			sourceTree = "<group>";
 		};
 		9CC33B20287D6832002E9853 /* Storage */ = {
@@ -356,10 +373,12 @@
 				9C20BAC8287EE642009378FB /* TabBarController.swift in Sources */,
 				9C1953942876D3860051CEC6 /* EmailView.swift in Sources */,
 				9C1953B3287871CC0051CEC6 /* AppRouter.swift in Sources */,
+				9C42E0BE28819B1300B2B9FF /* CategorySlider.swift in Sources */,
 				9CC4D6D6287C10450061F149 /* LoginNetworkClient.swift in Sources */,
 				9CC4D6E2287C6AB30061F149 /* UserNetworkDataSource.swift in Sources */,
 				9CC33B22287D6848002E9853 /* UserDatabaseDataSource.swift in Sources */,
 				9C1953A9287716FE0051CEC6 /* ConstructViewsProtocol.swift in Sources */,
+				9C42E0BC2881994900B2B9FF /* MockData.swift in Sources */,
 				9CC4D6DD287C1C6B0061F149 /* RequestError.swift in Sources */,
 				9CC33B31287D9F59002E9853 /* CheckNetworkClient.swift in Sources */,
 				9C1953962876D65C0051CEC6 /* PasswordView.swift in Sources */,
@@ -370,6 +389,7 @@
 				9C1C76D128802471006217A9 /* QuizViewController.swift in Sources */,
 				9C20BAD0287EF1DB009378FB /* UserViewModel.swift in Sources */,
 				9C1953AF287826BD0051CEC6 /* LoginViewModel.swift in Sources */,
+				9C42E0C028819E0200B2B9FF /* CategoryCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
