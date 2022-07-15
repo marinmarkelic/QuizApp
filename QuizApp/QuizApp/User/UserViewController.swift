@@ -18,6 +18,8 @@ class UserViewController: UIViewController {
 
     private var button: CustomButton!
 
+    private var cancellables = Set<AnyCancellable>()
+
     init(
         appRouter: AppRouterProtocol,
         userUseCase: UserUseCaseProtocol,
@@ -59,12 +61,15 @@ class UserViewController: UIViewController {
 
     @objc
     private func backgroundTapped(_ sender: UITapGestureRecognizer) {
-        textField.endEditing(true)
+        usernameTextField.endEditing(true)
+        nameTextField.endEditing(true)
     }
 
     @objc
     private func textFieldEndedEditing() {
-        userViewModel.save(username: textField.text ?? "")
+        Task {
+            await userViewModel.save(username: usernameTextField.text ?? "", name: nameTextField.text ?? "")
+        }
     }
 
     private func styleTabBarItem() {
@@ -80,7 +85,8 @@ class UserViewController: UIViewController {
         userViewModel
             .$userInfo
             .sink { [weak self] userInfo in
-                self?.textField.text = userInfo.username
+                self?.usernameTextField.text = userInfo.username
+                self?.nameTextField.text = userInfo.name
             }
             .store(in: &cancellables)
     }

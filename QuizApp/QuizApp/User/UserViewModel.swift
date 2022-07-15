@@ -1,4 +1,5 @@
 import Combine
+import Foundation
 
 class UserViewModel {
 
@@ -6,12 +7,14 @@ class UserViewModel {
     private let userUseCase: UserUseCaseProtocol
     private let logoutUseCase: LogOutUseCaseProtocol
 
-    @Published var userInfo: UserInfo = UserInfo(username: "")
+    @Published var userInfo: UserInfo = UserInfo(username: "", name: "")
 
     init(appRouter: AppRouterProtocol, userUseCase: UserUseCaseProtocol, logoutUseCase: LogOutUseCaseProtocol) {
         self.appRouter = appRouter
         self.userUseCase = userUseCase
         self.logoutUseCase = logoutUseCase
+
+        getUserInfo()
     }
 
     func save(username: String, name: String) async {
@@ -19,6 +22,16 @@ class UserViewModel {
             try await userUseCase.save(userInfo: UserInfoModel(username: username, name: name))
         } catch {
             logOut()
+        }
+    }
+
+    func getUserInfo() {
+        Task {
+            do {
+                userInfo = try await UserInfo(userUseCase.userInfo)
+            } catch {
+                logOut()
+            }
         }
     }
 
