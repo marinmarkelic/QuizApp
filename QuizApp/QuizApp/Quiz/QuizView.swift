@@ -1,6 +1,6 @@
 import UIKit
 
-class CategorySlider: UIView {
+class QuizView: UIView {
 
     private var collectionView: UICollectionView!
     private var collectionViewLayout: UICollectionViewFlowLayout!
@@ -19,7 +19,7 @@ class CategorySlider: UIView {
 
 }
 
-extension CategorySlider: ConstructViewsProtocol {
+extension QuizView: ConstructViewsProtocol {
 
     func createViews() {
         collectionViewLayout = UICollectionViewFlowLayout()
@@ -29,10 +29,10 @@ extension CategorySlider: ConstructViewsProtocol {
     }
 
     func styleViews() {
-        collectionViewLayout.scrollDirection = .horizontal
+        collectionViewLayout.scrollDirection = .vertical
 
         collectionView.collectionViewLayout = collectionViewLayout
-        collectionView.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.reuseIdentifier)
+        collectionView.register(QuizCell.self, forCellWithReuseIdentifier: QuizCell.reuseIdentifier)
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -47,37 +47,29 @@ extension CategorySlider: ConstructViewsProtocol {
 
 }
 
-extension CategorySlider: UICollectionViewDelegateFlowLayout {
+extension QuizView: UICollectionViewDelegateFlowLayout {
 
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-
-        let text = categories[indexPath.row].name
-        let font = UIFont(name: "SourceSansPro-Bold", size: 20) ?? UIFont.systemFont(ofSize: 20)
-
-        let size = text.size(withAttributes: [
-            .font: font
-        ])
-
-        let itemWidth = CGFloat(size.width + 5)
-        let itemHeight = CGFloat(size.height)
+        let itemWidth = CGFloat(frame.width)
+        let itemHeight = CGFloat(140)
 
         return CGSize(width: itemWidth, height: itemHeight)
     }
 
 }
 
-extension CategorySlider: UICollectionViewDataSource {
+extension QuizView: UICollectionViewDataSource {
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         1
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        categories.count
+        mockInfo.count
     }
 
     func collectionView(
@@ -85,31 +77,13 @@ extension CategorySlider: UICollectionViewDataSource {
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: CategoryCell.reuseIdentifier,
-            for: indexPath) as? CategoryCell
+            withReuseIdentifier: QuizCell.reuseIdentifier,
+            for: indexPath) as? QuizCell
         else { fatalError() }
 
-        let categoryData = categories[indexPath.row]
-
-        cell.set(title: categoryData.name, color: categoryData.color)
+        cell.set(info: mockInfo[indexPath.row])
 
         return cell
-    }
-
-}
-
-extension CategorySlider: UICollectionViewDelegate {
-
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        for view in collectionView.subviews {
-            guard let cell = view as? CategoryCell else { continue }
-
-            cell.resetColor()
-        }
-
-        guard let cell = collectionView.cellForItem(at: indexPath) as? CategoryCell else { return }
-
-        cell.changeColor()
     }
 
 }

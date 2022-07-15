@@ -8,7 +8,10 @@ class QuizViewController: UIViewController {
 
     private var titleView: UILabel!
 
+    private var quizContainer: UIView!
+
     private var categorySlider: CategorySlider!
+    private var quizView: QuizView!
 
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -50,8 +53,14 @@ extension QuizViewController: ConstructViewsProtocol {
 
         titleView = UILabel()
 
+        quizContainer = UIView()
+        mainView.addSubview(quizContainer)
+
         categorySlider = CategorySlider()
-        mainView.addSubview(categorySlider)
+        quizContainer.addSubview(categorySlider)
+
+        quizView = QuizView()
+        quizContainer.addSubview(quizView)
     }
 
     func styleViews() {
@@ -69,10 +78,20 @@ extension QuizViewController: ConstructViewsProtocol {
         mainView.snp.makeConstraints {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
+        quizContainer.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview()
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().inset(20)
+        }
 
         categorySlider.snp.makeConstraints {
             $0.leading.top.trailing.equalToSuperview()
             $0.height.equalTo(30)
+        }
+
+        quizView.snp.makeConstraints {
+            $0.top.equalTo(categorySlider.snp.bottom)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
     }
 
