@@ -5,6 +5,8 @@ class CategorySlider: UIView {
     private var collectionView: UICollectionView!
     private var collectionViewLayout: UICollectionViewFlowLayout!
 
+    var delegate: CategorySliderDelegate!
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -110,6 +112,13 @@ extension CategorySlider: UICollectionViewDelegate {
         guard let cell = collectionView.cellForItem(at: indexPath) as? CategoryCell else { return }
 
         cell.changeColor()
+
+        delegate.selectedCategory(self, category: cell.category)
     }
+
+}
+protocol CategorySliderDelegate {
+
+    func selectedCategory(_ categorySlider: CategorySlider, category: Category)
 
 }

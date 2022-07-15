@@ -4,6 +4,8 @@ class CategoryCell: UICollectionViewCell {
 
     static let reuseIdentifier = String(describing: CategorySlider.self)
 
+    var category: Category?
+
     private var label: UILabel!
 
     private var color: UIColor!
