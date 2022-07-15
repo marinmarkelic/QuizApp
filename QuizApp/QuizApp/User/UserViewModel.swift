@@ -7,7 +7,7 @@ class UserViewModel {
     private let userUseCase: UserUseCaseProtocol
     private let logoutUseCase: LogOutUseCaseProtocol
 
-    @Published var userInfo: UserInfo = UserInfo(username: "", name: "")
+    @Published var userInfo: UserInfo = UserInfo()
 
     init(appRouter: AppRouterProtocol, userUseCase: UserUseCaseProtocol, logoutUseCase: LogOutUseCaseProtocol) {
         self.appRouter = appRouter
@@ -52,6 +52,11 @@ struct UserInfo {
 }
 
 extension UserInfo {
+
+    init() {
+        username = ""
+        name = ""
+    }
 
     init(_ userInfo: UserInfoModel) {
         username = userInfo.username
