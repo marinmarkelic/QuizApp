@@ -33,8 +33,10 @@ class UserViewModel {
 
     func logOut() {
         DispatchQueue.main.async { [weak self] in
-            self?.logoutUseCase.logOut()
-            self?.appRouter.showLogin()
+            guard let self = self else { return }
+
+            self.logoutUseCase.logOut()
+            self.appRouter.showLogin()
         }
     }
 
