@@ -17,10 +17,12 @@ class UserViewModel {
         getUserInfo()
     }
 
-    func save(username: String, name: String) async {
-        do {
-            userInfo = try await UserInfo(userUseCase.save(userInfo: UserInfoModel(username: username, name: name)))
-        } catch _ {}
+    func save(username: String, name: String) {
+        Task {
+            do {
+                userInfo = try await UserInfo(userUseCase.save(userInfo: UserInfoModel(username: username, name: name)))
+            } catch _ {}
+        }
     }
 
     func getUserInfo() {

@@ -66,9 +66,7 @@ class UserViewController: UIViewController {
 
     @objc
     private func textFieldEndedEditing() {
-        Task {
-            await userViewModel.save(username: usernameText.text ?? "", name: nameTextField.text ?? "")
-        }
+        userViewModel.save(username: usernameText.text ?? "", name: nameTextField.text ?? "")
     }
 
     private func styleTabBarItem() {
