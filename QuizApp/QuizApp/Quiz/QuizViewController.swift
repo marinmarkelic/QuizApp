@@ -6,6 +6,8 @@ class QuizViewController: UIViewController {
 
     private var mainView: UIView!
 
+    private var titleView: UILabel!
+
     init() {
         super.init(nibName: nil, bundle: nil)
 
@@ -43,9 +45,17 @@ extension QuizViewController: ConstructViewsProtocol {
 
         mainView = UIView()
         gradientView.addSubview(mainView)
+
+        titleView = UILabel()
     }
 
-    func styleViews() {}
+    func styleViews() {
+        titleView.text = "PopQuiz"
+        titleView.textColor = .white
+        titleView.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 24), size: 24)
+        tabBarController?.navigationItem.titleView = titleView
+
+    }
 
     func defineLayoutForViews() {
         gradientView.snp.makeConstraints {
