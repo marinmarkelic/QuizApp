@@ -6,6 +6,9 @@ class QuizCell: UICollectionViewCell {
 
     private var image: UIImageView!
 
+    private var difficultyView: DifficultyView!
+
+    private var color: UIColor!
     private var title: UILabel!
     private var desc: UILabel!
 
@@ -26,6 +29,12 @@ class QuizCell: UICollectionViewCell {
     func set(info: Info) {
         title.text = info.title
         desc.text = info.description
+
+        difficultyView.set(difficulty: info.difficulty, color: color)
+    }
+
+    func set(color: UIColor) {
+        self.color = color
     }
 
 }
@@ -36,6 +45,9 @@ extension QuizCell: ConstructViewsProtocol {
 
         image = UIImageView(image: icon)
         addSubview(image)
+
+        difficultyView = DifficultyView()
+        addSubview(difficultyView)
 
         title = UILabel()
         addSubview(title)
@@ -63,6 +75,13 @@ extension QuizCell: ConstructViewsProtocol {
             $0.leading.top.equalToSuperview().offset(20)
             $0.bottom.equalToSuperview().inset(20)
             $0.width.equalTo(100)
+        }
+
+        difficultyView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(5)
+            $0.trailing.equalToSuperview().inset(20)
+            $0.width.equalTo(60)
+            $0.height.equalTo(20)
         }
 
         title.snp.makeConstraints {

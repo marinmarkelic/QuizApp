@@ -81,6 +81,8 @@ extension QuizView: UICollectionViewDataSource {
             for: indexPath) as? QuizCell
         else { fatalError() }
 
+        //change
+        cell.set(color: .yellow)
         cell.set(info: mockInfo[indexPath.row])
 
         return cell

@@ -36,6 +36,7 @@
 		9C42E0C22881A81D00B2B9FF /* SourceSansPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9C42E0C12881A74700B2B9FF /* SourceSansPro-Bold.ttf */; };
 		9C42E0C42881A9A100B2B9FF /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C42E0C32881A9A100B2B9FF /* QuizView.swift */; };
 		9C42E0C62881AAF300B2B9FF /* QuizCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C42E0C52881AAF300B2B9FF /* QuizCell.swift */; };
+		9C42E0C82881B71B00B2B9FF /* DifficultyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C42E0C72881B71B00B2B9FF /* DifficultyView.swift */; };
 		9CC33B22287D6848002E9853 /* UserDatabaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC33B21287D6848002E9853 /* UserDatabaseDataSource.swift */; };
 		9CC33B24287D6889002E9853 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC33B23287D6889002E9853 /* UserRepository.swift */; };
 		9CC33B26287D6E2B002E9853 /* SecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC33B25287D6E2B002E9853 /* SecureStorage.swift */; };
@@ -81,6 +82,7 @@
 		9C42E0C12881A74700B2B9FF /* SourceSansPro-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Bold.ttf"; sourceTree = "<group>"; };
 		9C42E0C32881A9A100B2B9FF /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
 		9C42E0C52881AAF300B2B9FF /* QuizCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizCell.swift; sourceTree = "<group>"; };
+		9C42E0C72881B71B00B2B9FF /* DifficultyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyView.swift; sourceTree = "<group>"; };
 		9CC33B21287D6848002E9853 /* UserDatabaseDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDatabaseDataSource.swift; sourceTree = "<group>"; };
 		9CC33B23287D6889002E9853 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		9CC33B25287D6E2B002E9853 /* SecureStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStorage.swift; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 				9C42E0BF28819E0200B2B9FF /* CategoryCell.swift */,
 				9C42E0C32881A9A100B2B9FF /* QuizView.swift */,
 				9C42E0C52881AAF300B2B9FF /* QuizCell.swift */,
+				9C42E0C72881B71B00B2B9FF /* DifficultyView.swift */,
 			);
 			path = Quiz;
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 				9C1953AB287725590051CEC6 /* TextFieldView.swift in Sources */,
 				9CC4D6E0287C5A720061F149 /* AppDependencies.swift in Sources */,
 				9C1953B12878366A0051CEC6 /* ErrorLabel.swift in Sources */,
+				9C42E0C82881B71B00B2B9FF /* DifficultyView.swift in Sources */,
 				9C20BAD2287EF25D009378FB /* UserUseCase.swift in Sources */,
 				9C19539C2876F1ED0051CEC6 /* GradientView.swift in Sources */,
 				9C19536B287584750051CEC6 /* AppDelegate.swift in Sources */,
