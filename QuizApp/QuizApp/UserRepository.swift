@@ -70,22 +70,8 @@ struct UserInfoRepoModel {
 
 extension UserInfoRepoModel {
 
-    init(_ userInfo: UserInfoDataSourceModel) {
-        username = userInfo.username
-        name = userInfo.name
-    }
-
     init(_ userInfo: UserInfoDataModel) {
         username = userInfo.email
-        name = userInfo.name
-    }
-
-}
-
-extension UserInfoDataSourceModel {
-
-    init(_ userInfo: UserInfoRepoModel) {
-        username = userInfo.username
         name = userInfo.name
     }
 

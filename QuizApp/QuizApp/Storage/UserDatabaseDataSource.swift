@@ -2,17 +2,13 @@ import Foundation
 
 protocol UserDatabaseDataSourceProtocol {
 
-    func save(accessToken: String)
+    var accessToken: String? { get }
 
-    func save(userInfo: UserInfoDataSourceModel)
+    func save(accessToken: String)
 
     func deleteAccessToken()
 
     func deleteUserInfo()
-
-    var accessToken: String? { get }
-
-    var userInfo: UserInfoDataSourceModel { get }
 
 }
 
@@ -26,10 +22,6 @@ class UserDatabaseDataSource: UserDatabaseDataSourceProtocol {
 
     var accessToken: String? {
         secureStorage.accessToken
-    }
-
-    var userInfo: UserInfoDataSourceModel {
-        UserInfoDataSourceModel(username: userDefaults.string(forKey: usernameKey) ?? "", name: "")
     }
 
     init(secureStorage: SecureStorage) {
@@ -47,16 +39,5 @@ class UserDatabaseDataSource: UserDatabaseDataSourceProtocol {
     func deleteUserInfo() {
         userDefaults.set("", forKey: usernameKey)
     }
-
-    func save(userInfo: UserInfoDataSourceModel) {
-        userDefaults.set(userInfo.username, forKey: usernameKey)
-    }
-
-}
-
-struct UserInfoDataSourceModel {
-
-    let username: String
-    let name: String
 
 }
