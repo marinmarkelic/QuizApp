@@ -56,13 +56,15 @@ extension CategorySlider: UICollectionViewDelegateFlowLayout {
     ) -> CGSize {
 
         let text = categories[indexPath.row].name
-        let font = UIFont(name: "SourceSansPro-Regular", size: 20) ?? UIFont.systemFont(ofSize: 20)
+        let font = UIFont(name: "SourceSansPro-Bold", size: 20) ?? UIFont.systemFont(ofSize: 20)
+
+        print(font)
 
         let size = text.size(withAttributes: [
             .font: font
         ])
 
-        let itemWidth = CGFloat(size.width)
+        let itemWidth = CGFloat(size.width + 5)
         let itemHeight = CGFloat(size.height)
 
         return CGSize(width: itemWidth, height: itemHeight)

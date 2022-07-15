@@ -48,6 +48,7 @@ extension CategoryCell: ConstructViewsProtocol {
 
     func styleViews() {
         label.textColor = .white
+        label.font = UIFont(name: "SourceSansPro-Bold", size: 20)
     }
 
     func defineLayoutForViews() {

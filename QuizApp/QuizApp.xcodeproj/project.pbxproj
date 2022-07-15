@@ -33,6 +33,7 @@
 		9C42E0BC2881994900B2B9FF /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C42E0BB2881994900B2B9FF /* MockData.swift */; };
 		9C42E0BE28819B1300B2B9FF /* CategorySlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C42E0BD28819B1300B2B9FF /* CategorySlider.swift */; };
 		9C42E0C028819E0200B2B9FF /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C42E0BF28819E0200B2B9FF /* CategoryCell.swift */; };
+		9C42E0C22881A81D00B2B9FF /* SourceSansPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9C42E0C12881A74700B2B9FF /* SourceSansPro-Bold.ttf */; };
 		9CC33B22287D6848002E9853 /* UserDatabaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC33B21287D6848002E9853 /* UserDatabaseDataSource.swift */; };
 		9CC33B24287D6889002E9853 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC33B23287D6889002E9853 /* UserRepository.swift */; };
 		9CC33B26287D6E2B002E9853 /* SecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC33B25287D6E2B002E9853 /* SecureStorage.swift */; };
@@ -75,6 +76,7 @@
 		9C42E0BB2881994900B2B9FF /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		9C42E0BD28819B1300B2B9FF /* CategorySlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySlider.swift; sourceTree = "<group>"; };
 		9C42E0BF28819E0200B2B9FF /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
+		9C42E0C12881A74700B2B9FF /* SourceSansPro-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Bold.ttf"; sourceTree = "<group>"; };
 		9CC33B21287D6848002E9853 /* UserDatabaseDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDatabaseDataSource.swift; sourceTree = "<group>"; };
 		9CC33B23287D6889002E9853 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		9CC33B25287D6E2B002E9853 /* SecureStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStorage.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				9C1953A62876FB430051CEC6 /* SourceSansPro-Regular.ttf */,
+				9C42E0C12881A74700B2B9FF /* SourceSansPro-Bold.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C42E0C22881A81D00B2B9FF /* SourceSansPro-Bold.ttf in Resources */,
 				9C1953A72876FB6A0051CEC6 /* SourceSansPro-Regular.ttf in Resources */,
 				9C195377287584770051CEC6 /* LaunchScreen.storyboard in Resources */,
 				9C195374287584770051CEC6 /* Assets.xcassets in Resources */,
