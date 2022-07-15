@@ -1,6 +1,10 @@
 protocol UserRepositoryProtocol {
 
+    var userInfo: UserInfoRepoModel { get }
+
     func logIn(username: String, password: String) async throws -> LoginResponseRepoModel
+
+    func logOut()
 
 }
 
@@ -8,6 +12,10 @@ class UserRepository: UserRepositoryProtocol {
 
     private let userNetworkDataSource: UserNetworkDataSourceProtocol
     private let userDatabaseDataSource: UserDatabaseDataSourceProtocol
+
+    var userInfo: UserInfoRepoModel {
+        UserInfoRepoModel(userDatabaseDataSource.userInfo)
+    }
 
     init(userNetworkDataSource: UserNetworkDataSourceProtocol, userDatabaseDataSource: UserDatabaseDataSourceProtocol) {
         self.userNetworkDataSource = userNetworkDataSource
@@ -22,8 +30,17 @@ class UserRepository: UserRepositoryProtocol {
         return responseRepoModel
     }
 
+    func logOut() {
+        userDatabaseDataSource.deleteAccessToken()
+        userDatabaseDataSource.deleteUserInfo()
+    }
+
     private func save(accessToken: String) {
         userDatabaseDataSource.save(accessToken: accessToken)
+    }
+
+    func save(userInfo: UserInfoRepoModel) {
+        userDatabaseDataSource.save(userInfo: UserInfoDataSourceModel(userInfo))
     }
 
 }
@@ -38,6 +55,28 @@ extension LoginResponseRepoModel {
 
     init(_ responseDataModel: LoginResponseDataModel) {
         accessToken = responseDataModel.accessToken
+    }
+
+}
+
+struct UserInfoRepoModel {
+
+    let username: String
+
+}
+
+extension UserInfoRepoModel {
+
+    init(_ userInfo: UserInfoDataSourceModel) {
+        username = userInfo.username
+    }
+
+}
+
+extension UserInfoDataSourceModel {
+
+    init(_ userInfo: UserInfoRepoModel) {
+        username = userInfo.username
     }
 
 }

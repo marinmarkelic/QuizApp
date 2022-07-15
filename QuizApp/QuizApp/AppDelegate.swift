@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 try await appDependencies.userNetworkDataSource.check()
 
                 DispatchQueue.main.async { [weak self] in
-                    self?.appRouter.showUser()
+                    self?.appRouter.showHome()
                 }
             } catch {
                 appDependencies.secureStorage.deleteAccessToken()
