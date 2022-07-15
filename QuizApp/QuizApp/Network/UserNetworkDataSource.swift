@@ -41,7 +41,7 @@ class UserNetworkDataSource: UserNetworkDataSourceProtocol {
     }
 
     func save(name: String) async throws -> UserInfoDataModel {
-        return try await UserInfoDataModel(userNetworkClient.save(name: name))
+        try await UserInfoDataModel(userNetworkClient.save(name: name))
     }
 
 }
@@ -62,8 +62,8 @@ extension LoginResponseDataModel {
 
 struct UserInfoDataModel {
 
-    let email: String
     let id: Int
+    let email: String
     let name: String
 
 }

@@ -85,8 +85,12 @@ class UserViewController: UIViewController {
         userViewModel
             .$userInfo
             .sink { [weak self] userInfo in
-                self?.usernameTextField.text = userInfo.username
-                self?.nameTextField.text = userInfo.name
+                guard let self = self else { return }
+
+                DispatchQueue.main.async {
+                    self.usernameTextField.text = userInfo.username
+                    self.nameTextField.text = userInfo.name
+                }
             }
             .store(in: &cancellables)
     }

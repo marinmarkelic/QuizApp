@@ -15,9 +15,7 @@ class UserRepository: UserRepositoryProtocol {
 
     var userInfo: UserInfoRepoModel {
         get async throws {
-            UserInfoRepoModel(
-                username: userDatabaseDataSource.userInfo.username,
-                name: try await userNetworkDataSource.userInfo.name)
+            UserInfoRepoModel(try await userNetworkDataSource.userInfo)
         }
     }
 
@@ -43,9 +41,8 @@ class UserRepository: UserRepositoryProtocol {
         userDatabaseDataSource.save(accessToken: accessToken)
     }
 
-    func save(userInfo: UserInfoRepoModel) async throws {
-        userDatabaseDataSource.save(userInfo: UserInfoDataSourceModel(userInfo))
-        _ = try await userNetworkDataSource.save(name: userInfo.name)
+    func save(userInfo: UserInfoRepoModel) async throws -> UserInfoRepoModel {
+        try await UserInfoRepoModel(userNetworkDataSource.save(name: userInfo.name))
     }
 
 }
@@ -75,6 +72,11 @@ extension UserInfoRepoModel {
 
     init(_ userInfo: UserInfoDataSourceModel) {
         username = userInfo.username
+        name = userInfo.name
+    }
+
+    init(_ userInfo: UserInfoDataModel) {
+        username = userInfo.email
         name = userInfo.name
     }
 

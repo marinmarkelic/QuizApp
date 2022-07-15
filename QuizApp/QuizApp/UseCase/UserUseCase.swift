@@ -2,7 +2,7 @@ protocol UserUseCaseProtocol {
 
     var userInfo: UserInfoModel { get async throws }
 
-    func save(userInfo: UserInfoModel) async throws
+    func save(userInfo: UserInfoModel) async throws -> UserInfoModel
 
 }
 
@@ -20,8 +20,8 @@ class UserUseCase: UserUseCaseProtocol {
         self.userRepository = userRepository
     }
 
-    func save(userInfo: UserInfoModel) async throws {
-        try await userRepository.save(userInfo: UserInfoRepoModel(userInfo))
+    func save(userInfo: UserInfoModel) async throws -> UserInfoModel {
+        try await UserInfoModel(userRepository.save(userInfo: UserInfoRepoModel(userInfo)))
     }
 
 }
