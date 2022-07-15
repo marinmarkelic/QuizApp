@@ -1,3 +1,4 @@
+import Combine
 import UIKit
 import SnapKit
 
@@ -43,7 +44,7 @@ class UserViewController: UIViewController {
         styleViews()
         defineLayoutForViews()
         addActions()
-        fetchData()
+        bindViewModel()
     }
 
     @objc
@@ -58,17 +59,12 @@ class UserViewController: UIViewController {
 
     @objc
     private func backgroundTapped(_ sender: UITapGestureRecognizer) {
-        usernameTextField.endEditing(true)
-        nameTextField.endEditing(true)
+        textField.endEditing(true)
     }
 
     @objc
     private func textFieldEndedEditing() {
-        Task {
-            await userViewModel.save(
-                username: usernameTextField.text ?? "",
-                name: nameTextField.text ?? "")
-        }
+        userViewModel.save(username: textField.text ?? "")
     }
 
     private func styleTabBarItem() {
@@ -80,11 +76,13 @@ class UserViewController: UIViewController {
             selectedImage: UIImage(systemName: "gearshape.fill", withConfiguration: config))
     }
 
-    private func fetchData() {
-        Task {
-            usernameTextField.text = await userViewModel.username
-            nameTextField.text = await userViewModel.name
-        }
+    private func bindViewModel() {
+        userViewModel
+            .$userInfo
+            .sink { [weak self] userInfo in
+                self?.textField.text = userInfo.username
+            }
+            .store(in: &cancellables)
     }
 
 }

@@ -1,4 +1,4 @@
-import Foundation
+import Combine
 
 class UserViewModel {
 
@@ -6,29 +6,7 @@ class UserViewModel {
     private let userUseCase: UserUseCaseProtocol
     private let logoutUseCase: LogOutUseCaseProtocol
 
-    var username: String {
-        get async {
-            await userInfo?.username ?? ""
-        }
-    }
-
-    var name: String {
-        get async {
-            await userInfo?.name ?? ""
-        }
-    }
-
-    var userInfo: UserInfo? {
-        get async {
-            do {
-                return try await UserInfo(userUseCase.userInfo)
-            } catch {
-                logOut()
-            }
-
-            return nil
-        }
-    }
+    @Published var userInfo: UserInfo = UserInfo(username: "")
 
     init(appRouter: AppRouterProtocol, userUseCase: UserUseCaseProtocol, logoutUseCase: LogOutUseCaseProtocol) {
         self.appRouter = appRouter
