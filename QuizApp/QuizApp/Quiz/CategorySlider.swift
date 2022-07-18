@@ -45,6 +45,7 @@ extension CategorySlider: ConstructViewsProtocol {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = .none
+
     }
 
     func defineLayoutForViews() {

@@ -102,12 +102,12 @@ extension QuizViewController: ConstructViewsProtocol {
         }
 
         categorySlider.snp.makeConstraints {
-            $0.leading.top.trailing.equalToSuperview()
+            $0.leading.top.trailing.equalToSuperview().offset(20)
             $0.height.equalTo(30)
         }
 
         quizView.snp.makeConstraints {
-            $0.top.equalTo(categorySlider.snp.bottom)
+            $0.top.equalTo(categorySlider.snp.bottom).offset(20)
             $0.leading.trailing.bottom.equalToSuperview()
         }
     }
