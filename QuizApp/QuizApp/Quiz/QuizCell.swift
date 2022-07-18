@@ -40,6 +40,7 @@ class QuizCell: UICollectionViewCell {
 }
 
 extension QuizCell: ConstructViewsProtocol {
+
     func createViews() {
         let icon = UIImage(systemName: "questionmark.square")
 
