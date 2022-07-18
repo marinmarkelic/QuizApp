@@ -49,6 +49,8 @@
 		9CC4D6E0287C5A720061F149 /* AppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4D6DF287C5A720061F149 /* AppDependencies.swift */; };
 		9CC4D6E2287C6AB30061F149 /* UserNetworkDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4D6E1287C6AB30061F149 /* UserNetworkDataSource.swift */; };
 		9CC4D6E4287C6C8C0061F149 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4D6E3287C6C8C0061F149 /* LoginUseCase.swift */; };
+		9CFCC2F42885532A00B01343 /* QuizViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFCC2F32885532A00B01343 /* QuizViewModel.swift */; };
+		9CFCC2F82885547600B01343 /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFCC2F72885547600B01343 /* Quiz.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -94,6 +96,8 @@
 		9CC4D6DF287C5A720061F149 /* AppDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependencies.swift; sourceTree = "<group>"; };
 		9CC4D6E1287C6AB30061F149 /* UserNetworkDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNetworkDataSource.swift; sourceTree = "<group>"; };
 		9CC4D6E3287C6C8C0061F149 /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
+		9CFCC2F32885532A00B01343 /* QuizViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewModel.swift; sourceTree = "<group>"; };
+		9CFCC2F72885547600B01343 /* Quiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +132,7 @@
 		9C195369287584750051CEC6 /* QuizApp */ = {
 			isa = PBXGroup;
 			children = (
+				9CFCC2F62885546700B01343 /* Enums */,
 				9C42E0BA2881993C00B2B9FF /* Mock */,
 				9CC33B20287D6832002E9853 /* Storage */,
 				9CC4D6E5287C70170061F149 /* UseCase */,
@@ -173,6 +178,7 @@
 		9C20BAC9287EEA06009378FB /* Quiz */ = {
 			isa = PBXGroup;
 			children = (
+				9CFCC2F32885532A00B01343 /* QuizViewModel.swift */,
 				9C1C76D028802471006217A9 /* QuizViewController.swift */,
 				9C42E0BD28819B1300B2B9FF /* CategorySlider.swift */,
 				9C42E0BF28819E0200B2B9FF /* CategoryCell.swift */,
@@ -267,6 +273,14 @@
 				9C20BAD7287F17F2009378FB /* LogOutUseCase.swift */,
 			);
 			path = UseCase;
+			sourceTree = "<group>";
+		};
+		9CFCC2F62885546700B01343 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				9CFCC2F72885547600B01343 /* Quiz.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -400,9 +414,11 @@
 				9C1953962876D65C0051CEC6 /* PasswordView.swift in Sources */,
 				9C1953B5287871E20051CEC6 /* AppRouterProtocol.swift in Sources */,
 				9CC33B24287D6889002E9853 /* UserRepository.swift in Sources */,
+				9CFCC2F42885532A00B01343 /* QuizViewModel.swift in Sources */,
 				9CC33B36287DBCB1002E9853 /* UserViewController.swift in Sources */,
 				9CC33B26287D6E2B002E9853 /* SecureStorage.swift in Sources */,
 				9C1C76D128802471006217A9 /* QuizViewController.swift in Sources */,
+				9CFCC2F82885547600B01343 /* Quiz.swift in Sources */,
 				9C20BAD0287EF1DB009378FB /* UserViewModel.swift in Sources */,
 				9C1953AF287826BD0051CEC6 /* LoginViewModel.swift in Sources */,
 				9C42E0C028819E0200B2B9FF /* CategoryCell.swift in Sources */,

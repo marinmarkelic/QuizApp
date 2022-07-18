@@ -2,6 +2,8 @@ import UIKit
 
 class QuizView: UIView {
 
+    private var quizes: [Quiz] = []
+
     private var collectionView: UICollectionView!
     private var collectionViewLayout: UICollectionViewFlowLayout!
 
@@ -45,6 +47,12 @@ extension QuizView: ConstructViewsProtocol {
         }
     }
 
+    func reloadQuizes(_ quizes: [Quiz]) {
+        self.quizes = quizes
+
+        collectionView.reloadData()
+    }
+
 }
 
 extension QuizView: UICollectionViewDelegateFlowLayout {
@@ -69,7 +77,7 @@ extension QuizView: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        mockInfo.count
+        quizes.count
     }
 
     func collectionView(
@@ -81,9 +89,8 @@ extension QuizView: UICollectionViewDataSource {
             for: indexPath) as? QuizCell
         else { fatalError() }
 
-        //change
         cell.set(color: .yellow)
-        cell.set(info: mockInfo[indexPath.row])
+        cell.set(quiz: quizes[indexPath.row])
 
         return cell
     }

@@ -13,10 +13,16 @@ class CategorySlider: UIView {
         createViews()
         styleViews()
         defineLayoutForViews()
+
+        selectCell(at: 0)
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    func selectCell(at section: Int) {
+        collectionView.selectItem(at: IndexPath(row: 0, section: section), animated: true, scrollPosition: [])
     }
 
 }
@@ -91,9 +97,7 @@ extension CategorySlider: UICollectionViewDataSource {
             for: indexPath) as? CategoryCell
         else { fatalError() }
 
-        let categoryData = categories[indexPath.row]
-
-        cell.set(title: categoryData.name, color: categoryData.color)
+        cell.set(category: categories[indexPath.row])
 
         return cell
     }
@@ -113,11 +117,14 @@ extension CategorySlider: UICollectionViewDelegate {
 
         cell.changeColor()
 
-        delegate.selectedCategory(self, category: cell.category)
+        guard let category = cell.category else { return }
+
+        delegate.selectedCategory(self, category: category)
     }
 
 }
-protocol CategorySliderDelegate {
+
+protocol CategorySliderDelegate: AnyObject {
 
     func selectedCategory(_ categorySlider: CategorySlider, category: Category)
 

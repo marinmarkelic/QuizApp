@@ -1,6 +1,11 @@
 import UIKit
+import Combine
 
 class QuizViewController: UIViewController {
+
+    private var quizViewModel: QuizViewModel = QuizViewModel()
+
+    private var cancellables = Set<AnyCancellable>()
 
     private var gradientView: GradientView!
 
@@ -29,6 +34,7 @@ class QuizViewController: UIViewController {
         createViews()
         styleViews()
         defineLayoutForViews()
+        bindViewModel()
     }
 
     func styleTabBarItem() {
@@ -38,6 +44,15 @@ class QuizViewController: UIViewController {
             title: "Quiz",
             image: UIImage(systemName: "rectangle.3.offgrid", withConfiguration: config),
             selectedImage: UIImage(systemName: "rectangle.3.offgrid.fill", withConfiguration: config))
+    }
+
+    func bindViewModel() {
+        quizViewModel
+            .$quizes
+            .sink { [weak self] quizes in
+                self?.quizView.reloadQuizes(quizes)
+            }
+            .store(in: &cancellables)
     }
 
 }
@@ -68,6 +83,8 @@ extension QuizViewController: ConstructViewsProtocol {
         titleView.textColor = .white
         titleView.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 24), size: 24)
         tabBarController?.navigationItem.titleView = titleView
+
+        categorySlider.delegate = self
     }
 
     func defineLayoutForViews() {
@@ -93,6 +110,14 @@ extension QuizViewController: ConstructViewsProtocol {
             $0.top.equalTo(categorySlider.snp.bottom)
             $0.leading.trailing.bottom.equalToSuperview()
         }
+    }
+
+}
+
+extension QuizViewController: CategorySliderDelegate {
+
+    func selectedCategory(_ categorySlider: CategorySlider, category: Category) {
+        quizViewModel.change(category: category)
     }
 
 }

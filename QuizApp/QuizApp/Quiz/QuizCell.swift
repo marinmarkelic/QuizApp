@@ -26,11 +26,11 @@ class QuizCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func set(info: Info) {
-        title.text = info.title
-        desc.text = info.description
+    func set(quiz: Quiz) {
+        title.text = quiz.name
+        desc.text = quiz.description
 
-        difficultyView.set(difficulty: info.difficulty, color: color)
+        difficultyView.set(difficulty: quiz.difficulty, color: quiz.category.color)
     }
 
     func set(color: UIColor) {

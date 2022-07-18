@@ -22,9 +22,10 @@ class CategoryCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func set(title: String, color: UIColor) {
-        label.text = title
-        self.color = color
+    func set(category: Category) {
+        label.text = category.name
+        self.color = category.color
+        self.category = category
     }
 
     func changeColor() {
