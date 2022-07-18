@@ -10,11 +10,11 @@ class UserNetworkClient: UserNetworkClientProtocol {
 
     private let networkClient: NetworkClient
 
-    private let accountUrlExtension = "/v1/account"
+    private let accountPath = "/v1/account"
 
     var userInfo: UserInfoNetworkDataModel {
         get async throws {
-            try await networkClient.get(path: accountUrlExtension)
+            try await networkClient.get(path: accountPath)
         }
     }
 
@@ -24,7 +24,7 @@ class UserNetworkClient: UserNetworkClientProtocol {
 
     func save(name: String) async throws -> UserInfoNetworkDataModel {
         try await networkClient.patch(
-            path: accountUrlExtension,
+            path: accountPath,
             body: UserInfoNetworkRequestModel(name: name))
     }
 
@@ -32,8 +32,8 @@ class UserNetworkClient: UserNetworkClientProtocol {
 
 struct UserInfoNetworkDataModel: Decodable {
 
-    let email: String
     let id: Int
+    let email: String
     let name: String
 
 }

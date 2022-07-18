@@ -13,32 +13,32 @@ class UserViewModel {
         self.appRouter = appRouter
         self.userUseCase = userUseCase
         self.logoutUseCase = logoutUseCase
-
-        getUserInfo()
     }
 
-    func save(username: String, name: String) async {
-        do {
-            try await userUseCase.save(userInfo: UserInfoModel(username: username, name: name))
-        } catch {
-            logOut()
+    @MainActor
+    func save(username: String, name: String) {
+        Task {
+            do {
+                userInfo = try await UserInfo(userUseCase.save(userInfo: UserInfoModel(username: username, name: name)))
+            } catch _ {}
         }
     }
 
+    @MainActor
     func getUserInfo() {
         Task {
             do {
                 userInfo = try await UserInfo(userUseCase.userInfo)
-            } catch {
-                logOut()
-            }
+            } catch _ {}
         }
     }
 
     func logOut() {
         DispatchQueue.main.async { [weak self] in
-            self?.logoutUseCase.logOut()
-            self?.appRouter.showLogin()
+            guard let self = self else { return }
+
+            self.logoutUseCase.logOut()
+            self.appRouter.showLogin()
         }
     }
 
