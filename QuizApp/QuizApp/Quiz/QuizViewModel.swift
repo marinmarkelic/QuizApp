@@ -29,13 +29,16 @@ class QuizViewModel {
         }
     }
 
+    @MainActor
     func loadCategories() {
         categories = [
-            Category(name: "Sport", color: sportColor),
-            Category(name: "Movies", color: moviesColor),
-            Category(name: "Music", color: musicColor),
-            Category(name: "Geography", color: geographyColor)
+            Category(name: "Sport", color: sportColor, isSelected: true),
+            Category(name: "Movies", color: moviesColor, isSelected: false),
+            Category(name: "Music", color: musicColor, isSelected: false),
+            Category(name: "Geography", color: geographyColor, isSelected: false)
         ]
+
+        change(category: categories[0])
     }
 
 }
@@ -58,11 +61,15 @@ extension Quiz {
         id = quiz.id
         name = quiz.name
         description = quiz.description
-        category = Category(name: quiz.category.name, color: quiz.category.color)
+        category = Category(
+            name: quiz.category.name,
+            color: quiz.category.color,
+            isSelected: quiz.category.name == "Sport" ? true : false)
         difficulty = quiz.difficulty
         imageUrl = quiz.imageUrl
         numberOfQuestions = quiz.numberOfQuestions
     }
+
 }
 
 extension QuizModel {

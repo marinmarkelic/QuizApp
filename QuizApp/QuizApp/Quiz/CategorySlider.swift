@@ -115,6 +115,11 @@ extension CategorySlider: UICollectionViewDelegate {
             cell.resetColor()
         }
 
+        for index in (0..<categories.count) {
+            categories[index].isSelected = false
+        }
+        categories[indexPath.row].isSelected = false
+
         guard let cell = collectionView.cellForItem(at: indexPath) as? CategoryCell else { return }
 
         cell.changeColor()
