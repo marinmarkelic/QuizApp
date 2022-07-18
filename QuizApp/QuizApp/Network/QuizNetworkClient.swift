@@ -8,14 +8,14 @@ class QuizNetworkClient: QuizNetworkClientProtocol {
 
     private let networkClient: NetworkClient
 
-    private let quizPath = "/v1/quiz"
+    private let quizPath = "/v1/quiz/list?category="
 
     init(networkClient: NetworkClient) {
         self.networkClient = networkClient
     }
 
     func fetchQuizesFor(category: String) async throws -> [QuizNetworkDataModel] {
-        try await networkClient.get(path: "\(quizPath)/list?category=\(category)")
+        try await networkClient.get(path: "\(quizPath)\(category)")
     }
 
 }

@@ -32,9 +32,9 @@ class QuizViewModel {
     func loadCategories() {
         categories = [
             Category(name: "Sport", color: sportColor),
-            Category(name: "Movies", color: politicsColor),
-            Category(name: "Music", color: youtubeColor),
-            Category(name: "Geography", color: animalsColor)
+            Category(name: "Movies", color: moviesColor),
+            Category(name: "Music", color: musicColor),
+            Category(name: "Geography", color: geographyColor)
         ]
     }
 

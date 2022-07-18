@@ -66,11 +66,11 @@ extension CategoryModel {
 
         switch name.lowercased() {
         case "geography":
-            color = animalsColor
+            color = geographyColor
         case "movies":
-            color = youtubeColor
+            color = musicColor
         case "music":
-            color = politicsColor
+            color = moviesColor
         case "sport":
             color = sportColor
         default:
