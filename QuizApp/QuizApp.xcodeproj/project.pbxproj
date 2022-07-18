@@ -24,6 +24,7 @@
 		9C1953B3287871CC0051CEC6 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1953B2287871CC0051CEC6 /* AppRouter.swift */; };
 		9C1953B5287871E20051CEC6 /* AppRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1953B4287871E20051CEC6 /* AppRouterProtocol.swift */; };
 		9C1C76D128802471006217A9 /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1C76D028802471006217A9 /* QuizViewController.swift */; };
+		9C1C76D328803AA9006217A9 /* UserNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1C76D228803AA9006217A9 /* UserNetworkClient.swift */; };
 		9C20BAC8287EE642009378FB /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C20BAC7287EE642009378FB /* TabBarController.swift */; };
 		9C20BAD0287EF1DB009378FB /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C20BACF287EF1DB009378FB /* UserViewModel.swift */; };
 		9C20BAD2287EF25D009378FB /* UserUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C20BAD1287EF25D009378FB /* UserUseCase.swift */; };
@@ -62,6 +63,7 @@
 		9C1953B2287871CC0051CEC6 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		9C1953B4287871E20051CEC6 /* AppRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouterProtocol.swift; sourceTree = "<group>"; };
 		9C1C76D028802471006217A9 /* QuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
+		9C1C76D228803AA9006217A9 /* UserNetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNetworkClient.swift; sourceTree = "<group>"; };
 		9C20BAC7287EE642009378FB /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		9C20BACF287EF1DB009378FB /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		9C20BAD1287EF25D009378FB /* UserUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUseCase.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 				9CC4D6D5287C10450061F149 /* LoginNetworkClient.swift */,
 				9CC33B30287D9F59002E9853 /* CheckNetworkClient.swift */,
 				9CC33B32287DA19F002E9853 /* NetworkClient.swift */,
+				9C1C76D228803AA9006217A9 /* UserNetworkClient.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 				9C20BAD2287EF25D009378FB /* UserUseCase.swift in Sources */,
 				9C19539C2876F1ED0051CEC6 /* GradientView.swift in Sources */,
 				9C19536B287584750051CEC6 /* AppDelegate.swift in Sources */,
+				9C1C76D328803AA9006217A9 /* UserNetworkClient.swift in Sources */,
 				9C20BAC8287EE642009378FB /* TabBarController.swift in Sources */,
 				9C1953942876D3860051CEC6 /* EmailView.swift in Sources */,
 				9C1953B3287871CC0051CEC6 /* AppRouter.swift in Sources */,

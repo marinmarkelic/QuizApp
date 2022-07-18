@@ -1,8 +1,8 @@
 protocol UserUseCaseProtocol {
 
-    var userInfo: UserInfoModel { get }
+    var userInfo: UserInfoModel { get async throws }
 
-    func save(userInfo: UserInfoModel)
+    func save(userInfo: UserInfoModel) async throws -> UserInfoModel
 
 }
 
@@ -11,15 +11,17 @@ class UserUseCase: UserUseCaseProtocol {
     private let userRepository: UserRepository
 
     var userInfo: UserInfoModel {
-        UserInfoModel(userRepository.userInfo)
+        get async throws {
+            try await UserInfoModel(userRepository.userInfo)
+        }
     }
 
     init(userRepository: UserRepository) {
         self.userRepository = userRepository
     }
 
-    func save(userInfo: UserInfoModel) {
-        userRepository.save(userInfo: UserInfoRepoModel(userInfo))
+    func save(userInfo: UserInfoModel) async throws -> UserInfoModel {
+        try await UserInfoModel(userRepository.save(userInfo: UserInfoRepoModel(userInfo)))
     }
 
 }
@@ -27,6 +29,7 @@ class UserUseCase: UserUseCaseProtocol {
 struct UserInfoModel {
 
     let username: String
+    let name: String
 
 }
 
@@ -34,6 +37,7 @@ extension UserInfoModel {
 
     init(_ userInfo: UserInfoRepoModel) {
         username = userInfo.username
+        name = userInfo.name
     }
 
 }
@@ -42,6 +46,7 @@ extension UserInfoRepoModel {
 
     init(_ userInfo: UserInfoModel) {
         username = userInfo.username
+        name = userInfo.name
     }
 
 }

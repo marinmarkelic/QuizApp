@@ -1,6 +1,6 @@
 protocol UserRepositoryProtocol {
 
-    var userInfo: UserInfoRepoModel { get }
+    var userInfo: UserInfoRepoModel { get async throws }
 
     func logIn(username: String, password: String) async throws -> LoginResponseRepoModel
 
@@ -14,7 +14,9 @@ class UserRepository: UserRepositoryProtocol {
     private let userDatabaseDataSource: UserDatabaseDataSourceProtocol
 
     var userInfo: UserInfoRepoModel {
-        UserInfoRepoModel(userDatabaseDataSource.userInfo)
+        get async throws {
+            UserInfoRepoModel(try await userNetworkDataSource.userInfo)
+        }
     }
 
     init(userNetworkDataSource: UserNetworkDataSourceProtocol, userDatabaseDataSource: UserDatabaseDataSourceProtocol) {
@@ -39,8 +41,8 @@ class UserRepository: UserRepositoryProtocol {
         userDatabaseDataSource.save(accessToken: accessToken)
     }
 
-    func save(userInfo: UserInfoRepoModel) {
-        userDatabaseDataSource.save(userInfo: UserInfoDataSourceModel(userInfo))
+    func save(userInfo: UserInfoRepoModel) async throws -> UserInfoRepoModel {
+        try await UserInfoRepoModel(userNetworkDataSource.save(name: userInfo.name))
     }
 
 }
@@ -62,21 +64,15 @@ extension LoginResponseRepoModel {
 struct UserInfoRepoModel {
 
     let username: String
+    let name: String
 
 }
 
 extension UserInfoRepoModel {
 
-    init(_ userInfo: UserInfoDataSourceModel) {
-        username = userInfo.username
-    }
-
-}
-
-extension UserInfoDataSourceModel {
-
-    init(_ userInfo: UserInfoRepoModel) {
-        username = userInfo.username
+    init(_ userInfo: UserInfoDataModel) {
+        username = userInfo.email
+        name = userInfo.name
     }
 
 }

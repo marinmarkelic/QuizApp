@@ -1,4 +1,5 @@
 import Combine
+import Foundation
 
 class UserViewModel {
 
@@ -6,27 +7,39 @@ class UserViewModel {
     private let userUseCase: UserUseCaseProtocol
     private let logoutUseCase: LogOutUseCaseProtocol
 
-    @Published var userInfo: UserInfo = UserInfo(username: "")
+    @Published var userInfo: UserInfo = UserInfo()
 
     init(appRouter: AppRouterProtocol, userUseCase: UserUseCaseProtocol, logoutUseCase: LogOutUseCaseProtocol) {
         self.appRouter = appRouter
         self.userUseCase = userUseCase
         self.logoutUseCase = logoutUseCase
-
-        getUserInfo()
     }
 
-    func save(username: String) {
-        userUseCase.save(userInfo: UserInfoModel(username: username))
+    @MainActor
+    func save(username: String, name: String) {
+        Task {
+            do {
+                userInfo = try await UserInfo(userUseCase.save(userInfo: UserInfoModel(username: username, name: name)))
+            } catch _ {}
+        }
+    }
+
+    @MainActor
+    func getUserInfo() {
+        Task {
+            do {
+                userInfo = try await UserInfo(userUseCase.userInfo)
+            } catch _ {}
+        }
     }
 
     func logOut() {
-        logoutUseCase.logOut()
-        appRouter.showLogin()
-    }
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
 
-    func getUserInfo() {
-        userInfo = UserInfo(userUseCase.userInfo)
+            self.logoutUseCase.logOut()
+            self.appRouter.showLogin()
+        }
     }
 
 }
@@ -34,13 +47,20 @@ class UserViewModel {
 struct UserInfo {
 
     let username: String
+    let name: String
 
 }
 
 extension UserInfo {
 
+    init() {
+        username = ""
+        name = ""
+    }
+
     init(_ userInfo: UserInfoModel) {
         username = userInfo.username
+        name = userInfo.name
     }
 
 }
@@ -49,6 +69,7 @@ extension UserInfoModel {
 
     init(_ userInfo: UserInfo) {
         username = userInfo.username
+        name = userInfo.name
     }
 
 }

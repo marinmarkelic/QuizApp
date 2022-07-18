@@ -10,8 +10,12 @@ class UserViewController: UIViewController {
 
     private var mainView: UIView!
 
-    private var label: UILabel!
-    private var textField: UITextField!
+    private var usernameLabel: UILabel!
+    private var usernameText: UILabel!
+
+    private var nameLabel: UILabel!
+    private var nameTextField: UITextField!
+
     private var button: CustomButton!
 
     private var cancellables = Set<AnyCancellable>()
@@ -45,6 +49,12 @@ class UserViewController: UIViewController {
         bindViewModel()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        userViewModel.getUserInfo()
+    }
+
     @objc
     private func pressedLogoutButton() {
         userViewModel.logOut()
@@ -57,12 +67,12 @@ class UserViewController: UIViewController {
 
     @objc
     private func backgroundTapped(_ sender: UITapGestureRecognizer) {
-        textField.endEditing(true)
+        nameTextField.endEditing(true)
     }
 
     @objc
     private func textFieldEndedEditing() {
-        userViewModel.save(username: textField.text ?? "")
+        userViewModel.save(username: usernameText.text ?? "", name: nameTextField.text ?? "")
     }
 
     private func styleTabBarItem() {
@@ -78,7 +88,12 @@ class UserViewController: UIViewController {
         userViewModel
             .$userInfo
             .sink { [weak self] userInfo in
-                self?.textField.text = userInfo.username
+                guard let self = self else { return }
+
+                DispatchQueue.main.async {
+                    self.usernameText.text = userInfo.username
+                    self.nameTextField.text = userInfo.name
+                }
             }
             .store(in: &cancellables)
     }
@@ -94,26 +109,39 @@ extension UserViewController: ConstructViewsProtocol {
         mainView = UIView()
         gradientView.addSubview(mainView)
 
-        label = UILabel()
-        mainView.addSubview(label)
+        usernameLabel = UILabel()
+        mainView.addSubview(usernameLabel)
 
-        textField = UITextField()
-        mainView.addSubview(textField)
+        usernameText = UILabel()
+        mainView.addSubview(usernameText)
+
+        nameLabel = UILabel()
+        mainView.addSubview(nameLabel)
+
+        nameTextField = UITextField()
+        mainView.addSubview(nameTextField)
 
         button = CustomButton()
         mainView.addSubview(button)
     }
 
     func styleViews() {
-        label.text = "USERNAME"
-        label.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 12), size: 12)
-        label.textColor = .white
+        usernameLabel.text = "USERNAME"
+        usernameLabel.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 12), size: 12)
+        usernameLabel.textColor = .white
 
-        textField.attributedPlaceholder = NSAttributedString("Username")
-        textField.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 20), size: 20)
-        textField.textColor = .white
-        textField.autocorrectionType = .no
-        textField.addTarget(self, action: #selector(textFieldEndedEditing), for: .editingDidEnd)
+        usernameText.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 20), size: 20)
+        usernameText.textColor = .white
+
+        nameLabel.text = "NAME"
+        nameLabel.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 12), size: 12)
+        nameLabel.textColor = .white
+
+        nameTextField.attributedPlaceholder = NSAttributedString("Name")
+        nameTextField.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 20), size: 20)
+        nameTextField.textColor = .white
+        nameTextField.autocorrectionType = .no
+        nameTextField.addTarget(self, action: #selector(textFieldEndedEditing), for: .editingDidEnd)
 
         button.setTitle("Log out", for: .normal)
         button.setTitleColor(.red, for: .normal)
@@ -130,15 +158,27 @@ extension UserViewController: ConstructViewsProtocol {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
 
-        label.snp.makeConstraints {
+        usernameLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(50)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().inset(20)
         }
 
-        textField.snp.makeConstraints {
-            $0.top.equalTo(label.snp.bottom).offset(4)
-            $0.leading.equalTo(label)
+        usernameText.snp.makeConstraints {
+            $0.top.equalTo(usernameLabel.snp.bottom).offset(4)
+            $0.leading.equalTo(usernameLabel)
+            $0.trailing.equalToSuperview().inset(20)
+        }
+
+        nameLabel.snp.makeConstraints {
+            $0.top.equalTo(usernameText.snp.bottom).offset(40)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().inset(20)
+        }
+
+        nameTextField.snp.makeConstraints {
+            $0.top.equalTo(nameLabel.snp.bottom).offset(4)
+            $0.leading.equalTo(usernameLabel)
             $0.trailing.equalToSuperview().inset(20)
         }
 
