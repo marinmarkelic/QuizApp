@@ -52,7 +52,6 @@
 		9CFCC2F82885547600B01343 /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFCC2F72885547600B01343 /* Quiz.swift */; };
 		9CFCC2FE2885871000B01343 /* QuizUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFCC2FD2885871000B01343 /* QuizUseCase.swift */; };
 		9CFCC30028858A1E00B01343 /* QuizNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFCC2FF28858A1E00B01343 /* QuizNetworkClient.swift */; };
-		9CFCC3022885A28100B01343 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFCC3012885A28100B01343 /* Colors.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -101,7 +100,6 @@
 		9CFCC2F72885547600B01343 /* Quiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz.swift; sourceTree = "<group>"; };
 		9CFCC2FD2885871000B01343 /* QuizUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizUseCase.swift; sourceTree = "<group>"; };
 		9CFCC2FF28858A1E00B01343 /* QuizNetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizNetworkClient.swift; sourceTree = "<group>"; };
-		9CFCC3012885A28100B01343 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -276,7 +274,6 @@
 			isa = PBXGroup;
 			children = (
 				9CFCC2F72885547600B01343 /* Quiz.swift */,
-				9CFCC3012885A28100B01343 /* Colors.swift */,
 			);
 			path = "User defined types";
 			sourceTree = "<group>";
@@ -406,7 +403,6 @@
 				9C42E0C62881AAF300B2B9FF /* QuizCell.swift in Sources */,
 				9CC4D6D6287C10450061F149 /* LoginNetworkClient.swift in Sources */,
 				9CC4D6E2287C6AB30061F149 /* UserNetworkDataSource.swift in Sources */,
-				9CFCC3022885A28100B01343 /* Colors.swift in Sources */,
 				9CC33B22287D6848002E9853 /* UserDatabaseDataSource.swift in Sources */,
 				9C1953A9287716FE0051CEC6 /* ConstructViewsProtocol.swift in Sources */,
 				9CC4D6DD287C1C6B0061F149 /* RequestError.swift in Sources */,
