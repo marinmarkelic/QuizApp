@@ -6,29 +6,18 @@ class QuizViewModel {
     @Published var categories: [Category] = []
 
     func change(category: Category) {
-        quizes = [
-            Quiz(id: 1,
-                 name: "Football",
-                 description: "Quiz description that can usually span over multiple lines",
-                 category: category,
-                 difficulty: .easy,
-                 imageUrl: "",
-                 numberOfQuestions: 0),
-            Quiz(id: 1,
-                 name: "Olympics",
-                 description: "Quiz description that can usually span over multiple lines",
-                 category: category,
-                 difficulty: .medium,
-                 imageUrl: "",
-                 numberOfQuestions: 0),
-            Quiz(id: 1,
-                 name: "NBA",
-                 description: "Quiz description that can usually span over multiple lines",
-                 category: category,
-                 difficulty: .hard,
-                 imageUrl: "",
-                 numberOfQuestions: 0)
-        ]
+        switch category.name {
+        case "Sport":
+            quizes = sportQuizes
+        case "Politics":
+            quizes = politicsQuizes
+        case "Youtube":
+            quizes = youtubeQuizes
+        case "Animals":
+            quizes = animalsQuizes
+        default:
+            quizes = sportQuizes
+        }
     }
 
     func loadCategories() {

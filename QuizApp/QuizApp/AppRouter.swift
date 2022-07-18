@@ -17,7 +17,7 @@ class AppRouter: AppRouterProtocol {
     }
 
     func showHome() {
-        let quizViewController = QuizViewController()
+        let quizViewController = QuizViewController(quizViewModel: QuizViewModel())
         let userViewController = UserViewController(
             appRouter: self,
             userUseCase: appDependencies.userUseCase,

@@ -3,7 +3,7 @@ import Combine
 
 class QuizViewController: UIViewController {
 
-    private var quizViewModel: QuizViewModel = QuizViewModel()
+    private var quizViewModel: QuizViewModel!
 
     private var cancellables = Set<AnyCancellable>()
 
@@ -18,8 +18,10 @@ class QuizViewController: UIViewController {
     private var categorySlider: CategorySlider!
     private var quizView: QuizView!
 
-    init() {
+    init(quizViewModel: QuizViewModel) {
         super.init(nibName: nil, bundle: nil)
+
+        self.quizViewModel = quizViewModel
 
         styleTabBarItem()
     }

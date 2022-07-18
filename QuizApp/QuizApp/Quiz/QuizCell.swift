@@ -86,7 +86,7 @@ extension QuizCell: ConstructViewsProtocol {
 
         title.snp.makeConstraints {
             $0.leading.equalTo(image.snp.trailing).offset(20)
-            $0.top.equalToSuperview().offset(20)
+            $0.top.equalToSuperview().offset(25)
             $0.trailing.equalToSuperview().inset(20)
         }
 
