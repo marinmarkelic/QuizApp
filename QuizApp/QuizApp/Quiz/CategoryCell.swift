@@ -26,6 +26,10 @@ class CategoryCell: UICollectionViewCell {
         label.text = category.name
         self.color = category.color
         self.category = category
+
+        if category.isSelected {
+            changeColor()
+        }
     }
 
     func changeColor() {

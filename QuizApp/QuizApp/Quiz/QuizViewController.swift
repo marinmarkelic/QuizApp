@@ -37,6 +37,12 @@ class QuizViewController: UIViewController {
         bindViewModel()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        quizViewModel.loadCategories()
+    }
+
     func styleTabBarItem() {
         let config = UIImage.SymbolConfiguration(scale: .medium)
 
@@ -51,6 +57,13 @@ class QuizViewController: UIViewController {
             .$quizes
             .sink { [weak self] quizes in
                 self?.quizView.reloadQuizes(quizes)
+            }
+            .store(in: &cancellables)
+
+        quizViewModel
+            .$categories
+            .sink { [weak self] categories in
+                self?.categorySlider.reloadWith(categories: categories)
             }
             .store(in: &cancellables)
     }

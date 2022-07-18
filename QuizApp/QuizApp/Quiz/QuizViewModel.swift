@@ -3,6 +3,7 @@ import Combine
 class QuizViewModel {
 
     @Published var quizes: [Quiz] = []
+    @Published var categories: [Category] = []
 
     func change(category: Category) {
         quizes = [
@@ -28,6 +29,22 @@ class QuizViewModel {
                  imageUrl: "",
                  numberOfQuestions: 0)
         ]
+    }
+
+    func loadCategories() {
+        categories = [
+            Category(name: "Sport", color: sportColor, isSelected: true),
+            Category(name: "Politics", color: politicsColor, isSelected: false),
+            Category(name: "Youtube", color: youtubeColor, isSelected: false),
+            Category(name: "Animals", color: animalsColor, isSelected: false)
+        ]
+
+        for category in categories
+        where category.isSelected {
+            change(category: category)
+            break
+        }
+
     }
 
 }

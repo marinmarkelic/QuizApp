@@ -2,6 +2,8 @@ import UIKit
 
 class CategorySlider: UIView {
 
+    private var categories: [Category] = []
+
     private var collectionView: UICollectionView!
     private var collectionViewLayout: UICollectionViewFlowLayout!
 
@@ -13,16 +15,16 @@ class CategorySlider: UIView {
         createViews()
         styleViews()
         defineLayoutForViews()
-
-        selectCell(at: 0)
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func selectCell(at section: Int) {
-        collectionView.selectItem(at: IndexPath(row: 0, section: section), animated: true, scrollPosition: [])
+    func reloadWith(categories: [Category]) {
+        self.categories = categories
+
+        collectionView.reloadData()
     }
 
 }
@@ -45,7 +47,6 @@ extension CategorySlider: ConstructViewsProtocol {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = .none
-
     }
 
     func defineLayoutForViews() {

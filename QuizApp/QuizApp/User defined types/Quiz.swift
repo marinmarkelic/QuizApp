@@ -12,5 +12,6 @@ public struct Category {
 
     let name: String
     let color: UIColor
+    let isSelected: Bool
 
 }
