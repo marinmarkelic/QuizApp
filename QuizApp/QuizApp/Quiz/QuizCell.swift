@@ -78,7 +78,7 @@ extension QuizCell: ConstructViewsProtocol {
         }
 
         difficultyView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(5)
+            $0.top.equalToSuperview().offset(10)
             $0.trailing.equalToSuperview().inset(20)
             $0.width.equalTo(60)
             $0.height.equalTo(20)

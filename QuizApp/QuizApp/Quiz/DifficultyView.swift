@@ -42,7 +42,8 @@ class DifficultyView: UIView {
 extension DifficultyView: ConstructViewsProtocol {
 
     func createViews() {
-        let square = UIImage(systemName: "square.fill")
+        let configuration = UIImage.SymbolConfiguration(scale: .small)
+        let square = UIImage(systemName: "square.fill", withConfiguration: configuration)
 
         square1 = UIImageView(image: square)
         addSubview(square1)
@@ -55,7 +56,9 @@ extension DifficultyView: ConstructViewsProtocol {
     }
 
     func styleViews() {
-
+        square1.transform = CGAffineTransform(rotationAngle: 0.79)
+        square2.transform = CGAffineTransform(rotationAngle: 0.79)
+        square3.transform = CGAffineTransform(rotationAngle: 0.79)
     }
 
     func defineLayoutForViews() {
