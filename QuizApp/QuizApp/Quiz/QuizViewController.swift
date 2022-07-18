@@ -37,10 +37,6 @@ class QuizViewController: UIViewController {
         styleViews()
         defineLayoutForViews()
         bindViewModel()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
 
         quizViewModel.loadCategories()
     }
