@@ -13,10 +13,9 @@ class UserViewModel {
         self.appRouter = appRouter
         self.userUseCase = userUseCase
         self.logoutUseCase = logoutUseCase
-
-        getUserInfo()
     }
 
+    @MainActor
     func save(username: String, name: String) {
         Task {
             do {
@@ -25,6 +24,7 @@ class UserViewModel {
         }
     }
 
+    @MainActor
     func getUserInfo() {
         Task {
             do {

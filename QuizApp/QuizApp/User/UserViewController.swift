@@ -49,6 +49,10 @@ class UserViewController: UIViewController {
         bindViewModel()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        userViewModel.getUserInfo()
+    }
+
     @objc
     private func pressedLogoutButton() {
         userViewModel.logOut()
