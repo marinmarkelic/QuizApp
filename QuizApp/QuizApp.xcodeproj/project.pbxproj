@@ -132,7 +132,7 @@
 		9C195369287584750051CEC6 /* QuizApp */ = {
 			isa = PBXGroup;
 			children = (
-				9CFCC2F62885546700B01343 /* Enums */,
+				9CFCC2F62885546700B01343 /* User defined types */,
 				9C42E0BA2881993C00B2B9FF /* Mock */,
 				9CC33B20287D6832002E9853 /* Storage */,
 				9CC4D6E5287C70170061F149 /* UseCase */,
@@ -275,12 +275,12 @@
 			path = UseCase;
 			sourceTree = "<group>";
 		};
-		9CFCC2F62885546700B01343 /* Enums */ = {
+		9CFCC2F62885546700B01343 /* User defined types */ = {
 			isa = PBXGroup;
 			children = (
 				9CFCC2F72885547600B01343 /* Quiz.swift */,
 			);
-			path = Enums;
+			path = "User defined types";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

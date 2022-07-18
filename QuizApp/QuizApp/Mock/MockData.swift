@@ -11,10 +11,3 @@ public let categories: [Category] = [
     Category(name: "MockCategory3", color: sportColor),
     Category(name: "MockCategory4", color: politicsColor)
 ]
-
-public struct Category {
-
-    let name: String
-    let color: UIColor
-
-}
