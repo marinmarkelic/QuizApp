@@ -16,11 +16,16 @@ class AppDependencies {
         LogOutUseCase(userRepository: userRepository)
     }()
 
+    lazy var quizUseCase: QuizUseCaseProtocol = {
+        QuizUseCase(userRepository: userRepository)
+    }()
+
     lazy var userNetworkDataSource: UserNetworkDataSourceProtocol = {
         UserNetworkDataSource(
             loginClient: loginNetworkClient,
             checkNetworkClient: checkNetworkClient,
-            userNetworkClient: userNetworkClient)
+            userNetworkClient: userNetworkClient,
+            quizNetworkClient: quizNetworkClient)
     }()
 
     lazy var userDatabaseDataSource: UserDatabaseDataSource = {
@@ -41,6 +46,10 @@ class AppDependencies {
 
     lazy var checkNetworkClient: CheckNetworkClientProtocol = {
         CheckNetworkClient(networkClient: networkClient)
+    }()
+
+    lazy var quizNetworkClient: QuizNetworkClientProtocol = {
+        QuizNetworkClient(networkClient: networkClient)
     }()
 
     lazy var networkClient: NetworkClient = {

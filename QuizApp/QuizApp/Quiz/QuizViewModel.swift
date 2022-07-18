@@ -2,38 +2,40 @@ import Combine
 
 class QuizViewModel {
 
+    private let quizUseCase: QuizUseCaseProtocol
+
     @Published var quizes: [Quiz] = []
     @Published var categories: [Category] = []
 
+    init(quizUseCase: QuizUseCaseProtocol) {
+        self.quizUseCase = quizUseCase
+    }
+
+    @MainActor
     func change(category: Category) {
-        switch category.name {
-        case "Sport":
-            quizes = sportQuizes
-        case "Politics":
-            quizes = politicsQuizes
-        case "Youtube":
-            quizes = youtubeQuizes
-        case "Animals":
-            quizes = animalsQuizes
-        default:
-            quizes = sportQuizes
+        Task {
+            do {
+                let quizes = try await quizUseCase.fetchQuizesFor(category: category)
+                var responseQuizes: [Quiz] = []
+
+                for quiz in quizes {
+                    responseQuizes.append(Quiz(quiz))
+                }
+
+                self.quizes = responseQuizes
+            } catch _ {
+
+            }
         }
     }
 
     func loadCategories() {
         categories = [
-            Category(name: "Sport", color: sportColor, isSelected: true),
-            Category(name: "Politics", color: politicsColor, isSelected: false),
-            Category(name: "Youtube", color: youtubeColor, isSelected: false),
-            Category(name: "Animals", color: animalsColor, isSelected: false)
+            Category(name: "Sport", color: sportColor),
+            Category(name: "Movies", color: politicsColor),
+            Category(name: "Music", color: youtubeColor),
+            Category(name: "Geography", color: animalsColor)
         ]
-
-        for category in categories
-        where category.isSelected {
-            change(category: category)
-            break
-        }
-
     }
 
 }
@@ -47,5 +49,32 @@ struct Quiz {
     let difficulty: Difficulty
     let imageUrl: String
     let numberOfQuestions: Int
+
+}
+
+extension Quiz {
+
+    init(_ quiz: QuizModel) {
+        id = quiz.id
+        name = quiz.name
+        description = quiz.description
+        category = Category(name: quiz.category.name, color: quiz.category.color)
+        difficulty = quiz.difficulty
+        imageUrl = quiz.imageUrl
+        numberOfQuestions = quiz.numberOfQuestions
+    }
+}
+
+extension QuizModel {
+
+    init(_ quiz: Quiz) {
+        id = quiz.id
+        name = quiz.name
+        description = quiz.description
+        category = CategoryModel(name: quiz.category.name, color: quiz.category.color)
+        difficulty = quiz.difficulty
+        imageUrl = quiz.imageUrl
+        numberOfQuestions = quiz.numberOfQuestions
+    }
 
 }

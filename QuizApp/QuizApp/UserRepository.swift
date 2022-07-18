@@ -6,6 +6,8 @@ protocol UserRepositoryProtocol {
 
     func logOut()
 
+    func fetchQuizesFor(category: String) async throws -> [QuizRepoModel]
+
 }
 
 class UserRepository: UserRepositoryProtocol {
@@ -45,6 +47,17 @@ class UserRepository: UserRepositoryProtocol {
         try await UserInfoRepoModel(userNetworkDataSource.save(name: userInfo.name))
     }
 
+    func fetchQuizesFor(category: String) async throws -> [QuizRepoModel] {
+        let quizes = try await userNetworkDataSource.fetchQuizesFor(category: category)
+        var responseQuizes: [QuizRepoModel] = []
+
+        for quiz in quizes {
+            responseQuizes.append(QuizRepoModel(quiz))
+        }
+
+        return responseQuizes
+    }
+
 }
 
 struct LoginResponseRepoModel {
@@ -73,6 +86,32 @@ extension UserInfoRepoModel {
     init(_ userInfo: UserInfoDataModel) {
         username = userInfo.email
         name = userInfo.name
+    }
+
+}
+
+struct QuizRepoModel {
+
+    let id: Int
+    let name: String
+    let description: String
+    let category: String
+    let difficulty: String
+    let imageUrl: String
+    let numberOfQuestions: Int
+
+}
+
+extension QuizRepoModel {
+
+    init(_ quiz: QuizResponseDataModel) {
+        id = quiz.id
+        name = quiz.name
+        description = quiz.description
+        category = quiz.category
+        difficulty = quiz.difficulty
+        imageUrl = quiz.imageUrl
+        numberOfQuestions = quiz.numberOfQuestions
     }
 
 }

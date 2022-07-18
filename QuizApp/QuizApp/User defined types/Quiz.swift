@@ -1,17 +1,16 @@
 import UIKit
 
-enum Difficulty {
+enum Difficulty: String {
 
-case easy
-case medium
-case hard
+    case easy = "EASY"
+    case normal = "NORMAL"
+    case hard = "HARD"
 
 }
 
-public struct Category {
+struct Category {
 
     let name: String
     let color: UIColor
-    let isSelected: Bool
 
 }

@@ -8,6 +8,8 @@ protocol UserNetworkDataSourceProtocol {
 
     func save(name: String) async throws -> UserInfoDataModel
 
+    func fetchQuizesFor(category: String) async throws -> [QuizResponseDataModel]
+
 }
 
 class UserNetworkDataSource: UserNetworkDataSourceProtocol {
@@ -15,6 +17,7 @@ class UserNetworkDataSource: UserNetworkDataSourceProtocol {
     private let loginClient: LoginNetworkClientProtocol
     private let checkNetworkClient: CheckNetworkClientProtocol
     private let userNetworkClient: UserNetworkClientProtocol
+    private let quizNetworkClient: QuizNetworkClientProtocol
 
     var userInfo: UserInfoDataModel {
         get async throws {
@@ -25,11 +28,13 @@ class UserNetworkDataSource: UserNetworkDataSourceProtocol {
     init(
         loginClient: LoginNetworkClientProtocol,
         checkNetworkClient: CheckNetworkClientProtocol,
-        userNetworkClient: UserNetworkClientProtocol
+        userNetworkClient: UserNetworkClientProtocol,
+        quizNetworkClient: QuizNetworkClientProtocol
     ) {
         self.loginClient = loginClient
         self.checkNetworkClient = checkNetworkClient
         self.userNetworkClient = userNetworkClient
+        self.quizNetworkClient = quizNetworkClient
     }
 
     func logIn(username: String, password: String) async throws -> LoginResponseDataModel {
@@ -42,6 +47,17 @@ class UserNetworkDataSource: UserNetworkDataSourceProtocol {
 
     func save(name: String) async throws -> UserInfoDataModel {
         try await UserInfoDataModel(userNetworkClient.save(name: name))
+    }
+
+    func fetchQuizesFor(category: String) async throws -> [QuizResponseDataModel] {
+        let quizes = try await quizNetworkClient.fetchQuizesFor(category: category)
+        var responseQuizes: [QuizResponseDataModel] = []
+
+        for quiz in quizes {
+            responseQuizes.append(QuizResponseDataModel(quiz))
+        }
+
+        return responseQuizes
     }
 
 }
@@ -74,6 +90,32 @@ extension UserInfoDataModel {
         email = userData.email
         id = userData.id
         name = userData.name
+    }
+
+}
+
+struct QuizResponseDataModel {
+
+    let id: Int
+    let name: String
+    let description: String
+    let category: String
+    let difficulty: String
+    let imageUrl: String
+    let numberOfQuestions: Int
+
+}
+
+extension QuizResponseDataModel {
+
+    init(_ quiz: QuizNetworkDataModel) {
+        id = quiz.id
+        name = quiz.name
+        description = quiz.description
+        category = quiz.category
+        difficulty = quiz.difficulty
+        imageUrl = quiz.imageUrl
+        numberOfQuestions = quiz.numberOfQuestions
     }
 
 }

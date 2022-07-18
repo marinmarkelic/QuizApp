@@ -27,9 +27,9 @@ class CategoryCell: UICollectionViewCell {
         self.color = category.color
         self.category = category
 
-        if category.isSelected {
-            changeColor()
-        }
+//        if category.isSelected {
+//            changeColor()
+//        }
     }
 
     func changeColor() {

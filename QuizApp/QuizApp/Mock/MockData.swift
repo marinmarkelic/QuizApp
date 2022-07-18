@@ -6,10 +6,10 @@ public let youtubeColor = UIColor(red: 242 / 255, green: 24 / 255, blue: 24 / 25
 public let animalsColor = UIColor(red: 117 / 255, green: 74 / 255, blue: 21 / 255, alpha: 1)
 
 private let categories = [
-    Category(name: "Sport", color: sportColor, isSelected: true),
-    Category(name: "Politics", color: politicsColor, isSelected: false),
-    Category(name: "Youtube", color: youtubeColor, isSelected: false),
-    Category(name: "Animals", color: animalsColor, isSelected: false)
+    Category(name: "Sport", color: sportColor),
+    Category(name: "Politics", color: politicsColor),
+    Category(name: "Youtube", color: youtubeColor),
+    Category(name: "Animals", color: animalsColor)
 ]
 
 let sportQuizes = [
@@ -24,7 +24,7 @@ let sportQuizes = [
          name: "Olympics",
          description: "Quiz description that can usually span over multiple lines",
          category: categories[0],
-         difficulty: .medium,
+         difficulty: .normal,
          imageUrl: "",
          numberOfQuestions: 0),
     Quiz(id: 1,
@@ -48,7 +48,7 @@ let politicsQuizes = [
          name: "Ideologies",
          description: "Quiz description that can usually span over multiple lines",
          category: categories[1],
-         difficulty: .medium,
+         difficulty: .normal,
          imageUrl: "",
          numberOfQuestions: 0),
     Quiz(id: 1,
@@ -72,7 +72,7 @@ let youtubeQuizes = [
          name: "Channels",
          description: "Quiz description that can usually span over multiple lines",
          category: categories[2],
-         difficulty: .medium,
+         difficulty: .normal,
          imageUrl: "",
          numberOfQuestions: 0),
     Quiz(id: 1,
@@ -96,7 +96,7 @@ let animalsQuizes = [
          name: "Mammals",
          description: "Quiz description that can usually span over multiple lines",
          category: categories[3],
-         difficulty: .medium,
+         difficulty: .normal,
          imageUrl: "",
          numberOfQuestions: 0),
     Quiz(id: 1,
