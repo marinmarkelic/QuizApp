@@ -1,4 +1,5 @@
 import UIKit
+
 protocol QuizUseCaseProtocol {
 
     func fetchQuizesFor(category: Category) async throws -> [QuizModel]
@@ -45,7 +46,7 @@ extension QuizModel {
         name = quiz.name
         description = quiz.description
         category = CategoryModel(name: quiz.name)
-        difficulty = Difficulty(rawValue: quiz.difficulty) ?? .easy
+        difficulty = Difficulty.easy
         imageUrl = quiz.imageUrl
         numberOfQuestions = quiz.numberOfQuestions
     }
@@ -66,13 +67,13 @@ extension CategoryModel {
 
         switch name.lowercased() {
         case "geography":
-            color = geographyColor
+            color = .animalsColor
         case "movies":
-            color = musicColor
+            color = .youtubeColor
         case "music":
-            color = moviesColor
+            color = .politicsColor
         case "sport":
-            color = sportColor
+            color = .sportColor
         default:
             color = .white
         }

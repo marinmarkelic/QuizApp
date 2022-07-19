@@ -5,7 +5,7 @@ class QuizViewModel {
 
     private let quizUseCase: QuizUseCaseProtocol
 
-    @Published var quizes: [Quiz] = []
+    @Published var quizzes: [Quiz] = []
     @Published var categories: [Category] = []
 
     init(quizUseCase: QuizUseCaseProtocol) {
@@ -16,32 +16,19 @@ class QuizViewModel {
     func change(category: Category) {
         Task {
             do {
-                let quizes = try await quizUseCase.fetchQuizesFor(category: category)
+                let quizzes = try await quizUseCase.fetchQuizesFor(category: category)
                 var responseQuizes: [Quiz] = []
 
-                for quiz in quizes {
+                for quiz in quizzes {
                     responseQuizes.append(Quiz(quiz))
                 }
 
-                self.quizes = responseQuizes
+                self.quizzes = responseQuizes
             } catch _ {
 
             }
         }
     }
-
-    @MainActor
-    func loadCategories() {
-        categories = [
-            Category(name: "Sport", color: sportColor, isSelected: true),
-            Category(name: "Movies", color: moviesColor, isSelected: false),
-            Category(name: "Music", color: musicColor, isSelected: false),
-            Category(name: "Geography", color: geographyColor, isSelected: false)
-        ]
-
-        change(category: categories[0])
-    @Published var quizzes: [Quiz] = []
-    @Published var categories: [Category] = []
 
     func changeCategory(for type: CategoryType) {
         categories = CategoryType.allCases.map {
@@ -65,18 +52,9 @@ class QuizViewModel {
     }
 
     private func changeQuiz(for type: CategoryType) {
-        switch type {
-        case .sport:
-            quizzes = sportQuizzes
-        case .politics:
-            quizzes = politicsQuizzes
-        case .youtube:
-            quizzes = youtubeQuizzes
-        case .animals:
-            quizzes = animalsQuizzes
-        }
     }
 
+    @MainActor
     func loadCategories() {
         categories = CategoryType.allCases.map {
             Category(type: $0)
@@ -105,10 +83,7 @@ extension Quiz {
         id = quiz.id
         name = quiz.name
         description = quiz.description
-        category = Category(
-            name: quiz.category.name,
-            color: quiz.category.color,
-            isSelected: quiz.category.name == "Sport" ? true : false)
+        category = Category(type: .youtube)
         difficulty = quiz.difficulty
         imageUrl = quiz.imageUrl
         numberOfQuestions = quiz.numberOfQuestions
@@ -127,13 +102,5 @@ extension QuizModel {
         imageUrl = quiz.imageUrl
         numberOfQuestions = quiz.numberOfQuestions
     }
-
-}
-
-struct Category {
-
-    let name: String
-    let color: UIColor
-    var isSelected: Bool
 
 }
