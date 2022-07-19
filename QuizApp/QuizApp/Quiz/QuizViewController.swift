@@ -1,13 +1,27 @@
 import UIKit
+import Combine
 
 class QuizViewController: UIViewController {
+
+    private var quizViewModel: QuizViewModel!
+
+    private var cancellables = Set<AnyCancellable>()
 
     private var gradientView: GradientView!
 
     private var mainView: UIView!
 
-    init() {
+    private var titleView: UILabel!
+
+    private var quizContainer: UIView!
+
+    private var categorySlider: CategorySlider!
+    private var quizView: QuizView!
+
+    init(quizViewModel: QuizViewModel) {
         super.init(nibName: nil, bundle: nil)
+
+        self.quizViewModel = quizViewModel
 
         styleTabBarItem()
     }
@@ -22,6 +36,16 @@ class QuizViewController: UIViewController {
         createViews()
         styleViews()
         defineLayoutForViews()
+        bindViewModel()
+
+        quizViewModel.loadCategories()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        categorySlider.redraw()
+        quizView.redraw()
     }
 
     func styleTabBarItem() {
@@ -31,6 +55,23 @@ class QuizViewController: UIViewController {
             title: "Quiz",
             image: UIImage(systemName: "rectangle.3.offgrid", withConfiguration: config),
             selectedImage: UIImage(systemName: "rectangle.3.offgrid.fill", withConfiguration: config))
+    }
+
+    func bindViewModel() {
+        quizViewModel
+            .$quizzes
+            .sink { [weak self] quizzes in
+                self?.quizView.reload(with: quizzes)
+            }
+            .store(in: &cancellables)
+
+        quizViewModel
+            .$categories
+            .removeDuplicates()
+            .sink { [weak self] categories in
+                self?.categorySlider.reload(with: categories)
+            }
+            .store(in: &cancellables)
     }
 
 }
@@ -43,9 +84,27 @@ extension QuizViewController: ConstructViewsProtocol {
 
         mainView = UIView()
         gradientView.addSubview(mainView)
+
+        titleView = UILabel()
+
+        quizContainer = UIView()
+        mainView.addSubview(quizContainer)
+
+        categorySlider = CategorySlider()
+        quizContainer.addSubview(categorySlider)
+
+        quizView = QuizView()
+        quizContainer.addSubview(quizView)
     }
 
-    func styleViews() {}
+    func styleViews() {
+        titleView.text = "PopQuiz"
+        titleView.textColor = .white
+        titleView.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 24), size: 24)
+        tabBarController?.navigationItem.titleView = titleView
+
+        categorySlider.delegate = self
+    }
 
     func defineLayoutForViews() {
         gradientView.snp.makeConstraints {
@@ -55,6 +114,30 @@ extension QuizViewController: ConstructViewsProtocol {
         mainView.snp.makeConstraints {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
+        quizContainer.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview()
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().inset(20)
+        }
+
+        categorySlider.snp.makeConstraints {
+            $0.leading.top.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().inset(20)
+            $0.height.equalTo(30)
+        }
+
+        quizView.snp.makeConstraints {
+            $0.top.equalTo(categorySlider.snp.bottom).offset(20)
+            $0.leading.trailing.bottom.equalToSuperview()
+        }
+    }
+
+}
+
+extension QuizViewController: CategorySliderDelegate {
+
+    func selectedCategory(_ categorySlider: CategorySlider, category: Category) {
+        quizViewModel.changeCategory(for: category.type)
     }
 
 }
