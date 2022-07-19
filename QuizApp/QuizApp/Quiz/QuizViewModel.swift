@@ -20,21 +20,18 @@ class QuizViewModel {
 
     private func changeQuiz(category: inout Category) {
         switch category.name {
-        case "Sport":
+        case .sport:
             quizes = sportQuizes
             category.color = .sportColor
-        case "Politics":
+        case .politics:
             quizes = politicsQuizes
             category.color = .politicsColor
-        case "Youtube":
+        case .youtube:
             quizes = youtubeQuizes
             category.color = .youtubeColor
-        case "Animals":
+        case .animals:
             quizes = animalsQuizes
             category.color = .animalsColor
-        default:
-            quizes = sportQuizes
-            category.color = .sportColor
         }
     }
 
@@ -44,7 +41,7 @@ class QuizViewModel {
         }
     }
 
-    private func getCategory(for name: String) -> Category {
+    private func getCategory(for name: CategoryName) -> Category {
         for index in (0..<categories.count)
         where categories[index].name == name {
             return categories[index]
@@ -55,10 +52,10 @@ class QuizViewModel {
 
     func loadCategories() {
         categories = [
-            Category(name: "Sport", color: .sportColor),
-            Category(name: "Politics"),
-            Category(name: "Youtube"),
-            Category(name: "Animals")
+            Category(name: .sport, color: .sportColor),
+            Category(name: .politics),
+            Category(name: .youtube),
+            Category(name: .animals)
         ]
 
         change(category: getCategory(for: categories[0].name))

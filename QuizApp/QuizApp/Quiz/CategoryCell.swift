@@ -24,7 +24,7 @@ class CategoryCell: UICollectionViewCell {
 
     func set(category: Category) {
         self.category = category
-        label.text = category.name
+        label.text = category.name.rawValue
         label.textColor = category.color
     }
 
