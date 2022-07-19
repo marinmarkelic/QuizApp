@@ -16,6 +16,10 @@ class QuizViewModel {
                 categories[index] = newCategory
             }
         }
+
+        for index in (0..<quizes.count) {
+            quizes[index].category = newCategory
+        }
     }
 
     private func changeQuiz(category: inout Category) {
@@ -68,7 +72,7 @@ struct Quiz {
     let id: Int
     let name: String
     let description: String
-    let category: Category
+    var category: Category
     let difficulty: Difficulty
     let imageUrl: String
     let numberOfQuestions: Int

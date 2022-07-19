@@ -47,7 +47,6 @@ extension QuizView: ConstructViewsProtocol {
 
     func reloadQuizes(_ quizes: [Quiz]) {
         self.quizes = quizes
-
         collectionView.reloadData()
     }
 
@@ -85,9 +84,8 @@ extension QuizView: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: QuizCell.reuseIdentifier,
             for: indexPath) as? QuizCell
-        else { fatalError() }
+        else { return QuizCell() }
 
-        cell.set(color: .yellow)
         cell.set(quiz: quizes[indexPath.row])
 
         return cell
