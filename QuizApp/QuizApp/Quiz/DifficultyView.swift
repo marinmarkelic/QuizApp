@@ -63,17 +63,17 @@ extension DifficultyView: ConstructViewsProtocol {
 
     func defineLayoutForViews() {
         square1.snp.makeConstraints {
-            $0.leading.centerY.equalToSuperview()
+            $0.top.leading.equalToSuperview()
         }
 
         square2.snp.makeConstraints {
             $0.leading.equalTo(square1.snp.trailing).offset(5)
-            $0.centerY.equalToSuperview()
+            $0.top.equalToSuperview()
         }
 
         square3.snp.makeConstraints {
             $0.leading.equalTo(square2.snp.trailing).offset(5)
-            $0.centerY.trailing.equalToSuperview()
+            $0.top.trailing.equalToSuperview()
         }
     }
 
