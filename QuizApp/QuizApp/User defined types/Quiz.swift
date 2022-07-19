@@ -8,26 +8,38 @@ enum Difficulty {
 
 }
 
-enum CategoryName: String {
+enum CategoryType: CaseIterable {
 
-    case sport = "Sport"
-    case politics = "Politics"
-    case youtube = "Youtube"
-    case animals = "Animals"
+    case sport
+    case politics
+    case youtube
+    case animals
 
 }
 
-public struct Category: Equatable {
+struct Category: Equatable {
 
-    let name: CategoryName
+    let type: CategoryType
     let color: UIColor
+    var name: String {
+        switch type {
+        case .sport:
+            return "Sport"
+        case .politics:
+            return "Politics"
+        case .youtube:
+            return "Youtube"
+        case .animals:
+            return "Animals"
+        }
+    }
 
 }
 
 extension Category {
 
-    init(name: CategoryName) {
-        self.name = name
+    init(type: CategoryType) {
+        self.type = type
         self.color = .white
     }
 

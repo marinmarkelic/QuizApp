@@ -2,8 +2,6 @@ import UIKit
 
 class DifficultyView: UIView {
 
-    private var difficultyColor: UIColor!
-
     private var square1: UIImageView!
     private var square2: UIImageView!
     private var square3: UIImageView!
@@ -65,8 +63,7 @@ extension DifficultyView: ConstructViewsProtocol {
 
     func defineLayoutForViews() {
         square1.snp.makeConstraints {
-            $0.leading.equalToSuperview()
-            $0.centerY.equalToSuperview()
+            $0.leading.centerY.equalToSuperview()
         }
 
         square2.snp.makeConstraints {
@@ -76,7 +73,7 @@ extension DifficultyView: ConstructViewsProtocol {
 
         square3.snp.makeConstraints {
             $0.leading.equalTo(square2.snp.trailing).offset(5)
-            $0.centerY.equalToSuperview()
+            $0.centerY.trailing.equalToSuperview()
         }
     }
 

@@ -44,8 +44,8 @@ class QuizViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 
-        categorySlider.reloadCells()
-        quizView.reloadCells()
+        categorySlider.redraw()
+        quizView.redraw()
     }
 
     func styleTabBarItem() {
@@ -59,9 +59,9 @@ class QuizViewController: UIViewController {
 
     func bindViewModel() {
         quizViewModel
-            .$quizes
-            .sink { [weak self] quizes in
-                self?.quizView.reloadQuizes(quizes)
+            .$quizzes
+            .sink { [weak self] quizzes in
+                self?.quizView.reload(with: quizzes)
             }
             .store(in: &cancellables)
 
@@ -137,7 +137,7 @@ extension QuizViewController: ConstructViewsProtocol {
 extension QuizViewController: CategorySliderDelegate {
 
     func selectedCategory(_ categorySlider: CategorySlider, category: Category) {
-        quizViewModel.change(category: category)
+        quizViewModel.changeCategory(for: category.type)
     }
 
 }

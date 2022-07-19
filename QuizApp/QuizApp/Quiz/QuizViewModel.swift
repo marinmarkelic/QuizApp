@@ -3,72 +3,49 @@ import UIKit
 
 class QuizViewModel {
 
-    @Published var quizes: [Quiz] = []
+    @Published var quizzes: [Quiz] = []
     @Published var categories: [Category] = []
 
-    func change(category: Category) {
-        resetCategoriesColors()
-
-        let newCategory = changeQuiz(categoryName: category.name)
-
-        for index in (0..<categories.count) {
-            if categories[index].name == category.name {
-                categories[index] = newCategory
-            }
+    func changeCategory(for type: CategoryType) {
+        categories = CategoryType.allCases.map {
+            Category(type: $0, color: type == $0 ? findColor(for: $0) : .white)
         }
 
-        for index in (0..<quizes.count) {
-            quizes[index].category = newCategory
-        }
+        changeQuiz(for: type)
     }
 
-    private func changeQuiz(categoryName: CategoryName) -> Category {
-        let color: UIColor
-
-        switch categoryName {
+    private func findColor(for type: CategoryType) -> UIColor {
+        switch type {
         case .sport:
-            quizes = sportQuizes
-            color = .sportColor
+            return .sportColor
         case .politics:
-            quizes = politicsQuizes
-            color = .politicsColor
+            return .politicsColor
         case .youtube:
-            quizes = youtubeQuizes
-            color = .youtubeColor
+            return .youtubeColor
         case .animals:
-            quizes = animalsQuizes
-            color = .animalsColor
-        }
-
-        let category = Category(name: categoryName, color: color)
-
-        return category
-    }
-
-    private func resetCategoriesColors() {
-        for index in (0..<categories.count) {
-            categories[index] = Category(name: categories[index].name)
+            return .animalsColor
         }
     }
 
-    private func getCategory(for name: CategoryName) -> Category {
-        for index in (0..<categories.count)
-        where categories[index].name == name {
-            return categories[index]
+    private func changeQuiz(for type: CategoryType) {
+        switch type {
+        case .sport:
+            quizzes = sportQuizzes
+        case .politics:
+            quizzes = politicsQuizzes
+        case .youtube:
+            quizzes = youtubeQuizzes
+        case .animals:
+            quizzes = animalsQuizzes
         }
-
-        return Category(name: name)
     }
 
     func loadCategories() {
-        categories = [
-            Category(name: .sport, color: .sportColor),
-            Category(name: .politics),
-            Category(name: .youtube),
-            Category(name: .animals)
-        ]
+        categories = CategoryType.allCases.map {
+            Category(type: $0)
+        }
 
-        change(category: getCategory(for: categories[0].name))
+        changeCategory(for: categories[0].type)
     }
 
 }

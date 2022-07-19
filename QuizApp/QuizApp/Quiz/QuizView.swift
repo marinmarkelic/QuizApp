@@ -2,7 +2,7 @@ import UIKit
 
 class QuizView: UIView {
 
-    private var quizes: [Quiz] = []
+    private var quizzes: [Quiz] = []
 
     private var collectionView: UICollectionView!
     private var collectionViewLayout: UICollectionViewFlowLayout!
@@ -19,7 +19,7 @@ class QuizView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func reloadCells() {
+    func redraw() {
         collectionViewLayout.invalidateLayout()
     }
 
@@ -29,7 +29,6 @@ extension QuizView: ConstructViewsProtocol {
 
     func createViews() {
         collectionViewLayout = UICollectionViewFlowLayout()
-
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
         addSubview(collectionView)
     }
@@ -40,7 +39,7 @@ extension QuizView: ConstructViewsProtocol {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.backgroundColor = .none
+        collectionView.backgroundColor = .clear
     }
 
     func defineLayoutForViews() {
@@ -49,8 +48,8 @@ extension QuizView: ConstructViewsProtocol {
         }
     }
 
-    func reloadQuizes(_ quizes: [Quiz]) {
-        self.quizes = quizes
+    func reload(with quizzes: [Quiz]) {
+        self.quizzes = quizzes
         collectionView.reloadData()
     }
 
@@ -63,10 +62,9 @@ extension QuizView: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        let itemWidth = CGFloat(frame.width)
-        let itemHeight = CGFloat(140)
+        let itemHeight: CGFloat = 140
 
-        return CGSize(width: itemWidth, height: itemHeight)
+        return CGSize(width: frame.width, height: itemHeight)
     }
 
 }
@@ -78,7 +76,7 @@ extension QuizView: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        quizes.count
+        quizzes.count
     }
 
     func collectionView(
@@ -90,7 +88,7 @@ extension QuizView: UICollectionViewDataSource {
             for: indexPath) as? QuizCell
         else { return QuizCell() }
 
-        cell.set(quiz: quizes[indexPath.row])
+        cell.set(quiz: quizzes[indexPath.row])
 
         return cell
     }

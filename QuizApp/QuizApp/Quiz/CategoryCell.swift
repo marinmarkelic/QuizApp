@@ -6,8 +6,6 @@ class CategoryCell: UICollectionViewCell {
 
     private var label: UILabel!
 
-    private var color: UIColor!
-
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -21,7 +19,7 @@ class CategoryCell: UICollectionViewCell {
     }
 
     func set(category: Category) {
-        label.text = category.name.rawValue
+        label.text = category.name
         label.textColor = category.color
     }
 

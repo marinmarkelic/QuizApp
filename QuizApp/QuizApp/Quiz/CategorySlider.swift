@@ -7,7 +7,7 @@ class CategorySlider: UIView {
     private var collectionView: UICollectionView!
     private var collectionViewLayout: UICollectionViewFlowLayout!
 
-    var delegate: CategorySliderDelegate!
+    weak var delegate: CategorySliderDelegate!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -27,7 +27,7 @@ class CategorySlider: UIView {
         collectionView.reloadData()
     }
 
-    func reloadCells() {
+    func redraw() {
         collectionViewLayout.invalidateLayout()
     }
 
@@ -49,7 +49,7 @@ extension CategorySlider: ConstructViewsProtocol {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.backgroundColor = .none
+        collectionView.backgroundColor = .clear
     }
 
     func defineLayoutForViews() {
@@ -67,9 +67,9 @@ extension CategorySlider: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        let widthOffset = CGFloat(5)
+        let widthOffset: CGFloat = 5
 
-        let text = categories[indexPath.row].name.rawValue
+        let text = categories[indexPath.row].name
         let font = UIFont(name: "SourceSansPro-Bold", size: 20) ?? UIFont.systemFont(ofSize: 20)
 
         let size = text.size(withAttributes: [

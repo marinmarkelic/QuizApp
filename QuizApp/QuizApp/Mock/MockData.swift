@@ -1,13 +1,13 @@
 import UIKit
 
 private let categories = [
-    Category(name: .sport),
-    Category(name: .politics),
-    Category(name: .youtube),
-    Category(name: .animals)
+    Category(type: .sport, color: .sportColor),
+    Category(type: .politics, color: .politicsColor),
+    Category(type: .youtube, color: .youtubeColor),
+    Category(type: .animals, color: .animalsColor)
 ]
 
-let sportQuizes = [
+let sportQuizzes = [
     Quiz(id: 1,
          name: "Football",
          description: "Quiz description that can usually span over multiple lines",
@@ -31,7 +31,7 @@ let sportQuizes = [
          numberOfQuestions: 0)
 ]
 
-let politicsQuizes = [
+let politicsQuizzes = [
     Quiz(id: 1,
          name: "Presidents",
          description: "Quiz description that can usually span over multiple lines",
@@ -55,7 +55,7 @@ let politicsQuizes = [
          numberOfQuestions: 0)
 ]
 
-let youtubeQuizes = [
+let youtubeQuizzes = [
     Quiz(id: 1,
          name: "Youtubers",
          description: "Quiz description that can usually span over multiple lines",
@@ -79,7 +79,7 @@ let youtubeQuizes = [
          numberOfQuestions: 0)
 ]
 
-let animalsQuizes = [
+let animalsQuizzes = [
     Quiz(id: 1,
          name: "Name the animal",
          description: "Quiz description that can usually span over multiple lines",
