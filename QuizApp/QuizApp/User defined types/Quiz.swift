@@ -8,10 +8,9 @@ case hard
 
 }
 
-public struct Category {
+public struct Category: Equatable {
 
     let name: String
-    let color: UIColor
-    let isSelected: Bool
+    var color: UIColor = .white
 
 }

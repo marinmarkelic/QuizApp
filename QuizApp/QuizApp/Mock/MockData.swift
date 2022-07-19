@@ -1,10 +1,10 @@
 import UIKit
 
 private let categories = [
-    Category(name: "Sport", color: .sportColor, isSelected: true),
-    Category(name: "Politics", color: .politicsColor, isSelected: false),
-    Category(name: "Youtube", color: .youtubeColor, isSelected: false),
-    Category(name: "Animals", color: .animalsColor, isSelected: false)
+    Category(name: "Sport"),
+    Category(name: "Politics"),
+    Category(name: "Youtube"),
+    Category(name: "Animals")
 ]
 
 let sportQuizes = [

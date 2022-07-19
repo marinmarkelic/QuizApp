@@ -97,7 +97,9 @@ extension CategorySlider: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: CategoryCell.reuseIdentifier,
             for: indexPath) as? CategoryCell
-        else { fatalError() }
+        else {
+            return CategoryCell()
+        }
 
         cell.set(category: categories[indexPath.row])
 
@@ -109,15 +111,7 @@ extension CategorySlider: UICollectionViewDataSource {
 extension CategorySlider: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        for view in collectionView.subviews {
-            guard let cell = view as? CategoryCell else { continue }
-
-            cell.resetColor()
-        }
-
         guard let cell = collectionView.cellForItem(at: indexPath) as? CategoryCell else { return }
-
-        cell.changeColor()
 
         guard let category = cell.category else { return }
 

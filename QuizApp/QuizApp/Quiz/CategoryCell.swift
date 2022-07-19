@@ -23,25 +23,9 @@ class CategoryCell: UICollectionViewCell {
     }
 
     func set(category: Category) {
-        label.text = category.name
-        self.color = category.color
         self.category = category
-
-        if category.isSelected {
-            changeColor()
-        }
-    }
-
-    func changeColor() {
-        if label.textColor == .white {
-            label.textColor = color
-        } else {
-            label.textColor = .white
-        }
-    }
-
-    func resetColor() {
-        label.textColor = .white
+        label.text = category.name
+        label.textColor = category.color
     }
 
 }

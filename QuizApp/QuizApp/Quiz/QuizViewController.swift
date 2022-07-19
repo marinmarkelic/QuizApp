@@ -60,6 +60,7 @@ class QuizViewController: UIViewController {
 
         quizViewModel
             .$categories
+            .removeDuplicates()
             .sink { [weak self] categories in
                 self?.categorySlider.reload(with: categories)
             }
@@ -113,7 +114,8 @@ extension QuizViewController: ConstructViewsProtocol {
         }
 
         categorySlider.snp.makeConstraints {
-            $0.leading.top.trailing.equalToSuperview().offset(20)
+            $0.leading.top.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().inset(20)
             $0.height.equalTo(30)
         }
 
