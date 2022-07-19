@@ -13,10 +13,14 @@ class QuizViewModel {
     }
 
     @MainActor
-    func change(category: Category) {
+    func changeCategory(for type: CategoryType) {
+        categories = CategoryType.allCases.map {
+            Category(type: $0, color: $0 == type ? findColor(for: type) : .white)
+        }
+
         Task {
             do {
-                let quizzes = try await quizUseCase.fetchQuizesFor(category: category)
+                let quizzes = try await quizUseCase.fetchQuizes(for: type)
                 var responseQuizes: [Quiz] = []
 
                 for quiz in quizzes {
@@ -30,14 +34,6 @@ class QuizViewModel {
         }
     }
 
-    func changeCategory(for type: CategoryType) {
-        categories = CategoryType.allCases.map {
-            Category(type: $0, color: type == $0 ? findColor(for: $0) : .white)
-        }
-
-        changeQuiz(for: type)
-    }
-
     private func findColor(for type: CategoryType) -> UIColor {
         switch type {
         case .sport:
@@ -49,9 +45,6 @@ class QuizViewModel {
         case .animals:
             return .animalsColor
         }
-    }
-
-    private func changeQuiz(for type: CategoryType) {
     }
 
     @MainActor

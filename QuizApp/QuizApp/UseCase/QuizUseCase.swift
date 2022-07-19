@@ -4,6 +4,8 @@ protocol QuizUseCaseProtocol {
 
     func fetchQuizesFor(category: Category) async throws -> [QuizModel]
 
+    func fetchQuizes(for type: CategoryType) async throws -> [QuizModel]
+
 }
 
 class QuizUseCase: QuizUseCaseProtocol {
@@ -16,6 +18,17 @@ class QuizUseCase: QuizUseCaseProtocol {
 
     func fetchQuizesFor(category: Category) async throws -> [QuizModel] {
         let quizes = try await userRepository.fetchQuizesFor(category: category.name.uppercased())
+        var responseQuizes: [QuizModel] = []
+
+        for quiz in quizes {
+            responseQuizes.append(QuizModel(quiz))
+        }
+
+        return responseQuizes
+    }
+
+    func fetchQuizes(for type: CategoryType) async throws -> [QuizModel] {
+        let quizes = try await userRepository.fetchQuizesFor(category: Category(type: type).name.uppercased())
         var responseQuizes: [QuizModel] = []
 
         for quiz in quizes {
