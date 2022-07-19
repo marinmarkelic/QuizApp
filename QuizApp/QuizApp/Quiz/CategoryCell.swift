@@ -4,8 +4,6 @@ class CategoryCell: UICollectionViewCell {
 
     static let reuseIdentifier = String(describing: CategoryCell.self)
 
-    var category: Category?
-
     private var label: UILabel!
 
     private var color: UIColor!
@@ -23,7 +21,6 @@ class CategoryCell: UICollectionViewCell {
     }
 
     func set(category: Category) {
-        self.category = category
         label.text = category.name.rawValue
         label.textColor = category.color
     }

@@ -68,11 +68,12 @@ extension DifficultyView: ConstructViewsProtocol {
         }
 
         square2.snp.makeConstraints {
-            $0.center.equalToSuperview()
+            $0.leading.equalTo(square1.snp.trailing).offset(5)
+            $0.centerY.equalToSuperview()
         }
 
         square3.snp.makeConstraints {
-            $0.trailing.equalToSuperview()
+            $0.leading.equalTo(square2.snp.trailing).offset(5)
             $0.centerY.equalToSuperview()
         }
     }

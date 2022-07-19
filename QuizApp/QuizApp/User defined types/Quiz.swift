@@ -20,6 +20,15 @@ enum CategoryName: String {
 public struct Category: Equatable {
 
     let name: CategoryName
-    var color: UIColor = .white
+    let color: UIColor
+
+}
+
+extension Category {
+
+    init(name: CategoryName) {
+        self.name = name
+        self.color = .white
+    }
 
 }

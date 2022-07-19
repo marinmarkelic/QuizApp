@@ -1,4 +1,5 @@
 import Combine
+import UIKit
 
 class QuizViewModel {
 
@@ -8,8 +9,7 @@ class QuizViewModel {
     func change(category: Category) {
         resetCategoriesColors()
 
-        var newCategory = Category(name: category.name)
-        changeQuiz(category: &newCategory)
+        let newCategory = changeQuiz(categoryName: category.name)
 
         for index in (0..<categories.count) {
             if categories[index].name == category.name {
@@ -22,26 +22,32 @@ class QuizViewModel {
         }
     }
 
-    private func changeQuiz(category: inout Category) {
-        switch category.name {
+    private func changeQuiz(categoryName: CategoryName) -> Category {
+        let color: UIColor
+
+        switch categoryName {
         case .sport:
             quizes = sportQuizes
-            category.color = .sportColor
+            color = .sportColor
         case .politics:
             quizes = politicsQuizes
-            category.color = .politicsColor
+            color = .politicsColor
         case .youtube:
             quizes = youtubeQuizes
-            category.color = .youtubeColor
+            color = .youtubeColor
         case .animals:
             quizes = animalsQuizes
-            category.color = .animalsColor
+            color = .animalsColor
         }
+
+        let category = Category(name: categoryName, color: color)
+
+        return category
     }
 
     private func resetCategoriesColors() {
         for index in (0..<categories.count) {
-            categories[index].color = .white
+            categories[index] = Category(name: categories[index].name)
         }
     }
 
@@ -51,7 +57,7 @@ class QuizViewModel {
             return categories[index]
         }
 
-        return(Category(name: name))
+        return Category(name: name)
     }
 
     func loadCategories() {

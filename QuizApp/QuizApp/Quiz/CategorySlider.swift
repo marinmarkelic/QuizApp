@@ -111,11 +111,7 @@ extension CategorySlider: UICollectionViewDataSource {
 extension CategorySlider: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? CategoryCell else { return }
-
-        guard let category = cell.category else { return }
-
-        delegate.selectedCategory(self, category: category)
+        delegate.selectedCategory(self, category: categories[indexPath.row])
     }
 
 }

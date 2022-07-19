@@ -2,10 +2,9 @@ import UIKit
 
 class QuizCell: UICollectionViewCell {
 
-    static let reuseIdentifier = String(describing: QuizView.self)
+    static let reuseIdentifier = String(describing: QuizCell.self)
 
     private var image: UIImageView!
-
     private var difficultyView: DifficultyView!
 
     private var color: UIColor!
