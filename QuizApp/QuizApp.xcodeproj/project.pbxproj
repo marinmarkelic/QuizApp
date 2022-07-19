@@ -134,6 +134,7 @@
 		9C195369287584750051CEC6 /* QuizApp */ = {
 			isa = PBXGroup;
 			children = (
+				9C5F21922886A3B6000C3511 /* Protocols */,
 				9CFCC2F62885546700B01343 /* User defined types */,
 				9CC33B20287D6832002E9853 /* Storage */,
 				9CC4D6E5287C70170061F149 /* UseCase */,
@@ -148,8 +149,6 @@
 				9C195375287584770051CEC6 /* LaunchScreen.storyboard */,
 				9C195378287584770051CEC6 /* Info.plist */,
 				9C19536A287584750051CEC6 /* AppDelegate.swift */,
-				9C1953A8287716FE0051CEC6 /* ConstructViewsProtocol.swift */,
-				9C1953B4287871E20051CEC6 /* AppRouterProtocol.swift */,
 				9C1953B2287871CC0051CEC6 /* AppRouter.swift */,
 				9CC4D6DF287C5A720061F149 /* AppDependencies.swift */,
 				9CC33B23287D6889002E9853 /* UserRepository.swift */,
@@ -195,6 +194,15 @@
 			children = (
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		9C5F21922886A3B6000C3511 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				9C1953A8287716FE0051CEC6 /* ConstructViewsProtocol.swift */,
+				9C1953B4287871E20051CEC6 /* AppRouterProtocol.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		9CC33B20287D6832002E9853 /* Storage */ = {
