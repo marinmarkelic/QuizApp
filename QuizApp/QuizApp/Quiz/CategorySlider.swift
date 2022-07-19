@@ -21,7 +21,7 @@ class CategorySlider: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func reloadWith(categories: [Category]) {
+    func reload(with categories: [Category]) {
         self.categories = categories
 
         collectionView.reloadData()
@@ -33,7 +33,6 @@ extension CategorySlider: ConstructViewsProtocol {
 
     func createViews() {
         collectionViewLayout = UICollectionViewFlowLayout()
-
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
         addSubview(collectionView)
     }
@@ -64,6 +63,7 @@ extension CategorySlider: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
+        let widthOffset = CGFloat(5)
 
         let text = categories[indexPath.row].name
         let font = UIFont(name: "SourceSansPro-Bold", size: 20) ?? UIFont.systemFont(ofSize: 20)
@@ -72,7 +72,7 @@ extension CategorySlider: UICollectionViewDelegateFlowLayout {
             .font: font
         ])
 
-        let itemWidth = CGFloat(size.width + 5)
+        let itemWidth = CGFloat(size.width + widthOffset)
         let itemHeight = CGFloat(size.height)
 
         return CGSize(width: itemWidth, height: itemHeight)

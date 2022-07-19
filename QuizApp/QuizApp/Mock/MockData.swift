@@ -1,15 +1,10 @@
 import UIKit
 
-public let sportColor = UIColor(red: 242 / 255, green: 201 / 255, blue: 76 / 255, alpha: 1)
-public let politicsColor = UIColor(red: 86 / 255, green: 204 / 255, blue: 242 / 255, alpha: 1)
-public let youtubeColor = UIColor(red: 242 / 255, green: 24 / 255, blue: 24 / 255, alpha: 1)
-public let animalsColor = UIColor(red: 117 / 255, green: 74 / 255, blue: 21 / 255, alpha: 1)
-
 private let categories = [
-    Category(name: "Sport", color: sportColor, isSelected: true),
-    Category(name: "Politics", color: politicsColor, isSelected: false),
-    Category(name: "Youtube", color: youtubeColor, isSelected: false),
-    Category(name: "Animals", color: animalsColor, isSelected: false)
+    Category(name: "Sport", color: .sportColor, isSelected: true),
+    Category(name: "Politics", color: .politicsColor, isSelected: false),
+    Category(name: "Youtube", color: .youtubeColor, isSelected: false),
+    Category(name: "Animals", color: .animalsColor, isSelected: false)
 ]
 
 let sportQuizes = [

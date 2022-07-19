@@ -22,10 +22,10 @@ class QuizViewModel {
 
     func loadCategories() {
         categories = [
-            Category(name: "Sport", color: sportColor, isSelected: true),
-            Category(name: "Politics", color: politicsColor, isSelected: false),
-            Category(name: "Youtube", color: youtubeColor, isSelected: false),
-            Category(name: "Animals", color: animalsColor, isSelected: false)
+            Category(name: "Sport", color: .sportColor, isSelected: true),
+            Category(name: "Politics", color: .politicsColor, isSelected: false),
+            Category(name: "Youtube", color: .youtubeColor, isSelected: false),
+            Category(name: "Animals", color: .animalsColor, isSelected: false)
         ]
 
         for category in categories

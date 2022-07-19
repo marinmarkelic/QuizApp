@@ -31,8 +31,6 @@ extension QuizView: ConstructViewsProtocol {
     }
 
     func styleViews() {
-        collectionViewLayout.scrollDirection = .vertical
-
         collectionView.collectionViewLayout = collectionViewLayout
         collectionView.register(QuizCell.self, forCellWithReuseIdentifier: QuizCell.reuseIdentifier)
         collectionView.showsHorizontalScrollIndicator = false

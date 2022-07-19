@@ -2,7 +2,7 @@ import UIKit
 
 class CategoryCell: UICollectionViewCell {
 
-    static let reuseIdentifier = String(describing: CategorySlider.self)
+    static let reuseIdentifier = String(describing: CategoryCell.self)
 
     var category: Category?
 

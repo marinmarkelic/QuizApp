@@ -61,7 +61,7 @@ class QuizViewController: UIViewController {
         quizViewModel
             .$categories
             .sink { [weak self] categories in
-                self?.categorySlider.reloadWith(categories: categories)
+                self?.categorySlider.reload(with: categories)
             }
             .store(in: &cancellables)
     }
