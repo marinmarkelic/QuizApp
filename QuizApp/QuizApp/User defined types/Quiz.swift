@@ -2,9 +2,9 @@ import UIKit
 
 enum Difficulty {
 
-case easy
-case medium
-case hard
+    case easy
+    case medium
+    case hard
 
 }
 
