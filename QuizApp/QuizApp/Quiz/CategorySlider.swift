@@ -118,7 +118,7 @@ extension CategorySlider: UICollectionViewDelegate {
         for index in (0..<categories.count) {
             categories[index].isSelected = false
         }
-        categories[indexPath.row].isSelected = false
+        categories[indexPath.row].isSelected = true
 
         guard let cell = collectionView.cellForItem(at: indexPath) as? CategoryCell else { return }
 
