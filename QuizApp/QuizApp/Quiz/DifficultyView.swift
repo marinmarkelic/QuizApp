@@ -2,8 +2,6 @@ import UIKit
 
 class DifficultyView: UIView {
 
-    private var difficultyColor: UIColor!
-
     private var square1: UIImageView!
     private var square2: UIImageView!
     private var square3: UIImageView!
@@ -26,7 +24,7 @@ class DifficultyView: UIView {
             square1.tintColor = color
             square2.tintColor = .white.withAlphaComponent(0.3)
             square3.tintColor = .white.withAlphaComponent(0.3)
-        case .normal:
+        case .medium:
             square1.tintColor = color
             square2.tintColor = color
             square3.tintColor = .white.withAlphaComponent(0.3)
@@ -56,25 +54,33 @@ extension DifficultyView: ConstructViewsProtocol {
     }
 
     func styleViews() {
-        square1.transform = CGAffineTransform(rotationAngle: 0.79)
-        square2.transform = CGAffineTransform(rotationAngle: 0.79)
-        square3.transform = CGAffineTransform(rotationAngle: 0.79)
+        let radians = 45.degreesToRadians
+
+        square1.transform = CGAffineTransform(rotationAngle: radians)
+        square2.transform = CGAffineTransform(rotationAngle: radians)
+        square3.transform = CGAffineTransform(rotationAngle: radians)
     }
 
     func defineLayoutForViews() {
         square1.snp.makeConstraints {
-            $0.leading.equalToSuperview()
-            $0.centerY.equalToSuperview()
+            $0.top.leading.equalToSuperview()
         }
 
         square2.snp.makeConstraints {
-            $0.center.equalToSuperview()
+            $0.leading.equalTo(square1.snp.trailing).offset(5)
+            $0.top.equalToSuperview()
         }
 
         square3.snp.makeConstraints {
-            $0.trailing.equalToSuperview()
-            $0.centerY.equalToSuperview()
+            $0.leading.equalTo(square2.snp.trailing).offset(5)
+            $0.top.trailing.equalToSuperview()
         }
     }
+
+}
+
+extension BinaryInteger {
+
+    var degreesToRadians: CGFloat { CGFloat(self) * .pi / 180 }
 
 }

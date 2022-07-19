@@ -1,14 +1,46 @@
 import UIKit
 
-public let sportColor = UIColor(red: 242 / 255, green: 201 / 255, blue: 76 / 255, alpha: 1)
-public let moviesColor = UIColor(red: 86 / 255, green: 204 / 255, blue: 242 / 255, alpha: 1)
-public let musicColor = UIColor(red: 242 / 255, green: 24 / 255, blue: 24 / 255, alpha: 1)
-public let geographyColor = UIColor(red: 117 / 255, green: 74 / 255, blue: 21 / 255, alpha: 1)
+enum Difficulty {
 
-enum Difficulty: String {
+    case easy
+    case medium
+    case hard
 
-    case easy = "EASY"
-    case normal = "NORMAL"
-    case hard = "HARD"
+}
+
+enum CategoryType: CaseIterable {
+
+    case sport
+    case politics
+    case youtube
+    case animals
+
+}
+
+struct Category: Equatable {
+
+    let type: CategoryType
+    let color: UIColor
+    var name: String {
+        switch type {
+        case .sport:
+            return "Sport"
+        case .politics:
+            return "Politics"
+        case .youtube:
+            return "Youtube"
+        case .animals:
+            return "Animals"
+        }
+    }
+
+}
+
+extension Category {
+
+    init(type: CategoryType) {
+        self.type = type
+        self.color = .white
+    }
 
 }

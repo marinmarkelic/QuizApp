@@ -2,20 +2,16 @@ import UIKit
 
 class QuizCell: UICollectionViewCell {
 
-    static let reuseIdentifier = String(describing: QuizView.self)
+    static let reuseIdentifier = String(describing: QuizCell.self)
 
     private var image: UIImageView!
-
     private var difficultyView: DifficultyView!
 
-    private var color: UIColor!
     private var title: UILabel!
     private var desc: UILabel!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-
-        backgroundColor = .red
 
         createViews()
         styleViews()
@@ -31,10 +27,6 @@ class QuizCell: UICollectionViewCell {
         desc.text = quiz.description
 
         difficultyView.set(difficulty: quiz.difficulty, color: quiz.category.color)
-    }
-
-    func set(color: UIColor) {
-        self.color = color
     }
 
 }
@@ -68,7 +60,6 @@ extension QuizCell: ConstructViewsProtocol {
         desc.textColor = .white
         desc.font = UIFont(name: "SourceSansPro-Bold", size: 14)
         desc.numberOfLines = 0
-
     }
 
     func defineLayoutForViews() {
@@ -81,7 +72,6 @@ extension QuizCell: ConstructViewsProtocol {
         difficultyView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(10)
             $0.trailing.equalToSuperview().inset(20)
-            $0.width.equalTo(60)
             $0.height.equalTo(20)
         }
 

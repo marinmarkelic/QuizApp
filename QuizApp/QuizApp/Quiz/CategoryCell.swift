@@ -2,13 +2,9 @@ import UIKit
 
 class CategoryCell: UICollectionViewCell {
 
-    static let reuseIdentifier = String(describing: CategorySlider.self)
-
-    var category: Category?
+    static let reuseIdentifier = String(describing: CategoryCell.self)
 
     private var label: UILabel!
-
-    private var color: UIColor!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,20 +20,7 @@ class CategoryCell: UICollectionViewCell {
 
     func set(category: Category) {
         label.text = category.name
-        self.color = category.color
-        self.category = category
-
-        if category.isSelected {
-            changeColor()
-        }
-    }
-
-    func changeColor() {
-        label.textColor = color
-    }
-
-    func resetColor() {
-        label.textColor = .white
+        label.textColor = category.color
     }
 
 }

@@ -7,7 +7,7 @@ class CategorySlider: UIView {
     private var collectionView: UICollectionView!
     private var collectionViewLayout: UICollectionViewFlowLayout!
 
-    var delegate: CategorySliderDelegate!
+    weak var delegate: CategorySliderDelegate!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -21,10 +21,14 @@ class CategorySlider: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func reloadWith(categories: [Category]) {
+    func reload(with categories: [Category]) {
         self.categories = categories
 
         collectionView.reloadData()
+    }
+
+    func redraw() {
+        collectionViewLayout.invalidateLayout()
     }
 
 }
@@ -33,7 +37,6 @@ extension CategorySlider: ConstructViewsProtocol {
 
     func createViews() {
         collectionViewLayout = UICollectionViewFlowLayout()
-
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
         addSubview(collectionView)
     }
@@ -46,7 +49,7 @@ extension CategorySlider: ConstructViewsProtocol {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.backgroundColor = .none
+        collectionView.backgroundColor = .clear
     }
 
     func defineLayoutForViews() {
@@ -64,6 +67,7 @@ extension CategorySlider: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
+        let widthOffset: CGFloat = 5
 
         let text = categories[indexPath.row].name
         let font = UIFont(name: "SourceSansPro-Bold", size: 20) ?? UIFont.systemFont(ofSize: 20)
@@ -72,7 +76,7 @@ extension CategorySlider: UICollectionViewDelegateFlowLayout {
             .font: font
         ])
 
-        let itemWidth = CGFloat(size.width + 5)
+        let itemWidth = CGFloat(size.width + widthOffset)
         let itemHeight = CGFloat(size.height)
 
         return CGSize(width: itemWidth, height: itemHeight)
@@ -97,7 +101,9 @@ extension CategorySlider: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: CategoryCell.reuseIdentifier,
             for: indexPath) as? CategoryCell
-        else { fatalError() }
+        else {
+            return CategoryCell()
+        }
 
         cell.set(category: categories[indexPath.row])
 
@@ -109,24 +115,7 @@ extension CategorySlider: UICollectionViewDataSource {
 extension CategorySlider: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        for view in collectionView.subviews {
-            guard let cell = view as? CategoryCell else { continue }
-
-            cell.resetColor()
-        }
-
-        for index in (0..<categories.count) {
-            categories[index].isSelected = false
-        }
-        categories[indexPath.row].isSelected = true
-
-        guard let cell = collectionView.cellForItem(at: indexPath) as? CategoryCell else { return }
-
-        cell.changeColor()
-
-        guard let category = cell.category else { return }
-
-        delegate.selectedCategory(self, category: category)
+        delegate.selectedCategory(self, category: categories[indexPath.row])
     }
 
 }
