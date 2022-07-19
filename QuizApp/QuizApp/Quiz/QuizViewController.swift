@@ -41,6 +41,13 @@ class QuizViewController: UIViewController {
         quizViewModel.loadCategories()
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        categorySlider.reloadCells()
+        quizView.reloadCells()
+    }
+
     func styleTabBarItem() {
         let config = UIImage.SymbolConfiguration(scale: .medium)
 

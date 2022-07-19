@@ -27,6 +27,10 @@ class CategorySlider: UIView {
         collectionView.reloadData()
     }
 
+    func reloadCells() {
+        collectionViewLayout.invalidateLayout()
+    }
+
 }
 
 extension CategorySlider: ConstructViewsProtocol {
