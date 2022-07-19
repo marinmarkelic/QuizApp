@@ -56,9 +56,11 @@ extension DifficultyView: ConstructViewsProtocol {
     }
 
     func styleViews() {
-        square1.transform = CGAffineTransform(rotationAngle: 0.79)
-        square2.transform = CGAffineTransform(rotationAngle: 0.79)
-        square3.transform = CGAffineTransform(rotationAngle: 0.79)
+        let radians = 45.degreesToRadians
+
+        square1.transform = CGAffineTransform(rotationAngle: radians)
+        square2.transform = CGAffineTransform(rotationAngle: radians)
+        square3.transform = CGAffineTransform(rotationAngle: radians)
     }
 
     func defineLayoutForViews() {
@@ -77,5 +79,11 @@ extension DifficultyView: ConstructViewsProtocol {
             $0.centerY.equalToSuperview()
         }
     }
+
+}
+
+extension BinaryInteger {
+
+    var degreesToRadians: CGFloat { CGFloat(self) * .pi / 180 }
 
 }
