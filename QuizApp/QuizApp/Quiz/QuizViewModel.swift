@@ -1,4 +1,5 @@
 import Combine
+import UIKit
 
 class QuizViewModel {
 
@@ -83,5 +84,13 @@ extension QuizModel {
         imageUrl = quiz.imageUrl
         numberOfQuestions = quiz.numberOfQuestions
     }
+
+}
+
+struct Category {
+
+    let name: String
+    let color: UIColor
+    var isSelected: Bool
 
 }

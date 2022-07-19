@@ -12,11 +12,3 @@ enum Difficulty: String {
     case hard = "HARD"
 
 }
-
-struct Category {
-
-    let name: String
-    let color: UIColor
-    var isSelected: Bool
-
-}
