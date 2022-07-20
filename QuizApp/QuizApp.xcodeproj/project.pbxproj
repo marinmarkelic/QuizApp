@@ -30,7 +30,9 @@
 		9C20BAD2287EF25D009378FB /* UserUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C20BAD1287EF25D009378FB /* UserUseCase.swift */; };
 		9C20BAD6287F01AC009378FB /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C20BAD5287F01AC009378FB /* CustomButton.swift */; };
 		9C20BAD8287F17F2009378FB /* LogOutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C20BAD7287F17F2009378FB /* LogOutUseCase.swift */; };
-		9C42E0BC2881994900B2B9FF /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C42E0BB2881994900B2B9FF /* MockData.swift */; };
+		9C25C88C288810B5000C4C90 /* QuizRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C25C88B288810B5000C4C90 /* QuizRepository.swift */; };
+		9C25C88E28881111000C4C90 /* QuizNetworkDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C25C88D28881111000C4C90 /* QuizNetworkDataSource.swift */; };
+		9C25C89428882613000C4C90 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 9C25C89328882613000C4C90 /* SDWebImage */; };
 		9C42E0BE28819B1300B2B9FF /* CategorySlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C42E0BD28819B1300B2B9FF /* CategorySlider.swift */; };
 		9C42E0C028819E0200B2B9FF /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C42E0BF28819E0200B2B9FF /* CategoryCell.swift */; };
 		9C42E0C22881A81D00B2B9FF /* SourceSansPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9C42E0C12881A74700B2B9FF /* SourceSansPro-Bold.ttf */; };
@@ -52,6 +54,8 @@
 		9CC4D6E4287C6C8C0061F149 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4D6E3287C6C8C0061F149 /* LoginUseCase.swift */; };
 		9CFCC2F42885532A00B01343 /* QuizViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFCC2F32885532A00B01343 /* QuizViewModel.swift */; };
 		9CFCC2F82885547600B01343 /* Quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFCC2F72885547600B01343 /* Quiz.swift */; };
+		9CFCC2FE2885871000B01343 /* QuizUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFCC2FD2885871000B01343 /* QuizUseCase.swift */; };
+		9CFCC30028858A1E00B01343 /* QuizNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFCC2FF28858A1E00B01343 /* QuizNetworkClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,7 +83,8 @@
 		9C20BAD1287EF25D009378FB /* UserUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUseCase.swift; sourceTree = "<group>"; };
 		9C20BAD5287F01AC009378FB /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		9C20BAD7287F17F2009378FB /* LogOutUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutUseCase.swift; sourceTree = "<group>"; };
-		9C42E0BB2881994900B2B9FF /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
+		9C25C88B288810B5000C4C90 /* QuizRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizRepository.swift; sourceTree = "<group>"; };
+		9C25C88D28881111000C4C90 /* QuizNetworkDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizNetworkDataSource.swift; sourceTree = "<group>"; };
 		9C42E0BD28819B1300B2B9FF /* CategorySlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySlider.swift; sourceTree = "<group>"; };
 		9C42E0BF28819E0200B2B9FF /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		9C42E0C12881A74700B2B9FF /* SourceSansPro-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Bold.ttf"; sourceTree = "<group>"; };
@@ -100,6 +105,8 @@
 		9CC4D6E3287C6C8C0061F149 /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
 		9CFCC2F32885532A00B01343 /* QuizViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewModel.swift; sourceTree = "<group>"; };
 		9CFCC2F72885547600B01343 /* Quiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Quiz.swift; sourceTree = "<group>"; };
+		9CFCC2FD2885871000B01343 /* QuizUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizUseCase.swift; sourceTree = "<group>"; };
+		9CFCC2FF28858A1E00B01343 /* QuizNetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizNetworkClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +114,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C25C89428882613000C4C90 /* SDWebImage in Frameworks */,
 				9CC33B2B287D77E5002E9853 /* KeychainSwift in Frameworks */,
 				9C19538E2876CF720051CEC6 /* SnapKit in Frameworks */,
 			);
@@ -134,8 +142,9 @@
 		9C195369287584750051CEC6 /* QuizApp */ = {
 			isa = PBXGroup;
 			children = (
-				9CFCC2F62885546700B01343 /* User defined types */,
-				9C42E0BA2881993C00B2B9FF /* Mock */,
+				9C25C88A2888109A000C4C90 /* Repositories */,
+				9C5F21922886A3B6000C3511 /* Protocols */,
+				9CFCC2F62885546700B01343 /* Models */,
 				9CC33B20287D6832002E9853 /* Storage */,
 				9CC4D6E5287C70170061F149 /* UseCase */,
 				9CC4D6DE287C552A0061F149 /* Network */,
@@ -149,11 +158,8 @@
 				9C195375287584770051CEC6 /* LaunchScreen.storyboard */,
 				9C195378287584770051CEC6 /* Info.plist */,
 				9C19536A287584750051CEC6 /* AppDelegate.swift */,
-				9C1953A8287716FE0051CEC6 /* ConstructViewsProtocol.swift */,
-				9C1953B4287871E20051CEC6 /* AppRouterProtocol.swift */,
 				9C1953B2287871CC0051CEC6 /* AppRouter.swift */,
 				9CC4D6DF287C5A720061F149 /* AppDependencies.swift */,
-				9CC33B23287D6889002E9853 /* UserRepository.swift */,
 				9C20BAC7287EE642009378FB /* TabBarController.swift */,
 			);
 			path = QuizApp;
@@ -198,12 +204,22 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
-		9C42E0BA2881993C00B2B9FF /* Mock */ = {
+		9C25C88A2888109A000C4C90 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				9C42E0BB2881994900B2B9FF /* MockData.swift */,
+				9CC33B23287D6889002E9853 /* UserRepository.swift */,
+				9C25C88B288810B5000C4C90 /* QuizRepository.swift */,
 			);
-			path = Mock;
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		9C5F21922886A3B6000C3511 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				9C1953A8287716FE0051CEC6 /* ConstructViewsProtocol.swift */,
+				9C1953B4287871E20051CEC6 /* AppRouterProtocol.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		9CC33B20287D6832002E9853 /* Storage */ = {
@@ -258,11 +274,13 @@
 			isa = PBXGroup;
 			children = (
 				9CC4D6E1287C6AB30061F149 /* UserNetworkDataSource.swift */,
+				9C25C88D28881111000C4C90 /* QuizNetworkDataSource.swift */,
 				9CC4D6DC287C1C6B0061F149 /* RequestError.swift */,
 				9CC4D6D5287C10450061F149 /* LoginNetworkClient.swift */,
 				9CC33B30287D9F59002E9853 /* CheckNetworkClient.swift */,
-				9CC33B32287DA19F002E9853 /* NetworkClient.swift */,
 				9C1C76D228803AA9006217A9 /* UserNetworkClient.swift */,
+				9CFCC2FF28858A1E00B01343 /* QuizNetworkClient.swift */,
+				9CC33B32287DA19F002E9853 /* NetworkClient.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -273,17 +291,18 @@
 				9CC4D6E3287C6C8C0061F149 /* LoginUseCase.swift */,
 				9C20BAD1287EF25D009378FB /* UserUseCase.swift */,
 				9C20BAD7287F17F2009378FB /* LogOutUseCase.swift */,
+				9CFCC2FD2885871000B01343 /* QuizUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
 		};
-		9CFCC2F62885546700B01343 /* User defined types */ = {
+		9CFCC2F62885546700B01343 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				9CFCC2F72885547600B01343 /* Quiz.swift */,
 				9C5F21932886AFF5000C3511 /* Colors.swift */,
 			);
-			path = "User defined types";
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -306,6 +325,7 @@
 			packageProductDependencies = (
 				9C19538D2876CF720051CEC6 /* SnapKit */,
 				9CC33B2A287D77E5002E9853 /* KeychainSwift */,
+				9C25C89328882613000C4C90 /* SDWebImage */,
 			);
 			productName = QuizApp;
 			productReference = 9C195367287584750051CEC6 /* QuizApp.app */;
@@ -338,6 +358,7 @@
 			packageReferences = (
 				9C19538C2876CF720051CEC6 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				9CC33B29287D77E5002E9853 /* XCRemoteSwiftPackageReference "keychain-swift" */,
+				9C25C89228882613000C4C90 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = 9C195368287584750051CEC6 /* Products */;
 			projectDirPath = "";
@@ -390,14 +411,17 @@
 				9C19539A2876DD7D0051CEC6 /* LoginButton.swift in Sources */,
 				9C20BAD8287F17F2009378FB /* LogOutUseCase.swift in Sources */,
 				9C19536F287584750051CEC6 /* LoginViewController.swift in Sources */,
+				9CFCC2FE2885871000B01343 /* QuizUseCase.swift in Sources */,
 				9CC4D6E4287C6C8C0061F149 /* LoginUseCase.swift in Sources */,
 				9C20BAD6287F01AC009378FB /* CustomButton.swift in Sources */,
 				9CC33B33287DA19F002E9853 /* NetworkClient.swift in Sources */,
 				9C1953AB287725590051CEC6 /* TextFieldView.swift in Sources */,
+				9C25C88E28881111000C4C90 /* QuizNetworkDataSource.swift in Sources */,
 				9CC4D6E0287C5A720061F149 /* AppDependencies.swift in Sources */,
 				9C1953B12878366A0051CEC6 /* ErrorLabel.swift in Sources */,
 				9C42E0C82881B71B00B2B9FF /* DifficultyView.swift in Sources */,
 				9C20BAD2287EF25D009378FB /* UserUseCase.swift in Sources */,
+				9CFCC30028858A1E00B01343 /* QuizNetworkClient.swift in Sources */,
 				9C19539C2876F1ED0051CEC6 /* GradientView.swift in Sources */,
 				9C19536B287584750051CEC6 /* AppDelegate.swift in Sources */,
 				9C1C76D328803AA9006217A9 /* UserNetworkClient.swift in Sources */,
@@ -411,11 +435,11 @@
 				9CC4D6E2287C6AB30061F149 /* UserNetworkDataSource.swift in Sources */,
 				9CC33B22287D6848002E9853 /* UserDatabaseDataSource.swift in Sources */,
 				9C1953A9287716FE0051CEC6 /* ConstructViewsProtocol.swift in Sources */,
-				9C42E0BC2881994900B2B9FF /* MockData.swift in Sources */,
 				9CC4D6DD287C1C6B0061F149 /* RequestError.swift in Sources */,
 				9CC33B31287D9F59002E9853 /* CheckNetworkClient.swift in Sources */,
 				9C1953962876D65C0051CEC6 /* PasswordView.swift in Sources */,
 				9C1953B5287871E20051CEC6 /* AppRouterProtocol.swift in Sources */,
+				9C25C88C288810B5000C4C90 /* QuizRepository.swift in Sources */,
 				9CC33B24287D6889002E9853 /* UserRepository.swift in Sources */,
 				9CFCC2F42885532A00B01343 /* QuizViewModel.swift in Sources */,
 				9CC33B36287DBCB1002E9853 /* UserViewController.swift in Sources */,
@@ -643,6 +667,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		9C25C89228882613000C4C90 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		9CC33B29287D77E5002E9853 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/evgenyneu/keychain-swift";
@@ -658,6 +690,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9C19538C2876CF720051CEC6 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		9C25C89328882613000C4C90 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9C25C89228882613000C4C90 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
 		};
 		9CC33B2A287D77E5002E9853 /* KeychainSwift */ = {
 			isa = XCSwiftPackageProductDependency;

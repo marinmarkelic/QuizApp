@@ -1,10 +1,11 @@
 import UIKit
+import SDWebImage
 
 class QuizCell: UICollectionViewCell {
 
     static let reuseIdentifier = String(describing: QuizCell.self)
 
-    private var image: UIImageView!
+    private var imageView: UIImageView!
     private var difficultyView: DifficultyView!
 
     private var title: UILabel!
@@ -26,6 +27,8 @@ class QuizCell: UICollectionViewCell {
         title.text = quiz.name
         desc.text = quiz.description
 
+        imageView.sd_setImage(with: URL(string: quiz.imageUrl))
+
         difficultyView.set(difficulty: quiz.difficulty, color: quiz.category.color)
     }
 
@@ -34,10 +37,8 @@ class QuizCell: UICollectionViewCell {
 extension QuizCell: ConstructViewsProtocol {
 
     func createViews() {
-        let icon = UIImage(systemName: "questionmark.square")
-
-        image = UIImageView(image: icon)
-        addSubview(image)
+        imageView = UIImageView()
+        addSubview(imageView)
 
         difficultyView = DifficultyView()
         addSubview(difficultyView)
@@ -54,6 +55,10 @@ extension QuizCell: ConstructViewsProtocol {
         layer.masksToBounds = true
         backgroundColor = .white.withAlphaComponent(0.3)
 
+        imageView.layer.cornerRadius = 5
+        imageView.layer.masksToBounds = true
+        imageView.contentMode = .scaleToFill
+
         title.textColor = .white
         title.font = UIFont(name: "SourceSansPro-Bold", size: 24)
 
@@ -63,7 +68,7 @@ extension QuizCell: ConstructViewsProtocol {
     }
 
     func defineLayoutForViews() {
-        image.snp.makeConstraints {
+        imageView.snp.makeConstraints {
             $0.leading.top.equalToSuperview().offset(20)
             $0.bottom.equalToSuperview().inset(20)
             $0.width.equalTo(100)
@@ -76,13 +81,13 @@ extension QuizCell: ConstructViewsProtocol {
         }
 
         title.snp.makeConstraints {
-            $0.leading.equalTo(image.snp.trailing).offset(20)
+            $0.leading.equalTo(imageView.snp.trailing).offset(20)
             $0.top.equalToSuperview().offset(25)
             $0.trailing.equalToSuperview().inset(20)
         }
 
         desc.snp.makeConstraints {
-            $0.leading.equalTo(image.snp.trailing).offset(20)
+            $0.leading.equalTo(imageView.snp.trailing).offset(20)
             $0.top.equalTo(title.snp.bottom).offset(5)
             $0.trailing.equalToSuperview().inset(20)
         }

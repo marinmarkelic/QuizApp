@@ -18,10 +18,10 @@ class QuizViewController: UIViewController {
     private var categorySlider: CategorySlider!
     private var quizView: QuizView!
 
-    init(quizViewModel: QuizViewModel) {
+    init(quizUseCase: QuizUseCaseProtocol) {
         super.init(nibName: nil, bundle: nil)
 
-        self.quizViewModel = quizViewModel
+        self.quizViewModel = QuizViewModel(quizUseCase: quizUseCase)
 
         styleTabBarItem()
     }

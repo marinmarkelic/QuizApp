@@ -2,6 +2,8 @@ protocol UserRepositoryProtocol {
 
     var userInfo: UserInfoRepoModel { get async throws }
 
+    func save(userInfo: UserInfoRepoModel) async throws -> UserInfoRepoModel
+
     func logIn(username: String, password: String) async throws -> LoginResponseRepoModel
 
     func logOut()
