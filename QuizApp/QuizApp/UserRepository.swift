@@ -6,7 +6,7 @@ protocol UserRepositoryProtocol {
 
     func logOut()
 
-    func fetchQuizzesFor(category: String) async throws -> [QuizRepoModel]
+    func fetchQuizzes(for category: CategoryRepoModel) async throws -> [QuizRepoModel]
 
 }
 
@@ -47,8 +47,9 @@ class UserRepository: UserRepositoryProtocol {
         try await UserInfoRepoModel(userNetworkDataSource.save(name: userInfo.name))
     }
 
-    func fetchQuizzesFor(category: String) async throws -> [QuizRepoModel] {
-        let quizzes = try await userNetworkDataSource.fetchQuizzesFor(category: category)
+    func fetchQuizzes(for category: CategoryRepoModel) async throws -> [QuizRepoModel] {
+        let quizzes = try await userNetworkDataSource.fetchQuizzes(
+            for: CategoryDataModel(rawValue: category.rawValue)!)
         var responseQuizzes: [QuizRepoModel] = []
 
         for quiz in quizzes {
@@ -95,7 +96,7 @@ struct QuizRepoModel {
     let id: Int
     let name: String
     let description: String
-    let category: String
+    let category: CategoryRepoModel
     let difficulty: String
     let imageUrl: String
     let numberOfQuestions: Int
@@ -108,10 +109,19 @@ extension QuizRepoModel {
         id = quiz.id
         name = quiz.name
         description = quiz.description
-        category = quiz.category
+        category = CategoryRepoModel(rawValue: quiz.category.rawValue)!
         difficulty = quiz.difficulty
         imageUrl = quiz.imageUrl
         numberOfQuestions = quiz.numberOfQuestions
     }
+
+}
+
+enum CategoryRepoModel: String {
+
+    case sport = "SPORT"
+    case movies = "MOVIES"
+    case music = "MUSIC"
+    case geography = "GEOGRAPHY"
 
 }

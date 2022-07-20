@@ -24,7 +24,7 @@ class DifficultyView: UIView {
             square1.tintColor = color
             square2.tintColor = .white.withAlphaComponent(0.3)
             square3.tintColor = .white.withAlphaComponent(0.3)
-        case .medium:
+        case .normal:
             square1.tintColor = color
             square2.tintColor = color
             square3.tintColor = .white.withAlphaComponent(0.3)

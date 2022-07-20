@@ -1,6 +1,6 @@
 protocol QuizNetworkClientProtocol {
 
-    func fetchQuizzesFor(category: String) async throws -> [QuizNetworkDataModel]
+    func fetchQuizzes(for category: CategoryNetworkDataModel) async throws -> [QuizNetworkDataModel]
 
 }
 
@@ -14,8 +14,8 @@ class QuizNetworkClient: QuizNetworkClientProtocol {
         self.networkClient = networkClient
     }
 
-    func fetchQuizzesFor(category: String) async throws -> [QuizNetworkDataModel] {
-        try await networkClient.get(path: "\(quizPath)\(category)")
+    func fetchQuizzes(for category: CategoryNetworkDataModel) async throws -> [QuizNetworkDataModel] {
+        try await networkClient.get(path: "\(quizPath)\(category.rawValue)")
     }
 
 }
@@ -25,9 +25,18 @@ struct QuizNetworkDataModel: Decodable {
     let id: Int
     let name: String
     let description: String
-    let category: String
+    let category: CategoryNetworkDataModel
     let difficulty: String
     let imageUrl: String
     let numberOfQuestions: Int
+
+}
+
+enum CategoryNetworkDataModel: String, Decodable {
+
+    case sport = "SPORT"
+    case movies = "MOVIES"
+    case music = "MUSIC"
+    case geography = "GEOGRAPHY"
 
 }

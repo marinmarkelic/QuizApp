@@ -2,9 +2,7 @@ import UIKit
 
 protocol QuizUseCaseProtocol {
 
-    func fetchQuizzesFor(category: Category) async throws -> [QuizModel]
-
-    func fetchQuizzes(for type: CategoryType) async throws -> [QuizModel]
+    func fetchQuizzes(for type: CategoryModel) async throws -> [QuizModel]
 
 }
 
@@ -16,19 +14,8 @@ class QuizUseCase: QuizUseCaseProtocol {
         self.userRepository = userRepository
     }
 
-    func fetchQuizzesFor(category: Category) async throws -> [QuizModel] {
-        let quizzes = try await userRepository.fetchQuizzesFor(category: category.name.uppercased())
-        var responseQuizzes: [QuizModel] = []
-
-        for quiz in quizzes {
-            responseQuizzes.append(QuizModel(quiz))
-        }
-
-        return responseQuizzes
-    }
-
-    func fetchQuizzes(for type: CategoryType) async throws -> [QuizModel] {
-        let quizzes = try await userRepository.fetchQuizzesFor(category: Category(type: type).name.uppercased())
+    func fetchQuizzes(for type: CategoryModel) async throws -> [QuizModel] {
+        let quizzes = try await userRepository.fetchQuizzes(for: CategoryRepoModel(rawValue: type.rawValue)!)
         var responseQuizzes: [QuizModel] = []
 
         for quiz in quizzes {
@@ -46,7 +33,7 @@ struct QuizModel {
     let name: String
     let description: String
     let category: CategoryModel
-    let difficulty: Difficulty
+    let difficulty: String
     let imageUrl: String
     let numberOfQuestions: Int
 
@@ -58,38 +45,19 @@ extension QuizModel {
         id = quiz.id
         name = quiz.name
         description = quiz.description
-        category = CategoryModel(name: quiz.name)
-        difficulty = Difficulty.easy
+        category = CategoryModel(rawValue: quiz.category.rawValue)!
+        difficulty = quiz.difficulty
         imageUrl = quiz.imageUrl
         numberOfQuestions = quiz.numberOfQuestions
     }
 
 }
 
-struct CategoryModel {
+enum CategoryModel: String {
 
-    let name: String
-    let color: UIColor
-
-}
-
-extension CategoryModel {
-
-    init(name: String) {
-        self.name = name
-
-        switch name.lowercased() {
-        case "geography":
-            color = .animalsColor
-        case "movies":
-            color = .youtubeColor
-        case "music":
-            color = .politicsColor
-        case "sport":
-            color = .sportColor
-        default:
-            color = .white
-        }
-    }
+    case sport = "SPORT"
+    case movies = "MOVIES"
+    case music = "MUSIC"
+    case geography = "GEOGRAPHY"
 
 }

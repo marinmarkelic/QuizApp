@@ -20,7 +20,7 @@ class QuizViewModel {
 
         Task {
             do {
-                let quizzes = try await quizUseCase.fetchQuizzes(for: type)
+                let quizzes = try await quizUseCase.fetchQuizzes(for: getCategoryModel(from: type))
                 var responseQuizzes: [Quiz] = []
 
                 for quiz in quizzes {
@@ -38,19 +38,32 @@ class QuizViewModel {
         switch type {
         case .sport:
             return .sportColor
-        case .politics:
-            return .politicsColor
-        case .youtube:
-            return .youtubeColor
-        case .animals:
-            return .animalsColor
+        case .movies:
+            return .moviesColor
+        case .music:
+            return .musicColor
+        case .geography:
+            return .geographyColor
+        }
+    }
+
+    private func getCategoryModel(from type: CategoryType) -> CategoryModel {
+        switch type {
+        case .sport:
+            return CategoryModel.sport
+        case .movies:
+            return CategoryModel.movies
+        case .music:
+            return CategoryModel.music
+        case .geography:
+            return CategoryModel.geography
         }
     }
 
     @MainActor
     func loadCategories() {
         categories = CategoryType.allCases.map {
-            Category(type: $0)
+            Category(type: $0, color: findColor(for: $0))
         }
 
         changeCategory(for: categories[0].type)
@@ -76,8 +89,8 @@ extension Quiz {
         id = quiz.id
         name = quiz.name
         description = quiz.description
-        category = Category(type: .youtube)
-        difficulty = quiz.difficulty
+        category = Category(from: quiz.category)
+        difficulty = Difficulty(rawValue: quiz.difficulty) ?? .easy
         imageUrl = quiz.imageUrl
         numberOfQuestions = quiz.numberOfQuestions
     }
@@ -90,8 +103,8 @@ extension QuizModel {
         id = quiz.id
         name = quiz.name
         description = quiz.description
-        category = CategoryModel(name: quiz.category.name, color: quiz.category.color)
-        difficulty = quiz.difficulty
+        category = CategoryModel(rawValue: quiz.category.name.capitalized)!
+        difficulty = quiz.difficulty.rawValue.capitalized
         imageUrl = quiz.imageUrl
         numberOfQuestions = quiz.numberOfQuestions
     }

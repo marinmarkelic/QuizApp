@@ -137,7 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				9C5F21922886A3B6000C3511 /* Protocols */,
-				9CFCC2F62885546700B01343 /* User defined types */,
+				9CFCC2F62885546700B01343 /* Models */,
 				9CC33B20287D6832002E9853 /* Storage */,
 				9CC4D6E5287C70170061F149 /* UseCase */,
 				9CC4D6DE287C552A0061F149 /* Network */,
@@ -280,13 +280,13 @@
 			path = UseCase;
 			sourceTree = "<group>";
 		};
-		9CFCC2F62885546700B01343 /* User defined types */ = {
+		9CFCC2F62885546700B01343 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				9CFCC2F72885547600B01343 /* Quiz.swift */,
 				9C5F21932886AFF5000C3511 /* Colors.swift */,
 			);
-			path = "User defined types";
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -416,7 +416,6 @@
 				9CC4D6E2287C6AB30061F149 /* UserNetworkDataSource.swift in Sources */,
 				9CC33B22287D6848002E9853 /* UserDatabaseDataSource.swift in Sources */,
 				9C1953A9287716FE0051CEC6 /* ConstructViewsProtocol.swift in Sources */,
-				9C42E0BC2881994900B2B9FF /* MockData.swift in Sources */,
 				9CC4D6DD287C1C6B0061F149 /* RequestError.swift in Sources */,
 				9CC33B31287D9F59002E9853 /* CheckNetworkClient.swift in Sources */,
 				9C1953962876D65C0051CEC6 /* PasswordView.swift in Sources */,

@@ -8,7 +8,7 @@ protocol UserNetworkDataSourceProtocol {
 
     func save(name: String) async throws -> UserInfoDataModel
 
-    func fetchQuizzesFor(category: String) async throws -> [QuizResponseDataModel]
+    func fetchQuizzes(for category: CategoryDataModel) async throws -> [QuizResponseDataModel]
 
 }
 
@@ -49,8 +49,9 @@ class UserNetworkDataSource: UserNetworkDataSourceProtocol {
         try await UserInfoDataModel(userNetworkClient.save(name: name))
     }
 
-    func fetchQuizzesFor(category: String) async throws -> [QuizResponseDataModel] {
-        let quizzes = try await quizNetworkClient.fetchQuizzesFor(category: category)
+    func fetchQuizzes(for category: CategoryDataModel) async throws -> [QuizResponseDataModel] {
+        let quizzes = try await quizNetworkClient.fetchQuizzes(
+            for: CategoryNetworkDataModel(rawValue: category.rawValue)!)
         var responseQuizzes: [QuizResponseDataModel] = []
 
         for quiz in quizzes {
@@ -99,7 +100,7 @@ struct QuizResponseDataModel {
     let id: Int
     let name: String
     let description: String
-    let category: String
+    let category: CategoryDataModel
     let difficulty: String
     let imageUrl: String
     let numberOfQuestions: Int
@@ -112,10 +113,19 @@ extension QuizResponseDataModel {
         id = quiz.id
         name = quiz.name
         description = quiz.description
-        category = quiz.category
+        category = CategoryDataModel(rawValue: quiz.category.rawValue)!
         difficulty = quiz.difficulty
         imageUrl = quiz.imageUrl
         numberOfQuestions = quiz.numberOfQuestions
     }
+
+}
+
+enum CategoryDataModel: String {
+
+    case sport = "SPORT"
+    case movies = "MOVIES"
+    case music = "MUSIC"
+    case geography = "GEOGRAPHY"
 
 }
