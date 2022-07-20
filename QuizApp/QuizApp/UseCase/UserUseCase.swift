@@ -8,7 +8,7 @@ protocol UserUseCaseProtocol {
 
 class UserUseCase: UserUseCaseProtocol {
 
-    private let userRepository: UserRepository
+    private let userRepository: UserRepositoryProtocol
 
     var userInfo: UserInfoModel {
         get async throws {
@@ -16,7 +16,7 @@ class UserUseCase: UserUseCaseProtocol {
         }
     }
 
-    init(userRepository: UserRepository) {
+    init(userRepository: UserRepositoryProtocol) {
         self.userRepository = userRepository
     }
 

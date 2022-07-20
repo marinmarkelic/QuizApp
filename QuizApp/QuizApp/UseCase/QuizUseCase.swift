@@ -8,14 +8,14 @@ protocol QuizUseCaseProtocol {
 
 class QuizUseCase: QuizUseCaseProtocol {
 
-    private let userRepository: UserRepositoryProtocol
+    private let quizRepository: QuizRepositoryProtocol
 
-    init(userRepository: UserRepositoryProtocol) {
-        self.userRepository = userRepository
+    init(quizRepository: QuizRepositoryProtocol) {
+        self.quizRepository = quizRepository
     }
 
     func fetchQuizzes(for type: CategoryModel) async throws -> [QuizModel] {
-        let quizzes = try await userRepository.fetchQuizzes(for: CategoryRepoModel(rawValue: type.rawValue)!)
+        let quizzes = try await quizRepository.fetchQuizzes(for: CategoryRepoModel(rawValue: type.rawValue)!)
         return quizzes.map {
             QuizModel($0)
         }

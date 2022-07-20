@@ -2,11 +2,11 @@ protocol UserRepositoryProtocol {
 
     var userInfo: UserInfoRepoModel { get async throws }
 
+    func save(userInfo: UserInfoRepoModel) async throws -> UserInfoRepoModel
+
     func logIn(username: String, password: String) async throws -> LoginResponseRepoModel
 
     func logOut()
-
-    func fetchQuizzes(for category: CategoryRepoModel) async throws -> [QuizRepoModel]
 
 }
 
@@ -47,14 +47,6 @@ class UserRepository: UserRepositoryProtocol {
         try await UserInfoRepoModel(userNetworkDataSource.save(name: userInfo.name))
     }
 
-    func fetchQuizzes(for category: CategoryRepoModel) async throws -> [QuizRepoModel] {
-        let quizzes = try await userNetworkDataSource.fetchQuizzes(
-            for: CategoryDataModel(rawValue: category.rawValue)!)
-        return quizzes.map {
-            QuizRepoModel($0)
-        }
-    }
-
 }
 
 struct LoginResponseRepoModel {
@@ -84,40 +76,5 @@ extension UserInfoRepoModel {
         username = userInfo.email
         name = userInfo.name
     }
-
-}
-
-struct QuizRepoModel {
-
-    let id: Int
-    let name: String
-    let description: String
-    let category: CategoryRepoModel
-    let difficulty: String
-    let imageUrl: String
-    let numberOfQuestions: Int
-
-}
-
-extension QuizRepoModel {
-
-    init(_ quiz: QuizResponseDataModel) {
-        id = quiz.id
-        name = quiz.name
-        description = quiz.description
-        category = CategoryRepoModel(rawValue: quiz.category.rawValue)!
-        difficulty = quiz.difficulty
-        imageUrl = quiz.imageUrl
-        numberOfQuestions = quiz.numberOfQuestions
-    }
-
-}
-
-enum CategoryRepoModel: String {
-
-    case sport = "SPORT"
-    case movies = "MOVIES"
-    case music = "MUSIC"
-    case geography = "GEOGRAPHY"
 
 }

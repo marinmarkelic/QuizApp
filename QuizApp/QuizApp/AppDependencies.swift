@@ -17,30 +17,37 @@ class AppDependencies {
     }()
 
     lazy var quizUseCase: QuizUseCaseProtocol = {
-        QuizUseCase(userRepository: userRepository)
+        QuizUseCase(quizRepository: quizRepository)
+    }()
+
+    lazy var userRepository: UserRepositoryProtocol = {
+        UserRepository(userNetworkDataSource: userNetworkDataSource, userDatabaseDataSource: userDatabaseDataSource)
+    }()
+
+    lazy var quizRepository: QuizRepositoryProtocol = {
+        QuizRepository(quizNetworkDataSource: quizNetworkDataSource)
     }()
 
     lazy var userNetworkDataSource: UserNetworkDataSourceProtocol = {
         UserNetworkDataSource(
             loginClient: loginNetworkClient,
             checkNetworkClient: checkNetworkClient,
-            userNetworkClient: userNetworkClient,
-            quizNetworkClient: quizNetworkClient)
+            userNetworkClient: userNetworkClient)
     }()
 
-    lazy var userDatabaseDataSource: UserDatabaseDataSource = {
+    lazy var quizNetworkDataSource: QuizNetworkDataSourceProtocol = {
+        QuizNetworkDataSource(quizNetworkClient: quizNetworkClient)
+    }()
+
+    lazy var userDatabaseDataSource: UserDatabaseDataSourceProtocol = {
         UserDatabaseDataSource(secureStorage: secureStorage)
-    }()
-
-    lazy var userRepository: UserRepository = {
-        UserRepository(userNetworkDataSource: userNetworkDataSource, userDatabaseDataSource: userDatabaseDataSource)
     }()
 
     lazy var loginNetworkClient: LoginNetworkClientProtocol = {
         LoginNetworkClient(networkClient: networkClient)
     }()
 
-    lazy var userNetworkClient: UserNetworkClient = {
+    lazy var userNetworkClient: UserNetworkClientProtocol = {
         UserNetworkClient(networkClient: networkClient)
     }()
 
