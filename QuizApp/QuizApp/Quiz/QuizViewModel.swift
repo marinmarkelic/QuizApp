@@ -59,7 +59,7 @@ class QuizViewModel {
     func loadCategories() {
         categories = CategoryType
             .allCases
-            .map { Category(type: $0, color: findColor(for: $0)) }
+            .map { Category(from: $0) }
 
         changeCategory(for: categories[0].type)
     }
