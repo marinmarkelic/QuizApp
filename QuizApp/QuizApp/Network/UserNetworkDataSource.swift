@@ -52,13 +52,9 @@ class UserNetworkDataSource: UserNetworkDataSourceProtocol {
     func fetchQuizzes(for category: CategoryDataModel) async throws -> [QuizResponseDataModel] {
         let quizzes = try await quizNetworkClient.fetchQuizzes(
             for: CategoryNetworkDataModel(rawValue: category.rawValue)!)
-        var responseQuizzes: [QuizResponseDataModel] = []
-
-        for quiz in quizzes {
-            responseQuizzes.append(QuizResponseDataModel(quiz))
+        return quizzes.map {
+            QuizResponseDataModel($0)
         }
-
-        return responseQuizzes
     }
 
 }

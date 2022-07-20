@@ -50,13 +50,9 @@ class UserRepository: UserRepositoryProtocol {
     func fetchQuizzes(for category: CategoryRepoModel) async throws -> [QuizRepoModel] {
         let quizzes = try await userNetworkDataSource.fetchQuizzes(
             for: CategoryDataModel(rawValue: category.rawValue)!)
-        var responseQuizzes: [QuizRepoModel] = []
-
-        for quiz in quizzes {
-            responseQuizzes.append(QuizRepoModel(quiz))
+        return quizzes.map {
+            QuizRepoModel($0)
         }
-
-        return responseQuizzes
     }
 
 }

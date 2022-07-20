@@ -16,13 +16,9 @@ class QuizUseCase: QuizUseCaseProtocol {
 
     func fetchQuizzes(for type: CategoryModel) async throws -> [QuizModel] {
         let quizzes = try await userRepository.fetchQuizzes(for: CategoryRepoModel(rawValue: type.rawValue)!)
-        var responseQuizzes: [QuizModel] = []
-
-        for quiz in quizzes {
-            responseQuizzes.append(QuizModel(quiz))
+        return quizzes.map {
+            QuizModel($0)
         }
-
-        return responseQuizzes
     }
 
 }

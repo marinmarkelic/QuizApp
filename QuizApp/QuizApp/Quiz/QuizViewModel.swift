@@ -21,13 +21,9 @@ class QuizViewModel {
         Task {
             do {
                 let quizzes = try await quizUseCase.fetchQuizzes(for: getCategoryModel(from: type))
-                var responseQuizzes: [Quiz] = []
-
-                for quiz in quizzes {
-                    responseQuizzes.append(Quiz(quiz))
+                self.quizzes = quizzes.map {
+                    Quiz($0)
                 }
-
-                self.quizzes = responseQuizzes
             } catch _ {
 
             }
@@ -76,7 +72,7 @@ struct Quiz {
     let id: Int
     let name: String
     let description: String
-    var category: Category //
+    var category: Category
     let difficulty: Difficulty
     let imageUrl: String
     let numberOfQuestions: Int
