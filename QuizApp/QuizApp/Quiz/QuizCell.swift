@@ -57,6 +57,7 @@ extension QuizCell: ConstructViewsProtocol {
 
         imageView.layer.cornerRadius = 5
         imageView.layer.masksToBounds = true
+        imageView.contentMode = .scaleToFill
 
         title.textColor = .white
         title.font = UIFont(name: "SourceSansPro-Bold", size: 24)

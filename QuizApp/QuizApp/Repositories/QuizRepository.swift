@@ -27,7 +27,7 @@ struct QuizRepoModel {
     let name: String
     let description: String
     let category: CategoryRepoModel
-    let difficulty: String
+    let difficulty: DifficultyRepoModel
     let imageUrl: String
     let numberOfQuestions: Int
 
@@ -40,7 +40,7 @@ extension QuizRepoModel {
         name = quiz.name
         description = quiz.description
         category = CategoryRepoModel(rawValue: quiz.category.rawValue)!
-        difficulty = quiz.difficulty
+        difficulty = DifficultyRepoModel(rawValue: quiz.difficulty.rawValue)!
         imageUrl = quiz.imageUrl
         numberOfQuestions = quiz.numberOfQuestions
     }
@@ -53,5 +53,13 @@ enum CategoryRepoModel: String {
     case movies = "MOVIES"
     case music = "MUSIC"
     case geography = "GEOGRAPHY"
+
+}
+
+enum DifficultyRepoModel: String {
+
+    case easy = "EASY"
+    case normal = "NORMAL"
+    case hard = "HARD"
 
 }

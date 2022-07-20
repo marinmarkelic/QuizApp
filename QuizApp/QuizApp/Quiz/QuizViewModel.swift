@@ -85,7 +85,7 @@ extension Quiz {
         name = quiz.name
         description = quiz.description
         category = Category(from: quiz.category)
-        difficulty = Difficulty(rawValue: quiz.difficulty) ?? .easy
+        difficulty = Difficulty(rawValue: quiz.difficulty.rawValue)!
         imageUrl = quiz.imageUrl
         numberOfQuestions = quiz.numberOfQuestions
     }
@@ -99,7 +99,7 @@ extension QuizModel {
         name = quiz.name
         description = quiz.description
         category = CategoryModel(rawValue: quiz.category.name.capitalized)!
-        difficulty = quiz.difficulty.rawValue.capitalized
+        difficulty = DifficultyModel(rawValue: quiz.difficulty.rawValue)!
         imageUrl = quiz.imageUrl
         numberOfQuestions = quiz.numberOfQuestions
     }

@@ -28,7 +28,7 @@ struct QuizModel {
     let name: String
     let description: String
     let category: CategoryModel
-    let difficulty: String
+    let difficulty: DifficultyModel
     let imageUrl: String
     let numberOfQuestions: Int
 
@@ -41,7 +41,7 @@ extension QuizModel {
         name = quiz.name
         description = quiz.description
         category = CategoryModel(rawValue: quiz.category.rawValue)!
-        difficulty = quiz.difficulty
+        difficulty = DifficultyModel(rawValue: quiz.difficulty.rawValue)!
         imageUrl = quiz.imageUrl
         numberOfQuestions = quiz.numberOfQuestions
     }
@@ -54,5 +54,13 @@ enum CategoryModel: String {
     case movies = "MOVIES"
     case music = "MUSIC"
     case geography = "GEOGRAPHY"
+
+}
+
+enum DifficultyModel: String {
+
+    case easy = "EASY"
+    case normal = "NORMAL"
+    case hard = "HARD"
 
 }

@@ -26,7 +26,7 @@ struct QuizNetworkDataModel: Decodable {
     let name: String
     let description: String
     let category: CategoryNetworkDataModel
-    let difficulty: String
+    let difficulty: DifficultyNetworkDataModel
     let imageUrl: String
     let numberOfQuestions: Int
 
@@ -38,5 +38,13 @@ enum CategoryNetworkDataModel: String, Decodable {
     case movies = "MOVIES"
     case music = "MUSIC"
     case geography = "GEOGRAPHY"
+
+}
+
+enum DifficultyNetworkDataModel: String, Decodable {
+
+    case easy = "EASY"
+    case normal = "NORMAL"
+    case hard = "HARD"
 
 }
