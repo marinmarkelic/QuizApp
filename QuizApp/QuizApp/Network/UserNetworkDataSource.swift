@@ -8,7 +8,7 @@ protocol UserNetworkDataSourceProtocol {
 
     func save(name: String) async throws -> UserInfoDataModel
 
-    func fetchQuizesFor(category: String) async throws -> [QuizResponseDataModel]
+    func fetchQuizzesFor(category: String) async throws -> [QuizResponseDataModel]
 
 }
 
@@ -49,15 +49,15 @@ class UserNetworkDataSource: UserNetworkDataSourceProtocol {
         try await UserInfoDataModel(userNetworkClient.save(name: name))
     }
 
-    func fetchQuizesFor(category: String) async throws -> [QuizResponseDataModel] {
-        let quizes = try await quizNetworkClient.fetchQuizesFor(category: category)
-        var responseQuizes: [QuizResponseDataModel] = []
+    func fetchQuizzesFor(category: String) async throws -> [QuizResponseDataModel] {
+        let quizzes = try await quizNetworkClient.fetchQuizzesFor(category: category)
+        var responseQuizzes: [QuizResponseDataModel] = []
 
-        for quiz in quizes {
-            responseQuizes.append(QuizResponseDataModel(quiz))
+        for quiz in quizzes {
+            responseQuizzes.append(QuizResponseDataModel(quiz))
         }
 
-        return responseQuizes
+        return responseQuizzes
     }
 
 }

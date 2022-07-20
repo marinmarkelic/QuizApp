@@ -20,14 +20,14 @@ class QuizViewModel {
 
         Task {
             do {
-                let quizzes = try await quizUseCase.fetchQuizes(for: type)
-                var responseQuizes: [Quiz] = []
+                let quizzes = try await quizUseCase.fetchQuizzes(for: type)
+                var responseQuizzes: [Quiz] = []
 
                 for quiz in quizzes {
-                    responseQuizes.append(Quiz(quiz))
+                    responseQuizzes.append(Quiz(quiz))
                 }
 
-                self.quizzes = responseQuizes
+                self.quizzes = responseQuizzes
             } catch _ {
 
             }

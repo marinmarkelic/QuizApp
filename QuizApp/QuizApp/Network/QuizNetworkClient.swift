@@ -1,6 +1,6 @@
 protocol QuizNetworkClientProtocol {
 
-    func fetchQuizesFor(category: String) async throws -> [QuizNetworkDataModel]
+    func fetchQuizzesFor(category: String) async throws -> [QuizNetworkDataModel]
 
 }
 
@@ -14,7 +14,7 @@ class QuizNetworkClient: QuizNetworkClientProtocol {
         self.networkClient = networkClient
     }
 
-    func fetchQuizesFor(category: String) async throws -> [QuizNetworkDataModel] {
+    func fetchQuizzesFor(category: String) async throws -> [QuizNetworkDataModel] {
         try await networkClient.get(path: "\(quizPath)\(category)")
     }
 

@@ -6,7 +6,7 @@ protocol UserRepositoryProtocol {
 
     func logOut()
 
-    func fetchQuizesFor(category: String) async throws -> [QuizRepoModel]
+    func fetchQuizzesFor(category: String) async throws -> [QuizRepoModel]
 
 }
 
@@ -47,15 +47,15 @@ class UserRepository: UserRepositoryProtocol {
         try await UserInfoRepoModel(userNetworkDataSource.save(name: userInfo.name))
     }
 
-    func fetchQuizesFor(category: String) async throws -> [QuizRepoModel] {
-        let quizes = try await userNetworkDataSource.fetchQuizesFor(category: category)
-        var responseQuizes: [QuizRepoModel] = []
+    func fetchQuizzesFor(category: String) async throws -> [QuizRepoModel] {
+        let quizzes = try await userNetworkDataSource.fetchQuizzesFor(category: category)
+        var responseQuizzes: [QuizRepoModel] = []
 
-        for quiz in quizes {
-            responseQuizes.append(QuizRepoModel(quiz))
+        for quiz in quizzes {
+            responseQuizzes.append(QuizRepoModel(quiz))
         }
 
-        return responseQuizes
+        return responseQuizzes
     }
 
 }

@@ -2,9 +2,9 @@ import UIKit
 
 protocol QuizUseCaseProtocol {
 
-    func fetchQuizesFor(category: Category) async throws -> [QuizModel]
+    func fetchQuizzesFor(category: Category) async throws -> [QuizModel]
 
-    func fetchQuizes(for type: CategoryType) async throws -> [QuizModel]
+    func fetchQuizzes(for type: CategoryType) async throws -> [QuizModel]
 
 }
 
@@ -16,26 +16,26 @@ class QuizUseCase: QuizUseCaseProtocol {
         self.userRepository = userRepository
     }
 
-    func fetchQuizesFor(category: Category) async throws -> [QuizModel] {
-        let quizes = try await userRepository.fetchQuizesFor(category: category.name.uppercased())
-        var responseQuizes: [QuizModel] = []
+    func fetchQuizzesFor(category: Category) async throws -> [QuizModel] {
+        let quizzes = try await userRepository.fetchQuizzesFor(category: category.name.uppercased())
+        var responseQuizzes: [QuizModel] = []
 
-        for quiz in quizes {
-            responseQuizes.append(QuizModel(quiz))
+        for quiz in quizzes {
+            responseQuizzes.append(QuizModel(quiz))
         }
 
-        return responseQuizes
+        return responseQuizzes
     }
 
-    func fetchQuizes(for type: CategoryType) async throws -> [QuizModel] {
-        let quizes = try await userRepository.fetchQuizesFor(category: Category(type: type).name.uppercased())
-        var responseQuizes: [QuizModel] = []
+    func fetchQuizzes(for type: CategoryType) async throws -> [QuizModel] {
+        let quizzes = try await userRepository.fetchQuizzesFor(category: Category(type: type).name.uppercased())
+        var responseQuizzes: [QuizModel] = []
 
-        for quiz in quizes {
-            responseQuizes.append(QuizModel(quiz))
+        for quiz in quizzes {
+            responseQuizzes.append(QuizModel(quiz))
         }
 
-        return responseQuizes
+        return responseQuizzes
     }
 
 }
