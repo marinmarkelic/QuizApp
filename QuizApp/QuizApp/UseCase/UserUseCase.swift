@@ -25,28 +25,3 @@ class UserUseCase: UserUseCaseProtocol {
     }
 
 }
-
-struct UserInfoModel {
-
-    let username: String
-    let name: String
-
-}
-
-extension UserInfoModel {
-
-    init(_ userInfo: UserInfoRepoModel) {
-        username = userInfo.username
-        name = userInfo.name
-    }
-
-}
-
-extension UserInfoRepoModel {
-
-    init(_ userInfo: UserInfoModel) {
-        username = userInfo.username
-        name = userInfo.name
-    }
-
-}
