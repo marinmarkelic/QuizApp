@@ -14,16 +14,15 @@ class QuizViewModel {
 
     @MainActor
     func changeCategory(for type: CategoryType) {
-        categories = CategoryType.allCases.map {
-            Category(type: $0, color: $0 == type ? findColor(for: type) : .white)
-        }
+        categories = CategoryType
+            .allCases
+            .map { Category(type: $0, color: $0 == type ? findColor(for: type) : .white) }
 
         Task {
             do {
                 let quizzes = try await quizUseCase.fetchQuizzes(for: getCategoryModel(from: type))
-                self.quizzes = quizzes.map {
-                    Quiz($0)
-                }
+                self.quizzes = quizzes
+                    .map { Quiz($0) }
             } catch _ {
 
             }
@@ -58,9 +57,9 @@ class QuizViewModel {
 
     @MainActor
     func loadCategories() {
-        categories = CategoryType.allCases.map {
-            Category(type: $0, color: findColor(for: $0))
-        }
+        categories = CategoryType
+            .allCases
+            .map { Category(type: $0, color: findColor(for: $0)) }
 
         changeCategory(for: categories[0].type)
     }

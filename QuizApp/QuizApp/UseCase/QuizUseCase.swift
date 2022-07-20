@@ -16,9 +16,8 @@ class QuizUseCase: QuizUseCaseProtocol {
 
     func fetchQuizzes(for type: CategoryModel) async throws -> [QuizModel] {
         let quizzes = try await quizRepository.fetchQuizzes(for: CategoryRepoModel(rawValue: type.rawValue)!)
-        return quizzes.map {
-            QuizModel($0)
-        }
+        return quizzes
+            .map { QuizModel($0) }
     }
 
 }

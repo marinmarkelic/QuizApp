@@ -15,9 +15,8 @@ class QuizRepository: QuizRepositoryProtocol {
     func fetchQuizzes(for category: CategoryRepoModel) async throws -> [QuizRepoModel] {
         let quizzes = try await quizNetworkDataSource.fetchQuizzes(
             for: CategoryDataModel(rawValue: category.rawValue)!)
-        return quizzes.map {
-            QuizRepoModel($0)
-        }
+        return quizzes
+            .map { QuizRepoModel($0) }
     }
 
 }

@@ -15,9 +15,8 @@ class QuizNetworkDataSource: QuizNetworkDataSourceProtocol {
     func fetchQuizzes(for category: CategoryDataModel) async throws -> [QuizResponseDataModel] {
         let quizzes = try await quizNetworkClient.fetchQuizzes(
             for: CategoryNetworkDataModel(rawValue: category.rawValue)!)
-        return quizzes.map {
-            QuizResponseDataModel($0)
-        }
+        return quizzes
+            .map { QuizResponseDataModel($0) }
     }
 
 }
