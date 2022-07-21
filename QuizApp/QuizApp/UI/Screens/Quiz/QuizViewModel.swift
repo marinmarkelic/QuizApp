@@ -23,7 +23,6 @@ class QuizViewModel {
         loadCategory(for: type)
     }
 
-    @MainActor
     private func loadCategory(for type: CategoryType) {
         Task {
             do {
