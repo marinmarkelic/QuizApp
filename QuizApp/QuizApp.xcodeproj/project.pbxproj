@@ -200,9 +200,9 @@
 		9C25C89528883B2D000C4C90 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				9C4807D728894475002D097D /* Screens */,
 				9C4807D52889443C002D097D /* Resources */,
 				9CC33B37287DBD1F002E9853 /* Common */,
+				9C4807D728894475002D097D /* Screens */,
 			);
 			path = UI;
 			sourceTree = "<group>";
