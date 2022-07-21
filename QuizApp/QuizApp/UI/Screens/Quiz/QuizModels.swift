@@ -36,11 +36,11 @@ enum Difficulty: String {
 
 enum CategoryType: CaseIterable {
 
+    case all
     case sport
     case movies
     case music
     case geography
-    case all
 
 }
 
