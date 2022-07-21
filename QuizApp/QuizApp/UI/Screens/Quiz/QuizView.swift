@@ -67,7 +67,7 @@ extension QuizView: ConstructViewsProtocol {
 
     private func makeCollectionViewLayout() {
         collectionViewLayout.headerReferenceSize = CGSize(width: 100, height: 20)
-        collectionViewLayout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
+        collectionViewLayout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
     }
 
 }
@@ -93,6 +93,10 @@ extension QuizView: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if category != .all {
+            return quizzes.count
+        }
+
         let category = CategoryType
             .allCases[section + 1]
         return quizzes
@@ -132,6 +136,11 @@ extension QuizView: UICollectionViewDataSource {
             withReuseIdentifier: QuizCell.reuseIdentifier,
             for: indexPath) as? QuizCell
         else { return QuizCell() }
+
+        let category = Array(Set(quizzes.map { $0.category }))
+            .sorted(by: { $0.hashValue > $1.hashValue })[indexPath.section]
+        let quizzes = quizzes
+            .filter { $0.category == category }
 
         cell.set(quiz: quizzes[indexPath.row])
 

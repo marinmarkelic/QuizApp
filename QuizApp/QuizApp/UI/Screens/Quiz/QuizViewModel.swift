@@ -26,7 +26,6 @@ class QuizViewModel {
             loadAllCategories()
         } else {
             loadCategory(for: type)
-
         }
     }
 
