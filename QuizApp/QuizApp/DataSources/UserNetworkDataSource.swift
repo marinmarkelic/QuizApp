@@ -45,35 +45,3 @@ class UserNetworkDataSource: UserNetworkDataSourceProtocol {
     }
 
 }
-
-struct LoginResponseDataModel {
-
-    let accessToken: String
-
-}
-
-extension LoginResponseDataModel {
-
-    init(_ loginResponse: LoginResponse) {
-        accessToken = loginResponse.accessToken
-    }
-
-}
-
-struct UserInfoDataModel {
-
-    let id: Int
-    let email: String
-    let name: String
-
-}
-
-extension UserInfoDataModel {
-
-    init(_ userData: UserInfoNetworkDataModel) {
-        email = userData.email
-        id = userData.id
-        name = userData.name
-    }
-
-}

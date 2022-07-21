@@ -23,13 +23,15 @@ class LoginNetworkClient: LoginNetworkClientProtocol {
 
     private let networkClient: NetworkClient
 
+    private let loginPath = "/v1/login"
+
     init(networkClient: NetworkClient) {
         self.networkClient = networkClient
     }
 
     func logIn(username: String, password: String) async throws -> LoginResponse {
         try await networkClient.post(
-            path: "/v1/login",
+            path: loginPath,
             body: LoginRequest(username: username, password: password))
     }
 
