@@ -95,11 +95,11 @@ extension QuizView: UICollectionViewDataSource {
             return quizzes.count
         }
 
-        let category = CategoryType
+        let sectionCategory = CategoryType
             .allCases[section + 1]
 
         return quizzes
-            .filter { $0.category.type == category }
+            .filter { $0.category.type == sectionCategory }
             .count
     }
 
