@@ -85,8 +85,7 @@ extension QuizView: UICollectionViewDelegateFlowLayout {
 extension QuizView: UICollectionViewDataSource {
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        let isAllSelected = category == .all
-        return isAllSelected ? CategoryType.allCases.count - 1 : 1
+        return quizzes.map { $0.category }.removingDuplicates().count
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
