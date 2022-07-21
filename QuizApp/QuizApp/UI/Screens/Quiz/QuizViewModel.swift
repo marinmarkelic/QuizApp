@@ -27,22 +27,27 @@ class QuizViewModel {
     private func loadCategory(for type: CategoryType) {
         Task {
             do {
-                let quizzes: [QuizModel]
-
-                guard let categoryModel = getCategoryModel(from: type) else {
-                    quizzes = try await quizUseCase.fetchAllQuizzes()
-                    self.quizzes = quizzes
-                        .map { Quiz($0) }
-                    return
-                }
-
-                quizzes = try await quizUseCase.fetchQuizzes(for: categoryModel)
-                self.quizzes = quizzes
-                    .map { Quiz($0) }
+                try await fetchQuizzes(for: type)
             } catch _ {
 
             }
         }
+    }
+
+    @MainActor
+    private func fetchQuizzes(for type: CategoryType) async throws {
+        let quizzes: [QuizModel]
+
+        guard let categoryModel = getCategoryModel(from: type) else {
+            quizzes = try await quizUseCase.fetchAllQuizzes()
+            self.quizzes = quizzes
+                .map { Quiz($0) }
+            return
+        }
+
+        quizzes = try await quizUseCase.fetchQuizzes(for: categoryModel)
+        self.quizzes = quizzes
+            .map { Quiz($0) }
     }
 
     private func findColor(for type: CategoryType) -> UIColor {
