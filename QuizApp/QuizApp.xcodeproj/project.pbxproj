@@ -217,7 +217,7 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
-		9C25C89628883BE1000C4C90 /* NetworkClients */ = {
+		9C25C89628883BE1000C4C90 /* Clients */ = {
 			isa = PBXGroup;
 			children = (
 				9CC4D6D5287C10450061F149 /* LoginNetworkClient.swift */,
@@ -226,7 +226,7 @@
 				9CFCC2FF28858A1E00B01343 /* QuizNetworkClient.swift */,
 				9CC33B32287DA19F002E9853 /* NetworkClient.swift */,
 			);
-			path = NetworkClients;
+			path = Clients;
 			sourceTree = "<group>";
 		};
 		9C25C89728883C03000C4C90 /* DataSources */ = {
@@ -318,7 +318,7 @@
 		9CC4D6DE287C552A0061F149 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				9C25C89628883BE1000C4C90 /* NetworkClients */,
+				9C25C89628883BE1000C4C90 /* Clients */,
 				9C25C89B28883C38000C4C90 /* Errors */,
 			);
 			path = Network;
