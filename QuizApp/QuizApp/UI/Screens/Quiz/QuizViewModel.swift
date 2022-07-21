@@ -13,6 +13,15 @@ class QuizViewModel {
     }
 
     @MainActor
+    func loadCategories() {
+        categories = CategoryType
+            .allCases
+            .map { Category(from: $0) }
+
+        changeCategory(for: categories[0].type)
+    }
+
+    @MainActor
     func changeCategory(for type: CategoryType) {
         quizzes = []
 
@@ -20,10 +29,10 @@ class QuizViewModel {
             .allCases
             .map { Category(type: $0, color: $0 == type ? findColor(for: type) : .white) }
 
-        loadCategory(for: type)
+        fetchCategoryQuizzes(for: type)
     }
 
-    private func loadCategory(for type: CategoryType) {
+    private func fetchCategoryQuizzes(for type: CategoryType) {
         Task {
             do {
                 try await fetchQuizzes(for: type)
@@ -77,15 +86,6 @@ class QuizViewModel {
         case .all:
             return nil
         }
-    }
-
-    @MainActor
-    func loadCategories() {
-        categories = CategoryType
-            .allCases
-            .map { Category(from: $0) }
-
-        changeCategory(for: categories[0].type)
     }
 
 }
