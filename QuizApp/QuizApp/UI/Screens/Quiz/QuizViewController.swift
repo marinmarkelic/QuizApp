@@ -73,14 +73,6 @@ class QuizViewController: UIViewController {
                 self?.categorySlider.reload(with: categories)
             }
             .store(in: &cancellables)
-
-        quizViewModel
-            .$selectedCategory
-            .removeDuplicates()
-            .sink { [weak self] category in
-                self?.quizView.reload(with: category)
-            }
-            .store(in: &cancellables)
     }
 
 }

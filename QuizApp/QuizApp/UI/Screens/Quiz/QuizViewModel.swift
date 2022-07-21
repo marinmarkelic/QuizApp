@@ -7,7 +7,6 @@ class QuizViewModel {
 
     @Published var quizzes: [Quiz] = []
     @Published var categories: [Category] = []
-    @Published var selectedCategory: CategoryType = .all
 
     init(quizUseCase: QuizUseCaseProtocol) {
         self.quizUseCase = quizUseCase
@@ -15,7 +14,6 @@ class QuizViewModel {
 
     @MainActor
     func changeCategory(for type: CategoryType) {
-        selectedCategory = type
         quizzes = []
 
         categories = CategoryType

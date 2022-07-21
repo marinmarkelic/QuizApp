@@ -3,7 +3,6 @@ import UIKit
 class QuizView: UIView {
 
     private var quizzes: [Quiz] = []
-    private var category: CategoryType?
 
     private var collectionView: UICollectionView!
     private var collectionViewLayout: UICollectionViewFlowLayout!
@@ -26,11 +25,6 @@ class QuizView: UIView {
 
     func reload(with quizzes: [Quiz]) {
         self.quizzes = quizzes
-        collectionView.reloadData()
-    }
-
-    func reload(with category: CategoryType) {
-        self.category = category
         collectionView.reloadData()
     }
 
@@ -95,7 +89,9 @@ extension QuizView: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if category != .all {
+        let categories = Array(Set(quizzes.map { $0.category })).sorted(by: {$0.hashValue > $1.hashValue})
+
+        if categories.count == 1 {
             return quizzes.count
         }
 
@@ -122,8 +118,7 @@ extension QuizView: UICollectionViewDataSource {
 
         let categories = Array(Set(quizzes.map { $0.category })).sorted(by: {$0.hashValue > $1.hashValue})
 
-        let dontShowHeader = category != .all || categories.count <= indexPath.section
-        quizHeader.isHidden = dontShowHeader
+        quizHeader.isHidden = categories.count == 1
 
         let sectionCategory = categories[indexPath.section]
         quizHeader.set(title: sectionCategory.name, color: sectionCategory.color)
