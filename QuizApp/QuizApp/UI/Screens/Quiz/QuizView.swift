@@ -40,7 +40,7 @@ extension QuizView: ConstructViewsProtocol {
 
     func createViews() {
         collectionViewLayout = UICollectionViewFlowLayout()
-        makeLayout()
+        makeCollectionViewLayout()
 
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
         addSubview(collectionView)
@@ -65,7 +65,7 @@ extension QuizView: ConstructViewsProtocol {
         }
     }
 
-    private func makeLayout() {
+    private func makeCollectionViewLayout() {
         collectionViewLayout.headerReferenceSize = CGSize(width: 100, height: 20)
         collectionViewLayout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
     }
@@ -89,7 +89,7 @@ extension QuizView: UICollectionViewDelegateFlowLayout {
 extension QuizView: UICollectionViewDataSource {
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        quizzes.map { $0.category }.removingDuplicates().count
+        Set(quizzes.map { $0.category }).count
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -113,13 +113,9 @@ extension QuizView: UICollectionViewDataSource {
             return QuizHeader()
         }
 
-        let categories = quizzes.map {
-            $0.category
-        }
-        .removingDuplicates()
+        let categories = Array(Set(quizzes.map { $0.category })).sorted(by: {$0.hashValue > $1.hashValue})
 
         let dontShowHeader = category != .all || categories.count <= indexPath.section
-
         quizHeader.isHidden = dontShowHeader
 
         let sectionCategory = categories[indexPath.section]
@@ -140,22 +136,6 @@ extension QuizView: UICollectionViewDataSource {
         cell.set(quiz: quizzes[indexPath.row])
 
         return cell
-    }
-
-}
-
-extension Array where Element: Hashable {
-
-    func removingDuplicates() -> [Element] {
-        var addedDict = [Element: Bool]()
-
-        return filter {
-            addedDict.updateValue(true, forKey: $0) == nil
-        }
-    }
-
-    mutating func removeDuplicates() {
-        self = self.removingDuplicates()
     }
 
 }
