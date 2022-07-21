@@ -1,3 +1,17 @@
+struct LoginResponseRepoModel {
+
+    var accessToken: String
+
+}
+
+extension LoginResponseRepoModel {
+
+    init(_ responseDataModel: LoginResponseDataModel) {
+        accessToken = responseDataModel.accessToken
+    }
+
+}
+
 struct UserInfoRepoModel {
 
     let username: String

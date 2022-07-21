@@ -19,24 +19,6 @@ extension UserInfo {
 
 }
 
-struct UserInfoDataModel {
-
-    let id: Int
-    let email: String
-    let name: String
-
-}
-
-extension UserInfoDataModel {
-
-    init(_ userData: UserInfoNetworkDataModel) {
-        email = userData.email
-        id = userData.id
-        name = userData.name
-    }
-
-}
-
 struct UserInfoNetworkDataModel: Decodable {
 
     let id: Int
