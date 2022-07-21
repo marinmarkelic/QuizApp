@@ -89,7 +89,9 @@ extension QuizView: UICollectionViewDelegateFlowLayout {
 extension QuizView: UICollectionViewDataSource {
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        Set(quizzes.map { $0.category }).count
+        Set(quizzes
+            .map { $0.category })
+        .count
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
