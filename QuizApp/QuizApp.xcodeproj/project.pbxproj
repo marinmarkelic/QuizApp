@@ -147,11 +147,11 @@
 			isa = PBXGroup;
 			children = (
 				9C25C89F28883CDD000C4C90 /* Main */,
-				9C5F21922886A3B6000C3511 /* Protocols */,
 				9CC4D6E5287C70170061F149 /* UseCase */,
 				9C25C88A2888109A000C4C90 /* Repositories */,
 				9CC4D6DE287C552A0061F149 /* Network */,
-				9CC33B20287D6832002E9853 /* Storage */,
+				9C25C89728883C03000C4C90 /* DataSources */,
+				9CC33B20287D6832002E9853 /* Util */,
 				9C25C89528883B2D000C4C90 /* UI */,
 				9CFCC2F62885546700B01343 /* Models */,
 				9C1953A32876F9A70051CEC6 /* Fonts */,
@@ -189,13 +189,6 @@
 			path = Quiz;
 			sourceTree = "<group>";
 		};
-		9C20BACC287EEA38009378FB /* Search */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Search;
-			sourceTree = "<group>";
-		};
 		9C25C88A2888109A000C4C90 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
@@ -212,7 +205,6 @@
 				9CC33B37287DBD1F002E9853 /* Shared */,
 				9C19538F2876D03B0051CEC6 /* Login */,
 				9C20BAC9287EEA06009378FB /* Quiz */,
-				9C20BACC287EEA38009378FB /* Search */,
 				9CC33B34287DBC97002E9853 /* User */,
 			);
 			path = UI;
@@ -230,13 +222,14 @@
 			path = NetworkClients;
 			sourceTree = "<group>";
 		};
-		9C25C89728883C03000C4C90 /* NetworkDataSources */ = {
+		9C25C89728883C03000C4C90 /* DataSources */ = {
 			isa = PBXGroup;
 			children = (
+				9CC33B21287D6848002E9853 /* UserDatabaseDataSource.swift */,
 				9CC4D6E1287C6AB30061F149 /* UserNetworkDataSource.swift */,
 				9C25C88D28881111000C4C90 /* QuizNetworkDataSource.swift */,
 			);
-			path = NetworkDataSources;
+			path = DataSources;
 			sourceTree = "<group>";
 		};
 		9C25C89B28883C38000C4C90 /* Errors */ = {
@@ -258,6 +251,8 @@
 		9C25C89F28883CDD000C4C90 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				9C1953A8287716FE0051CEC6 /* ConstructViewsProtocol.swift */,
+				9C1953B4287871E20051CEC6 /* AppRouterProtocol.swift */,
 				9C19536A287584750051CEC6 /* AppDelegate.swift */,
 				9C1953B2287871CC0051CEC6 /* AppRouter.swift */,
 				9CC4D6DF287C5A720061F149 /* AppDependencies.swift */,
@@ -302,22 +297,12 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		9C5F21922886A3B6000C3511 /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				9C1953A8287716FE0051CEC6 /* ConstructViewsProtocol.swift */,
-				9C1953B4287871E20051CEC6 /* AppRouterProtocol.swift */,
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
-		9CC33B20287D6832002E9853 /* Storage */ = {
+		9CC33B20287D6832002E9853 /* Util */ = {
 			isa = PBXGroup;
 			children = (
 				9CC33B25287D6E2B002E9853 /* SecureStorage.swift */,
-				9CC33B21287D6848002E9853 /* UserDatabaseDataSource.swift */,
 			);
-			path = Storage;
+			path = Util;
 			sourceTree = "<group>";
 		};
 		9CC33B34287DBC97002E9853 /* User */ = {
@@ -362,7 +347,6 @@
 		9CC4D6DE287C552A0061F149 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				9C25C89728883C03000C4C90 /* NetworkDataSources */,
 				9C25C89628883BE1000C4C90 /* NetworkClients */,
 				9C25C89B28883C38000C4C90 /* Errors */,
 			);
