@@ -2,6 +2,8 @@ protocol QuizNetworkClientProtocol {
 
     func fetchQuizzes(for category: CategoryNetworkDataModel) async throws -> [QuizNetworkDataModel]
 
+    func fetchAllQuizzes() async throws -> [QuizNetworkDataModel]
+
 }
 
 class QuizNetworkClient: QuizNetworkClientProtocol {
@@ -16,6 +18,10 @@ class QuizNetworkClient: QuizNetworkClientProtocol {
 
     func fetchQuizzes(for category: CategoryNetworkDataModel) async throws -> [QuizNetworkDataModel] {
         try await networkClient.get(path: "\(quizPath)\(category.rawValue)")
+    }
+
+    func fetchAllQuizzes() async throws -> [QuizNetworkDataModel] {
+        try await networkClient.get(path: "\(quizPath)")
     }
 
 }

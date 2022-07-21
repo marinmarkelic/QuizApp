@@ -181,7 +181,6 @@ enum CategoryRepoModel: String {
     case movies = "MOVIES"
     case music = "MUSIC"
     case geography = "GEOGRAPHY"
-    case all = ""
 
 }
 
@@ -225,7 +224,6 @@ enum CategoryDataModel: String {
     case movies = "MOVIES"
     case music = "MUSIC"
     case geography = "GEOGRAPHY"
-    case all = ""
 
 }
 
@@ -255,7 +253,6 @@ enum CategoryNetworkDataModel: String, Decodable {
     case movies = "MOVIES"
     case music = "MUSIC"
     case geography = "GEOGRAPHY"
-    case all = ""
 
 }
 
