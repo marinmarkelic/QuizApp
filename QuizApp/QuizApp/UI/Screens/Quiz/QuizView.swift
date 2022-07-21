@@ -110,19 +110,21 @@ extension QuizView: UICollectionViewDataSource {
             return QuizHeader()
         }
 
-        let hideHeader = Set(quizzes.map { $0.category.type }).count < 2
+        let categories = quizzes.map {
+            $0.category
+        }
+        .removingDuplicates()
 
-        if hideHeader {
+        let dontShowHeader = category != .all || categories.count <= indexPath.section
+
+        if dontShowHeader {
             quizHeader.isHidden = true
             return quizHeader
+        } else {
+            quizHeader.isHidden = false
         }
 
-        quizHeader.isHidden = false
-
-        let sectionCategory = quizzes.map {
-            $0.category
-        }[indexPath.row]
-
+        let sectionCategory = categories[indexPath.section]
         quizHeader.set(title: sectionCategory.name, color: sectionCategory.color)
 
         return quizHeader
@@ -140,6 +142,22 @@ extension QuizView: UICollectionViewDataSource {
         cell.set(quiz: quizzes[indexPath.row])
 
         return cell
+    }
+
+}
+
+extension Array where Element: Hashable {
+
+    func removingDuplicates() -> [Element] {
+        var addedDict = [Element: Bool]()
+
+        return filter {
+            addedDict.updateValue(true, forKey: $0) == nil
+        }
+    }
+
+    mutating func removeDuplicates() {
+        self = self.removingDuplicates()
     }
 
 }

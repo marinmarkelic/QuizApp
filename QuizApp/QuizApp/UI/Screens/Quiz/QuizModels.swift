@@ -44,7 +44,7 @@ enum CategoryType: CaseIterable {
 
 }
 
-struct Category: Equatable {
+struct Category: Equatable, Hashable {
 
     var name: String {
         switch type {
