@@ -137,13 +137,13 @@ extension QuizView: UICollectionViewDataSource {
             for: indexPath) as? QuizCell
         else { return QuizCell() }
 
-        let category = Array(Set(quizzes.map { $0.category }))
+        let sectionCategory = Array(Set(quizzes.map { $0.category }))
             .sorted { $0.hashValue > $1.hashValue }[indexPath.section]
-        let quizzes = quizzes
-            .filter { $0.category == category }
+        let sectionQuizzes = quizzes
+            .filter { $0.category == sectionCategory }
             .sorted { $0.difficulty < $1.difficulty }
 
-        cell.set(quiz: quizzes[indexPath.row])
+        cell.set(quiz: sectionQuizzes[indexPath.row])
 
         return cell
     }
