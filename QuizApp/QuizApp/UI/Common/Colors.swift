@@ -6,5 +6,6 @@ extension UIColor {
     static let moviesColor = UIColor(red: 86 / 255, green: 204 / 255, blue: 242 / 255, alpha: 1)
     static let musicColor = UIColor(red: 242 / 255, green: 24 / 255, blue: 24 / 255, alpha: 1)
     static let geographyColor = UIColor(red: 117 / 255, green: 74 / 255, blue: 21 / 255, alpha: 1)
+    static let allColor = UIColor(red: 117 / 255, green: 74 / 255, blue: 21 / 255, alpha: 1)
 
 }

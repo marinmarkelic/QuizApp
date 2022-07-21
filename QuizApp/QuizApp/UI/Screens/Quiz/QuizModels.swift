@@ -40,6 +40,7 @@ enum CategoryType: CaseIterable {
     case movies
     case music
     case geography
+    case all
 
 }
 
@@ -55,6 +56,8 @@ struct Category: Equatable {
             return "Music"
         case .geography:
             return "Geography"
+        case .all:
+            return "All"
         }
     }
 

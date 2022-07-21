@@ -18,11 +18,40 @@ class QuizViewModel {
             .allCases
             .map { Category(type: $0, color: $0 == type ? findColor(for: type) : .white) }
 
+        quizzes = []
+
+        if type == .all {
+            loadAllCategories()
+        } else {
+            loadCategory(for: type)
+
+        }
+    }
+
+    @MainActor
+    private func loadCategory(for type: CategoryType) {
         Task {
             do {
                 let quizzes = try await quizUseCase.fetchQuizzes(for: getCategoryModel(from: type))
                 self.quizzes = quizzes
                     .map { Quiz($0) }
+            } catch _ {
+
+            }
+        }
+    }
+
+    @MainActor
+    private func loadAllCategories() {
+        Task {
+            do {
+                for type in CategoryType.allCases
+                where type != .all {
+                    let quizzes = try await quizUseCase.fetchQuizzes(for: getCategoryModel(from: type))
+                    self.quizzes.append(
+                        contentsOf: quizzes
+                            .map { Quiz($0) })
+                }
             } catch _ {
 
             }
@@ -39,6 +68,8 @@ class QuizViewModel {
             return .musicColor
         case .geography:
             return .geographyColor
+        case .all:
+            return .allColor
         }
     }
 
@@ -52,6 +83,8 @@ class QuizViewModel {
             return CategoryModel.music
         case .geography:
             return CategoryModel.geography
+        case .all:
+            return CategoryModel.sport
         }
     }
 
