@@ -33,7 +33,7 @@ class QuizViewModel {
     private func loadCategory(for type: CategoryType) {
         Task {
             do {
-                let quizzes = try await quizUseCase.fetchQuizzes(for: getCategoryModel(from: type))
+                let quizzes = try await fetchQuizzes(for: type)
                 self.quizzes = quizzes
                     .map { Quiz($0) }
             } catch _ {
@@ -48,7 +48,7 @@ class QuizViewModel {
             do {
                 for type in CategoryType.allCases
                 where type != .all {
-                    let quizzes = try await quizUseCase.fetchQuizzes(for: getCategoryModel(from: type))
+                    let quizzes = try await fetchQuizzes(for: type)
                     self.quizzes.append(
                         contentsOf: quizzes
                             .map { Quiz($0) })
@@ -57,6 +57,14 @@ class QuizViewModel {
 
             }
         }
+    }
+
+    private func fetchQuizzes(for category: CategoryType) async throws -> [QuizModel] {
+        guard let category = getCategoryModel(from: category) else {
+            return []
+        }
+
+        return try await quizUseCase.fetchQuizzes(for: category)
     }
 
     private func findColor(for type: CategoryType) -> UIColor {
@@ -74,7 +82,7 @@ class QuizViewModel {
         }
     }
 
-    private func getCategoryModel(from type: CategoryType) -> CategoryModel {
+    private func getCategoryModel(from type: CategoryType) -> CategoryModel? {
         switch type {
         case .sport:
             return CategoryModel.sport
@@ -85,7 +93,7 @@ class QuizViewModel {
         case .geography:
             return CategoryModel.geography
         case .all:
-            return CategoryModel.sport
+            return nil
         }
     }
 
