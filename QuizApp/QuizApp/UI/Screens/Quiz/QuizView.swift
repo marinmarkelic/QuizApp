@@ -3,6 +3,7 @@ import UIKit
 class QuizView: UIView {
 
     private var quizzes: [Quiz] = []
+    private var category: CategoryType?
 
     private var collectionView: UICollectionView!
     private var collectionViewLayout: UICollectionViewFlowLayout!
@@ -23,6 +24,16 @@ class QuizView: UIView {
         collectionViewLayout.invalidateLayout()
     }
 
+    func reload(with quizzes: [Quiz]) {
+        self.quizzes = quizzes
+        collectionView.reloadData()
+    }
+
+    func reload(with category: CategoryType) {
+        self.category = category
+        collectionView.reloadData()
+    }
+
 }
 
 extension QuizView: ConstructViewsProtocol {
@@ -34,8 +45,15 @@ extension QuizView: ConstructViewsProtocol {
     }
 
     func styleViews() {
+        collectionViewLayout.headerReferenceSize = CGSize(width: 100, height: 20)
+        collectionViewLayout.sectionHeadersPinToVisibleBounds = true
+
         collectionView.collectionViewLayout = collectionViewLayout
         collectionView.register(QuizCell.self, forCellWithReuseIdentifier: QuizCell.reuseIdentifier)
+        collectionView.register(
+            QuizHeader.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: QuizHeader.reuseIdentifier)
         collectionView.showsVerticalScrollIndicator = false
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -46,11 +64,6 @@ extension QuizView: ConstructViewsProtocol {
         collectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-    }
-
-    func reload(with quizzes: [Quiz]) {
-        self.quizzes = quizzes
-        collectionView.reloadData()
     }
 
 }
@@ -72,11 +85,33 @@ extension QuizView: UICollectionViewDelegateFlowLayout {
 extension QuizView: UICollectionViewDataSource {
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        1
+        let isAllSelected = category == .all
+        return isAllSelected ? CategoryType.allCases.count - 1 : 1
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        quizzes.count
+        let category = CategoryType
+            .allCases[section + 1]
+        return quizzes
+            .filter { $0.category.type == category }
+            .count
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        viewForSupplementaryElementOfKind kind: String,
+        at indexPath: IndexPath
+    ) -> UICollectionReusableView {
+        guard let quizHeader = collectionView.dequeueReusableSupplementaryView(
+            ofKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: QuizHeader.reuseIdentifier,
+            for: indexPath
+        ) as? QuizHeader else {
+            return QuizHeader()
+        }
+
+        quizHeader.set(title: "Sport", color: .sportColor)
+        return quizHeader
     }
 
     func collectionView(
