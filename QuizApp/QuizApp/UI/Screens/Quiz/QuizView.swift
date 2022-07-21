@@ -101,6 +101,7 @@ extension QuizView: UICollectionViewDataSource {
 
         let category = CategoryType
             .allCases[section + 1]
+
         return quizzes
             .filter { $0.category.type == category }
             .count
