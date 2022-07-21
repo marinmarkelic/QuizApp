@@ -4,6 +4,8 @@ protocol QuizUseCaseProtocol {
 
     func fetchQuizzes(for type: CategoryModel) async throws -> [QuizModel]
 
+    func fetchAllQuizzes() async throws -> [QuizModel]
+
 }
 
 class QuizUseCase: QuizUseCaseProtocol {
@@ -15,14 +17,14 @@ class QuizUseCase: QuizUseCaseProtocol {
     }
 
     func fetchQuizzes(for type: CategoryModel) async throws -> [QuizModel] {
-        let quizzes: [QuizRepoModel]
+        let quizzes = try await quizRepository.fetchQuizzes(
+            for: CategoryRepoModel(rawValue: type.rawValue)!)
+        return quizzes
+            .map { QuizModel($0) }
+    }
 
-        if type == .all {
-            quizzes = try await quizRepository.fetchAllQuizzes()
-        } else {
-            quizzes = try await quizRepository.fetchQuizzes(for: CategoryRepoModel(rawValue: type.rawValue)!)
-        }
-
+    func fetchAllQuizzes() async throws -> [QuizModel] {
+        let quizzes = try await quizRepository.fetchAllQuizzes()
         return quizzes
             .map { QuizModel($0) }
     }

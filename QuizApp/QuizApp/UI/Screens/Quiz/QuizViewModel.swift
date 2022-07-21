@@ -27,7 +27,16 @@ class QuizViewModel {
     private func loadCategory(for type: CategoryType) {
         Task {
             do {
-                let quizzes = try await quizUseCase.fetchQuizzes(for: getCategoryModel(from: type))
+                let quizzes: [QuizModel]
+
+                guard let categoryModel = getCategoryModel(from: type) else {
+                    quizzes = try await quizUseCase.fetchAllQuizzes()
+                    self.quizzes = quizzes
+                        .map { Quiz($0) }
+                    return
+                }
+
+                quizzes = try await quizUseCase.fetchQuizzes(for: categoryModel)
                 self.quizzes = quizzes
                     .map { Quiz($0) }
             } catch _ {
@@ -51,7 +60,7 @@ class QuizViewModel {
         }
     }
 
-    private func getCategoryModel(from type: CategoryType) -> CategoryModel {
+    private func getCategoryModel(from type: CategoryType) -> CategoryModel? {
         switch type {
         case .sport:
             return CategoryModel.sport
@@ -62,7 +71,7 @@ class QuizViewModel {
         case .geography:
             return CategoryModel.geography
         case .all:
-            return CategoryModel.all
+            return nil
         }
     }
 

@@ -98,8 +98,6 @@ extension Category {
             self.init(type: CategoryType.music, color: .musicColor)
         case .geography:
             self.init(type: CategoryType.geography, color: .geographyColor)
-        case .all:
-            self.init(type: CategoryType.all, color: .allColor)
         }
     }
 

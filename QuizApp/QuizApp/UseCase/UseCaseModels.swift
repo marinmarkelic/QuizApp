@@ -65,7 +65,6 @@ enum CategoryModel: String {
     case movies = "MOVIES"
     case music = "MUSIC"
     case geography = "GEOGRAPHY"
-    case all = ""
 
 }
 
