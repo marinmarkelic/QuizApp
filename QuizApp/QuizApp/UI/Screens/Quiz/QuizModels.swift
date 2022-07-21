@@ -105,50 +105,6 @@ extension Category {
 
 }
 
-struct QuizModel {
-
-    let id: Int
-    let name: String
-    let description: String
-    let category: CategoryModel
-    let difficulty: DifficultyModel
-    let imageUrl: String
-    let numberOfQuestions: Int
-
-}
-
-extension QuizModel {
-
-    init(_ quiz: QuizRepoModel) {
-        id = quiz.id
-        name = quiz.name
-        description = quiz.description
-        category = CategoryModel(rawValue: quiz.category.rawValue)!
-        difficulty = DifficultyModel(rawValue: quiz.difficulty.rawValue)!
-        imageUrl = quiz.imageUrl
-        numberOfQuestions = quiz.numberOfQuestions
-    }
-
-}
-
-enum CategoryModel: String {
-
-    case sport = "SPORT"
-    case movies = "MOVIES"
-    case music = "MUSIC"
-    case geography = "GEOGRAPHY"
-    case all = ""
-
-}
-
-enum DifficultyModel: String {
-
-    case easy = "EASY"
-    case normal = "NORMAL"
-    case hard = "HARD"
-
-}
-
 struct QuizRepoModel {
 
     let id: Int

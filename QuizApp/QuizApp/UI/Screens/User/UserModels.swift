@@ -19,31 +19,6 @@ extension UserInfo {
 
 }
 
-extension UserInfoModel {
-
-    init(_ userInfo: UserInfo) {
-        username = userInfo.username
-        name = userInfo.name
-    }
-
-}
-
-struct UserInfoModel {
-
-    let username: String
-    let name: String
-
-}
-
-extension UserInfoModel {
-
-    init(_ userInfo: UserInfoRepoModel) {
-        username = userInfo.username
-        name = userInfo.name
-    }
-
-}
-
 extension UserInfoRepoModel {
 
     init(_ userInfo: UserInfoModel) {
