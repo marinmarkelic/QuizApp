@@ -89,14 +89,13 @@ extension QuizView: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let categories = Array(Set(quizzes.map { $0.category })).sorted(by: {$0.hashValue > $1.hashValue})
+        let categories = Array(Set(quizzes.map { $0.category })).sorted(by: {$0.name > $1.name})
 
         if categories.count == 1 {
             return quizzes.count
         }
 
-        let sectionCategory = CategoryType
-            .allCases[section + 1]
+        let sectionCategory = CategoryType.allCases[section + 1]
 
         return quizzes
             .filter { $0.category.type == sectionCategory }
@@ -116,7 +115,7 @@ extension QuizView: UICollectionViewDataSource {
             return QuizHeader()
         }
 
-        let categories = Array(Set(quizzes.map { $0.category })).sorted(by: {$0.hashValue > $1.hashValue})
+        let categories = Array(Set(quizzes.map { $0.category })).sorted(by: {$0.name > $1.name})
 
         quizHeader.isHidden = categories.count == 1
 
@@ -136,7 +135,7 @@ extension QuizView: UICollectionViewDataSource {
         else { return QuizCell() }
 
         let sectionCategory = Array(Set(quizzes.map { $0.category }))
-            .sorted { $0.hashValue > $1.hashValue }[indexPath.section]
+            .sorted { $0.name > $1.name }[indexPath.section]
         let sectionQuizzes = quizzes
             .filter { $0.category == sectionCategory }
             .sorted { $0.difficulty < $1.difficulty }

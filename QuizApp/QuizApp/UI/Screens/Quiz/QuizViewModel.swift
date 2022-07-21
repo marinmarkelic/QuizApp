@@ -20,49 +20,20 @@ class QuizViewModel {
             .allCases
             .map { Category(type: $0, color: $0 == type ? findColor(for: type) : .white) }
 
-        if type == .all {
-            loadAllCategories()
-        } else {
-            loadCategory(for: type)
-        }
+        loadCategory(for: type)
     }
 
     @MainActor
     private func loadCategory(for type: CategoryType) {
         Task {
             do {
-                let quizzes = try await fetchQuizzes(for: type)
+                let quizzes = try await quizUseCase.fetchQuizzes(for: getCategoryModel(from: type))
                 self.quizzes = quizzes
                     .map { Quiz($0) }
             } catch _ {
 
             }
         }
-    }
-
-    @MainActor
-    private func loadAllCategories() {
-        Task {
-            do {
-                for type in CategoryType.allCases
-                where type != .all {
-                    let quizzes = try await fetchQuizzes(for: type)
-                    self.quizzes.append(
-                        contentsOf: quizzes
-                            .map { Quiz($0) })
-                }
-            } catch _ {
-
-            }
-        }
-    }
-
-    private func fetchQuizzes(for category: CategoryType) async throws -> [QuizModel] {
-        guard let category = getCategoryModel(from: category) else {
-            return []
-        }
-
-        return try await quizUseCase.fetchQuizzes(for: category)
     }
 
     private func findColor(for type: CategoryType) -> UIColor {
@@ -80,7 +51,7 @@ class QuizViewModel {
         }
     }
 
-    private func getCategoryModel(from type: CategoryType) -> CategoryModel? {
+    private func getCategoryModel(from type: CategoryType) -> CategoryModel {
         switch type {
         case .sport:
             return CategoryModel.sport
@@ -91,7 +62,7 @@ class QuizViewModel {
         case .geography:
             return CategoryModel.geography
         case .all:
-            return nil
+            return CategoryModel.all
         }
     }
 

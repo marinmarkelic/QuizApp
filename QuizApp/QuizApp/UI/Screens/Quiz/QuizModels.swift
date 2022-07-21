@@ -28,12 +28,23 @@ extension Quiz {
 
 enum Difficulty: String, Comparable {
 
+    private var level: Int {
+        switch self {
+        case .easy:
+            return 1
+        case .normal:
+            return 2
+        case .hard:
+            return 3
+        }
+    }
+
     case easy = "EASY"
     case normal = "NORMAL"
     case hard = "HARD"
 
     static func < (lhs: Difficulty, rhs: Difficulty) -> Bool {
-        lhs.rawValue < rhs.rawValue
+        lhs.level < rhs.level
     }
 
 }
@@ -48,7 +59,7 @@ enum CategoryType: CaseIterable {
 
 }
 
-struct Category: Equatable, Hashable {
+struct Category: Hashable {
 
     var name: String {
         switch type {
@@ -87,6 +98,8 @@ extension Category {
             self.init(type: CategoryType.music, color: .musicColor)
         case .geography:
             self.init(type: CategoryType.geography, color: .geographyColor)
+        case .all:
+            self.init(type: CategoryType.all, color: .allColor)
         }
     }
 
@@ -124,6 +137,7 @@ enum CategoryModel: String {
     case movies = "MOVIES"
     case music = "MUSIC"
     case geography = "GEOGRAPHY"
+    case all = ""
 
 }
 
@@ -167,6 +181,7 @@ enum CategoryRepoModel: String {
     case movies = "MOVIES"
     case music = "MUSIC"
     case geography = "GEOGRAPHY"
+    case all = ""
 
 }
 
@@ -210,6 +225,7 @@ enum CategoryDataModel: String {
     case movies = "MOVIES"
     case music = "MUSIC"
     case geography = "GEOGRAPHY"
+    case all = ""
 
 }
 
@@ -239,6 +255,7 @@ enum CategoryNetworkDataModel: String, Decodable {
     case movies = "MOVIES"
     case music = "MUSIC"
     case geography = "GEOGRAPHY"
+    case all = ""
 
 }
 
