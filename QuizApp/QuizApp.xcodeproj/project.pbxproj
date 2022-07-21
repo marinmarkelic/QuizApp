@@ -154,7 +154,6 @@
 				9CC33B20287D6832002E9853 /* Util */,
 				9C25C89528883B2D000C4C90 /* UI */,
 				9CFCC2F62885546700B01343 /* Models */,
-				9C1953A32876F9A70051CEC6 /* Fonts */,
 				9C195373287584770051CEC6 /* Assets.xcassets */,
 				9C195375287584770051CEC6 /* LaunchScreen.storyboard */,
 				9C195378287584770051CEC6 /* Info.plist */,
@@ -201,11 +200,9 @@
 		9C25C89528883B2D000C4C90 /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				9C25C89E28883CBB000C4C90 /* Navigation */,
-				9CC33B37287DBD1F002E9853 /* Shared */,
-				9C19538F2876D03B0051CEC6 /* Login */,
-				9C20BAC9287EEA06009378FB /* Quiz */,
-				9CC33B34287DBC97002E9853 /* User */,
+				9C4807D728894475002D097D /* Screens */,
+				9C4807D52889443C002D097D /* Resources */,
+				9CC33B37287DBD1F002E9853 /* Common */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -297,6 +294,25 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		9C4807D52889443C002D097D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9C1953A32876F9A70051CEC6 /* Fonts */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		9C4807D728894475002D097D /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				9C19538F2876D03B0051CEC6 /* Login */,
+				9C25C89E28883CBB000C4C90 /* Navigation */,
+				9C20BAC9287EEA06009378FB /* Quiz */,
+				9CC33B34287DBC97002E9853 /* User */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
 		9CC33B20287D6832002E9853 /* Util */ = {
 			isa = PBXGroup;
 			children = (
@@ -314,14 +330,15 @@
 			path = User;
 			sourceTree = "<group>";
 		};
-		9CC33B37287DBD1F002E9853 /* Shared */ = {
+		9CC33B37287DBD1F002E9853 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				9C5F21932886AFF5000C3511 /* Colors.swift */,
 				9C1953AA287725590051CEC6 /* TextFieldView.swift */,
 				9C19539B2876F1ED0051CEC6 /* GradientView.swift */,
 				9C20BAD5287F01AC009378FB /* CustomButton.swift */,
 			);
-			path = Shared;
+			path = Common;
 			sourceTree = "<group>";
 		};
 		9CC4D6D8287C10F40061F149 /* View */ = {
@@ -367,7 +384,6 @@
 		9CFCC2F62885546700B01343 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				9C5F21932886AFF5000C3511 /* Colors.swift */,
 				9C25C8AF288840A3000C4C90 /* LoginModels.swift */,
 				9CFCC2F72885547600B01343 /* QuizModels.swift */,
 				9C25C8B12888428A000C4C90 /* UserModels.swift */,
