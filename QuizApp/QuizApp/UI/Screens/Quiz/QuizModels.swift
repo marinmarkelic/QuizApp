@@ -1,6 +1,6 @@
 import UIKit
 
-struct Quiz {
+struct Quiz: Equatable {
 
     let id: Int
     let name: String

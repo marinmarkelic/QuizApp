@@ -60,6 +60,7 @@ class QuizViewController: UIViewController {
     func bindViewModel() {
         quizViewModel
             .$quizzes
+            .removeDuplicates()
             .sink { [weak self] quizzes in
                 self?.quizView.reload(with: quizzes)
             }

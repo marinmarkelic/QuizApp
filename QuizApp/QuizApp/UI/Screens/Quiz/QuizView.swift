@@ -110,7 +110,21 @@ extension QuizView: UICollectionViewDataSource {
             return QuizHeader()
         }
 
-        quizHeader.set(title: "Sport", color: .sportColor)
+        guard let sectionCategory = (quizzes.filter {
+            $0.category.type == CategoryType.allCases[indexPath.row + 1]
+        }.first?.category
+        ) else {
+            return quizHeader
+        }
+
+        print(sectionCategory.name)
+
+        if category == .all {
+            quizHeader.set(title: sectionCategory.name, color: sectionCategory.color)
+        } else {
+            quizHeader.isHidden = true
+        }
+
         return quizHeader
     }
 
