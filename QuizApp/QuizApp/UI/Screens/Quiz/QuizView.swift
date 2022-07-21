@@ -61,7 +61,7 @@ extension QuizView: ConstructViewsProtocol {
 
     private func makeCollectionViewLayout() {
         collectionViewLayout.headerReferenceSize = CGSize(width: 100, height: 20)
-        collectionViewLayout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        collectionViewLayout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 30, right: 0)
     }
 
 }
