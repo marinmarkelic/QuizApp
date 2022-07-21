@@ -119,6 +119,8 @@ extension QuizView: UICollectionViewDataSource {
 
         print(sectionCategory.name)
 
+        quizHeader.set(title: sectionCategory.name, color: sectionCategory.color)
+
         if category == .all {
             quizHeader.set(title: sectionCategory.name, color: sectionCategory.color)
         } else {
