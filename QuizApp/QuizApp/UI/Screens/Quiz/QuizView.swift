@@ -40,14 +40,13 @@ extension QuizView: ConstructViewsProtocol {
 
     func createViews() {
         collectionViewLayout = UICollectionViewFlowLayout()
+        makeLayout()
+
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
         addSubview(collectionView)
     }
 
     func styleViews() {
-        collectionViewLayout.headerReferenceSize = CGSize(width: 100, height: 20)
-        collectionViewLayout.sectionHeadersPinToVisibleBounds = true
-
         collectionView.collectionViewLayout = collectionViewLayout
         collectionView.register(QuizCell.self, forCellWithReuseIdentifier: QuizCell.reuseIdentifier)
         collectionView.register(
@@ -64,6 +63,11 @@ extension QuizView: ConstructViewsProtocol {
         collectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+    }
+
+    private func makeLayout() {
+        collectionViewLayout.headerReferenceSize = CGSize(width: 100, height: 20)
+        collectionViewLayout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
     }
 
 }
@@ -85,7 +89,7 @@ extension QuizView: UICollectionViewDelegateFlowLayout {
 extension QuizView: UICollectionViewDataSource {
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return quizzes.map { $0.category }.removingDuplicates().count
+        quizzes.map { $0.category }.removingDuplicates().count
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -116,12 +120,7 @@ extension QuizView: UICollectionViewDataSource {
 
         let dontShowHeader = category != .all || categories.count <= indexPath.section
 
-        if dontShowHeader {
-            quizHeader.isHidden = true
-            return quizHeader
-        } else {
-            quizHeader.isHidden = false
-        }
+        quizHeader.isHidden = dontShowHeader
 
         let sectionCategory = categories[indexPath.section]
         quizHeader.set(title: sectionCategory.name, color: sectionCategory.color)
