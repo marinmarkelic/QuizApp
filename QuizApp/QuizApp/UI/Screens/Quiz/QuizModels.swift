@@ -26,11 +26,15 @@ extension Quiz {
 
 }
 
-enum Difficulty: String {
+enum Difficulty: String, Comparable {
 
     case easy = "EASY"
     case normal = "NORMAL"
     case hard = "HARD"
+
+    static func < (lhs: Difficulty, rhs: Difficulty) -> Bool {
+        lhs.rawValue < rhs.rawValue
+    }
 
 }
 
