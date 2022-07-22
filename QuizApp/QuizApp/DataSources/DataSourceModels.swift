@@ -6,7 +6,7 @@ struct LoginResponseDataModel: Decodable {
 
 extension LoginResponseDataModel {
 
-    init(_ loginResponse: LoginResponse) {
+    init(_ loginResponse: LoginResponseNetworkDataModel) {
         accessToken = loginResponse.accessToken
     }
 

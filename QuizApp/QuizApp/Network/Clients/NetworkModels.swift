@@ -1,3 +1,16 @@
+struct LoginRequestNetworkDataModel: Encodable {
+
+    let username: String
+    let password: String
+
+}
+
+struct LoginResponseNetworkDataModel: Decodable {
+
+    let accessToken: String
+
+}
+
 struct UserInfoNetworkDataModel: Decodable {
 
     let id: Int

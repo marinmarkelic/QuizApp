@@ -18,3 +18,12 @@ extension UserInfo {
     }
 
 }
+
+extension UserInfoModel {
+
+    init(_ userInfo: UserInfo) {
+        username = userInfo.username
+        name = userInfo.name
+    }
+
+}
