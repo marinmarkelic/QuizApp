@@ -1,3 +1,4 @@
+import Resolver
 class AppDependencies {
 
     private let baseUrl = "https://five-ios-quiz-app.herokuapp.com/api"
@@ -62,5 +63,14 @@ class AppDependencies {
     lazy var networkClient: NetworkClient = {
         NetworkClient(secureStorage: secureStorage, baseUrl: baseUrl)
     }()
+
+}
+
+extension Resolver: ResolverRegistering {
+
+    public static func registerAllServices() {
+        register { LoginUseCase(userRepository: AppDependencies().userRepository) }
+            .implements(LoginUseCaseProtocol.self)
+    }
 
 }
