@@ -1,10 +1,11 @@
 import Combine
 import UIKit
+import Resolver
 
 class LoginViewModel {
 
     private let appRouter: AppRouterProtocol
-    private let loginUseCase: LoginUseCaseProtocol
+    private let loginUseCase: LoginUseCaseProtocol = Resolver.resolve()
 
     @Published var isLoginButtonEnabled = false
     @Published var errorText = ""
@@ -13,7 +14,7 @@ class LoginViewModel {
     private var password = ""
 
     init(loginUseCase: LoginUseCaseProtocol, appRouter: AppRouterProtocol) {
-        self.loginUseCase = loginUseCase
+//        self.loginUseCase = loginUseCase
         self.appRouter = appRouter
     }
 
