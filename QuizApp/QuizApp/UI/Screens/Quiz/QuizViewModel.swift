@@ -35,7 +35,6 @@ class QuizViewModel {
     private func fetchCategoryQuizzes(for type: CategoryType) {
         Task {
             do {
-                throw RequestError.dataCodingError
                 try await fetchQuizzes(for: type)
             } catch _ {
                 errorMessage = """
