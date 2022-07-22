@@ -47,7 +47,7 @@ extension ErrorView: ConstructViewsProtocol {
         title.textColor = .white
         title.textAlignment = .center
 
-        desc.font = UIFont(name: "SourceSansPro-Regular", size: 28)
+        desc.font = UIFont(name: "SourceSansPro-Regular", size: 16)
         desc.textColor = .white
         desc.numberOfLines = 0
         desc.textAlignment = .center

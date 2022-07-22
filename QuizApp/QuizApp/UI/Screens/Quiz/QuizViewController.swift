@@ -63,6 +63,7 @@ class QuizViewController: UIViewController {
     func bindViewModel() {
         quizViewModel
             .$quizzes
+            .dropFirst()
             .removeDuplicates()
             .sink { [weak self] quizzes in
                 guard let self = self else { return }
