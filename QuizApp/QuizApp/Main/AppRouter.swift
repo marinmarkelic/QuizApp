@@ -1,27 +1,26 @@
 import UIKit
+import Resolver
 
 class AppRouter: AppRouterProtocol {
 
-    private let appDependencies: AppDependencies
     private let navigationController: UINavigationController
 
-    init(navigationController: UINavigationController, appDependencies: AppDependencies) {
+    init(navigationController: UINavigationController) {
         self.navigationController = navigationController
-        self.appDependencies = appDependencies
     }
 
     func showLogin() {
         let loginViewController = LoginViewController(
-            viewModel: LoginViewModel(loginUseCase: appDependencies.loginUseCase, appRouter: self))
+            viewModel: LoginViewModel(loginUseCase: Resolver.resolve(), appRouter: self))
         navigationController.setViewControllers([loginViewController], animated: true)
     }
 
     func showHome() {
-        let quizViewController = QuizViewController(quizUseCase: appDependencies.quizUseCase)
+        let quizViewController = QuizViewController(quizUseCase: Resolver.resolve())
         let userViewController = UserViewController(
             appRouter: self,
-            userUseCase: appDependencies.userUseCase,
-            logoutUseCase: appDependencies.logoutUseCase)
+            userUseCase: Resolver.resolve(),
+            logoutUseCase: Resolver.resolve())
 
         let viewControllers = [quizViewController, userViewController]
 

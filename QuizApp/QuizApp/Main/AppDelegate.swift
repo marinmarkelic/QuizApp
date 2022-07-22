@@ -1,9 +1,9 @@
 import UIKit
+import Resolver
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    private let appDependencies = AppDependencies()
     private var appRouter: AppRouterProtocol!
 
     var window: UIWindow?
@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
 
-        appRouter = AppRouter(navigationController: navigationController, appDependencies: appDependencies)
+        appRouter = AppRouter(navigationController: navigationController)
 
         showInitialViewController()
 
@@ -29,13 +29,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func showInitialViewController() {
         Task {
             do {
-                try await appDependencies.userNetworkDataSource.check()
+                try await Resolver.resolve(UserNetworkDataSourceProtocol.self).check()
 
                 DispatchQueue.main.async { [weak self] in
                     self?.appRouter.showHome()
                 }
             } catch {
-                appDependencies.secureStorage.deleteAccessToken()
+                Resolver.resolve(SecureStorageProtocol.self).deleteAccessToken()
 
                 DispatchQueue.main.async { [weak self] in
                     self?.appRouter.showLogin()
