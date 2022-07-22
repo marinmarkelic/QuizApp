@@ -18,6 +18,9 @@ class QuizViewController: UIViewController {
     private var categorySlider: CategorySlider!
     private var quizView: QuizView!
 
+    private var noQuizErrorLabel: UILabel!
+    private var errorView: ErrorView!
+
     init(quizUseCase: QuizUseCaseProtocol) {
         super.init(nibName: nil, bundle: nil)
 
@@ -60,9 +63,13 @@ class QuizViewController: UIViewController {
     func bindViewModel() {
         quizViewModel
             .$quizzes
+            .dropFirst()
             .removeDuplicates()
             .sink { [weak self] quizzes in
-                self?.quizView.reload(with: quizzes)
+                guard let self = self else { return }
+
+                self.quizView.reload(with: quizzes)
+                self.noQuizErrorLabel.isHidden = !quizzes.isEmpty
             }
             .store(in: &cancellables)
 
@@ -71,6 +78,17 @@ class QuizViewController: UIViewController {
             .removeDuplicates()
             .sink { [weak self] categories in
                 self?.categorySlider.reload(with: categories)
+            }
+            .store(in: &cancellables)
+
+        quizViewModel
+            .$errorMessage
+            .removeDuplicates()
+            .sink { [weak self] errorMessage in
+                guard let self = self else { return }
+
+                self.errorView.isHidden = errorMessage.isEmpty
+                self.errorView.set(description: errorMessage)
             }
             .store(in: &cancellables)
     }
@@ -96,6 +114,12 @@ extension QuizViewController: ConstructViewsProtocol {
 
         quizView = QuizView()
         quizContainer.addSubview(quizView)
+
+        noQuizErrorLabel = UILabel()
+        mainView.addSubview(noQuizErrorLabel)
+
+        errorView = ErrorView()
+        mainView.addSubview(errorView)
     }
 
     func styleViews() {
@@ -105,6 +129,13 @@ extension QuizViewController: ConstructViewsProtocol {
         tabBarController?.navigationItem.titleView = titleView
 
         categorySlider.delegate = self
+
+        noQuizErrorLabel.text = "There are no quizzes for this category"
+        noQuizErrorLabel.font = UIFont(name: "SourceSansPro-Bold", size: 20)
+        noQuizErrorLabel.textColor = .white
+        noQuizErrorLabel.numberOfLines = 0
+        noQuizErrorLabel.textAlignment = .center
+        noQuizErrorLabel.isHidden = true
     }
 
     func defineLayoutForViews() {
@@ -130,6 +161,16 @@ extension QuizViewController: ConstructViewsProtocol {
         quizView.snp.makeConstraints {
             $0.top.equalTo(categorySlider.snp.bottom).offset(20)
             $0.leading.trailing.bottom.equalToSuperview()
+        }
+
+        noQuizErrorLabel.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+        }
+
+        errorView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(50)
         }
     }
 

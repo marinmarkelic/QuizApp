@@ -7,6 +7,7 @@ class QuizViewModel {
 
     @Published var quizzes: [Quiz] = []
     @Published var categories: [Category] = []
+    @Published var errorMessage: String = ""
 
     init(quizUseCase: QuizUseCaseProtocol) {
         self.quizUseCase = quizUseCase
@@ -23,8 +24,6 @@ class QuizViewModel {
 
     @MainActor
     func changeCategory(for type: CategoryType) {
-        quizzes = []
-
         categories = CategoryType
             .allCases
             .map { Category(type: $0, color: $0 == type ? findColor(for: type) : .white) }
@@ -32,12 +31,17 @@ class QuizViewModel {
         fetchCategoryQuizzes(for: type)
     }
 
+    @MainActor
     private func fetchCategoryQuizzes(for type: CategoryType) {
         Task {
             do {
+                errorMessage = ""
                 try await fetchQuizzes(for: type)
             } catch _ {
-
+                errorMessage = """
+Data can't be reached.
+Please try again
+"""
             }
         }
     }
