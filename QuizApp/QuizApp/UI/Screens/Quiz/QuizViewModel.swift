@@ -35,6 +35,7 @@ class QuizViewModel {
     private func fetchCategoryQuizzes(for type: CategoryType) {
         Task {
             do {
+                errorMessage = ""
                 try await fetchQuizzes(for: type)
             } catch _ {
                 errorMessage = """
