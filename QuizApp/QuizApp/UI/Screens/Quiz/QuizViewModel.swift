@@ -46,7 +46,7 @@ class QuizViewModel {
     private func fetchQuizzes(for type: CategoryType) async throws {
         let quizzes: [QuizModel]
 
-        guard let categoryModel = getCategoryModel(from: type) else {
+        guard let categoryModel = CategoryModel(rawValue: type.rawValue) else {
             quizzes = try await quizUseCase.fetchAllQuizzes()
             self.quizzes = quizzes
                 .map { Quiz($0) }
@@ -70,21 +70,6 @@ class QuizViewModel {
             return .geographyColor
         case .all:
             return .allColor
-        }
-    }
-
-    private func getCategoryModel(from type: CategoryType) -> CategoryModel? {
-        switch type {
-        case .sport:
-            return CategoryModel.sport
-        case .movies:
-            return CategoryModel.movies
-        case .music:
-            return CategoryModel.music
-        case .geography:
-            return CategoryModel.geography
-        case .all:
-            return nil
         }
     }
 

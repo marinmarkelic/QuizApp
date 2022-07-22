@@ -49,13 +49,13 @@ enum Difficulty: String, Comparable {
 
 }
 
-enum CategoryType: CaseIterable {
+enum CategoryType: String, CaseIterable {
 
-    case all
-    case sport
-    case movies
-    case music
-    case geography
+    case all = "ALL"
+    case sport = "SPORT"
+    case movies = "MOVIES"
+    case music = "MUSIC"
+    case geography = "GEOGRAPHY"
 
 }
 
