@@ -18,7 +18,7 @@ class QuizViewController: UIViewController {
     private var categorySlider: CategorySlider!
     private var quizView: QuizView!
 
-    private var errorLabel: UILabel!
+    private var noQuizErrorLabel: UILabel!
     private var errorView: ErrorView!
 
     init(quizUseCase: QuizUseCaseProtocol) {
@@ -69,7 +69,7 @@ class QuizViewController: UIViewController {
                 guard let self = self else { return }
 
                 self.quizView.reload(with: quizzes)
-                self.errorLabel.isHidden = quizzes.count != 0
+                self.noQuizErrorLabel.isHidden = !quizzes.isEmpty
             }
             .store(in: &cancellables)
 
@@ -87,7 +87,7 @@ class QuizViewController: UIViewController {
             .sink { [weak self] errorMessage in
                 guard let self = self else { return }
 
-                self.errorView.isHidden = errorMessage == ""
+                self.errorView.isHidden = errorMessage.isEmpty
                 self.errorView.set(description: errorMessage)
             }
             .store(in: &cancellables)
@@ -115,8 +115,8 @@ extension QuizViewController: ConstructViewsProtocol {
         quizView = QuizView()
         quizContainer.addSubview(quizView)
 
-        errorLabel = UILabel()
-        mainView.addSubview(errorLabel)
+        noQuizErrorLabel = UILabel()
+        mainView.addSubview(noQuizErrorLabel)
 
         errorView = ErrorView()
         mainView.addSubview(errorView)
@@ -130,12 +130,12 @@ extension QuizViewController: ConstructViewsProtocol {
 
         categorySlider.delegate = self
 
-        errorLabel.text = "There are no quizzes for this category"
-        errorLabel.font = UIFont(name: "SourceSansPro-Bold", size: 20)
-        errorLabel.textColor = .white
-        errorLabel.numberOfLines = 0
-        errorLabel.textAlignment = .center
-        errorLabel.isHidden = true
+        noQuizErrorLabel.text = "There are no quizzes for this category"
+        noQuizErrorLabel.font = UIFont(name: "SourceSansPro-Bold", size: 20)
+        noQuizErrorLabel.textColor = .white
+        noQuizErrorLabel.numberOfLines = 0
+        noQuizErrorLabel.textAlignment = .center
+        noQuizErrorLabel.isHidden = true
     }
 
     func defineLayoutForViews() {
@@ -163,13 +163,15 @@ extension QuizViewController: ConstructViewsProtocol {
             $0.leading.trailing.bottom.equalToSuperview()
         }
 
-        errorLabel.snp.makeConstraints {
+        noQuizErrorLabel.snp.makeConstraints {
             $0.center.equalToSuperview()
             $0.leading.trailing.equalToSuperview()
         }
 
         errorView.snp.makeConstraints {
             $0.center.equalToSuperview()
+            $0.leading.equalToSuperview().offset(50)
+            $0.trailing.equalToSuperview().inset(50)
         }
     }
 
