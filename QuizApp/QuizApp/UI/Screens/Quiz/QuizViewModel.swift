@@ -7,6 +7,7 @@ class QuizViewModel {
 
     @Published var quizzes: [Quiz] = []
     @Published var categories: [Category] = []
+    @Published var errorMessage: String = ""
 
     init(quizUseCase: QuizUseCaseProtocol) {
         self.quizUseCase = quizUseCase
@@ -35,7 +36,10 @@ class QuizViewModel {
             do {
                 try await fetchQuizzes(for: type)
             } catch _ {
-
+                errorMessage = """
+Data can't be reached.
+Please try again
+"""
             }
         }
     }

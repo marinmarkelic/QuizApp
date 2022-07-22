@@ -79,6 +79,17 @@ class QuizViewController: UIViewController {
                 self?.categorySlider.reload(with: categories)
             }
             .store(in: &cancellables)
+
+        quizViewModel
+            .$errorMessage
+            .removeDuplicates()
+            .sink { [weak self] errorMessage in
+                guard let self = self else { return }
+
+                self.errorView.isHidden = errorMessage == ""
+                self.errorView.set(description: errorMessage)
+            }
+            .store(in: &cancellables)
     }
 
 }

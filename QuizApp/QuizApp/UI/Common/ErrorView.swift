@@ -45,9 +45,12 @@ extension ErrorView: ConstructViewsProtocol {
         title.text = "Error"
         title.font = UIFont(name: "SourceSansPro-Bold", size: 28)
         title.textColor = .white
+        title.textAlignment = .center
 
         desc.font = UIFont(name: "SourceSansPro-Regular", size: 28)
         desc.textColor = .white
+        desc.numberOfLines = 0
+        desc.textAlignment = .center
     }
 
     func defineLayoutForViews() {
