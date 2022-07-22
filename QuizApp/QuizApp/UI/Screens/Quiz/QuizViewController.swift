@@ -18,6 +18,8 @@ class QuizViewController: UIViewController {
     private var categorySlider: CategorySlider!
     private var quizView: QuizView!
 
+    private var errorLabel: UILabel!
+
     init(quizUseCase: QuizUseCaseProtocol) {
         super.init(nibName: nil, bundle: nil)
 
@@ -62,7 +64,10 @@ class QuizViewController: UIViewController {
             .$quizzes
             .removeDuplicates()
             .sink { [weak self] quizzes in
-                self?.quizView.reload(with: quizzes)
+                guard let self = self else { return }
+
+                self.quizView.reload(with: quizzes)
+                self.errorLabel.isHidden = quizzes.count != 0
             }
             .store(in: &cancellables)
 
@@ -96,6 +101,9 @@ extension QuizViewController: ConstructViewsProtocol {
 
         quizView = QuizView()
         quizContainer.addSubview(quizView)
+
+        errorLabel = UILabel()
+        mainView.addSubview(errorLabel)
     }
 
     func styleViews() {
@@ -105,6 +113,12 @@ extension QuizViewController: ConstructViewsProtocol {
         tabBarController?.navigationItem.titleView = titleView
 
         categorySlider.delegate = self
+
+        errorLabel.text = "There are no quizzes for this category"
+        errorLabel.font = UIFont(name: "SourceSansPro-Bold", size: 20)
+        errorLabel.textColor = .white
+        errorLabel.numberOfLines = 0
+        errorLabel.isHidden = true
     }
 
     func defineLayoutForViews() {
@@ -130,6 +144,10 @@ extension QuizViewController: ConstructViewsProtocol {
         quizView.snp.makeConstraints {
             $0.top.equalTo(categorySlider.snp.bottom).offset(20)
             $0.leading.trailing.bottom.equalToSuperview()
+        }
+
+        errorLabel.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
     }
 

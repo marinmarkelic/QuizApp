@@ -23,8 +23,6 @@ class QuizViewModel {
 
     @MainActor
     func changeCategory(for type: CategoryType) {
-        quizzes = []
-
         categories = CategoryType
             .allCases
             .map { Category(type: $0, color: $0 == type ? findColor(for: type) : .white) }
