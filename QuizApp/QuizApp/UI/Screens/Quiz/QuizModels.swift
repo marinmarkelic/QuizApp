@@ -1,6 +1,6 @@
 import UIKit
 
-struct Quiz {
+struct Quiz: Equatable {
 
     let id: Int
     let name: String
@@ -26,24 +26,40 @@ extension Quiz {
 
 }
 
-enum Difficulty: String {
+enum Difficulty: String, Comparable {
+
+    private var level: Int {
+        switch self {
+        case .easy:
+            return 1
+        case .normal:
+            return 2
+        case .hard:
+            return 3
+        }
+    }
 
     case easy = "EASY"
     case normal = "NORMAL"
     case hard = "HARD"
 
-}
-
-enum CategoryType: CaseIterable {
-
-    case sport
-    case movies
-    case music
-    case geography
+    static func < (lhs: Difficulty, rhs: Difficulty) -> Bool {
+        lhs.level < rhs.level
+    }
 
 }
 
-struct Category: Equatable {
+enum CategoryType: String, CaseIterable {
+
+    case all = "ALL"
+    case sport = "SPORT"
+    case movies = "MOVIES"
+    case music = "MUSIC"
+    case geography = "GEOGRAPHY"
+
+}
+
+struct Category: Hashable {
 
     var name: String {
         switch type {
@@ -55,6 +71,8 @@ struct Category: Equatable {
             return "Music"
         case .geography:
             return "Geography"
+        case .all:
+            return "All"
         }
     }
 
@@ -82,163 +100,5 @@ extension Category {
             self.init(type: CategoryType.geography, color: .geographyColor)
         }
     }
-
-}
-
-struct QuizModel {
-
-    let id: Int
-    let name: String
-    let description: String
-    let category: CategoryModel
-    let difficulty: DifficultyModel
-    let imageUrl: String
-    let numberOfQuestions: Int
-
-}
-
-extension QuizModel {
-
-    init(_ quiz: QuizRepoModel) {
-        id = quiz.id
-        name = quiz.name
-        description = quiz.description
-        category = CategoryModel(rawValue: quiz.category.rawValue)!
-        difficulty = DifficultyModel(rawValue: quiz.difficulty.rawValue)!
-        imageUrl = quiz.imageUrl
-        numberOfQuestions = quiz.numberOfQuestions
-    }
-
-}
-
-enum CategoryModel: String {
-
-    case sport = "SPORT"
-    case movies = "MOVIES"
-    case music = "MUSIC"
-    case geography = "GEOGRAPHY"
-
-}
-
-enum DifficultyModel: String {
-
-    case easy = "EASY"
-    case normal = "NORMAL"
-    case hard = "HARD"
-
-}
-
-struct QuizRepoModel {
-
-    let id: Int
-    let name: String
-    let description: String
-    let category: CategoryRepoModel
-    let difficulty: DifficultyRepoModel
-    let imageUrl: String
-    let numberOfQuestions: Int
-
-}
-
-extension QuizRepoModel {
-
-    init(_ quiz: QuizResponseDataModel) {
-        id = quiz.id
-        name = quiz.name
-        description = quiz.description
-        category = CategoryRepoModel(rawValue: quiz.category.rawValue)!
-        difficulty = DifficultyRepoModel(rawValue: quiz.difficulty.rawValue)!
-        imageUrl = quiz.imageUrl
-        numberOfQuestions = quiz.numberOfQuestions
-    }
-
-}
-
-enum CategoryRepoModel: String {
-
-    case sport = "SPORT"
-    case movies = "MOVIES"
-    case music = "MUSIC"
-    case geography = "GEOGRAPHY"
-
-}
-
-enum DifficultyRepoModel: String {
-
-    case easy = "EASY"
-    case normal = "NORMAL"
-    case hard = "HARD"
-
-}
-
-struct QuizResponseDataModel {
-
-    let id: Int
-    let name: String
-    let description: String
-    let category: CategoryDataModel
-    let difficulty: DifficultyDataModel
-    let imageUrl: String
-    let numberOfQuestions: Int
-
-}
-
-extension QuizResponseDataModel {
-
-    init(_ quiz: QuizNetworkDataModel) {
-        id = quiz.id
-        name = quiz.name
-        description = quiz.description
-        category = CategoryDataModel(rawValue: quiz.category.rawValue)!
-        difficulty = DifficultyDataModel(rawValue: quiz.difficulty.rawValue)!
-        imageUrl = quiz.imageUrl
-        numberOfQuestions = quiz.numberOfQuestions
-    }
-
-}
-
-enum CategoryDataModel: String {
-
-    case sport = "SPORT"
-    case movies = "MOVIES"
-    case music = "MUSIC"
-    case geography = "GEOGRAPHY"
-
-}
-
-enum DifficultyDataModel: String {
-
-    case easy = "EASY"
-    case normal = "NORMAL"
-    case hard = "HARD"
-
-}
-
-struct QuizNetworkDataModel: Decodable {
-
-    let id: Int
-    let name: String
-    let description: String
-    let category: CategoryNetworkDataModel
-    let difficulty: DifficultyNetworkDataModel
-    let imageUrl: String
-    let numberOfQuestions: Int
-
-}
-
-enum CategoryNetworkDataModel: String, Decodable {
-
-    case sport = "SPORT"
-    case movies = "MOVIES"
-    case music = "MUSIC"
-    case geography = "GEOGRAPHY"
-
-}
-
-enum DifficultyNetworkDataModel: String, Decodable {
-
-    case easy = "EASY"
-    case normal = "NORMAL"
-    case hard = "HARD"
 
 }

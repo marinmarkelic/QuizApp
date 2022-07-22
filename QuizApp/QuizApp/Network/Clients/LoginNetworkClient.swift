@@ -1,21 +1,8 @@
 import Foundation
 
-struct LoginRequest: Encodable {
-
-    let username: String
-    let password: String
-
-}
-
-struct LoginResponse: Decodable {
-
-    let accessToken: String
-
-}
-
 protocol LoginNetworkClientProtocol {
 
-    func logIn(username: String, password: String) async throws -> LoginResponse
+    func logIn(username: String, password: String) async throws -> LoginResponseNetworkDataModel
 
 }
 
@@ -29,10 +16,10 @@ class LoginNetworkClient: LoginNetworkClientProtocol {
         self.networkClient = networkClient
     }
 
-    func logIn(username: String, password: String) async throws -> LoginResponse {
+    func logIn(username: String, password: String) async throws -> LoginResponseNetworkDataModel {
         try await networkClient.post(
             path: loginPath,
-            body: LoginRequest(username: username, password: password))
+            body: LoginRequestNetworkDataModel(username: username, password: password))
     }
 
 }

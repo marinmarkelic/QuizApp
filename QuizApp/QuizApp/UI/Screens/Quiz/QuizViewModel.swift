@@ -13,20 +13,49 @@ class QuizViewModel {
     }
 
     @MainActor
+    func loadCategories() {
+        categories = CategoryType
+            .allCases
+            .map { Category(from: $0) }
+
+        changeCategory(for: categories[0].type)
+    }
+
+    @MainActor
     func changeCategory(for type: CategoryType) {
+        quizzes = []
+
         categories = CategoryType
             .allCases
             .map { Category(type: $0, color: $0 == type ? findColor(for: type) : .white) }
 
+        fetchCategoryQuizzes(for: type)
+    }
+
+    private func fetchCategoryQuizzes(for type: CategoryType) {
         Task {
             do {
-                let quizzes = try await quizUseCase.fetchQuizzes(for: getCategoryModel(from: type))
-                self.quizzes = quizzes
-                    .map { Quiz($0) }
+                try await fetchQuizzes(for: type)
             } catch _ {
 
             }
         }
+    }
+
+    @MainActor
+    private func fetchQuizzes(for type: CategoryType) async throws {
+        let quizzes: [QuizModel]
+
+        guard let categoryModel = CategoryModel(rawValue: type.rawValue) else {
+            quizzes = try await quizUseCase.fetchAllQuizzes()
+            self.quizzes = quizzes
+                .map { Quiz($0) }
+            return
+        }
+
+        quizzes = try await quizUseCase.fetchQuizzes(for: categoryModel)
+        self.quizzes = quizzes
+            .map { Quiz($0) }
     }
 
     private func findColor(for type: CategoryType) -> UIColor {
@@ -39,29 +68,9 @@ class QuizViewModel {
             return .musicColor
         case .geography:
             return .geographyColor
+        case .all:
+            return .allColor
         }
-    }
-
-    private func getCategoryModel(from type: CategoryType) -> CategoryModel {
-        switch type {
-        case .sport:
-            return CategoryModel.sport
-        case .movies:
-            return CategoryModel.movies
-        case .music:
-            return CategoryModel.music
-        case .geography:
-            return CategoryModel.geography
-        }
-    }
-
-    @MainActor
-    func loadCategories() {
-        categories = CategoryType
-            .allCases
-            .map { Category(from: $0) }
-
-        changeCategory(for: categories[0].type)
     }
 
 }

@@ -23,12 +23,19 @@ class QuizView: UIView {
         collectionViewLayout.invalidateLayout()
     }
 
+    func reload(with quizzes: [Quiz]) {
+        self.quizzes = quizzes
+        collectionView.reloadData()
+    }
+
 }
 
 extension QuizView: ConstructViewsProtocol {
 
     func createViews() {
         collectionViewLayout = UICollectionViewFlowLayout()
+        makeCollectionViewLayout()
+
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
         addSubview(collectionView)
     }
@@ -36,6 +43,10 @@ extension QuizView: ConstructViewsProtocol {
     func styleViews() {
         collectionView.collectionViewLayout = collectionViewLayout
         collectionView.register(QuizCell.self, forCellWithReuseIdentifier: QuizCell.reuseIdentifier)
+        collectionView.register(
+            QuizHeader.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: QuizHeader.reuseIdentifier)
         collectionView.showsVerticalScrollIndicator = false
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -48,9 +59,9 @@ extension QuizView: ConstructViewsProtocol {
         }
     }
 
-    func reload(with quizzes: [Quiz]) {
-        self.quizzes = quizzes
-        collectionView.reloadData()
+    private func makeCollectionViewLayout() {
+        collectionViewLayout.headerReferenceSize = CGSize(width: 100, height: 20)
+        collectionViewLayout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 30, right: 0)
     }
 
 }
@@ -72,11 +83,46 @@ extension QuizView: UICollectionViewDelegateFlowLayout {
 extension QuizView: UICollectionViewDataSource {
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        1
+        Set(quizzes
+            .map { $0.category })
+        .count
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        quizzes.count
+        let categories = Array(Set(quizzes.map { $0.category })).sorted(by: {$0.name > $1.name})
+
+        if categories.count == 1 {
+            return quizzes.count
+        }
+
+        let sectionCategory = CategoryType.allCases[section + 1]
+
+        return quizzes
+            .filter { $0.category.type == sectionCategory }
+            .count
+    }
+
+    func collectionView(
+        _ collectionView: UICollectionView,
+        viewForSupplementaryElementOfKind kind: String,
+        at indexPath: IndexPath
+    ) -> UICollectionReusableView {
+        guard let quizHeader = collectionView.dequeueReusableSupplementaryView(
+            ofKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: QuizHeader.reuseIdentifier,
+            for: indexPath
+        ) as? QuizHeader else {
+            return QuizHeader()
+        }
+
+        let categories = Array(Set(quizzes.map { $0.category })).sorted(by: {$0.name > $1.name})
+
+        quizHeader.isHidden = categories.count == 1
+
+        let sectionCategory = categories[indexPath.section]
+        quizHeader.set(title: sectionCategory.name, color: sectionCategory.color)
+
+        return quizHeader
     }
 
     func collectionView(
@@ -88,7 +134,13 @@ extension QuizView: UICollectionViewDataSource {
             for: indexPath) as? QuizCell
         else { return QuizCell() }
 
-        cell.set(quiz: quizzes[indexPath.row])
+        let sectionCategory = Array(Set(quizzes.map { $0.category }))
+            .sorted { $0.name > $1.name }[indexPath.section]
+        let sectionQuizzes = quizzes
+            .filter { $0.category == sectionCategory }
+            .sorted { $0.difficulty < $1.difficulty }
+
+        cell.set(quiz: sectionQuizzes[indexPath.row])
 
         return cell
     }
