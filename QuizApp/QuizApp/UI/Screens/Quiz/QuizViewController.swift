@@ -170,8 +170,7 @@ extension QuizViewController: ConstructViewsProtocol {
 
         errorView.snp.makeConstraints {
             $0.center.equalToSuperview()
-            $0.leading.equalToSuperview().offset(50)
-            $0.trailing.equalToSuperview().inset(50)
+            $0.leading.trailing.equalToSuperview().inset(50)
         }
     }
 
