@@ -19,6 +19,7 @@ class QuizViewController: UIViewController {
     private var quizView: QuizView!
 
     private var errorLabel: UILabel!
+    private var errorView: ErrorView!
 
     init(quizUseCase: QuizUseCaseProtocol) {
         super.init(nibName: nil, bundle: nil)
@@ -104,6 +105,9 @@ extension QuizViewController: ConstructViewsProtocol {
 
         errorLabel = UILabel()
         mainView.addSubview(errorLabel)
+
+        errorView = ErrorView()
+        mainView.addSubview(errorView)
     }
 
     func styleViews() {
@@ -147,6 +151,10 @@ extension QuizViewController: ConstructViewsProtocol {
         }
 
         errorLabel.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
+
+        errorView.snp.makeConstraints {
             $0.center.equalToSuperview()
         }
     }
