@@ -62,12 +62,13 @@ extension ErrorView: ConstructViewsProtocol {
 
         title.snp.makeConstraints {
             $0.top.equalTo(imageView.snp.bottom).offset(10)
+            $0.leading.trailing.equalToSuperview()
             $0.centerX.equalToSuperview()
         }
 
         desc.snp.makeConstraints {
             $0.top.equalTo(title.snp.bottom).offset(10)
-            $0.bottom.equalToSuperview()
+            $0.leading.trailing.bottom.equalToSuperview()
             $0.centerX.equalToSuperview()
         }
     }

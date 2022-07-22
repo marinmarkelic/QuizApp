@@ -134,6 +134,7 @@ extension QuizViewController: ConstructViewsProtocol {
         errorLabel.font = UIFont(name: "SourceSansPro-Bold", size: 20)
         errorLabel.textColor = .white
         errorLabel.numberOfLines = 0
+        errorLabel.textAlignment = .center
         errorLabel.isHidden = true
     }
 
@@ -164,6 +165,7 @@ extension QuizViewController: ConstructViewsProtocol {
 
         errorLabel.snp.makeConstraints {
             $0.center.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
         }
 
         errorView.snp.makeConstraints {
