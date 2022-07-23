@@ -5,6 +5,7 @@ import Resolver
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private var appRouter: AppRouterProtocol!
+    private var dependencies: Resolver!
 
     var window: UIWindow?
 
@@ -15,10 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let window = UIWindow(frame: UIScreen.main.bounds)
         let navigationController = UINavigationController()
 
+        dependencies = Resolver.dependencies
+
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
 
-        appRouter = AppRouter(navigationController: navigationController)
+        appRouter = AppRouter(navigationController: navigationController, dependencies: dependencies)
 
         showInitialViewController()
 
@@ -29,7 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func showInitialViewController() {
         Task {
             do {
-                try await Resolver.resolve(UserNetworkDataSourceProtocol.self).check()
+                let userNetworkDataSource: UserNetworkDataSourceProtocol = Resolver.resolve()
+                try await userNetworkDataSource.check()
 
                 DispatchQueue.main.async { [weak self] in
                     self?.appRouter.showHome()

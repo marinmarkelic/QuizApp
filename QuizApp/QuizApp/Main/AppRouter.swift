@@ -4,9 +4,11 @@ import Resolver
 class AppRouter: AppRouterProtocol {
 
     private let navigationController: UINavigationController
+    private let dependencies: Resolver
 
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController, dependencies: Resolver) {
         self.navigationController = navigationController
+        self.dependencies = dependencies
     }
 
     func showLogin() {

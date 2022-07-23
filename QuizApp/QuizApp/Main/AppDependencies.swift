@@ -2,13 +2,16 @@ import Resolver
 
 extension Resolver: ResolverRegistering {
 
+    static let dependencies = Resolver()
+
     public static func registerAllServices() {
+
+        defaultScope = .application
 
         register { SecureStorage() }
             .implements(SecureStorageProtocol.self)
 
         register { NetworkClient(secureStorage: resolve(), baseUrl: "https://five-ios-quiz-app.herokuapp.com/api") }
-            .scope(.application)
 
         register { LoginNetworkClient(networkClient: resolve()) }
             .implements(LoginNetworkClientProtocol.self)
@@ -23,7 +26,7 @@ extension Resolver: ResolverRegistering {
             .implements(QuizNetworkClientProtocol.self)
 
         register { UserNetworkDataSource(
-            loginClient: resolve(),
+            loginNetworkClient: resolve(),
             checkNetworkClient: resolve(),
             userNetworkClient: resolve())
         }
