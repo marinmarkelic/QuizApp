@@ -153,6 +153,10 @@ class AppDependencies {
             .scope(.unique)
 
         container
+            .register { QuizDetailsViewController() }
+            .scope(.unique)
+
+        container
             .register { UserViewController(userViewModel: container.resolve()) }
             .scope(.unique)
     }
