@@ -8,6 +8,8 @@ class NetworkClient {
     init(secureStorage: SecureStorage, baseUrl: String) {
         self.secureStorage = secureStorage
         self.baseUrl = baseUrl
+
+        print("network client init")
     }
 
     func get(path: String) async throws {
