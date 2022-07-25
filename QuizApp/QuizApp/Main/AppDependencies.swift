@@ -122,11 +122,11 @@ class AppDependencies {
     private func registerViewModels(in container: Resolver) {
         container
             .register { LoginViewModel(loginUseCase: container.resolve(), appRouter: container.resolve()) }
-            .scope(.application)
+            .scope(.unique)
 
         container
             .register { QuizViewModel(quizUseCase: container.resolve()) }
-            .scope(.application)
+            .scope(.unique)
 
         container
             .register {
@@ -135,7 +135,7 @@ class AppDependencies {
                     userUseCase: container.resolve(),
                     logoutUseCase: container.resolve())
             }
-            .scope(.application)
+            .scope(.unique)
     }
 
 }
