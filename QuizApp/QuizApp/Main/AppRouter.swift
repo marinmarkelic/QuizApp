@@ -12,6 +12,7 @@ class AppRouter: AppRouterProtocol {
     init(container: Resolver) {
         self.container = container
         navigationController = UINavigationController()
+        navigationController.navigationBar.isHidden = true
 
         quizNavigationController = UINavigationController()
         userNavigationController = UINavigationController()
