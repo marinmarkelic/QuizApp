@@ -37,7 +37,7 @@ class AppRouter: AppRouterProtocol {
     private func showInitialViewController() {
         Task {
             do {
-                let userNetworkDataSource: UserNetworkDataSourceProtocol = container.resolve()
+                let userNetworkDataSource = container.resolve(UserNetworkDataSourceProtocol.self)
                 try await userNetworkDataSource.check()
 
                 DispatchQueue.main.async { [weak self] in
