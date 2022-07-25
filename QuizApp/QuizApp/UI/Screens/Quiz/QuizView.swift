@@ -2,6 +2,8 @@ import UIKit
 
 class QuizView: UIView {
 
+    weak var delegate: QuizViewDelegate?
+
     private var quizzes: [Quiz] = []
 
     private var collectionView: UICollectionView!
@@ -27,6 +29,12 @@ class QuizView: UIView {
         self.quizzes = quizzes
         collectionView.reloadData()
     }
+
+}
+
+protocol QuizViewDelegate: AnyObject {
+
+    func selected(quiz: Quiz)
 
 }
 
@@ -62,6 +70,20 @@ extension QuizView: ConstructViewsProtocol {
     private func makeCollectionViewLayout() {
         collectionViewLayout.headerReferenceSize = CGSize(width: 100, height: 20)
         collectionViewLayout.sectionInset = UIEdgeInsets(top: 10, left: 0, bottom: 30, right: 0)
+    }
+
+}
+
+extension QuizView: UICollectionViewDelegate {
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard
+            let cell = collectionView.cellForItem(at: indexPath) as? QuizCell,
+            let quiz = cell.quiz,
+            let delegate = delegate
+        else { return }
+
+        delegate.selected(quiz: quiz)
     }
 
 }
