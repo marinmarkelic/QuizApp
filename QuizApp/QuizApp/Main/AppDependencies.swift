@@ -21,6 +21,11 @@ class AppDependencies {
             .implements(AppRouterProtocol.self)
             .scope(.application)
 
+        container
+            .register { SecureStorage() }
+            .implements(SecureStorageProtocol.self)
+            .scope(.application)
+
         registerNetworkClients(in: container)
         registerDataSources(in: container)
         registerRepos(in: container)
@@ -29,11 +34,6 @@ class AppDependencies {
     }
 
     private func registerNetworkClients(in container: Resolver) {
-        container
-            .register { SecureStorage() }
-            .implements(SecureStorageProtocol.self)
-            .scope(.application)
-
         container
             .register { NetworkClient(secureStorage: container.resolve(), baseUrl: self.baseUrl) }
             .scope(.application)
