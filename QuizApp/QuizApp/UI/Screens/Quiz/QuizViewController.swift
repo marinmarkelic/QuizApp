@@ -98,6 +98,14 @@ class QuizViewController: UIViewController {
 
 }
 
+extension QuizViewController: QuizViewDelegate {
+
+    func selected(quiz: Quiz) {
+        appRouter.showQuizDetails(with: quiz)
+    }
+
+}
+
 extension QuizViewController: ConstructViewsProtocol {
 
     func createViews() {
@@ -132,6 +140,7 @@ extension QuizViewController: ConstructViewsProtocol {
         tabBarController?.navigationItem.titleView = titleView
 
         categorySlider.delegate = self
+        quizView.delegate = self
 
         noQuizErrorLabel.text = "There are no quizzes for this category"
         noQuizErrorLabel.font = UIFont(name: "SourceSansPro-Bold", size: 20)

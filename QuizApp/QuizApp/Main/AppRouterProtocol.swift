@@ -8,4 +8,6 @@ protocol AppRouterProtocol {
 
     func showHome()
 
+    func showQuizDetails(with quiz: Quiz)
+
 }

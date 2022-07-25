@@ -16,6 +16,10 @@ class QuizDetailsViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func set(quiz: Quiz) {
+        detailsView.set(quiz: quiz)
+    }
+
 }
 
 extension QuizDetailsViewController: ConstructViewsProtocol {
@@ -26,7 +30,7 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
     }
 
     func styleViews() {
-
+        view.backgroundColor = .clear
     }
 
     func defineLayoutForViews() {

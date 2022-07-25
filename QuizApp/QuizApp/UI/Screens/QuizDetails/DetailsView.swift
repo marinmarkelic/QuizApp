@@ -19,10 +19,10 @@ class DetailsView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func set(title text: String, description: String, imageUrl: String) {
-        title.text = text
-        desc.text = description
-        imageView.sd_setImage(with: URL(string: imageUrl))
+    func set(quiz: Quiz) {
+        title.text = quiz.name
+        desc.text = quiz.description
+        imageView.sd_setImage(with: URL(string: quiz.imageUrl))
     }
 
 }
@@ -45,6 +45,8 @@ extension DetailsView: ConstructViewsProtocol {
 
     func styleViews() {
         backgroundColor = .white.withAlphaComponent(0.3)
+        layer.cornerRadius = 10
+        clipsToBounds = true
 
         title.font = UIFont(name: "SourceSansPro-Bold", size: 32)
         title.textAlignment = .center
@@ -52,6 +54,8 @@ extension DetailsView: ConstructViewsProtocol {
         desc.font = UIFont(name: "SourceSansPro-Bold", size: 20)
         desc.textAlignment = .center
         desc.numberOfLines = 0
+
+        imageView.contentMode = .scaleAspectFit
 
         startButton.setTitle("Start Quiz", for: .normal)
     }
@@ -68,6 +72,7 @@ extension DetailsView: ConstructViewsProtocol {
 
         imageView.snp.makeConstraints {
             $0.top.equalTo(desc.snp.bottom).offset(20)
+            $0.height.equalTo(50)
             $0.leading.trailing.equalToSuperview().inset(20)
         }
 
