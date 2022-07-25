@@ -61,10 +61,11 @@ class AppDependencies {
 
     private func registerDataSources(in container: Resolver) {
         container
-            .register { UserNetworkDataSource(
-                loginNetworkClient: container.resolve(),
-                checkNetworkClient: container.resolve(),
-                userNetworkClient: container.resolve())
+            .register {
+                UserNetworkDataSource(
+                    loginNetworkClient: container.resolve(),
+                    checkNetworkClient: container.resolve(),
+                    userNetworkClient: container.resolve())
             }
             .implements(UserNetworkDataSourceProtocol.self)
             .scope(.application)
@@ -128,10 +129,11 @@ class AppDependencies {
             .scope(.application)
 
         container
-            .register { UserViewModel(
-                appRouter: container.resolve(),
-                userUseCase: container.resolve(),
-                logoutUseCase: container.resolve())
+            .register {
+                UserViewModel(
+                    appRouter: container.resolve(),
+                    userUseCase: container.resolve(),
+                    logoutUseCase: container.resolve())
             }
             .scope(.application)
     }
