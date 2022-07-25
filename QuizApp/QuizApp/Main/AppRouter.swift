@@ -6,9 +6,14 @@ class AppRouter: AppRouterProtocol {
     private let navigationController: UINavigationController
     private let resolver: Resolver
 
-    init(navigationController: UINavigationController, resolver: Resolver) {
-        self.navigationController = navigationController
+    init(resolver: Resolver) {
+        self.navigationController = UINavigationController()
         self.resolver = resolver
+    }
+
+    func start(in window: UIWindow) {
+        window.rootViewController = navigationController
+        window.makeKeyAndVisible()
 
         showInitialViewController()
     }

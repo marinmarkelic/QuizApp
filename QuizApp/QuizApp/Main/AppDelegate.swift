@@ -15,16 +15,11 @@ class AppDelegresolveate: UIResponder, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         let window = UIWindow(frame: UIScreen.main.bounds)
-        let navigationController = UINavigationController()
 
         appDependencies = AppDependencies()
 
-        resolver = appDependencies.container
-
-        window.rootViewController = navigationController
-        window.makeKeyAndVisible()
-
-        appRouter = AppRouter(navigationController: navigationController, resolver: resolver)
+        appRouter = appDependencies.appRouter
+        appRouter.start(in: window)
 
         self.window = window
         return true

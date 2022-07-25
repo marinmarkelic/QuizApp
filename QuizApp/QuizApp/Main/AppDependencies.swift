@@ -1,16 +1,25 @@
 import Resolver
+import UIKit
 
 class AppDependencies {
 
     private let baseUrl = "https://five-ios-quiz-app.herokuapp.com/api"
 
-    lazy var container: Resolver = {
+    private lazy var container: Resolver = {
         let container = Resolver()
         registerDependencies(in: container)
         return container
     }()
 
+    lazy var appRouter: AppRouter = {
+        container.resolve()
+    }()
+
     func registerDependencies(in container: Resolver) {
+        container.register { AppRouter(resolver: container) }
+            .implements(AppRouterProtocol.self)
+            .scope(.application)
+
         registerNetworkClients(in: container)
         registerDataSources(in: container)
         registerRepos(in: container)
