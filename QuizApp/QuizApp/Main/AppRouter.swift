@@ -9,6 +9,8 @@ class AppRouter: AppRouterProtocol {
     init(navigationController: UINavigationController, resolver: Resolver) {
         self.navigationController = navigationController
         self.resolver = resolver
+
+        showInitialViewController()
     }
 
     func showLogin() {
@@ -29,6 +31,25 @@ class AppRouter: AppRouterProtocol {
         let tabBarController = TabBarController(viewControllers: viewControllers)
 
         navigationController.setViewControllers([tabBarController], animated: true)
+    }
+
+    private func showInitialViewController() {
+        Task {
+            do {
+                let userNetworkDataSource: UserNetworkDataSourceProtocol = resolver.resolve()
+                try await userNetworkDataSource.check()
+
+                DispatchQueue.main.async { [weak self] in
+                    self?.showHome()
+                }
+            } catch {
+                resolver.resolve(SecureStorageProtocol.self).deleteAccessToken()
+
+                DispatchQueue.main.async { [weak self] in
+                    self?.showLogin()
+                }
+            }
+        }
     }
 
 }

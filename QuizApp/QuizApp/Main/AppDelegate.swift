@@ -26,29 +26,8 @@ class AppDelegresolveate: UIResponder, UIApplicationDelegate {
 
         appRouter = AppRouter(navigationController: navigationController, resolver: resolver)
 
-        showInitialViewController()
-
         self.window = window
         return true
-    }
-
-    private func showInitialViewController() {
-        Task {
-            do {
-                let userNetworkDataSource: UserNetworkDataSourceProtocol = resolver.resolve()
-                try await userNetworkDataSource.check()
-
-                DispatchQueue.main.async { [weak self] in
-                    self?.appRouter.showHome()
-                }
-            } catch {
-                resolver.resolve(SecureStorageProtocol.self).deleteAccessToken()
-
-                DispatchQueue.main.async { [weak self] in
-                    self?.appRouter.showLogin()
-                }
-            }
-        }
     }
 
 }
