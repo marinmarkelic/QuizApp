@@ -6,9 +6,15 @@ class AppRouter: AppRouterProtocol {
     private let navigationController: UINavigationController
     private let container: Resolver
 
+    private var quizNavigationController: UINavigationController!
+    private var userNavigationController: UINavigationController!
+
     init(container: Resolver) {
         self.container = container
         navigationController = UINavigationController()
+
+        quizNavigationController = UINavigationController()
+        userNavigationController = UINavigationController()
     }
 
     func start(in window: UIWindow) {
@@ -25,11 +31,15 @@ class AppRouter: AppRouterProtocol {
 
     func showHome() {
         let quizViewController = container.resolve(QuizViewController.self)
-        let userViewController = container.resolve(UserViewController.self)
+        quizNavigationController.viewControllers = [quizViewController]
 
-        let viewControllers = [quizViewController, userViewController]
+        let userViewController = container.resolve(UserViewController.self)
+        userNavigationController.viewControllers = [userViewController]
+
+        let viewControllers = [quizNavigationController!, userNavigationController!]
 
         let tabBarController = TabBarController(viewControllers: viewControllers)
+        tabBarController.navigationController?.navigationBar.isHidden = true
 
         navigationController.setViewControllers([tabBarController], animated: true)
     }
@@ -38,7 +48,7 @@ class AppRouter: AppRouterProtocol {
         let quizDetailsViewController = container.resolve(QuizDetailsViewController.self)
         quizDetailsViewController.set(quiz: quiz)
 
-        navigationController.pushViewController(quizDetailsViewController, animated: true)
+        quizNavigationController.pushViewController(quizDetailsViewController, animated: true)
     }
 
     private func showInitialViewController() {

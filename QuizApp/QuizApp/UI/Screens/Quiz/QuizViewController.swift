@@ -10,7 +10,6 @@ class QuizViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
 
     private var gradientView: GradientView!
-
     private var mainView: UIView!
 
     private var titleView: UILabel!
@@ -134,10 +133,11 @@ extension QuizViewController: ConstructViewsProtocol {
     }
 
     func styleViews() {
+        let titleView = UILabel()
         titleView.text = "PopQuiz"
         titleView.textColor = .white
         titleView.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 24), size: 24)
-        tabBarController?.navigationItem.titleView = titleView
+        navigationItem.titleView = titleView
 
         categorySlider.delegate = self
         quizView.delegate = self

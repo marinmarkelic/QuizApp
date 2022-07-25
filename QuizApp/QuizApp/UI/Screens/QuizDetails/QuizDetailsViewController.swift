@@ -46,7 +46,7 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
         titleView.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 24), size: 24)
         navigationItem.titleView = titleView
 
-        let image = UIImage(systemName: "chevron.left")
+        let image = UIImage(systemName: "chevron.left")?.withTintColor(.white)
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: image,
             style: .done,
