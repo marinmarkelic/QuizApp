@@ -9,7 +9,7 @@ class LoginUseCase: LoginUseCaseProtocol {
     private let userRepository: UserRepositoryProtocol
 
     init(userRepository: UserRepositoryProtocol) {
-        self.userRepository = userRepositor
+        self.userRepository = userRepository
     }
 
     func logIn(username: String, password: String) async throws -> LoginResponseModel {
