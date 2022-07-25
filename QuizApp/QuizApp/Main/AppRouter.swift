@@ -19,13 +19,13 @@ class AppRouter: AppRouterProtocol {
     }
 
     func showLogin() {
-        let loginViewController = LoginViewController(loginViewModel: container.resolve())
+        let loginViewController = container.resolve(LoginViewController.self)
         navigationController.setViewControllers([loginViewController], animated: true)
     }
 
     func showHome() {
-        let quizViewController = QuizViewController(quizViewModel: container.resolve())
-        let userViewController = UserViewController(userViewModel: container.resolve())
+        let quizViewController = container.resolve(QuizViewController.self)
+        let userViewController = container.resolve(UserViewController.self)
 
         let viewControllers = [quizViewController, userViewController]
 

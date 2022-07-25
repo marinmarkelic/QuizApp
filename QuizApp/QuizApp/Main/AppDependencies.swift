@@ -31,6 +31,7 @@ class AppDependencies {
         registerRepos(in: container)
         registerUseCases(in: container)
         registerViewModels(in: container)
+        registerViewControllers(in: container)
     }
 
     private func registerNetworkClients(in container: Resolver) {
@@ -135,6 +136,20 @@ class AppDependencies {
                     userUseCase: container.resolve(),
                     logoutUseCase: container.resolve())
             }
+            .scope(.unique)
+    }
+
+    private func registerViewControllers(in container: Resolver) {
+        container
+            .register { LoginViewController(loginViewModel: container.resolve()) }
+            .scope(.unique)
+
+        container
+            .register { QuizViewController(quizViewModel: container.resolve()) }
+            .scope(.unique)
+
+        container
+            .register { UserViewController(userViewModel: container.resolve()) }
             .scope(.unique)
     }
 
