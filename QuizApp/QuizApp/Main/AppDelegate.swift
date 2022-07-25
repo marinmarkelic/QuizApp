@@ -6,7 +6,6 @@ class AppDelegresolveate: UIResponder, UIApplicationDelegate {
 
     private var appRouter: AppRouterProtocol!
     private var appDependencies: AppDependencies!
-    private var resolver: Resolver!
 
     var window: UIWindow?
 

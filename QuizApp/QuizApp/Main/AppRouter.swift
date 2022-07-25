@@ -7,8 +7,8 @@ class AppRouter: AppRouterProtocol {
     private let resolver: Resolver
 
     init(resolver: Resolver) {
-        self.navigationController = UINavigationController()
         self.resolver = resolver
+        navigationController = UINavigationController()
     }
 
     func start(in window: UIWindow) {
