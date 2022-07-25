@@ -1,66 +1,156 @@
+import Resolver
+import UIKit
+
 class AppDependencies {
 
     private let baseUrl = "https://five-ios-quiz-app.herokuapp.com/api"
 
-    lazy var secureStorage = SecureStorage()
-
-    lazy var loginUseCase: LoginUseCaseProtocol = {
-        LoginUseCase(userRepository: userRepository)
+    private lazy var container: Resolver = {
+        let container = Resolver()
+        registerDependencies(in: container)
+        return container
     }()
 
-    lazy var userUseCase: UserUseCaseProtocol = {
-        UserUseCase(userRepository: userRepository)
+    lazy var appRouter: AppRouterProtocol = {
+        container.resolve()
     }()
 
-    lazy var logoutUseCase: LogOutUseCaseProtocol = {
-        LogOutUseCase(userRepository: userRepository)
-    }()
+    func registerDependencies(in container: Resolver) {
+        container
+            .register { AppRouter(container: container) }
+            .implements(AppRouterProtocol.self)
+            .scope(.application)
 
-    lazy var quizUseCase: QuizUseCaseProtocol = {
-        QuizUseCase(quizRepository: quizRepository)
-    }()
+        container
+            .register { SecureStorage() }
+            .implements(SecureStorageProtocol.self)
+            .scope(.application)
 
-    lazy var userRepository: UserRepositoryProtocol = {
-        UserRepository(userNetworkDataSource: userNetworkDataSource, userDatabaseDataSource: userDatabaseDataSource)
-    }()
+        registerNetworkClients(in: container)
+        registerDataSources(in: container)
+        registerRepos(in: container)
+        registerUseCases(in: container)
+        registerViewModels(in: container)
+        registerViewControllers(in: container)
+    }
 
-    lazy var quizRepository: QuizRepositoryProtocol = {
-        QuizRepository(quizNetworkDataSource: quizNetworkDataSource)
-    }()
+    private func registerNetworkClients(in container: Resolver) {
+        container
+            .register { NetworkClient(secureStorage: container.resolve(), baseUrl: self.baseUrl) }
+            .scope(.application)
 
-    lazy var userNetworkDataSource: UserNetworkDataSourceProtocol = {
-        UserNetworkDataSource(
-            loginClient: loginNetworkClient,
-            checkNetworkClient: checkNetworkClient,
-            userNetworkClient: userNetworkClient)
-    }()
+        container
+            .register { LoginNetworkClient(networkClient: container.resolve()) }
+            .implements(LoginNetworkClientProtocol.self)
+            .scope(.application)
 
-    lazy var quizNetworkDataSource: QuizNetworkDataSourceProtocol = {
-        QuizNetworkDataSource(quizNetworkClient: quizNetworkClient)
-    }()
+        container
+            .register { CheckNetworkClient(networkClient: container.resolve()) }
+            .implements(CheckNetworkClientProtocol.self)
+            .scope(.application)
 
-    lazy var userDatabaseDataSource: UserDatabaseDataSourceProtocol = {
-        UserDatabaseDataSource(secureStorage: secureStorage)
-    }()
+        container
+            .register { UserNetworkClient(networkClient: container.resolve()) }
+            .implements(UserNetworkClientProtocol.self)
+            .scope(.application)
 
-    lazy var loginNetworkClient: LoginNetworkClientProtocol = {
-        LoginNetworkClient(networkClient: networkClient)
-    }()
+        container
+            .register { QuizNetworkClient(networkClient: container.resolve()) }
+            .implements(QuizNetworkClientProtocol.self)
+            .scope(.application)
+    }
 
-    lazy var userNetworkClient: UserNetworkClientProtocol = {
-        UserNetworkClient(networkClient: networkClient)
-    }()
+    private func registerDataSources(in container: Resolver) {
+        container
+            .register {
+                UserNetworkDataSource(
+                    loginNetworkClient: container.resolve(),
+                    checkNetworkClient: container.resolve(),
+                    userNetworkClient: container.resolve())
+            }
+            .implements(UserNetworkDataSourceProtocol.self)
+            .scope(.application)
 
-    lazy var checkNetworkClient: CheckNetworkClientProtocol = {
-        CheckNetworkClient(networkClient: networkClient)
-    }()
+        container
+            .register { QuizNetworkDataSource(quizNetworkClient: container.resolve()) }
+            .implements(QuizNetworkDataSourceProtocol.self)
+            .scope(.application)
 
-    lazy var quizNetworkClient: QuizNetworkClientProtocol = {
-        QuizNetworkClient(networkClient: networkClient)
-    }()
+        container
+            .register { UserDatabaseDataSource(secureStorage: container.resolve()) }
+            .implements(UserDatabaseDataSourceProtocol.self)
+            .scope(.application)
+    }
 
-    lazy var networkClient: NetworkClient = {
-        NetworkClient(secureStorage: secureStorage, baseUrl: baseUrl)
-    }()
+    private func registerRepos(in container: Resolver) {
+        container
+            .register {
+                UserRepository(
+                    userNetworkDataSource: container.resolve(),
+                    userDatabaseDataSource: container.resolve())
+            }
+            .implements(UserRepositoryProtocol.self)
+            .scope(.application)
+
+        container
+            .register { QuizRepository(quizNetworkDataSource: container.resolve()) }
+            .implements(QuizRepositoryProtocol.self)
+            .scope(.application)
+    }
+
+    private func registerUseCases(in container: Resolver) {
+        container
+            .register { LoginUseCase(userRepository: container.resolve()) }
+            .implements(LoginUseCaseProtocol.self)
+            .scope(.application)
+
+        container
+            .register { UserUseCase(userRepository: container.resolve()) }
+            .implements(UserUseCaseProtocol.self)
+            .scope(.application)
+
+        container
+            .register { LogOutUseCase(userRepository: container.resolve()) }
+            .implements(LogOutUseCaseProtocol.self)
+            .scope(.application)
+
+        container
+            .register { QuizUseCase(quizRepository: container.resolve()) }
+            .implements(QuizUseCaseProtocol.self)
+            .scope(.application)
+    }
+
+    private func registerViewModels(in container: Resolver) {
+        container
+            .register { LoginViewModel(loginUseCase: container.resolve(), appRouter: container.resolve()) }
+            .scope(.unique)
+
+        container
+            .register { QuizViewModel(quizUseCase: container.resolve()) }
+            .scope(.unique)
+
+        container
+            .register {
+                UserViewModel(
+                    appRouter: container.resolve(),
+                    userUseCase: container.resolve(),
+                    logoutUseCase: container.resolve())
+            }
+            .scope(.unique)
+    }
+
+    private func registerViewControllers(in container: Resolver) {
+        container
+            .register { LoginViewController(loginViewModel: container.resolve()) }
+            .scope(.unique)
+
+        container
+            .register { QuizViewController(quizViewModel: container.resolve()) }
+            .scope(.unique)
+
+        container
+            .register { UserViewController(userViewModel: container.resolve()) }
+            .scope(.unique)
+    }
 
 }

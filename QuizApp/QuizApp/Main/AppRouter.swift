@@ -1,33 +1,56 @@
 import UIKit
+import Resolver
 
 class AppRouter: AppRouterProtocol {
 
-    private let appDependencies: AppDependencies
     private let navigationController: UINavigationController
+    private let container: Resolver
 
-    init(navigationController: UINavigationController, appDependencies: AppDependencies) {
-        self.navigationController = navigationController
-        self.appDependencies = appDependencies
+    init(container: Resolver) {
+        self.container = container
+        navigationController = UINavigationController()
+    }
+
+    func start(in window: UIWindow) {
+        window.rootViewController = navigationController
+        window.makeKeyAndVisible()
+
+        showInitialViewController()
     }
 
     func showLogin() {
-        let loginViewController = LoginViewController(
-            viewModel: LoginViewModel(loginUseCase: appDependencies.loginUseCase, appRouter: self))
+        let loginViewController = container.resolve(LoginViewController.self)
         navigationController.setViewControllers([loginViewController], animated: true)
     }
 
     func showHome() {
-        let quizViewController = QuizViewController(quizUseCase: appDependencies.quizUseCase)
-        let userViewController = UserViewController(
-            appRouter: self,
-            userUseCase: appDependencies.userUseCase,
-            logoutUseCase: appDependencies.logoutUseCase)
+        let quizViewController = container.resolve(QuizViewController.self)
+        let userViewController = container.resolve(UserViewController.self)
 
         let viewControllers = [quizViewController, userViewController]
 
         let tabBarController = TabBarController(viewControllers: viewControllers)
 
         navigationController.setViewControllers([tabBarController], animated: true)
+    }
+
+    private func showInitialViewController() {
+        Task {
+            do {
+                let userNetworkDataSource = container.resolve(UserNetworkDataSourceProtocol.self)
+                try await userNetworkDataSource.check()
+
+                DispatchQueue.main.async { [weak self] in
+                    self?.showHome()
+                }
+            } catch {
+                container.resolve(SecureStorageProtocol.self).deleteAccessToken()
+
+                DispatchQueue.main.async { [weak self] in
+                    self?.showLogin()
+                }
+            }
+        }
     }
 
 }

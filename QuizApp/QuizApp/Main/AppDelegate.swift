@@ -1,10 +1,11 @@
 import UIKit
+import Resolver
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    private let appDependencies = AppDependencies()
     private var appRouter: AppRouterProtocol!
+    private var appDependencies: AppDependencies!
 
     var window: UIWindow?
 
@@ -13,35 +14,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         let window = UIWindow(frame: UIScreen.main.bounds)
-        let navigationController = UINavigationController()
 
-        window.rootViewController = navigationController
-        window.makeKeyAndVisible()
+        appDependencies = AppDependencies()
 
-        appRouter = AppRouter(navigationController: navigationController, appDependencies: appDependencies)
-
-        showInitialViewController()
+        appRouter = appDependencies.appRouter
+        appRouter.start(in: window)
 
         self.window = window
         return true
-    }
-
-    private func showInitialViewController() {
-        Task {
-            do {
-                try await appDependencies.userNetworkDataSource.check()
-
-                DispatchQueue.main.async { [weak self] in
-                    self?.appRouter.showHome()
-                }
-            } catch {
-                appDependencies.secureStorage.deleteAccessToken()
-
-                DispatchQueue.main.async { [weak self] in
-                    self?.appRouter.showLogin()
-                }
-            }
-        }
     }
 
 }

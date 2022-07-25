@@ -46,6 +46,7 @@
 		9C4807E028899EF7002D097D /* DataSourceModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4807DF28899EF7002D097D /* DataSourceModels.swift */; };
 		9C4807E22889A088002D097D /* NetworkModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4807E12889A088002D097D /* NetworkModels.swift */; };
 		9C4807E4288A996D002D097D /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C4807E3288A996C002D097D /* ErrorView.swift */; };
+		9C4807EA288AE033002D097D /* Resolver in Frameworks */ = {isa = PBXBuildFile; productRef = 9C4807E9288AE033002D097D /* Resolver */; };
 		9C5F21942886AFF5000C3511 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C5F21932886AFF5000C3511 /* Colors.swift */; };
 		9CC33B22287D6848002E9853 /* UserDatabaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC33B21287D6848002E9853 /* UserDatabaseDataSource.swift */; };
 		9CC33B24287D6889002E9853 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC33B23287D6889002E9853 /* UserRepository.swift */; };
@@ -130,6 +131,7 @@
 			files = (
 				9C25C89428882613000C4C90 /* SDWebImage in Frameworks */,
 				9CC33B2B287D77E5002E9853 /* KeychainSwift in Frameworks */,
+				9C4807EA288AE033002D097D /* Resolver in Frameworks */,
 				9C19538E2876CF720051CEC6 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -371,6 +373,7 @@
 				9C19538D2876CF720051CEC6 /* SnapKit */,
 				9CC33B2A287D77E5002E9853 /* KeychainSwift */,
 				9C25C89328882613000C4C90 /* SDWebImage */,
+				9C4807E9288AE033002D097D /* Resolver */,
 			);
 			productName = QuizApp;
 			productReference = 9C195367287584750051CEC6 /* QuizApp.app */;
@@ -404,6 +407,7 @@
 				9C19538C2876CF720051CEC6 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				9CC33B29287D77E5002E9853 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 				9C25C89228882613000C4C90 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				9C4807E8288AE033002D097D /* XCRemoteSwiftPackageReference "Resolver" */,
 			);
 			productRefGroup = 9C195368287584750051CEC6 /* Products */;
 			projectDirPath = "";
@@ -727,6 +731,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		9C4807E8288AE033002D097D /* XCRemoteSwiftPackageReference "Resolver" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Resolver";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		9CC33B29287D77E5002E9853 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/evgenyneu/keychain-swift";
@@ -747,6 +759,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9C25C89228882613000C4C90 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
+		};
+		9C4807E9288AE033002D097D /* Resolver */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9C4807E8288AE033002D097D /* XCRemoteSwiftPackageReference "Resolver" */;
+			productName = Resolver;
 		};
 		9CC33B2A287D77E5002E9853 /* KeychainSwift */ = {
 			isa = XCSwiftPackageProductDependency;

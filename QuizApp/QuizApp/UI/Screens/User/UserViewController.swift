@@ -20,15 +20,8 @@ class UserViewController: UIViewController {
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(
-        appRouter: AppRouterProtocol,
-        userUseCase: UserUseCaseProtocol,
-        logoutUseCase: LogOutUseCaseProtocol
-    ) {
-        self.userViewModel = UserViewModel(
-            appRouter: appRouter,
-            userUseCase: userUseCase,
-            logoutUseCase: logoutUseCase)
+    init(userViewModel: UserViewModel) {
+        self.userViewModel = userViewModel
 
         super.init(nibName: nil, bundle: nil)
 

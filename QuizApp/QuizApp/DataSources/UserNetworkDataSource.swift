@@ -12,7 +12,7 @@ protocol UserNetworkDataSourceProtocol {
 
 class UserNetworkDataSource: UserNetworkDataSourceProtocol {
 
-    private let loginClient: LoginNetworkClientProtocol
+    private let loginNetworkClient: LoginNetworkClientProtocol
     private let checkNetworkClient: CheckNetworkClientProtocol
     private let userNetworkClient: UserNetworkClientProtocol
 
@@ -23,17 +23,17 @@ class UserNetworkDataSource: UserNetworkDataSourceProtocol {
     }
 
     init(
-        loginClient: LoginNetworkClientProtocol,
+        loginNetworkClient: LoginNetworkClientProtocol,
         checkNetworkClient: CheckNetworkClientProtocol,
         userNetworkClient: UserNetworkClientProtocol
     ) {
-        self.loginClient = loginClient
+        self.loginNetworkClient = loginNetworkClient
         self.checkNetworkClient = checkNetworkClient
         self.userNetworkClient = userNetworkClient
     }
 
     func logIn(username: String, password: String) async throws -> LoginResponseDataModel {
-        LoginResponseDataModel(try await loginClient.logIn(username: username, password: password))
+        LoginResponseDataModel(try await loginNetworkClient.logIn(username: username, password: password))
     }
 
     func check() async throws {
