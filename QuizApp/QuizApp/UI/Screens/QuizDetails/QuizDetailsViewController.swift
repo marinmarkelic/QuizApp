@@ -40,7 +40,24 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
     }
 
     func styleViews() {
-        view.backgroundColor = .clear
+        let titleView = UILabel()
+        titleView.text = "PopQuiz"
+        titleView.textColor = .white
+        titleView.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 24), size: 24)
+        navigationItem.titleView = titleView
+
+        let image = UIImage(systemName: "chevron.left")
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: image,
+            style: .done,
+            target: self,
+            action: #selector(pressedBack))
+        navigationItem.leftBarButtonItem?.tintColor = .white
+    }
+
+    @objc
+    private func pressedBack() {
+        navigationController?.popViewController(animated: true)
     }
 
     func defineLayoutForViews() {
