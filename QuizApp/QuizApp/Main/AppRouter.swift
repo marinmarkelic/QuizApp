@@ -4,10 +4,10 @@ import Resolver
 class AppRouter: AppRouterProtocol {
 
     private let navigationController: UINavigationController
-    private let resolver: Resolver
+    private let container: Resolver
 
-    init(resolver: Resolver) {
-        self.resolver = resolver
+    init(container: Resolver) {
+        self.container = container
         navigationController = UINavigationController()
     }
 
@@ -19,17 +19,13 @@ class AppRouter: AppRouterProtocol {
     }
 
     func showLogin() {
-        let loginViewController = LoginViewController(
-            viewModel: LoginViewModel(loginUseCase: resolver.resolve(), appRouter: self))
+        let loginViewController = LoginViewController(loginViewModel: container.resolve())
         navigationController.setViewControllers([loginViewController], animated: true)
     }
 
     func showHome() {
-        let quizViewController = QuizViewController(quizUseCase: resolver.resolve())
-        let userViewController = UserViewController(
-            appRouter: self,
-            userUseCase: resolver.resolve(),
-            logoutUseCase: resolver.resolve())
+        let quizViewController = QuizViewController(quizViewModel: container.resolve())
+        let userViewController = UserViewController(userViewModel: container.resolve())
 
         let viewControllers = [quizViewController, userViewController]
 
@@ -41,14 +37,14 @@ class AppRouter: AppRouterProtocol {
     private func showInitialViewController() {
         Task {
             do {
-                let userNetworkDataSource: UserNetworkDataSourceProtocol = resolver.resolve()
+                let userNetworkDataSource: UserNetworkDataSourceProtocol = container.resolve()
                 try await userNetworkDataSource.check()
 
                 DispatchQueue.main.async { [weak self] in
                     self?.showHome()
                 }
             } catch {
-                resolver.resolve(SecureStorageProtocol.self).deleteAccessToken()
+                container.resolve(SecureStorageProtocol.self).deleteAccessToken()
 
                 DispatchQueue.main.async { [weak self] in
                     self?.showLogin()

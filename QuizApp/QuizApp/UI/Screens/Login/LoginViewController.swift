@@ -7,7 +7,7 @@ class LoginViewController: UIViewController {
     private var hasValidInputForEmail = false
     private var hasValidInputForPassword = false
 
-    private var viewModel: LoginViewModel!
+    private var loginViewModel: LoginViewModel!
 
     private var gradientView: GradientView!
     private var mainView: UIView!
@@ -37,10 +37,10 @@ class LoginViewController: UIViewController {
         bindViewModel()
     }
 
-     init(viewModel: LoginViewModel) {
+     init(loginViewModel: LoginViewModel) {
         super.init(nibName: nil, bundle: nil)
 
-        self.viewModel = viewModel
+        self.loginViewModel = loginViewModel
     }
 
     required init?(coder: NSCoder) {
@@ -59,14 +59,14 @@ class LoginViewController: UIViewController {
     }
 
     private func bindViewModel() {
-        viewModel
+        loginViewModel
             .$isLoginButtonEnabled
             .sink { [weak self] isLoginEnabled in
                 self?.redrawButtons(shouldEnable: isLoginEnabled)
             }
             .store(in: &cancellables)
 
-        viewModel
+        loginViewModel
             .$errorText
             .removeDuplicates()
             .sink { [weak self] errorText in
@@ -93,7 +93,7 @@ class LoginViewController: UIViewController {
 
     @objc
     private func pressedLoginButton() {
-        viewModel.pressedLoginButton()
+        loginViewModel.pressedLoginButton()
     }
 
 }
@@ -200,11 +200,11 @@ extension LoginViewController: ConstructViewsProtocol {
 extension LoginViewController: EmailViewDelegate, PasswordViewDelegate {
 
     func passwordViewText(_ passwordView: PasswordView, text: String) {
-        viewModel.updatedPassword(with: text)
+        loginViewModel.updatedPassword(with: text)
     }
 
     func emailViewText(_ emailView: EmailView, text: String) {
-        viewModel.updatedEmail(with: text)
+        loginViewModel.updatedEmail(with: text)
     }
 
 }

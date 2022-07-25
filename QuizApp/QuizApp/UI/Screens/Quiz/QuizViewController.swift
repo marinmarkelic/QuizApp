@@ -21,10 +21,10 @@ class QuizViewController: UIViewController {
     private var noQuizErrorLabel: UILabel!
     private var errorView: ErrorView!
 
-    init(quizUseCase: QuizUseCaseProtocol) {
+    init(quizViewModel: QuizViewModel) {
         super.init(nibName: nil, bundle: nil)
 
-        self.quizViewModel = QuizViewModel(quizUseCase: quizUseCase)
+        self.quizViewModel = quizViewModel
 
         styleTabBarItem()
     }

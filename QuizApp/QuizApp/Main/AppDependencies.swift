@@ -17,7 +17,7 @@ class AppDependencies {
 
     func registerDependencies(in container: Resolver) {
         container
-            .register { AppRouter(resolver: container) }
+            .register { AppRouter(container: container) }
             .implements(AppRouterProtocol.self)
             .scope(.application)
 
@@ -25,6 +25,7 @@ class AppDependencies {
         registerDataSources(in: container)
         registerRepos(in: container)
         registerUseCases(in: container)
+        registerViewModels(in: container)
     }
 
     private func registerNetworkClients(in container: Resolver) {
@@ -114,6 +115,24 @@ class AppDependencies {
         container
             .register { QuizUseCase(quizRepository: container.resolve()) }
             .implements(QuizUseCaseProtocol.self)
+            .scope(.application)
+    }
+
+    private func registerViewModels(in container: Resolver) {
+        container
+            .register { LoginViewModel(loginUseCase: container.resolve(), appRouter: container.resolve()) }
+            .scope(.application)
+
+        container
+            .register { QuizViewModel(quizUseCase: container.resolve()) }
+            .scope(.application)
+
+        container
+            .register { UserViewModel(
+                appRouter: container.resolve(),
+                userUseCase: container.resolve(),
+                logoutUseCase: container.resolve())
+            }
             .scope(.application)
     }
 
