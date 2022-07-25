@@ -2,6 +2,10 @@ import UIKit
 
 class QuizDetailsViewController: UIViewController {
 
+    private var gradientView: GradientView!
+
+    private var mainView: UIView!
+
     private var detailsView: DetailsView!
 
     init() {
@@ -25,8 +29,14 @@ class QuizDetailsViewController: UIViewController {
 extension QuizDetailsViewController: ConstructViewsProtocol {
 
     func createViews() {
+        gradientView = GradientView()
+        view.addSubview(gradientView)
+
+        mainView = UIView()
+        gradientView.addSubview(mainView)
+
         detailsView = DetailsView()
-        view.addSubview(detailsView)
+        mainView.addSubview(detailsView)
     }
 
     func styleViews() {
@@ -34,7 +44,16 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
     }
 
     func defineLayoutForViews() {
+        gradientView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+
+        mainView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+
         detailsView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(20)
             $0.center.equalToSuperview()
         }
     }
