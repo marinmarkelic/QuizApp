@@ -14,8 +14,6 @@ class QuizUseCase: QuizUseCaseProtocol {
 
     init(quizRepository: QuizRepositoryProtocol) {
         self.quizRepository = quizRepository
-
-        print("quizuc init")
     }
 
     func fetchQuizzes(for type: CategoryModel) async throws -> [QuizModel] {

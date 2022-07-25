@@ -18,8 +18,6 @@ class UserUseCase: UserUseCaseProtocol {
 
     init(userRepository: UserRepositoryProtocol) {
         self.userRepository = userRepository
-
-        print("useruc init")
     }
 
     func save(userInfo: UserInfoModel) async throws -> UserInfoModel {
