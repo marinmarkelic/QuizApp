@@ -60,6 +60,11 @@ extension DetailsView: ConstructViewsProtocol {
         imageView.contentMode = .scaleAspectFit
 
         startButton.setTitle("Start Quiz", for: .normal)
+        startButton.titleLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 16)
+        startButton.backgroundColor = .white
+        startButton.setTitleColor(UIColor(red: 99 / 255, green: 41 / 255, blue: 222 / 255, alpha: 1.0), for: .normal)
+        startButton.layer.cornerRadius = 20
+        startButton.clipsToBounds = true
     }
 
     func defineLayoutForViews() {
@@ -81,6 +86,7 @@ extension DetailsView: ConstructViewsProtocol {
         startButton.snp.makeConstraints {
             $0.top.equalTo(imageView.snp.bottom).offset(20)
             $0.leading.trailing.bottom.equalToSuperview().inset(20)
+            $0.height.equalTo(45)
         }
     }
 
