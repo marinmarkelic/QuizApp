@@ -2,7 +2,7 @@ import UIKit
 import Resolver
 
 @main
-class AppDelegresolveate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private var appRouter: AppRouterProtocol!
     private var appDependencies: AppDependencies!
