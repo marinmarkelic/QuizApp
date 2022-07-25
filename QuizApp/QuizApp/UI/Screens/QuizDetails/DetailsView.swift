@@ -50,10 +50,12 @@ extension DetailsView: ConstructViewsProtocol {
 
         title.font = UIFont(name: "SourceSansPro-Bold", size: 32)
         title.textAlignment = .center
+        title.textColor = .white
 
         desc.font = UIFont(name: "SourceSansPro-Bold", size: 20)
         desc.textAlignment = .center
         desc.numberOfLines = 0
+        desc.textColor = .white
 
         imageView.contentMode = .scaleAspectFit
 
@@ -72,8 +74,8 @@ extension DetailsView: ConstructViewsProtocol {
 
         imageView.snp.makeConstraints {
             $0.top.equalTo(desc.snp.bottom).offset(20)
-            $0.height.equalTo(50)
             $0.leading.trailing.equalToSuperview().inset(20)
+            $0.height.equalTo(150)
         }
 
         startButton.snp.makeConstraints {
