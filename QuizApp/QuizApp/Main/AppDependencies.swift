@@ -11,6 +11,13 @@ class AppDependencies {
     }()
 
     func registerDependencies(in container: Resolver) {
+        registerNetworkClients(in: container)
+        registerDataSources(in: container)
+        registerRepos(in: container)
+        registerUseCases(in: container)
+    }
+
+    private func registerNetworkClients(in container: Resolver) {
         container.register { SecureStorage() }
             .implements(SecureStorageProtocol.self)
             .scope(.application)
@@ -33,7 +40,9 @@ class AppDependencies {
         container.register { QuizNetworkClient(networkClient: container.resolve()) }
             .implements(QuizNetworkClientProtocol.self)
             .scope(.application)
+    }
 
+    private func registerDataSources(in container: Resolver) {
         container.register { UserNetworkDataSource(
             loginNetworkClient: container.resolve(),
             checkNetworkClient: container.resolve(),
@@ -49,7 +58,9 @@ class AppDependencies {
         container.register { UserDatabaseDataSource(secureStorage: container.resolve()) }
             .implements(UserDatabaseDataSourceProtocol.self)
             .scope(.application)
+    }
 
+    private func registerRepos(in container: Resolver) {
         container.register {
             UserRepository(
                 userNetworkDataSource: container.resolve(),
@@ -61,7 +72,9 @@ class AppDependencies {
         container.register { QuizRepository(quizNetworkDataSource: container.resolve()) }
             .implements(QuizRepositoryProtocol.self)
             .scope(.application)
+    }
 
+    private func registerUseCases(in container: Resolver) {
         container.register { LoginUseCase(userRepository: container.resolve()) }
             .implements(LoginUseCaseProtocol.self)
             .scope(.application)
@@ -77,14 +90,6 @@ class AppDependencies {
         container.register { QuizUseCase(quizRepository: container.resolve()) }
             .implements(QuizUseCaseProtocol.self)
             .scope(.application)
-    }
-}
-
-extension Resolver: ResolverRegistering {
-
-    public static func registerAllServices() {
-        defaultScope = .application
-
     }
 
 }
