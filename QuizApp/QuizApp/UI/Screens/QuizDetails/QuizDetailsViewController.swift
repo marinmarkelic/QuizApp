@@ -29,12 +29,6 @@ class QuizDetailsViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func set(quiz: Quiz) {
-        id = quiz.id
-
-        detailsView.set(quiz: quiz)
-    }
-
 }
 
 extension QuizDetailsViewController: ConstructViewsProtocol {
@@ -70,7 +64,7 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
 
     @objc
     private func pressedBack() {
-        navigationController?.popViewController(animated: true)
+        appRouter.goBack()
     }
 
     func defineLayoutForViews() {

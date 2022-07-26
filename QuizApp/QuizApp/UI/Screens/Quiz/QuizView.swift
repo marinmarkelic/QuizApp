@@ -26,7 +26,14 @@ class QuizView: UIView {
     }
 
     func reload(with quizzes: [Quiz]) {
-        self.quizzes = quizzes
+        self.quizzes = quizzes.sorted {
+            if $0.category.index == $1.category.index {
+                return $0.difficulty < $1.difficulty
+            }
+
+            return $0.category.index < $1.category.index
+        }
+
         collectionView.reloadData()
     }
 
@@ -77,13 +84,25 @@ extension QuizView: ConstructViewsProtocol {
 extension QuizView: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard
-            let cell = collectionView.cellForItem(at: indexPath) as? QuizCell,
-            let quiz = cell.quiz,
-            let delegate = delegate
-        else { return }
+        guard let delegate = delegate else { return }
 
+        let quiz: Quiz = quizzes[determineQuizIndex(collectionView, indexPath: indexPath)]
         delegate.selected(quiz: quiz)
+    }
+
+    private func determineQuizIndex(_ collectionView: UICollectionView, indexPath: IndexPath) -> Int {
+        var result = 0
+
+        for index in 0..<collectionView.numberOfSections {
+            if index < indexPath.section {
+                result += collectionView.numberOfItems(inSection: index)
+            } else {
+                result += indexPath.row
+                break
+            }
+        }
+
+        return result
     }
 
 }
@@ -105,9 +124,7 @@ extension QuizView: UICollectionViewDelegateFlowLayout {
 extension QuizView: UICollectionViewDataSource {
 
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        Set(quizzes
-            .map { $0.category })
-        .count
+        Set(quizzes.map { $0.category }).count
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
