@@ -2,13 +2,8 @@ import UIKit
 
 class SolvingQuizViewController: UIViewController {
 
-    private var solvingQuizViewModel: SolvingQuizViewModel!
-    private var appRouter: AppRouterProtocol!
-
-    init(solvingQuizViewModel: SolvingQuizViewModel) {
+    init() {
         super.init(nibName: nil, bundle: nil)
-
-        self.solvingQuizViewModel = solvingQuizViewModel
     }
 
     required init?(coder: NSCoder) {

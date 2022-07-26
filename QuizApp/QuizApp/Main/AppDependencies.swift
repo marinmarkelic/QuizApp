@@ -161,7 +161,6 @@ class AppDependencies {
             }
             .scope(.unique)
 
-        //
         container
             .register { (_, args) -> QuizDetailsViewController in
                 let quiz: Quiz = args.get()
@@ -178,7 +177,7 @@ class AppDependencies {
             .scope(.unique)
 
         container
-            .register { SolvingQuizViewController(solvingQuizViewModel: container.resolve()) }
+            .register { SolvingQuizViewController() }
             .scope(.unique)
     }
 
