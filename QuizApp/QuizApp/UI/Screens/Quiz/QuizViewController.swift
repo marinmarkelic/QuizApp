@@ -12,8 +12,6 @@ class QuizViewController: UIViewController {
     private var gradientView: GradientView!
     private var mainView: UIView!
 
-    private var titleView: UILabel!
-
     private var quizContainer: UIView!
 
     private var categorySlider: CategorySlider!
@@ -113,8 +111,6 @@ extension QuizViewController: ConstructViewsProtocol {
 
         mainView = UIView()
         gradientView.addSubview(mainView)
-
-        titleView = UILabel()
 
         quizContainer = UIView()
         mainView.addSubview(quizContainer)
