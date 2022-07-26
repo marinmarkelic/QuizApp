@@ -33,6 +33,7 @@ class QuizView: UIView {
 
             return $0.category.index < $1.category.index
         }
+
         collectionView.reloadData()
     }
 
