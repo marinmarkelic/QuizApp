@@ -12,7 +12,6 @@ class SolvingQuizViewController: UIViewController {
 
         self.solvingQuizViewModel = solvingQuizViewModel
         self.appRouter = appRouter
-
     }
 
     func set(id: Int) {

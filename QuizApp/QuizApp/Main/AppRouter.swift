@@ -1,7 +1,7 @@
 import UIKit
 import Resolver
 
- class AppRouter: AppRouterProtocol {
+class AppRouter: AppRouterProtocol {
 
     private let navigationController: UINavigationController
     private let container: Resolver

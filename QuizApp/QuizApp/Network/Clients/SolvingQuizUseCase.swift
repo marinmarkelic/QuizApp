@@ -1,6 +1,7 @@
 protocol SolvingQuizUseCaseProtocol {
 
     func startQuiz(with request: QuizStartRequestModel) async throws -> QuizStartResponseModel
+
 }
 
 class SolvingQuizUseCase: SolvingQuizUseCaseProtocol {
@@ -15,4 +16,5 @@ class SolvingQuizUseCase: SolvingQuizUseCaseProtocol {
         let response = try await quizRepository.startQuiz(with: QuizStartRequestRepoModel(request))
         return QuizStartResponseModel(response)
     }
+
 }
