@@ -174,11 +174,7 @@ class AppDependencies {
             .scope(.unique)
 
         container
-            .register {
-                SolvingQuizViewController(
-                    solvingQuizViewModel: container.resolve(),
-                    appRouter: container.resolve())
-            }
+            .register { SolvingQuizViewController(solvingQuizViewModel: container.resolve()) }
             .scope(.unique)
     }
 
