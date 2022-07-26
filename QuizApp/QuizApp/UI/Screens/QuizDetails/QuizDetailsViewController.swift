@@ -2,14 +2,19 @@ import UIKit
 
 class QuizDetailsViewController: UIViewController {
 
+    private var appRouter: AppRouterProtocol!
+
+    private var quiz: Quiz!
+
     private var gradientView: GradientView!
-
     private var mainView: UIView!
-
     private var detailsView: DetailsView!
 
-    init() {
+    init(appRouter: AppRouterProtocol, quiz: Quiz) {
         super.init(nibName: nil, bundle: nil)
+
+        self.appRouter = appRouter
+        self.quiz = quiz
 
         createViews()
         styleViews()
@@ -18,10 +23,6 @@ class QuizDetailsViewController: UIViewController {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    func set(quiz: Quiz) {
-        detailsView.set(quiz: quiz)
     }
 
 }
@@ -53,11 +54,13 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
             target: self,
             action: #selector(pressedBack))
         navigationItem.leftBarButtonItem?.tintColor = .white
+
+        detailsView.set(quiz: quiz)
     }
 
     @objc
     private func pressedBack() {
-        navigationController?.popViewController(animated: true)
+        appRouter.popViewController()
     }
 
     func defineLayoutForViews() {
