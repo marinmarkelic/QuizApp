@@ -6,24 +6,14 @@ class AppRouter: AppRouterProtocol {
     private let container: Resolver
 
     private var navigationController: UINavigationController!
-    private var quizNavigationController: UINavigationController!
-    private var userNavigationController: UINavigationController!
 
     init(container: Resolver) {
         self.container = container
-
-        setupNavigationControllers()
-    }
-
-    private func setupNavigationControllers() {
-        navigationController = UINavigationController()
-        navigationController.navigationBar.isHidden = true
-
-        quizNavigationController = UINavigationController()
-        userNavigationController = UINavigationController()
     }
 
     func start(in window: UIWindow) {
+        navigationController = UINavigationController()
+
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
 
@@ -37,12 +27,9 @@ class AppRouter: AppRouterProtocol {
 
     func showHome() {
         let quizViewController = container.resolve(QuizViewController.self)
-        quizNavigationController.viewControllers = [quizViewController]
-
         let userViewController = container.resolve(UserViewController.self)
-        userNavigationController.viewControllers = [userViewController]
 
-        let viewControllers = [quizNavigationController!, userNavigationController!]
+        let viewControllers = [quizViewController, userViewController]
 
         let tabBarController = TabBarController(viewControllers: viewControllers)
         tabBarController.navigationController?.navigationBar.isHidden = true
@@ -54,7 +41,7 @@ class AppRouter: AppRouterProtocol {
         let quizDetailsViewController = container.resolve(QuizDetailsViewController.self)
         quizDetailsViewController.set(quiz: quiz)
 
-        quizNavigationController.pushViewController(quizDetailsViewController, animated: true)
+        navigationController.pushViewController(quizDetailsViewController, animated: true)
     }
 
     private func showInitialViewController() {
