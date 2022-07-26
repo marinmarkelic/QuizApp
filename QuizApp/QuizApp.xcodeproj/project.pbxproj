@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9C0481E2288FEFFD0095247C /* SolvingQuizUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0481E1288FEFFD0095247C /* SolvingQuizUseCase.swift */; };
 		9C19536B287584750051CEC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C19536A287584750051CEC6 /* AppDelegate.swift */; };
 		9C19536F287584750051CEC6 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C19536E287584750051CEC6 /* LoginViewController.swift */; };
 		9C195374287584770051CEC6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C195373287584770051CEC6 /* Assets.xcassets */; };
@@ -69,6 +70,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9C0481E1288FEFFD0095247C /* SolvingQuizUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolvingQuizUseCase.swift; sourceTree = "<group>"; };
 		9C195367287584750051CEC6 /* QuizApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuizApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C19536A287584750051CEC6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9C19536E287584750051CEC6 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 				9C1C76D228803AA9006217A9 /* UserNetworkClient.swift */,
 				9CFCC2FF28858A1E00B01343 /* QuizNetworkClient.swift */,
 				9CC33B32287DA19F002E9853 /* NetworkClient.swift */,
+				9C0481E1288FEFFD0095247C /* SolvingQuizUseCase.swift */,
 			);
 			path = Clients;
 			sourceTree = "<group>";
@@ -514,6 +517,7 @@
 				9CC33B24287D6889002E9853 /* UserRepository.swift in Sources */,
 				9C25C8B22888428A000C4C90 /* UserModels.swift in Sources */,
 				9CFCC2F42885532A00B01343 /* QuizViewModel.swift in Sources */,
+				9C0481E2288FEFFD0095247C /* SolvingQuizUseCase.swift in Sources */,
 				9CC33B36287DBCB1002E9853 /* UserViewController.swift in Sources */,
 				9CC33B26287D6E2B002E9853 /* SecureStorage.swift in Sources */,
 				9C1C76D128802471006217A9 /* QuizViewController.swift in Sources */,
