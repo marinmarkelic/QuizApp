@@ -93,3 +93,53 @@ extension QuizStartRequestRepoModel {
     }
 
 }
+
+struct QuizStartResponseModel {
+
+    let questions: [QuestionModel]
+    let sessionId: String
+
+}
+
+struct QuestionModel {
+
+    let answers: [AnswerModel]
+    let correctAnswerId: Int
+    let id: Int
+    let question: String
+
+}
+
+struct AnswerModel {
+
+    let answer: String
+    let id: Int
+
+}
+
+extension QuizStartResponseModel {
+
+    init(_ response: QuizStartResponseRepoModel) {
+        questions = response.questions.map { QuestionModel($0) }
+        sessionId = response.sessionId
+    }
+}
+
+extension QuestionModel {
+
+    init(_ question: QuestionRepoModel) {
+        answers = question.answers.map { AnswerModel($0) }
+        correctAnswerId = question.correctAnswerId
+        id = question.id
+        self.question = question.question
+    }
+}
+
+extension AnswerModel {
+
+    init(_ answer: AnswerRepoModel) {
+        self.answer = answer.answer
+        id = answer.id
+    }
+
+}

@@ -86,3 +86,53 @@ extension QuizStartRequestNetworkDataModel {
     }
 
 }
+
+struct QuizStartResponseDataModel {
+
+    let questions: [QuestionDataModel]
+    let sessionId: String
+
+}
+
+struct QuestionDataModel {
+
+    let answers: [AnswerDataModel]
+    let correctAnswerId: Int
+    let id: Int
+    let question: String
+
+}
+
+struct AnswerDataModel {
+
+    let answer: String
+    let id: Int
+
+}
+
+extension QuizStartResponseDataModel {
+
+    init(_ response: QuizStartResponseNetworkDataModel) {
+        questions = response.questions.map { QuestionDataModel($0) }
+        sessionId = response.sessionId
+    }
+}
+
+extension QuestionDataModel {
+
+    init(_ question: QuestionNetworkDataModel) {
+        answers = question.answers.map { AnswerDataModel($0) }
+        correctAnswerId = question.correctAnswerId
+        id = question.id
+        self.question = question.question
+    }
+}
+
+extension AnswerDataModel {
+
+    init(_ answer: AnswerNetworkDataModel) {
+        self.answer = answer.answer
+        id = answer.id
+    }
+
+}
