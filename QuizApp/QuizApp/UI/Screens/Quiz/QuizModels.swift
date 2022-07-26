@@ -146,6 +146,7 @@ extension QuizStartResponse {
         questions = response.questions.map { Question($0) }
         sessionId = response.sessionId
     }
+
 }
 
 extension Question {
@@ -156,6 +157,7 @@ extension Question {
         id = question.id
         self.question = question.question
     }
+
 }
 
 extension Answer {

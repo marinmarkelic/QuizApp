@@ -114,6 +114,7 @@ extension QuizStartResponseRepoModel {
         questions = response.questions.map { QuestionRepoModel($0) }
         sessionId = response.sessionId
     }
+
 }
 
 extension QuestionRepoModel {
@@ -124,6 +125,7 @@ extension QuestionRepoModel {
         id = question.id
         self.question = question.question
     }
+
 }
 
 extension AnswerRepoModel {

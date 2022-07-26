@@ -116,6 +116,7 @@ extension QuizStartResponseDataModel {
         questions = response.questions.map { QuestionDataModel($0) }
         sessionId = response.sessionId
     }
+
 }
 
 extension QuestionDataModel {
@@ -126,6 +127,7 @@ extension QuestionDataModel {
         id = question.id
         self.question = question.question
     }
+
 }
 
 extension AnswerDataModel {

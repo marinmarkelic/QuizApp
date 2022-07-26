@@ -123,6 +123,7 @@ extension QuizStartResponseModel {
         questions = response.questions.map { QuestionModel($0) }
         sessionId = response.sessionId
     }
+
 }
 
 extension QuestionModel {
@@ -133,6 +134,7 @@ extension QuestionModel {
         id = question.id
         self.question = question.question
     }
+
 }
 
 extension AnswerModel {
