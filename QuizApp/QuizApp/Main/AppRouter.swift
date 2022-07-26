@@ -3,14 +3,19 @@ import Resolver
 
 class AppRouter: AppRouterProtocol {
 
-    private let navigationController: UINavigationController
     private let container: Resolver
 
+    private var navigationController: UINavigationController!
     private var quizNavigationController: UINavigationController!
     private var userNavigationController: UINavigationController!
 
     init(container: Resolver) {
         self.container = container
+
+        setupNavigationControllers()
+    }
+
+    private func setupNavigationControllers() {
         navigationController = UINavigationController()
         navigationController.navigationBar.isHidden = true
 
