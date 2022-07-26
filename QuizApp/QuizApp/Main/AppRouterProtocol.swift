@@ -10,4 +10,6 @@ protocol AppRouterProtocol {
 
     func showQuizDetails(with quiz: Quiz)
 
+    func showQuiz()
+
 }

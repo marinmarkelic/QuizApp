@@ -2,14 +2,18 @@ import UIKit
 
 class QuizDetailsViewController: UIViewController {
 
+    private var appRouter: AppRouterProtocol!
+
     private var gradientView: GradientView!
 
     private var mainView: UIView!
 
     private var detailsView: DetailsView!
 
-    init() {
+    init(appRouter: AppRouterProtocol) {
         super.init(nibName: nil, bundle: nil)
+
+        self.appRouter = appRouter
 
         createViews()
         styleViews()
@@ -53,6 +57,8 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
             target: self,
             action: #selector(pressedBack))
         navigationItem.leftBarButtonItem?.tintColor = .white
+
+        detailsView.delegate = self
     }
 
     @objc
@@ -73,6 +79,14 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.center.equalToSuperview()
         }
+    }
+
+}
+
+extension QuizDetailsViewController: DetailsViewDelegate {
+
+    func startQuiz() {
+        appRouter.showQuiz()
     }
 
 }

@@ -2,6 +2,8 @@ import UIKit
 
 class DetailsView: UIView {
 
+    weak var delegate: DetailsViewDelegate?
+
     private var title: UILabel!
     private var desc: UILabel!
     private var imageView: UIImageView!
@@ -65,6 +67,12 @@ extension DetailsView: ConstructViewsProtocol {
         startButton.setTitleColor(UIColor(red: 99 / 255, green: 41 / 255, blue: 222 / 255, alpha: 1.0), for: .normal)
         startButton.layer.cornerRadius = 20
         startButton.clipsToBounds = true
+        startButton.addTarget(self, action: #selector(buttonPress), for: .touchUpInside)
+    }
+
+    @objc
+    private func buttonPress() {
+        delegate?.startQuiz()
     }
 
     func defineLayoutForViews() {
@@ -89,5 +97,11 @@ extension DetailsView: ConstructViewsProtocol {
             $0.height.equalTo(45)
         }
     }
+
+}
+
+protocol DetailsViewDelegate: AnyObject {
+
+    func startQuiz()
 
 }
