@@ -60,7 +60,7 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
 
     @objc
     private func pressedBack() {
-        appRouter.popViewController()
+        appRouter.goBack()
     }
 
     func defineLayoutForViews() {

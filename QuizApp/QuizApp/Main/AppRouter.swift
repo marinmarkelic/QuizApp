@@ -39,7 +39,7 @@ class AppRouter: AppRouterProtocol {
         navigationController.pushViewController(quizDetailsViewController, animated: true)
     }
 
-    func popViewController() {
+    func goBack() {
         navigationController.popViewController(animated: true)
     }
 

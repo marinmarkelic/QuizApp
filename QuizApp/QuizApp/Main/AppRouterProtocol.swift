@@ -10,6 +10,6 @@ protocol AppRouterProtocol {
 
     func showQuizDetails(with quiz: Quiz)
 
-    func popViewController()
+    func goBack()
 
 }
