@@ -3,17 +3,15 @@ import Resolver
 
 class AppRouter: AppRouterProtocol {
 
+    private let navigationController: UINavigationController
     private let container: Resolver
-
-    private var navigationController: UINavigationController!
 
     init(container: Resolver) {
         self.container = container
+        navigationController = UINavigationController()
     }
 
     func start(in window: UIWindow) {
-        navigationController = UINavigationController()
-
         window.rootViewController = navigationController
         window.makeKeyAndVisible()
 
