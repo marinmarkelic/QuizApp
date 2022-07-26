@@ -2,7 +2,7 @@ import UIKit
 
 class QuizDetailsViewController: UIViewController {
 
-    private var id: Int?
+    private var quiz: Quiz!
 
     private var appRouter: AppRouterProtocol!
 
@@ -14,11 +14,12 @@ class QuizDetailsViewController: UIViewController {
 
     private var detailsView: DetailsView!
 
-    init(appRouter: AppRouterProtocol, solvingQuizViewModel: SolvingQuizViewModel) {
+    init(appRouter: AppRouterProtocol, solvingQuizViewModel: SolvingQuizViewModel, quiz: Quiz) {
         super.init(nibName: nil, bundle: nil)
 
         self.appRouter = appRouter
         self.solvingQuizViewModel = solvingQuizViewModel
+        self.quiz = quiz
 
         createViews()
         styleViews()
@@ -59,6 +60,7 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
             action: #selector(pressedBack))
         navigationItem.leftBarButtonItem?.tintColor = .white
 
+        detailsView.set(quiz: quiz)
         detailsView.delegate = self
     }
 
@@ -87,9 +89,7 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
 extension QuizDetailsViewController: DetailsViewDelegate {
 
     func startQuiz() {
-        guard let id = id else { return }
-
-        solvingQuizViewModel.startQuiz(with: id)
+        solvingQuizViewModel.startQuiz(with: quiz.id)
         appRouter.showQuiz()
     }
 
