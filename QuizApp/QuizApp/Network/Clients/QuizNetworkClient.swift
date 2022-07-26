@@ -27,10 +27,7 @@ class QuizNetworkClient: QuizNetworkClientProtocol {
     }
 
     func startQuiz(with request: QuizStartRequestNetworkDataModel) async throws -> QuizStartResponseNetworkDataModel {
-        print(getStartQuizPath(id: request.id))
-        print(request)
-
-        return try await networkClient.post(path: getStartQuizPath(id: request.id), body: request) //
+        try await networkClient.post(path: getStartQuizPath(id: request.id), body: request)
     }
 
     private func getStartQuizPath(id: Int) -> String {

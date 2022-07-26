@@ -1,7 +1,7 @@
 import UIKit
 import Resolver
 
-class AppRouter: AppRouterProtocol {
+ class AppRouter: AppRouterProtocol {
 
     private let navigationController: UINavigationController
     private let container: Resolver
@@ -41,8 +41,10 @@ class AppRouter: AppRouterProtocol {
         navigationController.pushViewController(quizDetailsViewController, animated: true)
     }
 
-    func showQuiz() {
-        let solvingQuizViewController = SolvingQuizViewController(solvingQuizViewModel: container.resolve(), appRouter: container.resolve())
+    func showQuiz(with id: Int) {
+        let solvingQuizViewController = container.resolve(SolvingQuizViewController.self)
+        solvingQuizViewController.set(id: id)
+
         navigationController.pushViewController(solvingQuizViewController, animated: true)
     }
 

@@ -2,6 +2,8 @@ import UIKit
 
 class SolvingQuizViewController: UIViewController {
 
+    private var id: Int?
+
     private var solvingQuizViewModel: SolvingQuizViewModel!
     private var appRouter: AppRouterProtocol!
 
@@ -13,10 +15,16 @@ class SolvingQuizViewController: UIViewController {
 
     }
 
+    func set(id: Int) {
+        self.id = id
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        solvingQuizViewModel.startQuiz()
+        guard let id = id else { return }
+
+        solvingQuizViewModel.startQuiz(with: id)
     }
 
     required init?(coder: NSCoder) {

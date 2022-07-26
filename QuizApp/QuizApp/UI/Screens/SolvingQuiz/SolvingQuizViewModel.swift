@@ -6,10 +6,10 @@ class SolvingQuizViewModel {
         self.solvingQuizUseCase = solvingQuizUseCase
     }
 
-    func startQuiz() {
+    func startQuiz(with id: Int) {
         Task {
             do {
-                try await print(solvingQuizUseCase.startQuiz(with: QuizStartRequestModel(id: 1)))
+                try await print(solvingQuizUseCase.startQuiz(with: QuizStartRequestModel(id: id)))
             } catch {
 
             }

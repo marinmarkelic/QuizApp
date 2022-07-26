@@ -2,6 +2,8 @@ import UIKit
 
 class QuizDetailsViewController: UIViewController {
 
+    private var id: Int?
+
     private var appRouter: AppRouterProtocol!
 
     private var gradientView: GradientView!
@@ -25,6 +27,8 @@ class QuizDetailsViewController: UIViewController {
     }
 
     func set(quiz: Quiz) {
+        id = quiz.id
+
         detailsView.set(quiz: quiz)
     }
 
@@ -86,7 +90,9 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
 extension QuizDetailsViewController: DetailsViewDelegate {
 
     func startQuiz() {
-        appRouter.showQuiz()
+        guard let id = id else { return }
+
+        appRouter.showQuiz(with: id)
     }
 
 }
