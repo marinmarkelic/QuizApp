@@ -102,3 +102,17 @@ extension Category {
     }
 
 }
+
+struct QuizStartRequest {
+
+    let id: Int
+
+}
+
+extension QuizStartRequestModel {
+
+    init(_ request: QuizStartRequest) {
+        id = request.id
+    }
+    
+}

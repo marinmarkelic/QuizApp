@@ -53,3 +53,9 @@ enum DifficultyNetworkDataModel: String, Decodable {
     case hard = "HARD"
 
 }
+
+struct QuizStartRequestNetworkDataModel: Encodable {
+
+    let id: Int
+
+}

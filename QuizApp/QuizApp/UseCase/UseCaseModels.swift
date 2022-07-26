@@ -79,3 +79,17 @@ enum DifficultyModel: String {
     case hard = "HARD"
 
 }
+
+struct QuizStartRequestModel {
+
+    let id: Int
+
+}
+
+extension QuizStartRequestRepoModel {
+
+    init(_ request: QuizStartRequestModel) {
+        id = request.id
+    }
+
+}
