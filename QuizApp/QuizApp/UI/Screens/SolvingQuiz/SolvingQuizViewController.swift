@@ -12,6 +12,7 @@ class SolvingQuizViewController: UIViewController {
     private var mainView: UIView!
 
     private var progressView: ProgressView!
+    private var questionsView: QuestionsView!
 
     private var cancellables = Set<AnyCancellable>()
 
@@ -34,9 +35,11 @@ class SolvingQuizViewController: UIViewController {
         solvingQuizViewModel
             .$quiz
             .sink { [weak self] quiz in
-                print(quiz)
+                if quiz.questions.isEmpty { return }
+
                 self?.quiz = quiz
                 self?.progressView.set(numberOfQuestions: quiz.questions.count)
+                self?.questionsView.set(questions: quiz.questions)
             }
             .store(in: &cancellables)
     }
@@ -54,10 +57,12 @@ extension SolvingQuizViewController: ConstructViewsProtocol {
 
         progressView = ProgressView()
         mainView.addSubview(progressView)
+
+        questionsView = QuestionsView()
+        mainView.addSubview(questionsView)
     }
 
     func styleViews() {
-
     }
 
     func defineLayoutForViews() {
@@ -71,6 +76,11 @@ extension SolvingQuizViewController: ConstructViewsProtocol {
 
         progressView.snp.makeConstraints {
             $0.leading.top.trailing.equalToSuperview().inset(20)
+        }
+
+        questionsView.snp.makeConstraints {
+            $0.top.equalTo(progressView.snp.bottom).offset(10)
+            $0.leading.trailing.bottom.equalToSuperview().inset(20)
         }
     }
 
