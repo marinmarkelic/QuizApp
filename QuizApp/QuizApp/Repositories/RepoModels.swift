@@ -77,7 +77,7 @@ struct QuizStartRequestRepoModel {
 
 }
 
-extension QuizStartRequestNetworkDataModel {
+extension QuizStartRequestDataModel {
 
     init(_ request: QuizStartRequestRepoModel) {
         id = request.id

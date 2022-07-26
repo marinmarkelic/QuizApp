@@ -114,5 +114,5 @@ extension QuizStartRequestModel {
     init(_ request: QuizStartRequest) {
         id = request.id
     }
-    
+
 }
