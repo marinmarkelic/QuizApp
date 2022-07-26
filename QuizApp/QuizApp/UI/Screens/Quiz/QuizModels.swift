@@ -76,6 +76,21 @@ struct Category: Hashable {
         }
     }
 
+    var index: Int {
+        switch type {
+        case .sport:
+            return 1
+        case .movies:
+            return 2
+        case .music:
+            return 3
+        case .geography:
+            return 4
+        case .all:
+            return 0
+        }
+    }
+
     let type: CategoryType
     let color: UIColor
 

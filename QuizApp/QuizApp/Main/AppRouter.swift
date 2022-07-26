@@ -34,6 +34,15 @@ class AppRouter: AppRouterProtocol {
         navigationController.setViewControllers([tabBarController], animated: true)
     }
 
+    func showQuizDetails(with quiz: Quiz) {
+        let quizDetailsViewController = container.resolve(QuizDetailsViewController.self, args: quiz)
+        navigationController.pushViewController(quizDetailsViewController, animated: true)
+    }
+
+    func goBack() {
+        navigationController.popViewController(animated: true)
+    }
+
     private func showInitialViewController() {
         Task {
             do {

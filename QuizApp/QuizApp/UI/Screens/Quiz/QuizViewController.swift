@@ -3,15 +3,14 @@ import Combine
 
 class QuizViewController: UIViewController {
 
+    private var appRouter: AppRouterProtocol!
+
     private var quizViewModel: QuizViewModel!
 
     private var cancellables = Set<AnyCancellable>()
 
     private var gradientView: GradientView!
-
     private var mainView: UIView!
-
-    private var titleView: UILabel!
 
     private var quizContainer: UIView!
 
@@ -21,10 +20,11 @@ class QuizViewController: UIViewController {
     private var noQuizErrorLabel: UILabel!
     private var errorView: ErrorView!
 
-    init(quizViewModel: QuizViewModel) {
+    init(quizViewModel: QuizViewModel, appRouter: AppRouterProtocol) {
         super.init(nibName: nil, bundle: nil)
 
         self.quizViewModel = quizViewModel
+        self.appRouter = appRouter
 
         styleTabBarItem()
     }
@@ -95,6 +95,14 @@ class QuizViewController: UIViewController {
 
 }
 
+extension QuizViewController: QuizViewDelegate {
+
+    func selected(quiz: Quiz) {
+        appRouter.showQuizDetails(with: quiz)
+    }
+
+}
+
 extension QuizViewController: ConstructViewsProtocol {
 
     func createViews() {
@@ -103,8 +111,6 @@ extension QuizViewController: ConstructViewsProtocol {
 
         mainView = UIView()
         gradientView.addSubview(mainView)
-
-        titleView = UILabel()
 
         quizContainer = UIView()
         mainView.addSubview(quizContainer)
@@ -123,12 +129,14 @@ extension QuizViewController: ConstructViewsProtocol {
     }
 
     func styleViews() {
+        let titleView = UILabel()
         titleView.text = "PopQuiz"
         titleView.textColor = .white
         titleView.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 24), size: 24)
         tabBarController?.navigationItem.titleView = titleView
 
         categorySlider.delegate = self
+        quizView.delegate = self
 
         noQuizErrorLabel.text = "There are no quizzes for this category"
         noQuizErrorLabel.font = UIFont(name: "SourceSansPro-Bold", size: 20)

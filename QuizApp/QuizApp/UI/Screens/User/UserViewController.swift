@@ -119,6 +119,12 @@ extension UserViewController: ConstructViewsProtocol {
     }
 
     func styleViews() {
+        let titleView = UILabel()
+        titleView.text = "PopQuiz"
+        titleView.textColor = .white
+        titleView.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 24), size: 24)
+        navigationItem.titleView = titleView
+
         usernameLabel.text = "USERNAME"
         usernameLabel.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 12), size: 12)
         usernameLabel.textColor = .white
