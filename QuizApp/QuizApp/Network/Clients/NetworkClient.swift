@@ -87,7 +87,10 @@ class NetworkClient {
             throw RequestError.dataCodingError
         }
 
+        let accessToken = secureStorage.accessToken ?? ""
+
         var urlRequest = URLRequest(url: url)
+        urlRequest.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
         urlRequest.addValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRequest.httpMethod = "POST"
         urlRequest.httpBody = jsonData

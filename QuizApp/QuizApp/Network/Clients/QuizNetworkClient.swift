@@ -4,6 +4,8 @@ protocol QuizNetworkClientProtocol {
 
     func fetchAllQuizzes() async throws -> [QuizNetworkDataModel]
 
+    func startQuiz(with request: QuizStartRequestNetworkDataModel) async throws -> QuizStartResponseNetworkDataModel
+
 }
 
 class QuizNetworkClient: QuizNetworkClientProtocol {
@@ -22,6 +24,17 @@ class QuizNetworkClient: QuizNetworkClientProtocol {
 
     func fetchAllQuizzes() async throws -> [QuizNetworkDataModel] {
         try await networkClient.get(path: "\(quizPath)")
+    }
+
+    func startQuiz(with request: QuizStartRequestNetworkDataModel) async throws -> QuizStartResponseNetworkDataModel {
+        print(getStartQuizPath(id: request.id))
+        print(request)
+
+        return try await networkClient.post(path: getStartQuizPath(id: request.id), body: request) //
+    }
+
+    private func getStartQuizPath(id: Int) -> String {
+        return "/v1/quiz/\(id)/session/start"
     }
 
 }
