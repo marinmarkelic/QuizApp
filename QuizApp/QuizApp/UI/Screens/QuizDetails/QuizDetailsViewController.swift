@@ -96,7 +96,7 @@ extension QuizDetailsViewController: DetailsViewDelegate {
         guard let id = id else { return }
 
         solvingQuizViewModel.startQuiz(with: id)
-        appRouter.showQuiz(with: id)
+        appRouter.showQuiz()
     }
 
 }
