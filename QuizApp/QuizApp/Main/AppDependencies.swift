@@ -118,6 +118,11 @@ class AppDependencies {
             .register { QuizUseCase(quizRepository: container.resolve()) }
             .implements(QuizUseCaseProtocol.self)
             .scope(.application)
+
+        container
+            .register { SolvingQuizUseCase(quizRepository: container.resolve()) }
+            .implements(SolvingQuizUseCaseProtocol.self)
+            .scope(.unique)
     }
 
     private func registerViewModels(in container: Resolver) {
