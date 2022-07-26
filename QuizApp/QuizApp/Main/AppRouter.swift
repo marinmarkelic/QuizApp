@@ -32,7 +32,6 @@ class AppRouter: AppRouterProtocol {
         let viewControllers = [quizViewController, userViewController]
 
         let tabBarController = TabBarController(viewControllers: viewControllers)
-        tabBarController.navigationController?.navigationBar.isHidden = true
 
         navigationController.setViewControllers([tabBarController], animated: true)
     }

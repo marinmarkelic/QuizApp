@@ -137,7 +137,7 @@ extension QuizViewController: ConstructViewsProtocol {
         titleView.text = "PopQuiz"
         titleView.textColor = .white
         titleView.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 24), size: 24)
-        navigationItem.titleView = titleView
+        tabBarController?.navigationItem.titleView = titleView
 
         categorySlider.delegate = self
         quizView.delegate = self
