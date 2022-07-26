@@ -23,9 +23,14 @@ class ProgressView: UIView {
         label.text = "1/\(numberOfQuestions)"
 
         setupStackView(numberOfQuestions: numberOfQuestions)
+        selectCell(at: 0)
     }
 
     private func setupStackView(numberOfQuestions: Int) {
+        for subview in stackView.arrangedSubviews {
+            subview.removeFromSuperview()
+        }
+
         for _ in 0..<numberOfQuestions {
             let cell = UIView()
             cell.backgroundColor = .white.withAlphaComponent(0.3)
@@ -35,9 +40,14 @@ class ProgressView: UIView {
         }
     }
 
+    private func selectCell(at index: Int) {
+        stackView.arrangedSubviews[index].backgroundColor = .white
+    }
+
 }
 
 extension ProgressView: ConstructViewsProtocol {
+
     func createViews() {
         label = UILabel()
         addSubview(label)
@@ -50,7 +60,6 @@ extension ProgressView: ConstructViewsProtocol {
         label.textColor = .white
         label.font = UIFont(name: "SourceSansPro-Bold", size: 18)
 
-        stackView.axis = .horizontal //
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
         stackView.spacing = 5
