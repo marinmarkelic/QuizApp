@@ -31,7 +31,7 @@ class QuizNetworkClient: QuizNetworkClientProtocol {
     }
 
     private func getStartQuizPath(id: Int) -> String {
-        return "/v1/quiz/\(id)/session/start"
+        "/v1/quiz/\(id)/session/start"
     }
 
 }
