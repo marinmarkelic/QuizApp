@@ -5,29 +5,13 @@ import Resolver
 class QuizViewModel {
 
     private let quizUseCase: QuizUseCaseProtocol
-    private let container: Resolver
 
     @Published var quizzes: [Quiz] = []
     @Published var categories: [Category] = []
     @Published var errorMessage: String = ""
 
-    init(quizUseCase: QuizUseCaseProtocol, container: Resolver) {
+    init(quizUseCase: QuizUseCaseProtocol) {
         self.quizUseCase = quizUseCase
-        self.container = container
-
-        test()
-    }
-
-    private func test() {
-        let solving = SolvingQuizUseCase(quizRepository: container.resolve())
-
-        Task {
-            do {
-                print(try await solving.startQuiz(with: QuizStartRequestModel(id: 1)))
-            } catch let err as RequestError {
-                print(err)
-            }
-        }
     }
 
     @MainActor

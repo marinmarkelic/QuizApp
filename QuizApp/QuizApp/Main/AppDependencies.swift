@@ -131,7 +131,7 @@ class AppDependencies {
             .scope(.unique)
 
         container
-            .register { QuizViewModel(quizUseCase: container.resolve(), container: container) }
+            .register { QuizViewModel(quizUseCase: container.resolve()) }
             .scope(.unique)
 
         container
