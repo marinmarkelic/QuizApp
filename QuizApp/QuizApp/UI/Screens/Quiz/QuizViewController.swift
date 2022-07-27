@@ -3,8 +3,6 @@ import Combine
 
 class QuizViewController: UIViewController {
 
-    private var appRouter: AppRouterProtocol!
-
     private var viewModel: QuizViewModel!
 
     private var cancellables = Set<AnyCancellable>()
@@ -20,11 +18,10 @@ class QuizViewController: UIViewController {
     private var noQuizErrorLabel: UILabel!
     private var errorView: ErrorView!
 
-    init(viewModel: QuizViewModel, appRouter: AppRouterProtocol) {
+    init(viewModel: QuizViewModel) {
         super.init(nibName: nil, bundle: nil)
 
         self.viewModel = viewModel
-        self.appRouter = appRouter
 
         styleTabBarItem()
     }
@@ -98,7 +95,7 @@ class QuizViewController: UIViewController {
 extension QuizViewController: QuizViewDelegate {
 
     func selected(quiz: Quiz) {
-        appRouter.showQuizDetails(with: quiz)
+        viewModel.showQuizDetails(with: quiz)
     }
 
 }
