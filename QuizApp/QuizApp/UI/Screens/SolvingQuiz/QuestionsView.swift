@@ -61,9 +61,9 @@ extension QuestionsView: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        let itemHeight: CGFloat = 400
+        let heightOffset: CGFloat = 30
 
-        return CGSize(width: frame.width, height: itemHeight)
+        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height - heightOffset)
     }
 
     func collectionView(

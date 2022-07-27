@@ -37,6 +37,7 @@ extension AnswerView: ConstructViewsProtocol {
 
         label.font = UIFont(name: "SourceSansPro-Bold", size: 20)
         label.textColor = .white
+        label.numberOfLines = 0
     }
 
     func defineLayoutForViews() {

@@ -51,7 +51,7 @@ extension QuestionCell: ConstructViewsProtocol {
 
         stackView.axis = .vertical
         stackView.alignment = .fill
-        stackView.distribution = .fillEqually
+        stackView.distribution = .fill
         stackView.spacing = 10
     }
 
@@ -61,8 +61,8 @@ extension QuestionCell: ConstructViewsProtocol {
         }
 
         stackView.snp.makeConstraints {
-            $0.top.equalTo(label.snp.bottom).offset(10)
-            $0.leading.trailing.bottom.equalToSuperview()
+            $0.top.equalTo(label.snp.bottom).offset(30)
+            $0.leading.trailing.equalToSuperview()
         }
     }
 

@@ -79,7 +79,7 @@ extension SolvingQuizViewController: ConstructViewsProtocol {
         }
 
         questionsView.snp.makeConstraints {
-            $0.top.equalTo(progressView.snp.bottom).offset(10)
+            $0.top.equalTo(progressView.snp.bottom).offset(50)
             $0.leading.trailing.bottom.equalToSuperview().inset(20)
         }
     }
