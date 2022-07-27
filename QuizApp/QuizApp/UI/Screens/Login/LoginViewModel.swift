@@ -12,9 +12,9 @@ class LoginViewModel {
     private var email = ""
     private var password = ""
 
-    init(loginUseCase: LoginUseCaseProtocol, appRouter: AppRouterProtocol) {
-        self.loginUseCase = loginUseCase
+    init(appRouter: AppRouterProtocol, loginUseCase: LoginUseCaseProtocol) {
         self.appRouter = appRouter
+        self.loginUseCase = loginUseCase
     }
 
     func updatedEmail(with text: String) {

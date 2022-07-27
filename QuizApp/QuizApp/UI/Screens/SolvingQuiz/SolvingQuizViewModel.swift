@@ -6,8 +6,12 @@ class SolvingQuizViewModel {
 
     @Published var quiz: QuizStartResponse = .empty
 
-    init(solvingQuizUseCase: SolvingQuizUseCase) {
+    init(id: Int, solvingQuizUseCase: SolvingQuizUseCase) {
         self.solvingQuizUseCase = solvingQuizUseCase
+
+        Task {
+            await startQuiz(with: id)
+        }
     }
 
     @MainActor

@@ -122,16 +122,16 @@ class AppDependencies {
         container
             .register { SolvingQuizUseCase(quizRepository: container.resolve()) }
             .implements(SolvingQuizUseCaseProtocol.self)
-            .scope(.unique)
+            .scope(.application)
     }
 
     private func registerViewModels(in container: Resolver) {
         container
-            .register { LoginViewModel(loginUseCase: container.resolve(), appRouter: container.resolve()) }
+            .register { LoginViewModel(appRouter: container.resolve(), loginUseCase: container.resolve()) }
             .scope(.unique)
 
         container
-            .register { QuizViewModel(quizUseCase: container.resolve()) }
+            .register { QuizViewModel(appRouter: container.resolve(), quizUseCase: container.resolve()) }
             .scope(.unique)
 
         container
@@ -144,33 +144,47 @@ class AppDependencies {
             .scope(.unique)
 
         container
-            .register { SolvingQuizViewModel(solvingQuizUseCase: container.resolve()) }
-            .scope(.application)
+            .register { (_, args) -> QuizDetailsViewModel in
+                QuizDetailsViewModel(quiz: args.get(), appRouter: container.resolve())
+            }
+            .scope(.unique)
+
+        container
+            .register { (_, args) -> SolvingQuizViewModel in
+                let id: Int = args.get()
+
+                return SolvingQuizViewModel(
+                    id: id,
+                    solvingQuizUseCase: container.resolve())
+            }
+            .scope(.unique)
     }
 
     private func registerViewControllers(in container: Resolver) {
         container
-            .register { LoginViewController(loginViewModel: container.resolve()) }
+            .register { LoginViewController(viewModel: container.resolve()) }
             .scope(.unique)
 
         container
-            .register {
-                QuizViewController(
-                    quizViewModel: container.resolve(),
-                    appRouter: container.resolve())
+            .register { QuizViewController(viewModel: container.resolve()) }
+            .scope(.unique)
+
+        container
+            .register { (_, args) -> QuizDetailsViewController in
+                let quiz: Quiz = args.get()
+                return QuizDetailsViewController(viewModel: container.resolve(args: quiz))
             }
             .scope(.unique)
 
         container
-            .register {
-                QuizDetailsViewController(
-                    appRouter: container.resolve(),
-                    solvingQuizViewModel: container.resolve())
-            }
+            .register { UserViewController(viewModel: container.resolve()) }
             .scope(.unique)
 
         container
-            .register { UserViewController(userViewModel: container.resolve()) }
+            .register { (_, args) -> SolvingQuizViewController in
+                let id: Int = args.get()
+                return SolvingQuizViewController(viewModel: container.resolve(args: id))
+            }
             .scope(.unique)
 
         container

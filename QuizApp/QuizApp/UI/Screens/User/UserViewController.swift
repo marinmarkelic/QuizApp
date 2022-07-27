@@ -4,7 +4,7 @@ import SnapKit
 
 class UserViewController: UIViewController {
 
-    private var userViewModel: UserViewModel
+    private var viewModel: UserViewModel
 
     private var gradientView: GradientView!
 
@@ -20,8 +20,8 @@ class UserViewController: UIViewController {
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(userViewModel: UserViewModel) {
-        self.userViewModel = userViewModel
+    init(viewModel: UserViewModel) {
+        self.viewModel = viewModel
 
         super.init(nibName: nil, bundle: nil)
 
@@ -45,12 +45,12 @@ class UserViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        userViewModel.getUserInfo()
+        viewModel.getUserInfo()
     }
 
     @objc
     private func pressedLogoutButton() {
-        userViewModel.logOut()
+        viewModel.logOut()
     }
 
     private func addActions() {
@@ -65,7 +65,7 @@ class UserViewController: UIViewController {
 
     @objc
     private func textFieldEndedEditing() {
-        userViewModel.save(username: usernameText.text ?? "", name: nameTextField.text ?? "")
+        viewModel.save(username: usernameText.text ?? "", name: nameTextField.text ?? "")
     }
 
     private func styleTabBarItem() {
@@ -78,7 +78,7 @@ class UserViewController: UIViewController {
     }
 
     private func bindViewModel() {
-        userViewModel
+        viewModel
             .$userInfo
             .sink { [weak self] userInfo in
                 guard let self = self else { return }

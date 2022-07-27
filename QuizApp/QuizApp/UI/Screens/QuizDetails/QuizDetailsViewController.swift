@@ -1,12 +1,9 @@
+import Combine
 import UIKit
 
 class QuizDetailsViewController: UIViewController {
 
-    private var id: Int?
-
-    private var appRouter: AppRouterProtocol!
-
-    private var solvingQuizViewModel: SolvingQuizViewModel!
+    private var viewModel: QuizDetailsViewModel!
 
     private var gradientView: GradientView!
 
@@ -14,25 +11,30 @@ class QuizDetailsViewController: UIViewController {
 
     private var detailsView: DetailsView!
 
-    init(appRouter: AppRouterProtocol, solvingQuizViewModel: SolvingQuizViewModel) {
+    private var cancellables = Set<AnyCancellable>()
+
+    init(viewModel: QuizDetailsViewModel) {
         super.init(nibName: nil, bundle: nil)
 
-        self.appRouter = appRouter
-        self.solvingQuizViewModel = solvingQuizViewModel
+        self.viewModel = viewModel
 
         createViews()
         styleViews()
         defineLayoutForViews()
+        bindViewModel()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func set(quiz: Quiz) {
-        id = quiz.id
-
-        detailsView.set(quiz: quiz)
+    private func bindViewModel() {
+        viewModel
+            .$quiz
+            .sink { [weak self] quiz in
+                self?.detailsView.set(quiz: quiz)
+            }
+            .store(in: &cancellables)
     }
 
 }
@@ -70,7 +72,7 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
 
     @objc
     private func pressedBack() {
-        navigationController?.popViewController(animated: true)
+        viewModel.goBack()
     }
 
     func defineLayoutForViews() {
@@ -93,10 +95,7 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
 extension QuizDetailsViewController: DetailsViewDelegate {
 
     func startQuiz() {
-        guard let id = id else { return }
-
-        solvingQuizViewModel.startQuiz(with: id)
-        appRouter.showQuiz()
+        viewModel.startQuiz()
     }
 
 }

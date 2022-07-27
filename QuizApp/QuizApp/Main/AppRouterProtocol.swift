@@ -10,6 +10,8 @@ protocol AppRouterProtocol {
 
     func showQuizDetails(with quiz: Quiz)
 
-    func showQuiz()
+    func showQuiz(with id: Int)
+
+    func goBack()
 
 }
