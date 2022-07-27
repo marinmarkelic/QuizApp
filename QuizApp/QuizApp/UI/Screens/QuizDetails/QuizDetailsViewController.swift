@@ -90,7 +90,6 @@ extension QuizDetailsViewController: DetailsViewDelegate {
 
     func startQuiz() {
         solvingQuizViewModel.startQuiz(with: quiz.id)
-        appRouter.showQuiz()
     }
 
 }

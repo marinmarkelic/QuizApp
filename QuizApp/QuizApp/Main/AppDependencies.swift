@@ -144,8 +144,12 @@ class AppDependencies {
             .scope(.unique)
 
         container
-            .register { SolvingQuizViewModel(solvingQuizUseCase: container.resolve()) }
-            .scope(.unique)
+            .register {
+                SolvingQuizViewModel(
+                    appRouter: container.resolve(),
+                    solvingQuizUseCase: container.resolve())
+            }
+            .scope(.application)
     }
 
     private func registerViewControllers(in container: Resolver) {
