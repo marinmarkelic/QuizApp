@@ -2,7 +2,7 @@ class SolvingQuizViewModel {
 
     private let solvingQuizUseCase: SolvingQuizUseCase
 
-    init(solvingQuizUseCase: SolvingQuizUseCase, id: Int) {
+    init(id: Int, solvingQuizUseCase: SolvingQuizUseCase) {
         self.solvingQuizUseCase = solvingQuizUseCase
 
         Task {

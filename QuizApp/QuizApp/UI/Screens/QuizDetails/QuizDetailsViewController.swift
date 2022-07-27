@@ -1,8 +1,7 @@
+import Combine
 import UIKit
 
 class QuizDetailsViewController: UIViewController {
-
-    private var quiz: Quiz!
 
     private var appRouter: AppRouterProtocol!
 
@@ -14,20 +13,31 @@ class QuizDetailsViewController: UIViewController {
 
     private var detailsView: DetailsView!
 
-    init(appRouter: AppRouterProtocol, quizDetailsViewModel: QuizDetailsViewModel, quiz: Quiz) {
+    private var cancellables = Set<AnyCancellable>()
+
+    init(appRouter: AppRouterProtocol, quizDetailsViewModel: QuizDetailsViewModel) {
         super.init(nibName: nil, bundle: nil)
 
         self.appRouter = appRouter
         self.quizDetailsViewModel = quizDetailsViewModel
-        self.quiz = quiz
 
         createViews()
         styleViews()
         defineLayoutForViews()
+        bindViewModel()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    private func bindViewModel() {
+        quizDetailsViewModel
+            .$quiz
+            .sink { [weak self] quiz in
+                self?.detailsView.set(quiz: quiz)
+            }
+            .store(in: &cancellables)
     }
 
 }
@@ -60,7 +70,6 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
             action: #selector(pressedBack))
         navigationItem.leftBarButtonItem?.tintColor = .white
 
-        detailsView.set(quiz: quiz)
         detailsView.delegate = self
     }
 
@@ -89,7 +98,7 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
 extension QuizDetailsViewController: DetailsViewDelegate {
 
     func startQuiz() {
-        quizDetailsViewModel.startQuiz(with: quiz.id)
+        quizDetailsViewModel.startQuiz()
     }
 
 }

@@ -1,14 +1,19 @@
+import Combine
+
 class QuizDetailsViewModel {
 
     private var appRouter: AppRouterProtocol
 
-    init(appRouter: AppRouterProtocol) {
+    @Published var quiz: Quiz
+
+    init(quiz: Quiz, appRouter: AppRouterProtocol) {
+        self.quiz = quiz
         self.appRouter = appRouter
     }
 
     @MainActor
-    func startQuiz(with id: Int) {
-        appRouter.showQuiz(with: id)
+    func startQuiz() {
+        appRouter.showQuiz(with: quiz.id)
     }
 
 }
