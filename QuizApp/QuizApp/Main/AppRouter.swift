@@ -35,15 +35,17 @@ class AppRouter: AppRouterProtocol {
     }
 
     func showQuizDetails(with quiz: Quiz) {
-        let quizDetailsViewController = container.resolve(QuizDetailsViewController.self)
-        quizDetailsViewController.set(quiz: quiz)
-
+        let quizDetailsViewController = container.resolve(QuizDetailsViewController.self, args: quiz)
         navigationController.pushViewController(quizDetailsViewController, animated: true)
     }
 
-    func showQuiz() {
-        let solvingQuizViewController = container.resolve(SolvingQuizViewController.self)
+    func showQuiz(with id: Int) {
+        let solvingQuizViewController = container.resolve(SolvingQuizViewController.self, args: id)
         navigationController.pushViewController(solvingQuizViewController, animated: true)
+    }
+
+    func goBack() {
+        navigationController.popViewController(animated: true)
     }
 
     private func showInitialViewController() {

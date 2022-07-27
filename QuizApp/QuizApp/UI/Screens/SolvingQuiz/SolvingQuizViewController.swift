@@ -32,7 +32,7 @@ class SolvingQuizViewController: UIViewController {
     }
 
     private func bindViewModel() {
-        solvingQuizViewModel
+        viewModel
             .$quiz
             .sink { [weak self] quiz in
                 if quiz.questions.isEmpty { return }

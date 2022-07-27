@@ -338,8 +338,8 @@
 			isa = PBXGroup;
 			children = (
 				9CA94DF8288ECB6B0038315F /* QuizDetailsViewController.swift */,
-				9CA94DFA288ECCBC0038315F /* DetailsView.swift */,
 				9C5024D228912DE300B93FDB /* QuizDetailsViewModel.swift */,
+				9CA94DFA288ECCBC0038315F /* DetailsView.swift */,
 			);
 			path = QuizDetails;
 			sourceTree = "<group>";

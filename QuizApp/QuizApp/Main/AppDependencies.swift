@@ -151,11 +151,7 @@ class AppDependencies {
 
         container
             .register { (_, args) -> SolvingQuizViewModel in
-                let id: Int = args.get()
-
-                return SolvingQuizViewModel(
-                    id: id,
-                    solvingQuizUseCase: container.resolve())
+                SolvingQuizViewModel(id: args.get(), solvingQuizUseCase: container.resolve())
             }
             .scope(.unique)
     }
@@ -185,10 +181,6 @@ class AppDependencies {
                 let id: Int = args.get()
                 return SolvingQuizViewController(viewModel: container.resolve(args: id))
             }
-            .scope(.unique)
-
-        container
-            .register { SolvingQuizViewController(solvingQuizViewModel: container.resolve()) }
             .scope(.unique)
     }
 
