@@ -4,9 +4,8 @@ class QuestionCell: UICollectionViewCell {
 
     static let reuseIdentifier = String(describing: QuestionCell.self)
 
-    private var answers: [Answer] = []
-
     private var label: UILabel!
+    private var stackView: UIStackView!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,7 +21,15 @@ class QuestionCell: UICollectionViewCell {
 
     func set(title: String, answers: [Answer]) {
         label.text = title
-        self.answers = answers
+
+        stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+
+        for answer in answers {
+            let answerView = AnswerView()
+            answerView.set(id: answer.id, text: answer.answer)
+
+            stackView.addArrangedSubview(answerView)
+        }
     }
 
 }
@@ -32,17 +39,30 @@ extension QuestionCell: ConstructViewsProtocol {
     func createViews() {
         label = UILabel()
         addSubview(label)
+
+        stackView = UIStackView()
+        addSubview(stackView)
     }
 
     func styleViews() {
         label.font = UIFont(name: "SourceSansPro-Bold", size: 24)
         label.textColor = .white
         label.numberOfLines = 0
+
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .fillEqually
+        stackView.spacing = 10
     }
 
     func defineLayoutForViews() {
         label.snp.makeConstraints {
             $0.leading.top.trailing.equalToSuperview()
+        }
+
+        stackView.snp.makeConstraints {
+            $0.top.equalTo(label.snp.bottom).offset(10)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
     }
 

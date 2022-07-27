@@ -66,6 +66,20 @@ extension QuestionsView: UICollectionViewDelegateFlowLayout {
         return CGSize(width: frame.width, height: itemHeight)
     }
 
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        insetForSectionAt section: Int
+    ) -> UIEdgeInsets {
+        if section == 0 {
+            return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
+        } else if section == collectionView.numberOfSections - 1 {
+            return UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+        } else {
+            return UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        }
+    }
+
 }
 
 extension QuestionsView: UICollectionViewDataSource {
