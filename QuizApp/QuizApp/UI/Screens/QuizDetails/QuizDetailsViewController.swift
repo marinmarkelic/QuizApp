@@ -3,7 +3,7 @@ import UIKit
 
 class QuizDetailsViewController: UIViewController {
 
-    private var quizDetailsViewModel: QuizDetailsViewModel!
+    private var viewModel: QuizDetailsViewModel!
 
     private var gradientView: GradientView!
 
@@ -13,10 +13,10 @@ class QuizDetailsViewController: UIViewController {
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(quizDetailsViewModel: QuizDetailsViewModel) {
+    init(viewModel: QuizDetailsViewModel) {
         super.init(nibName: nil, bundle: nil)
 
-        self.quizDetailsViewModel = quizDetailsViewModel
+        self.viewModel = viewModel
 
         createViews()
         styleViews()
@@ -29,7 +29,7 @@ class QuizDetailsViewController: UIViewController {
     }
 
     private func bindViewModel() {
-        quizDetailsViewModel
+        viewModel
             .$quiz
             .sink { [weak self] quiz in
                 self?.detailsView.set(quiz: quiz)
@@ -72,7 +72,7 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
 
     @objc
     private func pressedBack() {
-        quizDetailsViewModel.goBack()
+        viewModel.goBack()
     }
 
     func defineLayoutForViews() {
@@ -95,7 +95,7 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
 extension QuizDetailsViewController: DetailsViewDelegate {
 
     func startQuiz() {
-        quizDetailsViewModel.startQuiz()
+        viewModel.startQuiz()
     }
 
 }

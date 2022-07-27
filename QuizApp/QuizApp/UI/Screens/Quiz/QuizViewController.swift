@@ -5,7 +5,7 @@ class QuizViewController: UIViewController {
 
     private var appRouter: AppRouterProtocol!
 
-    private var quizViewModel: QuizViewModel!
+    private var viewModel: QuizViewModel!
 
     private var cancellables = Set<AnyCancellable>()
 
@@ -20,10 +20,10 @@ class QuizViewController: UIViewController {
     private var noQuizErrorLabel: UILabel!
     private var errorView: ErrorView!
 
-    init(quizViewModel: QuizViewModel, appRouter: AppRouterProtocol) {
+    init(viewModel: QuizViewModel, appRouter: AppRouterProtocol) {
         super.init(nibName: nil, bundle: nil)
 
-        self.quizViewModel = quizViewModel
+        self.viewModel = viewModel
         self.appRouter = appRouter
 
         styleTabBarItem()
@@ -41,7 +41,7 @@ class QuizViewController: UIViewController {
         defineLayoutForViews()
         bindViewModel()
 
-        quizViewModel.loadCategories()
+        viewModel.loadCategories()
     }
 
     override func viewDidLayoutSubviews() {
@@ -61,7 +61,7 @@ class QuizViewController: UIViewController {
     }
 
     func bindViewModel() {
-        quizViewModel
+        viewModel
             .$quizzes
             .dropFirst()
             .removeDuplicates()
@@ -73,7 +73,7 @@ class QuizViewController: UIViewController {
             }
             .store(in: &cancellables)
 
-        quizViewModel
+        viewModel
             .$categories
             .removeDuplicates()
             .sink { [weak self] categories in
@@ -81,7 +81,7 @@ class QuizViewController: UIViewController {
             }
             .store(in: &cancellables)
 
-        quizViewModel
+        viewModel
             .$errorMessage
             .removeDuplicates()
             .sink { [weak self] errorMessage in
@@ -187,7 +187,7 @@ extension QuizViewController: ConstructViewsProtocol {
 extension QuizViewController: CategorySliderDelegate {
 
     func selectedCategory(_ categorySlider: CategorySlider, category: Category) {
-        quizViewModel.changeCategory(for: category.type)
+        viewModel.changeCategory(for: category.type)
     }
 
 }

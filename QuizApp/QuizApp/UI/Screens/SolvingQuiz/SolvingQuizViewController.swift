@@ -2,12 +2,12 @@ import UIKit
 
 class SolvingQuizViewController: UIViewController {
 
-    private var solvingQuizViewModel: SolvingQuizViewModel!
+    private var viewModel: SolvingQuizViewModel!
 
-    init(solvingQuizViewModel: SolvingQuizViewModel) {
+    init(viewModel: SolvingQuizViewModel) {
         super.init(nibName: nil, bundle: nil)
 
-        self.solvingQuizViewModel = solvingQuizViewModel
+        self.viewModel = viewModel
     }
 
     required init?(coder: NSCoder) {
