@@ -56,7 +56,6 @@ extension QuizView: ConstructViewsProtocol {
     }
 
     func styleViews() {
-        collectionView.collectionViewLayout = collectionViewLayout
         collectionView.register(QuizCell.self, forCellWithReuseIdentifier: QuizCell.reuseIdentifier)
         collectionView.register(
             QuizHeader.self,

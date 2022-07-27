@@ -4,11 +4,12 @@ class QuestionCell: UICollectionViewCell {
 
     static let reuseIdentifier = String(describing: QuestionCell.self)
 
-    private var title: UILabel!
+    private var answers: [Answer] = []
+
+    private var label: UILabel!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .yellow
 
         createViews()
         styleViews()
@@ -19,24 +20,29 @@ class QuestionCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func set(title: String, answers: [Answer]) {
+        label.text = title
+        self.answers = answers
+    }
+
 }
 
 extension QuestionCell: ConstructViewsProtocol {
 
     func createViews() {
-        title = UILabel()
-        addSubview(title)
+        label = UILabel()
+        addSubview(label)
     }
 
     func styleViews() {
-        backgroundColor = .yellow
-
-        title.text = "yeet"
+        label.font = UIFont(name: "SourceSansPro-Bold", size: 24)
+        label.textColor = .white
+        label.numberOfLines = 0
     }
 
     func defineLayoutForViews() {
-        title.snp.makeConstraints {
-            $0.leading.top.trailing.bottom.equalToSuperview()
+        label.snp.makeConstraints {
+            $0.leading.top.trailing.equalToSuperview()
         }
     }
 

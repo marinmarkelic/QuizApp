@@ -38,7 +38,7 @@ extension QuestionsView: ConstructViewsProtocol {
     func styleViews() {
         collectionViewLayout.scrollDirection = .horizontal
 
-        collectionView.isScrollEnabled = false
+//        collectionView.isScrollEnabled = false
         collectionView.register(QuestionCell.self, forCellWithReuseIdentifier: QuestionCell.reuseIdentifier)
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.dataSource = self
@@ -86,6 +86,10 @@ extension QuestionsView: UICollectionViewDataSource {
             withReuseIdentifier: QuestionCell.reuseIdentifier,
             for: indexPath) as? QuestionCell
         else { return QuestionCell() }
+
+        cell.set(
+            title: questions[indexPath.section].question,
+            answers: questions[indexPath.section].answers)
 
         return cell
     }
