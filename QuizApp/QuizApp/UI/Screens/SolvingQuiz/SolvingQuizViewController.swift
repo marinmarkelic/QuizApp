@@ -63,6 +63,24 @@ extension SolvingQuizViewController: ConstructViewsProtocol {
     }
 
     func styleViews() {
+        let titleView = UILabel()
+        titleView.text = "PopQuiz"
+        titleView.textColor = .white
+        titleView.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 24), size: 24)
+        navigationItem.titleView = titleView
+
+        let image = UIImage(systemName: "chevron.left")?.withTintColor(.white)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: image,
+            style: .done,
+            target: self,
+            action: #selector(pressedBack))
+        navigationItem.leftBarButtonItem?.tintColor = .white
+    }
+
+    @objc
+    private func pressedBack() {
+        viewModel.goBack()
     }
 
     func defineLayoutForViews() {

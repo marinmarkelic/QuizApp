@@ -2,11 +2,13 @@ import Combine
 
 class SolvingQuizViewModel {
 
+    private let appRouter: AppRouterProtocol
     private let solvingQuizUseCase: SolvingQuizUseCase
 
     @Published var quiz: QuizStartResponse = .empty
 
-    init(id: Int, solvingQuizUseCase: SolvingQuizUseCase) {
+    init(id: Int, appRouter: AppRouterProtocol, solvingQuizUseCase: SolvingQuizUseCase) {
+        self.appRouter = appRouter
         self.solvingQuizUseCase = solvingQuizUseCase
 
         Task {
@@ -24,6 +26,10 @@ class SolvingQuizViewModel {
 
             }
         }
+    }
+
+    func goBack() {
+        appRouter.goBack()
     }
 
 }

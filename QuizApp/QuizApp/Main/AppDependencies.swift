@@ -151,7 +151,10 @@ class AppDependencies {
 
         container
             .register { (_, args) -> SolvingQuizViewModel in
-                SolvingQuizViewModel(id: args.get(), solvingQuizUseCase: container.resolve())
+                SolvingQuizViewModel(
+                    id: args.get(),
+                    appRouter: container.resolve(),
+                    solvingQuizUseCase: container.resolve())
             }
             .scope(.unique)
     }
