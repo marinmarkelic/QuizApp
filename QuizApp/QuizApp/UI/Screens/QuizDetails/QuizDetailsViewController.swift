@@ -89,8 +89,6 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
 extension QuizDetailsViewController: DetailsViewDelegate {
 
     func startQuiz() {
-        guard let quiz = quiz else { return }
-
         quizDetailsViewModel.startQuiz(with: quiz.id)
     }
 
