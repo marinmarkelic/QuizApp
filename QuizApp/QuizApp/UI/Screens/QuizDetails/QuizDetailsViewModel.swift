@@ -2,7 +2,7 @@ import Combine
 
 class QuizDetailsViewModel {
 
-    private var appRouter: AppRouterProtocol
+    private let appRouter: AppRouterProtocol
 
     @Published var quiz: Quiz
 
