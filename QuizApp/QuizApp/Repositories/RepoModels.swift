@@ -70,3 +70,69 @@ enum DifficultyRepoModel: String {
     case hard = "HARD"
 
 }
+
+struct QuizStartRequestRepoModel {
+
+    let id: Int
+
+}
+
+extension QuizStartRequestDataModel {
+
+    init(_ request: QuizStartRequestRepoModel) {
+        id = request.id
+    }
+
+}
+
+struct QuizStartResponseRepoModel {
+
+    let questions: [QuestionRepoModel]
+    let sessionId: String
+
+}
+
+struct QuestionRepoModel {
+
+    let answers: [AnswerRepoModel]
+    let correctAnswerId: Int
+    let id: Int
+    let question: String
+
+}
+
+struct AnswerRepoModel {
+
+    let answer: String
+    let id: Int
+
+}
+
+extension QuizStartResponseRepoModel {
+
+    init(_ response: QuizStartResponseDataModel) {
+        questions = response.questions.map { QuestionRepoModel($0) }
+        sessionId = response.sessionId
+    }
+
+}
+
+extension QuestionRepoModel {
+
+    init(_ question: QuestionDataModel) {
+        answers = question.answers.map { AnswerRepoModel($0) }
+        correctAnswerId = question.correctAnswerId
+        id = question.id
+        self.question = question.question
+    }
+
+}
+
+extension AnswerRepoModel {
+
+    init(_ answer: AnswerDataModel) {
+        self.answer = answer.answer
+        id = answer.id
+    }
+
+}
