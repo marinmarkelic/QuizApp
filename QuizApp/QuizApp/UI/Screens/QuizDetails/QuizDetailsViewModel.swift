@@ -8,6 +8,7 @@ class QuizDetailsViewModel {
 
     @MainActor
     func startQuiz(with id: Int) {
+        appRouter.showQuiz(with: id)
     }
 
 }

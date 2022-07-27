@@ -39,8 +39,8 @@ class AppRouter: AppRouterProtocol {
         navigationController.pushViewController(quizDetailsViewController, animated: true)
     }
 
-    func showQuiz() {
-        let solvingQuizViewController = container.resolve(SolvingQuizViewController.self)
+    func showQuiz(with id: Int) {
+        let solvingQuizViewController = container.resolve(SolvingQuizViewController.self, args: id)
         navigationController.pushViewController(solvingQuizViewController, animated: true)
     }
 

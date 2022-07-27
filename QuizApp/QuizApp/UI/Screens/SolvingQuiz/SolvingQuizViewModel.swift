@@ -1,11 +1,13 @@
 class SolvingQuizViewModel {
 
-    private let appRouter: AppRouterProtocol
     private let solvingQuizUseCase: SolvingQuizUseCase
 
-    init(appRouter: AppRouterProtocol, solvingQuizUseCase: SolvingQuizUseCase) {
-        self.appRouter = appRouter
+    init(solvingQuizUseCase: SolvingQuizUseCase, id: Int) {
         self.solvingQuizUseCase = solvingQuizUseCase
+
+        Task {
+            await startQuiz(with: id)
+        }
     }
 
     @MainActor
@@ -13,7 +15,6 @@ class SolvingQuizViewModel {
         Task {
             do {
                 try await print(solvingQuizUseCase.startQuiz(with: QuizStartRequestModel(id: id)))
-                appRouter.showQuiz()
             } catch {
 
             }

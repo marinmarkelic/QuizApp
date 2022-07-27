@@ -148,12 +148,14 @@ class AppDependencies {
             .scope(.unique)
 
         container
-            .register {
-                SolvingQuizViewModel(
-                    appRouter: container.resolve(),
-                    solvingQuizUseCase: container.resolve())
+            .register { (_, args) -> SolvingQuizViewModel in
+                let id: Int = args.get()
+
+                return SolvingQuizViewModel(
+                    solvingQuizUseCase: container.resolve(),
+                    id: id)
             }
-            .scope(.application)
+            .scope(.unique)
     }
 
     private func registerViewControllers(in container: Resolver) {
@@ -175,7 +177,7 @@ class AppDependencies {
 
                 return QuizDetailsViewController(
                     appRouter: container.resolve(),
-                    solvingQuizViewModel: container.resolve(),
+                    quizDetailsViewModel: container.resolve(),
                     quiz: quiz)
             }
             .scope(.unique)
@@ -185,7 +187,10 @@ class AppDependencies {
             .scope(.unique)
 
         container
-            .register { SolvingQuizViewController() }
+            .register { (_, args) -> SolvingQuizViewController in
+                let id: Int = args.get()
+                return SolvingQuizViewController(solvingQuizViewModel: container.resolve(args: id))
+            }
             .scope(.unique)
     }
 

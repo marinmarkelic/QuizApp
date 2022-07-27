@@ -6,7 +6,7 @@ class QuizDetailsViewController: UIViewController {
 
     private var appRouter: AppRouterProtocol!
 
-    private var solvingQuizViewModel: SolvingQuizViewModel!
+    private var quizDetailsViewModel: QuizDetailsViewModel!
 
     private var gradientView: GradientView!
 
@@ -14,11 +14,11 @@ class QuizDetailsViewController: UIViewController {
 
     private var detailsView: DetailsView!
 
-    init(appRouter: AppRouterProtocol, solvingQuizViewModel: SolvingQuizViewModel, quiz: Quiz) {
+    init(appRouter: AppRouterProtocol, quizDetailsViewModel: QuizDetailsViewModel, quiz: Quiz) {
         super.init(nibName: nil, bundle: nil)
 
         self.appRouter = appRouter
-        self.solvingQuizViewModel = solvingQuizViewModel
+        self.quizDetailsViewModel = quizDetailsViewModel
         self.quiz = quiz
 
         createViews()
@@ -89,7 +89,9 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
 extension QuizDetailsViewController: DetailsViewDelegate {
 
     func startQuiz() {
-        solvingQuizViewModel.startQuiz(with: quiz.id)
+        guard let quiz = quiz else { return }
+
+        quizDetailsViewModel.startQuiz(with: quiz.id)
     }
 
 }
