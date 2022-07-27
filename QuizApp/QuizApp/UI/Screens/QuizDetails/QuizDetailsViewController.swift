@@ -3,8 +3,6 @@ import UIKit
 
 class QuizDetailsViewController: UIViewController {
 
-    private var appRouter: AppRouterProtocol!
-
     private var quizDetailsViewModel: QuizDetailsViewModel!
 
     private var gradientView: GradientView!
@@ -15,10 +13,9 @@ class QuizDetailsViewController: UIViewController {
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(appRouter: AppRouterProtocol, quizDetailsViewModel: QuizDetailsViewModel) {
+    init(quizDetailsViewModel: QuizDetailsViewModel) {
         super.init(nibName: nil, bundle: nil)
 
-        self.appRouter = appRouter
         self.quizDetailsViewModel = quizDetailsViewModel
 
         createViews()
@@ -75,7 +72,7 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
 
     @objc
     private func pressedBack() {
-        appRouter.goBack()
+        quizDetailsViewModel.goBack()
     }
 
     func defineLayoutForViews() {

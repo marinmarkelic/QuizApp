@@ -16,4 +16,8 @@ class QuizDetailsViewModel {
         appRouter.showQuiz(with: quiz.id)
     }
 
+    func goBack() {
+        appRouter.goBack()
+    }
+
 }

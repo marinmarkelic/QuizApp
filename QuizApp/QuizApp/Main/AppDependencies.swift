@@ -176,10 +176,7 @@ class AppDependencies {
         container
             .register { (_, args) -> QuizDetailsViewController in
                 let quiz: Quiz = args.get()
-
-                return QuizDetailsViewController(
-                    appRouter: container.resolve(),
-                    quizDetailsViewModel: container.resolve(args: quiz))
+                return QuizDetailsViewController(quizDetailsViewModel: container.resolve(args: quiz))
             }
             .scope(.unique)
 
