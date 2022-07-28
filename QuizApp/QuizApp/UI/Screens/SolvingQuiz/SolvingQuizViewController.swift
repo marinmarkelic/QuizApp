@@ -36,6 +36,7 @@ class SolvingQuizViewController: UIViewController {
     private func bindViewModel() {
         viewModel
             .$quiz
+            .removeDuplicates()
             .sink { [weak self] quiz in
                 self?.questionsView.set(questions: quiz.questions)
             }
@@ -43,6 +44,7 @@ class SolvingQuizViewController: UIViewController {
 
         viewModel
             .$progressColors
+            .removeDuplicates()
             .sink { [weak self] colors in
                 guard let self = self else { return }
 
