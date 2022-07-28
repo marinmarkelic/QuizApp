@@ -19,9 +19,9 @@ class AnswerView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func set(id: Int, text: String) {
-        self.id = id
-        label.text = text
+    func set(answer: Answer) {
+        id = answer.id
+        label.text = answer.answer
     }
 
 }

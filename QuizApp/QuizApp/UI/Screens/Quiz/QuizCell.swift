@@ -5,8 +5,6 @@ class QuizCell: UICollectionViewCell {
 
     static let reuseIdentifier = String(describing: QuizCell.self)
 
-    var quiz: Quiz!
-
     private var imageView: UIImageView!
     private var difficultyView: DifficultyView!
 
@@ -26,8 +24,6 @@ class QuizCell: UICollectionViewCell {
     }
 
     func set(quiz: Quiz) {
-        self.quiz = quiz
-
         title.text = quiz.name
         desc.text = quiz.description
 

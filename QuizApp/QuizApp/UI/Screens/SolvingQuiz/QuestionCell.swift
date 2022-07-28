@@ -28,7 +28,7 @@ class QuestionCell: UICollectionViewCell {
 
         for answer in answers {
             let answerView = AnswerView()
-            answerView.set(id: answer.id, text: answer.answer)
+            answerView.set(answer: answer)
             answerView.delegate = self
 
             stackView.addArrangedSubview(answerView)

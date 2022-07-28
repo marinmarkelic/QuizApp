@@ -39,17 +39,16 @@ class SolvingQuizViewController: UIViewController {
         viewModel
             .$quiz
             .sink { [weak self] quiz in
-                if quiz.questions.isEmpty { return }
+                guard let self = self else { return }
 
-                self?.quiz = quiz
-                self?.questionsView.set(questions: quiz.questions)
+                self.quiz = quiz
+                self.questionsView.set(questions: quiz.questions)
             }
             .store(in: &cancellables)
 
         viewModel
             .$progressColors
             .sink { [weak self] colors in
-                if colors.isEmpty { return }
 
                 self?.progressView.set(colors: colors)
             }

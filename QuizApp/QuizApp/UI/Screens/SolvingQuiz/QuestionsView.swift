@@ -40,7 +40,6 @@ extension QuestionsView: ConstructViewsProtocol {
     func styleViews() {
         collectionViewLayout.scrollDirection = .horizontal
 
-//        collectionView.isScrollEnabled = false
         collectionView.register(QuestionCell.self, forCellWithReuseIdentifier: QuestionCell.reuseIdentifier)
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.dataSource = self
@@ -64,7 +63,6 @@ extension QuestionsView: UICollectionViewDelegateFlowLayout {
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
         let heightOffset: CGFloat = 30
-
         return CGSize(width: collectionView.frame.width, height: collectionView.frame.height - heightOffset)
     }
 
@@ -127,5 +125,4 @@ extension QuestionsView: QuestionCellDelegate {
 
 }
 
-extension QuestionsView: UICollectionViewDelegate {
-}
+extension QuestionsView: UICollectionViewDelegate {}
