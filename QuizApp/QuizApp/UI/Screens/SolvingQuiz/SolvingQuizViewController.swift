@@ -49,8 +49,10 @@ class SolvingQuizViewController: UIViewController {
         viewModel
             .$progressColors
             .sink { [weak self] colors in
+                guard let self = self else { return }
 
-                self?.progressView.set(colors: colors)
+                self.progressView.set(colors: colors)
+                self.questionsView.scrollToQuestion(at: colors.firstIndex(of: .white))
             }
             .store(in: &cancellables)
     }

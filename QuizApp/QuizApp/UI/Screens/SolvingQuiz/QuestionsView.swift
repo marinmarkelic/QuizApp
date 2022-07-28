@@ -53,6 +53,12 @@ extension QuestionsView: ConstructViewsProtocol {
         }
     }
 
+    func scrollToQuestion(at index: Int?) {
+        guard let index = index else { return }
+
+        collectionView.scrollToItem(at: IndexPath(row: 0, section: index), at: .centeredHorizontally, animated: true)
+    }
+
 }
 
 extension QuestionsView: UICollectionViewDelegateFlowLayout {
