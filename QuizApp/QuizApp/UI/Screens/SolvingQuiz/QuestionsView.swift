@@ -26,6 +26,12 @@ class QuestionsView: UIView {
         collectionView.reloadData()
     }
 
+    func scrollToQuestion(at index: Int?) {
+        guard let index = index else { return }
+
+        collectionView.scrollToItem(at: IndexPath(row: 0, section: index), at: .centeredHorizontally, animated: true)
+    }
+
 }
 
 extension QuestionsView: ConstructViewsProtocol {
@@ -51,12 +57,6 @@ extension QuestionsView: ConstructViewsProtocol {
         collectionView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
-    }
-
-    func scrollToQuestion(at index: Int?) {
-        guard let index = index else { return }
-
-        collectionView.scrollToItem(at: IndexPath(row: 0, section: index), at: .centeredHorizontally, animated: true)
     }
 
 }
