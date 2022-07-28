@@ -46,10 +46,16 @@ class SolvingQuizViewController: UIViewController {
             .$progressColors
             .removeDuplicates()
             .sink { [weak self] colors in
-                guard let self = self else { return }
+                self?.progressView.set(colors: colors)
+            }
+            .store(in: &cancellables)
 
-                self.progressView.set(colors: colors)
-                self.questionsView.scrollToQuestion(at: colors.firstIndex(of: .white))
+        viewModel
+            .$currentQuestionIndex
+            .removeDuplicates()
+            .dropFirst()
+            .sink { [weak self] questionIndex in
+                self?.questionsView.scrollToQuestion(at: questionIndex)
             }
             .store(in: &cancellables)
     }

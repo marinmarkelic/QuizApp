@@ -10,6 +10,7 @@ class SolvingQuizViewModel {
 
     @Published var quiz: QuizStartResponse = .empty
     @Published var progressColors: [UIColor] = []
+    @Published var currentQuestionIndex: Int = 0
 
     init(id: Int, router: AppRouterProtocol, useCase: SolvingQuizUseCaseProtocol) {
         self.id = id
@@ -51,6 +52,9 @@ class SolvingQuizViewModel {
         if questionIndex + 1 < progressColors.count {
             progressColors[questionIndex + 1] = .white
         }
+
+        if currentQuestionIndex >= quiz.questions.count - 1 { return }
+        currentQuestionIndex += 1
     }
 
     private func changeAnswerColors(for question: Question, selectedAnswerId: Int) {
