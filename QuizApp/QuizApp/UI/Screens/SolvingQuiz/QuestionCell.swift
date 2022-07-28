@@ -4,7 +4,7 @@ class QuestionCell: UICollectionViewCell {
 
     static let reuseIdentifier = String(describing: QuestionCell.self)
 
-    weak var delegate: QuestionCellDelegate!
+    weak var delegate: QuestionCellDelegate?
 
     private var label: UILabel!
     private var stackView: UIStackView!
@@ -66,6 +66,7 @@ extension QuestionCell: ConstructViewsProtocol {
         stackView.snp.makeConstraints {
             $0.top.equalTo(label.snp.bottom).offset(30)
             $0.leading.trailing.equalToSuperview()
+            $0.bottom.lessThanOrEqualToSuperview()
         }
     }
 
@@ -80,7 +81,7 @@ protocol QuestionCellDelegate: AnyObject {
 extension QuestionCell: AnswerViewDelegate {
 
     func selectedAnswer(with id: Int) {
-        delegate.selectedAnswer(with: id)
+        delegate?.selectedAnswer(with: id)
     }
 
 }

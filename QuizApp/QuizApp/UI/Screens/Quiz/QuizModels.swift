@@ -141,9 +141,7 @@ struct QuizStartResponse {
 
 extension QuizStartResponse {
 
-    static var empty: QuizStartResponse = {
-        QuizStartResponse(questions: [], sessionId: "")
-    }()
+    static var empty = QuizStartResponse(questions: [], sessionId: "")
 
 }
 

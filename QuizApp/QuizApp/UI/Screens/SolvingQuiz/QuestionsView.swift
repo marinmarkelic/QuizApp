@@ -2,7 +2,7 @@ import UIKit
 
 class QuestionsView: UIView {
 
-    weak var delegate: QuestionsViewDelegate!
+    weak var delegate: QuestionsViewDelegate?
 
     private var questions: [Question] = []
 
@@ -126,7 +126,7 @@ protocol QuestionsViewDelegate: AnyObject {
 extension QuestionsView: QuestionCellDelegate {
 
     func selectedAnswer(with id: Int) {
-        delegate.selectedAnswer(with: id)
+        delegate?.selectedAnswer(with: id)
     }
 
 }

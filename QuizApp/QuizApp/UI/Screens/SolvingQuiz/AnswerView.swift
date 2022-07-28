@@ -2,7 +2,7 @@ import UIKit
 
 class AnswerView: UIView {
 
-    weak var delegate: AnswerViewDelegate!
+    weak var delegate: AnswerViewDelegate?
 
     private var id: Int!
     private var label: UILabel!
@@ -47,7 +47,7 @@ extension AnswerView: ConstructViewsProtocol {
 
     @objc
     private func selectedAnswer() {
-        delegate.selectedAnswer(with: id ?? 0)
+        delegate?.selectedAnswer(with: id)
     }
 
     func defineLayoutForViews() {
