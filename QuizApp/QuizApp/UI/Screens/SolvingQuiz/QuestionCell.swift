@@ -6,6 +6,9 @@ class QuestionCell: UICollectionViewCell {
 
     weak var delegate: QuestionCellDelegate!
 
+    private var scrollView: UIScrollView!
+    private var mainView: UIView!
+
     private var label: UILabel!
     private var stackView: UIStackView!
 
@@ -35,16 +38,28 @@ class QuestionCell: UICollectionViewCell {
         }
     }
 
+    func redraw() {
+        mainView.snp.updateConstraints {
+            $0.width.equalToSuperview()
+        }
+    }
+
 }
 
 extension QuestionCell: ConstructViewsProtocol {
 
     func createViews() {
+        scrollView = UIScrollView()
+        addSubview(scrollView)
+
+        mainView = UIView()
+        scrollView.addSubview(mainView)
+
         label = UILabel()
-        addSubview(label)
+        mainView.addSubview(label)
 
         stackView = UIStackView()
-        addSubview(stackView)
+        mainView.addSubview(stackView)
     }
 
     func styleViews() {
@@ -59,6 +74,15 @@ extension QuestionCell: ConstructViewsProtocol {
     }
 
     func defineLayoutForViews() {
+        scrollView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+
+        mainView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+            $0.width.equalToSuperview()
+        }
+
         label.snp.makeConstraints {
             $0.leading.top.trailing.equalToSuperview()
         }
@@ -66,6 +90,7 @@ extension QuestionCell: ConstructViewsProtocol {
         stackView.snp.makeConstraints {
             $0.top.equalTo(label.snp.bottom).offset(30)
             $0.leading.trailing.equalToSuperview()
+            $0.bottom.lessThanOrEqualToSuperview()
         }
     }
 

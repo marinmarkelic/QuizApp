@@ -6,6 +6,8 @@ class QuestionsView: UIView {
 
     private var questions: [Question] = []
 
+    private var currentQuestionIndex: Int?
+
     private var collectionViewLayout: UICollectionViewFlowLayout!
     private var collectionView: UICollectionView!
 
@@ -29,7 +31,15 @@ class QuestionsView: UIView {
     func scrollToQuestion(at index: Int?) {
         guard let index = index else { return }
 
+        currentQuestionIndex = index
         collectionView.scrollToItem(at: IndexPath(row: 0, section: index), at: .centeredHorizontally, animated: true)
+    }
+
+    func redraw() {
+        guard let currentQuestionIndex = currentQuestionIndex else { return }
+
+        collectionViewLayout.invalidateLayout()
+        collectionView.scrollToItem(at: IndexPath(row: 0, section: currentQuestionIndex), at: .centeredHorizontally, animated: false)
     }
 
 }

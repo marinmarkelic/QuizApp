@@ -33,6 +33,11 @@ class SolvingQuizViewController: UIViewController {
         viewModel.startQuiz()
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        questionsView.redraw()
+    }
+
     private func bindViewModel() {
         viewModel
             .$quiz
