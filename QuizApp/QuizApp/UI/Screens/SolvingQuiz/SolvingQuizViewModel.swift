@@ -33,6 +33,22 @@ class SolvingQuizViewModel {
         }
     }
 
+    @MainActor
+    func selectedAnswer(with id: Int) {
+        guard let questionIndex = progressColors.firstIndex(of: .white) else { return }
+
+        let isCorrectAnswer = quiz.questions[questionIndex].correctAnswerId == id
+        if isCorrectAnswer {
+            progressColors[questionIndex] = .green
+        } else {
+            progressColors[questionIndex] = .red
+        }
+
+        if questionIndex + 1 < progressColors.count {
+            progressColors[questionIndex + 1] = .white
+        }
+    }
+
     func goBack() {
         router.goBack()
     }

@@ -2,6 +2,8 @@ import UIKit
 
 class QuestionsView: UIView {
 
+    weak var delegate: QuestionsViewDelegate!
+
     private var questions: [Question] = []
 
     private var collectionViewLayout: UICollectionViewFlowLayout!
@@ -104,8 +106,23 @@ extension QuestionsView: UICollectionViewDataSource {
         cell.set(
             title: questions[indexPath.section].question,
             answers: questions[indexPath.section].answers)
+        cell.delegate = self
 
         return cell
+    }
+
+}
+
+protocol QuestionsViewDelegate: AnyObject {
+
+    func selectedAnswer(with id: Int)
+
+}
+
+extension QuestionsView: QuestionCellDelegate {
+
+    func selectedAnswer(with id: Int) {
+        delegate.selectedAnswer(with: id)
     }
 
 }

@@ -88,6 +88,8 @@ extension SolvingQuizViewController: ConstructViewsProtocol {
             target: self,
             action: #selector(pressedBack))
         navigationItem.leftBarButtonItem?.tintColor = .white
+
+        questionsView.delegate = self
     }
 
     @objc
@@ -112,6 +114,14 @@ extension SolvingQuizViewController: ConstructViewsProtocol {
             $0.top.equalTo(progressView.snp.bottom).offset(50)
             $0.leading.trailing.bottom.equalToSuperview().inset(20)
         }
+    }
+
+}
+
+extension SolvingQuizViewController: QuestionsViewDelegate {
+
+    func selectedAnswer(with id: Int) {
+        viewModel.selectedAnswer(with: id)
     }
 
 }

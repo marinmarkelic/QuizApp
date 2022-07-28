@@ -2,6 +2,8 @@ import UIKit
 
 class AnswerView: UIView {
 
+    weak var delegate: AnswerViewDelegate!
+
     private var id: Int!
     private var label: UILabel!
 
@@ -35,9 +37,17 @@ extension AnswerView: ConstructViewsProtocol {
         layer.cornerRadius = 30
         backgroundColor = .white.withAlphaComponent(0.3)
 
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(selectedAnswer))
+        addGestureRecognizer(gesture)
+
         label.font = UIFont(name: "SourceSansPro-Bold", size: 20)
         label.textColor = .white
         label.numberOfLines = 0
+    }
+
+    @objc
+    private func selectedAnswer() {
+        delegate.selectedAnswer(with: id ?? 0)
     }
 
     func defineLayoutForViews() {
@@ -45,5 +55,11 @@ extension AnswerView: ConstructViewsProtocol {
             $0.edges.equalToSuperview().inset(20)
         }
     }
+
+}
+
+protocol AnswerViewDelegate: AnyObject {
+
+    func selectedAnswer(with id: Int)
 
 }
