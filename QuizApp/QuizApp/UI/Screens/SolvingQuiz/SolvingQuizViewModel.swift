@@ -1,15 +1,17 @@
 import Combine
+import UIKit
 
 class SolvingQuizViewModel {
 
-    private let appRouter: AppRouterProtocol
-    private let solvingQuizUseCase: SolvingQuizUseCase
+    private let router: AppRouterProtocol
+    private let useCase: SolvingQuizUseCaseProtocol
 
     @Published var quiz: QuizStartResponse = .empty
+    @Published var progressColors: [UIColor] = []
 
-    init(id: Int, appRouter: AppRouterProtocol, solvingQuizUseCase: SolvingQuizUseCase) {
-        self.appRouter = appRouter
-        self.solvingQuizUseCase = solvingQuizUseCase
+    init(id: Int, router: AppRouterProtocol, useCase: SolvingQuizUseCaseProtocol) {
+        self.router = router
+        self.useCase = useCase
 
         Task {
             await startQuiz(with: id)
@@ -20,8 +22,12 @@ class SolvingQuizViewModel {
     func startQuiz(with id: Int) {
         Task {
             do {
-                let quiz = try await solvingQuizUseCase.startQuiz(with: QuizStartRequestModel(id: id))
+                let quiz = try await useCase.startQuiz(with: QuizStartRequestModel(id: id))
                 self.quiz = QuizStartResponse(quiz)
+
+                let unansweredColor: UIColor = .white.withAlphaComponent(0.3)
+                progressColors = [UIColor](repeating: unansweredColor, count: quiz.questions.count)
+                progressColors[0] = .white
             } catch {
 
             }
@@ -29,7 +35,7 @@ class SolvingQuizViewModel {
     }
 
     func goBack() {
-        appRouter.goBack()
+        router.goBack()
     }
 
 }

@@ -17,31 +17,20 @@ class ProgressView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func set(numberOfQuestions: Int) {
-        if numberOfQuestions < 1 || label == nil { return }
+    func set(colors: [UIColor]) {
+        stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
 
-        label.text = "1/\(numberOfQuestions)"
+        for index in 0..<colors.count {
+            if colors[index] == UIColor.white {
+                label.text = "\(index + 1)/\(colors.count)"
+            }
 
-        setupStackView(numberOfQuestions: numberOfQuestions)
-        selectCell(at: 0)
-    }
-
-    private func setupStackView(numberOfQuestions: Int) {
-        for subview in stackView.arrangedSubviews {
-            subview.removeFromSuperview()
-        }
-
-        for _ in 0..<numberOfQuestions {
             let cell = UIView()
-            cell.backgroundColor = .white.withAlphaComponent(0.3)
+            cell.backgroundColor = colors[index]
             cell.layer.cornerRadius = 2
 
             stackView.addArrangedSubview(cell)
         }
-    }
-
-    private func selectCell(at index: Int) {
-        stackView.arrangedSubviews[index].backgroundColor = .white
     }
 
 }

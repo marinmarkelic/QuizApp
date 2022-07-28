@@ -3,10 +3,9 @@ import UIKit
 
 class SolvingQuizViewController: UIViewController {
 
-    private var quiz: QuizStartResponse!
+    private let viewModel: SolvingQuizViewModel
 
-    private var viewModel: SolvingQuizViewModel!
-    private var appRouter: AppRouterProtocol!
+    private var quiz: QuizStartResponse!
 
     private var gradientView: GradientView!
     private var mainView: UIView!
@@ -17,9 +16,9 @@ class SolvingQuizViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
 
     init(viewModel: SolvingQuizViewModel) {
-        super.init(nibName: nil, bundle: nil)
-
         self.viewModel = viewModel
+
+        super.init(nibName: nil, bundle: nil)
 
         createViews()
         styleViews()
@@ -38,8 +37,16 @@ class SolvingQuizViewController: UIViewController {
                 if quiz.questions.isEmpty { return }
 
                 self?.quiz = quiz
-                self?.progressView.set(numberOfQuestions: quiz.questions.count)
                 self?.questionsView.set(questions: quiz.questions)
+            }
+            .store(in: &cancellables)
+
+        viewModel
+            .$progressColors
+            .sink { [weak self] colors in
+                if colors.isEmpty { return }
+
+                self?.progressView.set(colors: colors)
             }
             .store(in: &cancellables)
     }
