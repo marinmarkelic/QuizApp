@@ -39,9 +39,9 @@ class SolvingQuizViewModel {
 
         let isCorrectAnswer = quiz.questions[questionIndex].correctAnswerId == id
         if isCorrectAnswer {
-            progressColors[questionIndex] = .green
+            progressColors[questionIndex] = .correctAnswerColor
         } else {
-            progressColors[questionIndex] = .red
+            progressColors[questionIndex] = .incorrectAnswerColor
         }
 
         if questionIndex + 1 < progressColors.count {
