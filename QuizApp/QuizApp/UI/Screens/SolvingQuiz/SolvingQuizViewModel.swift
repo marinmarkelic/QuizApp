@@ -37,8 +37,8 @@ class SolvingQuizViewModel {
     func selectedAnswer(with id: Int) {
         guard let questionIndex = progressColors.firstIndex(of: .white) else { return }
 
-        let correctAnswerId = quiz.questions[questionIndex].correctAnswerId
-        if correctAnswerId == id {
+        let isAnswerCorrect = quiz.questions[questionIndex].correctAnswerId == id
+        if isAnswerCorrect {
             progressColors[questionIndex] = .correctAnswerColor
         } else {
             progressColors[questionIndex] = .incorrectAnswerColor

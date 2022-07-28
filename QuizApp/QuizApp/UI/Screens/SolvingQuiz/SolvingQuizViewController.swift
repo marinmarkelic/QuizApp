@@ -5,8 +5,6 @@ class SolvingQuizViewController: UIViewController {
 
     private let viewModel: SolvingQuizViewModel
 
-    private var quiz: QuizStartResponse!
-
     private var gradientView: GradientView!
     private var mainView: UIView!
 
@@ -39,10 +37,7 @@ class SolvingQuizViewController: UIViewController {
         viewModel
             .$quiz
             .sink { [weak self] quiz in
-                guard let self = self else { return }
-
-                self.quiz = quiz
-                self.questionsView.set(questions: quiz.questions)
+                self?.questionsView.set(questions: quiz.questions)
             }
             .store(in: &cancellables)
 

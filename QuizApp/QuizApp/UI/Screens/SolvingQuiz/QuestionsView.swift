@@ -32,7 +32,6 @@ extension QuestionsView: ConstructViewsProtocol {
 
     func createViews() {
         collectionViewLayout = UICollectionViewFlowLayout()
-
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
         addSubview(collectionView)
     }
@@ -40,6 +39,7 @@ extension QuestionsView: ConstructViewsProtocol {
     func styleViews() {
         collectionViewLayout.scrollDirection = .horizontal
 
+        collectionView.isScrollEnabled = false
         collectionView.register(QuestionCell.self, forCellWithReuseIdentifier: QuestionCell.reuseIdentifier)
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.dataSource = self
