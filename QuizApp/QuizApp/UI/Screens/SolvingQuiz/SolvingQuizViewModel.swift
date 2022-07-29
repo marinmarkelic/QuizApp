@@ -13,6 +13,8 @@ class SolvingQuizViewModel {
     @Published var currentQuestionIndex: Int = 0
     @Published var errorMessage: String = ""
 
+    private var correctQuestions: Int = 0
+
     init(id: Int, router: AppRouterProtocol, useCase: SolvingQuizUseCaseProtocol) {
         self.id = id
         self.router = router
@@ -47,6 +49,7 @@ Please try again.
         let isAnswerCorrect = quiz.questions[currentQuestionIndex].correctAnswerId == id
         if isAnswerCorrect {
             progressColors[currentQuestionIndex] = .correctAnswerColor
+            correctQuestions += 1
         } else {
             progressColors[currentQuestionIndex] = .incorrectAnswerColor
         }
@@ -55,7 +58,8 @@ Please try again.
             progressColors[currentQuestionIndex + 1] = .white
             currentQuestionIndex += 1
         } else {
-            router.showResults()
+            let text = "\(correctQuestions)/\(quiz.questions.count)"
+            router.showResults(with: text)
         }
     }
 

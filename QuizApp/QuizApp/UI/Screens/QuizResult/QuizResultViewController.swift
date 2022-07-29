@@ -2,15 +2,18 @@ import UIKit
 
 class QuizResultViewController: UIViewController {
 
-    private var viewModel: QuizResultViewModel!
+    private let viewModel: QuizResultViewModel
+
+    private let text: String
 
     private var gradientView: GradientView!
     private var mainView: UIView!
 
     private var label: UILabel!
 
-    init(viewModel: QuizResultViewModel) {
+    init(text: String, viewModel: QuizResultViewModel) {
         self.viewModel = viewModel
+        self.text = text
 
         super.init(nibName: nil, bundle: nil)
 
@@ -42,7 +45,7 @@ extension QuizResultViewController: ConstructViewsProtocol {
         label.font = UIFont(name: "SourceSansPro-Bold", size: 88)
         label.textColor = .white
         label.textAlignment = .center
-        label.text = "teest"
+        label.text = text
     }
 
     func defineLayoutForViews() {
