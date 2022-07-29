@@ -42,6 +42,8 @@ Please try again.
 
     @MainActor
     func selectedAnswer(with id: Int) {
+        if isQuestionAnswered(for: id) { return }
+
         let question = quiz.questions[currentQuestionIndex]
 
         changeAnswerColors(for: question, selectedAnswerId: id)
@@ -60,6 +62,16 @@ Please try again.
         } else {
             finishQuiz()
         }
+    }
+
+    private func isQuestionAnswered(for id: Int) -> Bool {
+        for index in 0..<currentQuestionIndex {
+            if quiz.questions[index].answers.contains(where: { $0.id == id }) {
+                return true
+            }
+        }
+
+        return false
     }
 
     private func changeAnswerColors(for question: Question, selectedAnswerId: Int) {
