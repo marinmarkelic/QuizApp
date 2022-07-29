@@ -5,8 +5,12 @@ class SolvingQuizViewController: UIViewController {
 
     private let viewModel: SolvingQuizViewModel
 
+    private var isPortrait: Bool!
+
     private var gradientView: GradientView!
     private var mainView: UIView!
+
+    private var errorView: ErrorView!
 
     private var progressView: ProgressView!
     private var questionsView: QuestionsView!
@@ -30,12 +34,26 @@ class SolvingQuizViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        isPortrait = UIDevice.current.orientation.isPortrait
         viewModel.startQuiz()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        // This is used because we only want redraw() to be called on rotation and not when
+        // collectionView.scrollToItem() is called.
+        if isPortrait != UIDevice.current.orientation.isPortrait {
+            isPortrait = UIDevice.current.orientation.isPortrait
+            questionsView.redraw(with: viewModel.currentQuestionIndex)
+        }
     }
 
     private func bindViewModel() {
         viewModel
             .$quiz
+            .removeDuplicates()
             .sink { [weak self] quiz in
                 self?.questionsView.set(questions: quiz.questions)
             }
@@ -43,11 +61,39 @@ class SolvingQuizViewController: UIViewController {
 
         viewModel
             .$progressColors
+            .removeDuplicates()
             .sink { [weak self] colors in
+                self?.progressView.set(colors: colors)
+            }
+            .store(in: &cancellables)
+
+        viewModel
+            .$currentQuestionIndex
+            .removeDuplicates()
+            .sink { [weak self] questionIndex in
                 guard let self = self else { return }
 
-                self.progressView.set(colors: colors)
-                self.questionsView.scrollToQuestion(at: colors.firstIndex(of: .white))
+                let scrollDelayInMillis = 400
+
+                self.progressView.set(current: questionIndex + 1)
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(scrollDelayInMillis)) {
+                    self.questionsView.scrollToQuestion(at: questionIndex)
+                }
+            }
+            .store(in: &cancellables)
+
+        viewModel
+            .$errorMessage
+            .removeDuplicates()
+            .sink { [weak self] errorMessage in
+                guard let self = self else { return }
+
+                self.errorView.isHidden = errorMessage.isEmpty
+                self.progressView.isHidden = !errorMessage.isEmpty
+                self.questionsView.isHidden = !errorMessage.isEmpty
+
+                self.errorView.set(description: errorMessage)
             }
             .store(in: &cancellables)
     }
@@ -62,6 +108,9 @@ extension SolvingQuizViewController: ConstructViewsProtocol {
 
         mainView = UIView()
         gradientView.addSubview(mainView)
+
+        errorView = ErrorView()
+        mainView.addSubview(errorView)
 
         progressView = ProgressView()
         mainView.addSubview(progressView)
@@ -102,12 +151,16 @@ extension SolvingQuizViewController: ConstructViewsProtocol {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
 
+        errorView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
+
         progressView.snp.makeConstraints {
             $0.leading.top.trailing.equalToSuperview().inset(20)
         }
 
         questionsView.snp.makeConstraints {
-            $0.top.equalTo(progressView.snp.bottom).offset(50)
+            $0.top.equalTo(progressView.snp.bottom).offset(20)
             $0.leading.trailing.bottom.equalToSuperview().inset(20)
         }
     }

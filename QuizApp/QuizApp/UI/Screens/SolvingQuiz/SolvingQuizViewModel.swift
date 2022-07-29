@@ -10,6 +10,10 @@ class SolvingQuizViewModel {
 
     @Published var quiz: QuizStartResponse = .empty
     @Published var progressColors: [UIColor] = []
+    @Published var currentQuestionIndex: Int = 0
+    @Published var errorMessage: String = ""
+
+    private var correctQuestions: Int = 0
 
     init(id: Int, router: AppRouterProtocol, useCase: SolvingQuizUseCaseProtocol) {
         self.id = id
@@ -28,24 +32,59 @@ class SolvingQuizViewModel {
                 progressColors = [UIColor](repeating: unansweredColor, count: quiz.questions.count)
                 progressColors[0] = .white
             } catch {
-
+                errorMessage = """
+Couldn't start quiz.
+Please try again.
+"""
             }
         }
     }
 
     @MainActor
     func selectedAnswer(with id: Int) {
-        guard let questionIndex = progressColors.firstIndex(of: .white) else { return }
+        if isQuestionAnswered(for: id) { return }
 
-        let isAnswerCorrect = quiz.questions[questionIndex].correctAnswerId == id
+        let question = quiz.questions[currentQuestionIndex]
+
+        changeAnswerColors(for: question, selectedAnswerId: id)
+
+        let isAnswerCorrect = quiz.questions[currentQuestionIndex].correctAnswerId == id
         if isAnswerCorrect {
-            progressColors[questionIndex] = .correctAnswerColor
+            progressColors[currentQuestionIndex] = .correctAnswerColor
+            correctQuestions += 1
         } else {
-            progressColors[questionIndex] = .incorrectAnswerColor
+            progressColors[currentQuestionIndex] = .incorrectAnswerColor
         }
 
-        if questionIndex + 1 < progressColors.count {
-            progressColors[questionIndex + 1] = .white
+        if currentQuestionIndex < progressColors.count - 1 {
+            progressColors[currentQuestionIndex + 1] = .white
+            currentQuestionIndex += 1
+        } else {
+            finishQuiz()
+        }
+    }
+
+    private func isQuestionAnswered(for id: Int) -> Bool {
+        for index in 0..<currentQuestionIndex {
+            if quiz.questions[index].answers.contains(where: { $0.id == id }) {
+                return true
+            }
+        }
+
+        return false
+    }
+
+    private func changeAnswerColors(for question: Question, selectedAnswerId: Int) {
+        quiz = QuizStartResponse(quiz, id: question.id, selectedAnswerId: selectedAnswerId)
+    }
+
+    private func finishQuiz() {
+        let delayInMillis = 400
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(delayInMillis)) { [weak self] in
+            guard let self = self else { return }
+
+            let text = "\(self.correctQuestions)/\(self.quiz.questions.count)"
+            self.router.showResults(with: text)
         }
     }
 

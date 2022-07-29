@@ -157,6 +157,10 @@ class AppDependencies {
                     useCase: container.resolve())
             }
             .scope(.unique)
+
+        container
+            .register { QuizResultViewModel(router: container.resolve()) }
+            .scope(.unique)
     }
 
     private func registerViewControllers(in container: Resolver) {
@@ -183,6 +187,13 @@ class AppDependencies {
             .register { (_, args) -> SolvingQuizViewController in
                 let id: Int = args.get()
                 return SolvingQuizViewController(viewModel: container.resolve(args: id))
+            }
+            .scope(.unique)
+
+        container
+            .register { (_, args) -> QuizResultViewController in
+                let text: String = args.get()
+                return QuizResultViewController(text: text, viewModel: container.resolve())
             }
             .scope(.unique)
     }

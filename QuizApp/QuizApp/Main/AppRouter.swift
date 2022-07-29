@@ -44,6 +44,11 @@ class AppRouter: AppRouterProtocol {
         navigationController.pushViewController(solvingQuizViewController, animated: true)
     }
 
+    func showResults(with text: String) {
+        let quizResultViewController = container.resolve(QuizResultViewController.self, args: text)
+        navigationController.setViewControllers([quizResultViewController], animated: true)
+    }
+
     func goBack() {
         navigationController.popViewController(animated: true)
     }

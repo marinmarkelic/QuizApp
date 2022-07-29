@@ -22,6 +22,7 @@ class AnswerView: UIView {
     func set(answer: Answer) {
         id = answer.id
         label.text = answer.answer
+        backgroundColor = answer.color
     }
 
 }
@@ -35,7 +36,6 @@ extension AnswerView: ConstructViewsProtocol {
 
     func styleViews() {
         layer.cornerRadius = 30
-        backgroundColor = .white.withAlphaComponent(0.3)
 
         let gesture = UITapGestureRecognizer(target: self, action: #selector(selectedAnswer))
         addGestureRecognizer(gesture)
