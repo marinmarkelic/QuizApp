@@ -193,7 +193,8 @@ class AppDependencies {
         container
             .register { (_, args) -> QuizResultViewController in
                 let text: String = args.get()
-                return QuizResultViewController(text: text, viewModel: container.resolve()) }
+                return QuizResultViewController(text: text, viewModel: container.resolve())
+            }
             .scope(.unique)
     }
 
