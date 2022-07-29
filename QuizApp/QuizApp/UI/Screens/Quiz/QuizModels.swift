@@ -139,6 +139,12 @@ struct QuizStartResponse {
 
 }
 
+extension QuizStartResponse {
+
+    static var empty = QuizStartResponse(questions: [], sessionId: "")
+
+}
+
 struct Question {
 
     let answers: [Answer]

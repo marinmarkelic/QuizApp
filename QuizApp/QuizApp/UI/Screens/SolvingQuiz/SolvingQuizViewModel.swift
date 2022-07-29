@@ -1,24 +1,56 @@
+import Combine
+import UIKit
+
 class SolvingQuizViewModel {
 
-    private let solvingQuizUseCase: SolvingQuizUseCase
+    private let id: Int
 
-    init(id: Int, solvingQuizUseCase: SolvingQuizUseCase) {
-        self.solvingQuizUseCase = solvingQuizUseCase
+    private let router: AppRouterProtocol
+    private let useCase: SolvingQuizUseCaseProtocol
 
-        Task {
-            await startQuiz(with: id)
-        }
+    @Published var quiz: QuizStartResponse = .empty
+    @Published var progressColors: [UIColor] = []
+
+    init(id: Int, router: AppRouterProtocol, useCase: SolvingQuizUseCaseProtocol) {
+        self.id = id
+        self.router = router
+        self.useCase = useCase
     }
 
     @MainActor
-    func startQuiz(with id: Int) {
+    func startQuiz() {
         Task {
             do {
-                try await print(solvingQuizUseCase.startQuiz(with: QuizStartRequestModel(id: id)))
+                let quiz = try await useCase.startQuiz(with: QuizStartRequestModel(id: id))
+                self.quiz = QuizStartResponse(quiz)
+
+                let unansweredColor: UIColor = .white.withAlphaComponent(0.3)
+                progressColors = [UIColor](repeating: unansweredColor, count: quiz.questions.count)
+                progressColors[0] = .white
             } catch {
 
             }
         }
+    }
+
+    @MainActor
+    func selectedAnswer(with id: Int) {
+        guard let questionIndex = progressColors.firstIndex(of: .white) else { return }
+
+        let isAnswerCorrect = quiz.questions[questionIndex].correctAnswerId == id
+        if isAnswerCorrect {
+            progressColors[questionIndex] = .correctAnswerColor
+        } else {
+            progressColors[questionIndex] = .incorrectAnswerColor
+        }
+
+        if questionIndex + 1 < progressColors.count {
+            progressColors[questionIndex + 1] = .white
+        }
+    }
+
+    func goBack() {
+        router.goBack()
     }
 
 }
