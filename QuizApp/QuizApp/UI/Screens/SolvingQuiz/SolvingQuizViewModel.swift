@@ -58,13 +58,22 @@ Please try again.
             progressColors[currentQuestionIndex + 1] = .white
             currentQuestionIndex += 1
         } else {
-            let text = "\(correctQuestions)/\(quiz.questions.count)"
-            router.showResults(with: text)
+            finishQuiz()
         }
     }
 
     private func changeAnswerColors(for question: Question, selectedAnswerId: Int) {
         quiz = QuizStartResponse(quiz, id: question.id, selectedAnswerId: selectedAnswerId)
+    }
+
+    private func finishQuiz() {
+        let delayInMillis = 400
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(delayInMillis)) { [weak self] in
+            guard let self = self else { return }
+
+            let text = "\(self.correctQuestions)/\(self.quiz.questions.count)"
+            self.router.showResults(with: text)
+        }
     }
 
     func goBack() {
