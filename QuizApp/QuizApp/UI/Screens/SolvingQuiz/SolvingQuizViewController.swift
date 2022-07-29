@@ -73,9 +73,10 @@ class SolvingQuizViewController: UIViewController {
             .sink { [weak self] questionIndex in
                 guard let self = self else { return }
 
-                let scrollDelayInMillis = 300
+                let scrollDelayInMillis = 400
 
                 self.progressView.set(current: questionIndex + 1)
+
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(scrollDelayInMillis)) {
                     self.questionsView.scrollToQuestion(at: questionIndex)
                 }

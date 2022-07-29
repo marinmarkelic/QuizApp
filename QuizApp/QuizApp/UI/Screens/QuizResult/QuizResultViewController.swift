@@ -2,9 +2,9 @@ import UIKit
 
 class QuizResultViewController: UIViewController {
 
-    private let viewModel: QuizResultViewModel
-
     private let text: String
+
+    private let viewModel: QuizResultViewModel
 
     private var gradientView: GradientView!
     private var mainView: UIView!
@@ -13,8 +13,8 @@ class QuizResultViewController: UIViewController {
     private var button: UIButton!
 
     init(text: String, viewModel: QuizResultViewModel) {
-        self.viewModel = viewModel
         self.text = text
+        self.viewModel = viewModel
 
         super.init(nibName: nil, bundle: nil)
 
@@ -61,7 +61,7 @@ extension QuizResultViewController: ConstructViewsProtocol {
 
     @objc
     private func exitQuiz() {
-        viewModel.showHome()
+        viewModel.exitQuiz()
     }
 
     func defineLayoutForViews() {
