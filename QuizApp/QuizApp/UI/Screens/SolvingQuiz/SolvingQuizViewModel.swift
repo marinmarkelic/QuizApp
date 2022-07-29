@@ -11,6 +11,7 @@ class SolvingQuizViewModel {
     @Published var quiz: QuizStartResponse = .empty
     @Published var progressColors: [UIColor] = []
     @Published var currentQuestionIndex: Int = 0
+    @Published var errorMessage: String = ""
 
     init(id: Int, router: AppRouterProtocol, useCase: SolvingQuizUseCaseProtocol) {
         self.id = id
@@ -29,7 +30,10 @@ class SolvingQuizViewModel {
                 progressColors = [UIColor](repeating: unansweredColor, count: quiz.questions.count)
                 progressColors[0] = .white
             } catch {
-
+                errorMessage = """
+Couldn't start quiz.
+Please try again.
+"""
             }
         }
     }

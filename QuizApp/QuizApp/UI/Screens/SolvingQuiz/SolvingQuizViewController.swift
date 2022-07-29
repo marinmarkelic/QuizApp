@@ -10,6 +10,8 @@ class SolvingQuizViewController: UIViewController {
     private var gradientView: GradientView!
     private var mainView: UIView!
 
+    private var errorView: ErrorView!
+
     private var progressView: ProgressView!
     private var questionsView: QuestionsView!
 
@@ -79,6 +81,20 @@ class SolvingQuizViewController: UIViewController {
                 }
             }
             .store(in: &cancellables)
+
+        viewModel
+            .$errorMessage
+            .removeDuplicates()
+            .sink { [weak self] errorMessage in
+                guard let self = self else { return }
+
+                self.errorView.isHidden = errorMessage.isEmpty
+                self.progressView.isHidden = !errorMessage.isEmpty
+                self.questionsView.isHidden = !errorMessage.isEmpty
+
+                self.errorView.set(description: errorMessage)
+            }
+            .store(in: &cancellables)
     }
 
 }
@@ -91,6 +107,9 @@ extension SolvingQuizViewController: ConstructViewsProtocol {
 
         mainView = UIView()
         gradientView.addSubview(mainView)
+
+        errorView = ErrorView()
+        mainView.addSubview(errorView)
 
         progressView = ProgressView()
         mainView.addSubview(progressView)
@@ -129,6 +148,10 @@ extension SolvingQuizViewController: ConstructViewsProtocol {
 
         mainView.snp.makeConstraints {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+
+        errorView.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
 
         progressView.snp.makeConstraints {
