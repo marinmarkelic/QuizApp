@@ -4,7 +4,7 @@ class QuestionCell: UICollectionViewCell {
 
     static let reuseIdentifier = String(describing: QuestionCell.self)
 
-    weak var delegate: QuestionCellDelegate!
+    weak var delegate: QuestionCellDelegate?
 
     private var scrollView: UIScrollView!
     private var mainView: UIView!
@@ -105,7 +105,7 @@ protocol QuestionCellDelegate: AnyObject {
 extension QuestionCell: AnswerViewDelegate {
 
     func selectedAnswer(with id: Int) {
-        delegate.selectedAnswer(with: id)
+        delegate?.selectedAnswer(with: id)
     }
 
 }

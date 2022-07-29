@@ -141,9 +141,7 @@ struct QuizStartResponse {
 
 extension QuizStartResponse {
 
-    static var empty: QuizStartResponse = {
-        QuizStartResponse(questions: [], sessionId: "")
-    }()
+    static var empty = QuizStartResponse(questions: [], sessionId: "")
 
     init(_ model: QuizStartResponse, id: Int, selectedAnswerId: Int) {
         questions = model.questions.map { $0.id == id ? Question($0, selectedAnswerId: selectedAnswerId) : $0 }
