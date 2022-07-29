@@ -4,12 +4,19 @@ class QuizResultViewController: UIViewController {
 
     private var viewModel: QuizResultViewModel!
 
+    private var gradientView: GradientView!
+    private var mainView: UIView!
+
     private var label: UILabel!
 
     init(viewModel: QuizResultViewModel) {
         self.viewModel = viewModel
 
         super.init(nibName: nil, bundle: nil)
+
+        createViews()
+        styleViews()
+        defineLayoutForViews()
     }
 
     required init?(coder: NSCoder) {
@@ -21,8 +28,14 @@ class QuizResultViewController: UIViewController {
 extension QuizResultViewController: ConstructViewsProtocol {
 
     func createViews() {
+        gradientView = GradientView()
+        view.addSubview(gradientView)
+
+        mainView = UIView()
+        gradientView.addSubview(mainView)
+
         label = UILabel()
-        view.addSubview(label)
+        mainView.addSubview(label)
     }
 
     func styleViews() {
@@ -33,9 +46,16 @@ extension QuizResultViewController: ConstructViewsProtocol {
     }
 
     func defineLayoutForViews() {
+        gradientView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+
+        mainView.snp.makeConstraints {
+            $0.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+
         label.snp.makeConstraints {
-            $0.centerX.equalToSuperview()
-            $0.centerY.equalToSuperview().offset(50)
+            $0.center.equalToSuperview()
         }
     }
 

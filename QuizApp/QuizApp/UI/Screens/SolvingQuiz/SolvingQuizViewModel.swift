@@ -55,7 +55,7 @@ Please try again.
             progressColors[currentQuestionIndex + 1] = .white
             currentQuestionIndex += 1
         } else {
-            print("end")
+            router.showResults()
         }
     }
 

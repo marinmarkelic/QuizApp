@@ -12,6 +12,8 @@ protocol AppRouterProtocol {
 
     func showQuiz(with id: Int)
 
+    func showResults()
+
     func goBack()
 
 }
