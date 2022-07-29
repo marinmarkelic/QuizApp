@@ -6,4 +6,8 @@ class QuizResultViewModel {
         self.router = router
     }
 
+    func showHome() {
+        router.showHome()
+    }
+
 }
