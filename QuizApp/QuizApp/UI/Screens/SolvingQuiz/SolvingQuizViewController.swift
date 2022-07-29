@@ -5,6 +5,8 @@ class SolvingQuizViewController: UIViewController {
 
     private let viewModel: SolvingQuizViewModel
 
+    private var isPortrait: Bool!
+
     private var gradientView: GradientView!
     private var mainView: UIView!
 
@@ -30,12 +32,20 @@ class SolvingQuizViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        isPortrait = UIDevice.current.orientation.isPortrait
         viewModel.startQuiz()
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        questionsView.redraw()
+
+        // This is used because we only want redraw() to be called on rotation and not when
+        // collectionView.scrollToItem() is called.
+        if isPortrait != UIDevice.current.orientation.isPortrait {
+            isPortrait = UIDevice.current.orientation.isPortrait
+            questionsView.redraw(with: viewModel.currentQuestionIndex)
+        }
     }
 
     private func bindViewModel() {
@@ -58,7 +68,6 @@ class SolvingQuizViewController: UIViewController {
         viewModel
             .$currentQuestionIndex
             .removeDuplicates()
-            .dropFirst()
             .sink { [weak self] questionIndex in
                 let scrollDelayInMillis = 300
 
@@ -124,7 +133,7 @@ extension SolvingQuizViewController: ConstructViewsProtocol {
         }
 
         questionsView.snp.makeConstraints {
-            $0.top.equalTo(progressView.snp.bottom).offset(50)
+            $0.top.equalTo(progressView.snp.bottom).offset(20)
             $0.leading.trailing.bottom.equalToSuperview().inset(20)
         }
     }

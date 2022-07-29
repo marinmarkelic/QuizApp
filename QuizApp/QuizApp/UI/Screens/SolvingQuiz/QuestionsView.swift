@@ -6,8 +6,6 @@ class QuestionsView: UIView {
 
     private var questions: [Question] = []
 
-    private var currentQuestionIndex: Int?
-
     private var collectionViewLayout: UICollectionViewFlowLayout!
     private var collectionView: UICollectionView!
 
@@ -28,21 +26,20 @@ class QuestionsView: UIView {
         collectionView.reloadData()
     }
 
-    func scrollToQuestion(at index: Int?) {
-        guard let index = index else { return }
+    func scrollToQuestion(at index: Int, animated: Bool = true) {
+        if index > collectionView.numberOfSections - 1 { return }
 
-        currentQuestionIndex = index
-        collectionView.scrollToItem(at: IndexPath(row: 0, section: index), at: .centeredHorizontally, animated: true)
+        collectionView.scrollToItem(
+            at: IndexPath(row: 0, section: index),
+            at: .centeredHorizontally,
+            animated: animated)
     }
 
-    func redraw() {
-        guard let currentQuestionIndex = currentQuestionIndex else { return }
-
+    func redraw(with index: Int) {
         collectionViewLayout.invalidateLayout()
-        collectionView.scrollToItem(
-            at: IndexPath(row: 0, section: currentQuestionIndex),
-            at: .centeredHorizontally,
-            animated: false)
+        collectionView.performBatchUpdates(nil) {_ in
+            self.scrollToQuestion(at: index, animated: false)
+        }
     }
 
 }
@@ -81,8 +78,12 @@ extension QuestionsView: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        let heightOffset: CGFloat = 30
-        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height - heightOffset)
+        if UIDevice.current.orientation.isPortrait {
+            let heightOffset: CGFloat = 30
+            return CGSize(width: collectionView.frame.width, height: collectionView.frame.height - heightOffset)
+        } else {
+            return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+        }
     }
 
     func collectionView(

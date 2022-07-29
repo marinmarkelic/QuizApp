@@ -38,12 +38,6 @@ class QuestionCell: UICollectionViewCell {
         }
     }
 
-    func redraw() {
-        mainView.snp.updateConstraints {
-            $0.width.equalToSuperview()
-        }
-    }
-
 }
 
 extension QuestionCell: ConstructViewsProtocol {
@@ -63,6 +57,8 @@ extension QuestionCell: ConstructViewsProtocol {
     }
 
     func styleViews() {
+        scrollView.showsVerticalScrollIndicator = false
+
         label.font = UIFont(name: "SourceSansPro-Bold", size: 24)
         label.textColor = .white
         label.numberOfLines = 0
