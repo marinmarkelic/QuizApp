@@ -39,7 +39,10 @@ class QuestionsView: UIView {
         guard let currentQuestionIndex = currentQuestionIndex else { return }
 
         collectionViewLayout.invalidateLayout()
-        collectionView.scrollToItem(at: IndexPath(row: 0, section: currentQuestionIndex), at: .centeredHorizontally, animated: false)
+        collectionView.scrollToItem(
+            at: IndexPath(row: 0, section: currentQuestionIndex),
+            at: .centeredHorizontally,
+            animated: false)
     }
 
 }

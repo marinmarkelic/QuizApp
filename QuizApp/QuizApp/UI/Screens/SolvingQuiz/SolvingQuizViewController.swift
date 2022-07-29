@@ -60,7 +60,11 @@ class SolvingQuizViewController: UIViewController {
             .removeDuplicates()
             .dropFirst()
             .sink { [weak self] questionIndex in
-                self?.questionsView.scrollToQuestion(at: questionIndex)
+                let scrollDelayInMillis = 300
+
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(scrollDelayInMillis)) {
+                    self?.questionsView.scrollToQuestion(at: questionIndex)
+                }
             }
             .store(in: &cancellables)
     }
