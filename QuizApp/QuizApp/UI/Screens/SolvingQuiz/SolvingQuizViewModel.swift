@@ -51,12 +51,12 @@ Please try again.
             progressColors[currentQuestionIndex] = .incorrectAnswerColor
         }
 
-        if currentQuestionIndex + 1 < progressColors.count {
+        if currentQuestionIndex < progressColors.count - 1 {
             progressColors[currentQuestionIndex + 1] = .white
+            currentQuestionIndex += 1
+        } else {
+            print("end")
         }
-
-        if currentQuestionIndex >= quiz.questions.count - 1 { return }
-        currentQuestionIndex += 1
     }
 
     private func changeAnswerColors(for question: Question, selectedAnswerId: Int) {
