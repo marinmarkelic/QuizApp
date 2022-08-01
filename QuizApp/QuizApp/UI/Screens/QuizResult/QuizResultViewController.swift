@@ -28,6 +28,11 @@ class QuizResultViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.endQuiz()
+    }
+
     private func bindViewModel() {
         viewModel
             .$text
