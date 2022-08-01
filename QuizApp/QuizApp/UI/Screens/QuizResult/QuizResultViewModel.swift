@@ -22,11 +22,8 @@ class QuizResultViewModel {
         Task {
             do {
                 let request = QuizEndRequest(id: result.sessionId, numberOfCorrectQuestions: result.correctQuestions)
-                let response = try await useCase.endQuiz(with: QuizEndRequestModel(request))
-                print(response)
-            } catch let err {
-                print(err)
-            }
+                _ = try await useCase.endQuiz(with: QuizEndRequestModel(request))
+            } catch _ {}
         }
     }
 
