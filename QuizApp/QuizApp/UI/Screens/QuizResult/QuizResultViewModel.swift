@@ -7,6 +7,8 @@ class QuizResultViewModel {
     private let router: AppRouterProtocol
     private let useCase: SolvingQuizUseCase
 
+    @Published var text: String = ""
+
     init(result: Result, router: AppRouterProtocol, useCase: SolvingQuizUseCase) {
         self.result = result
         self.router = router
@@ -19,14 +21,14 @@ class QuizResultViewModel {
     private func endQuiz() {
         Task {
             do {
-                let request = QuizEndRequest(id: useCase.sessionID, numberOfCorrectQuestions: 2)
+                let request = QuizEndRequest(id: result.sessionId, numberOfCorrectQuestions: result.correctQuestions)
                 let response = try await useCase.endQuiz(with: QuizEndRequestModel(request))
                 print(response)
             } catch let err {
                 print(err)
             }
         }
-    @Published var text: String = ""
+    }
 
     private func setText() {
         text = "\(result.correctQuestions)/\(result.totalQuestions)"

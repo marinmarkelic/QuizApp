@@ -162,7 +162,7 @@ class AppDependencies {
             .register { (_, args) -> QuizResultViewModel in
                 let result: Result = args.get()
                 return QuizResultViewModel(
-                    result: result, 
+                    result: result,
                     router: container.resolve(),
                     useCase: container.resolve())
             }

@@ -91,6 +91,7 @@ Please try again.
             guard let self = self else { return }
 
             let result = Result(
+                sessionId: self.quiz.sessionId,
                 correctQuestions: self.correctQuestions,
                 totalQuestions: self.quiz.questions.count)
             self.router.showResults(with: result)

@@ -8,8 +8,6 @@ protocol SolvingQuizUseCaseProtocol {
 
 class SolvingQuizUseCase: SolvingQuizUseCaseProtocol {
 
-    var sessionID = "" // Remove
-
     private let quizRepository: QuizRepository
 
     init(quizRepository: QuizRepository) {
@@ -18,7 +16,6 @@ class SolvingQuizUseCase: SolvingQuizUseCaseProtocol {
 
     func startQuiz(with request: QuizStartRequestModel) async throws -> QuizStartResponseModel {
         let response = try await quizRepository.startQuiz(with: QuizStartRequestRepoModel(request))
-        sessionID = response.sessionId
         return QuizStartResponseModel(response)
     }
 
