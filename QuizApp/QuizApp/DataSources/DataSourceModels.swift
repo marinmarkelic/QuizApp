@@ -153,3 +153,17 @@ extension QuizEndRequestNetworkDataModel {
     }
 
 }
+
+struct QuizEndResponseDataModel {
+
+    let points: Int
+
+}
+
+extension QuizEndResponseDataModel {
+
+    init(_ model: QuizEndResponseNetworkDataModel) {
+        points = model.points
+    }
+
+}

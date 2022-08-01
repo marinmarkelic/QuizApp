@@ -129,3 +129,17 @@ extension QuizEndRequestModel {
     }
 
 }
+
+struct QuizEndResponse {
+
+    let points: Int
+
+}
+
+extension QuizEndResponse {
+
+    init(_ model: QuizEndResponseModel) {
+        points = model.points
+    }
+
+}

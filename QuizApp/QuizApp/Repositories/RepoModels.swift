@@ -152,3 +152,17 @@ extension QuizEndRequestDataModel {
     }
 
 }
+
+struct QuizEndResponseRepoModel {
+
+    let points: Int
+
+}
+
+extension QuizEndResponseRepoModel {
+
+    init(_ model: QuizEndResponseDataModel) {
+        points = model.points
+    }
+
+}
