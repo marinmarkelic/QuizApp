@@ -6,6 +6,11 @@ protocol QuizNetworkClientProtocol {
 
     func startQuiz(with request: QuizStartRequestNetworkDataModel) async throws -> QuizStartResponseNetworkDataModel
 
+    func endQuiz(
+        with request: QuizEndRequestNetworkDataModel,
+        id: String
+    ) async throws -> QuizEndResponseNetworkDataModel
+
 }
 
 class QuizNetworkClient: QuizNetworkClientProtocol {
@@ -32,6 +37,17 @@ class QuizNetworkClient: QuizNetworkClientProtocol {
 
     private func getStartQuizPath(id: Int) -> String {
         "/v1/quiz/\(id)/session/start"
+    }
+
+    func endQuiz(
+        with request: QuizEndRequestNetworkDataModel,
+        id: String
+    ) async throws -> QuizEndResponseNetworkDataModel {
+        try await networkClient.post(path: getEndQuizPath(id: id), body: request)
+    }
+
+    private func getEndQuizPath(id: String) -> String {
+        "/v1/quiz/\(id)/session/end"
     }
 
 }

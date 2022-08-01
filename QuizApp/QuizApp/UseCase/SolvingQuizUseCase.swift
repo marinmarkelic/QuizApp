@@ -2,6 +2,8 @@ protocol SolvingQuizUseCaseProtocol {
 
     func startQuiz(with request: QuizStartRequestModel) async throws -> QuizStartResponseModel
 
+    func endQuiz(with request: QuizEndRequestModel) async throws -> QuizEndResponseModel
+
 }
 
 class SolvingQuizUseCase: SolvingQuizUseCaseProtocol {
@@ -15,6 +17,11 @@ class SolvingQuizUseCase: SolvingQuizUseCaseProtocol {
     func startQuiz(with request: QuizStartRequestModel) async throws -> QuizStartResponseModel {
         let response = try await quizRepository.startQuiz(with: QuizStartRequestRepoModel(request))
         return QuizStartResponseModel(response)
+    }
+
+    func endQuiz(with request: QuizEndRequestModel) async throws -> QuizEndResponseModel {
+        let response = try await quizRepository.endQuiz(with: QuizEndRequestRepoModel(request))
+        return QuizEndResponseModel(response)
     }
 
 }

@@ -6,6 +6,8 @@ protocol QuizRepositoryProtocol {
 
     func startQuiz(with request: QuizStartRequestRepoModel) async throws -> QuizStartResponseRepoModel
 
+    func endQuiz(with request: QuizEndRequestRepoModel) async throws -> QuizEndResponseRepoModel
+
 }
 
 class QuizRepository: QuizRepositoryProtocol {
@@ -32,6 +34,11 @@ class QuizRepository: QuizRepositoryProtocol {
     func startQuiz(with request: QuizStartRequestRepoModel) async throws -> QuizStartResponseRepoModel {
         let response = try await quizNetworkDataSource.startQuiz(with: QuizStartRequestDataModel(request))
         return QuizStartResponseRepoModel(response)
+    }
+
+    func endQuiz(with request: QuizEndRequestRepoModel) async throws -> QuizEndResponseRepoModel {
+        let response = try await quizNetworkDataSource.endQuiz(with: QuizEndRequestDataModel(request))
+        return QuizEndResponseRepoModel(response)
     }
 
 }
