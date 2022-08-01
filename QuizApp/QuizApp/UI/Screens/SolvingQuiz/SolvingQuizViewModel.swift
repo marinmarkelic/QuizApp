@@ -78,7 +78,7 @@ Please try again.
     }
 
     private func setProgressText() {
-            progressText = "\(currentQuestionIndex + 1)/\(quiz.questions.count)"
+        progressText = "\(currentQuestionIndex + 1)/\(quiz.questions.count)"
     }
 
     private func changeAnswerColors(for question: Question, selectedAnswerId: Int) {
