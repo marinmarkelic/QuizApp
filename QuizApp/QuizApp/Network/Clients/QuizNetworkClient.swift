@@ -47,7 +47,7 @@ class QuizNetworkClient: QuizNetworkClientProtocol {
     }
 
     private func getEndQuizPath(id: String) -> String {
-        "/v1/quiz/\(id)/session/end"
+        "/v1/quiz/session/\(id)/end"
     }
 
 }
