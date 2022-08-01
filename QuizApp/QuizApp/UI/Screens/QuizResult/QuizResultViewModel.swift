@@ -2,14 +2,14 @@ import Combine
 
 class QuizResultViewModel {
 
-    private let result: Result
+    private let result: QuizResult
 
     private let router: AppRouterProtocol
     private let useCase: SolvingQuizUseCase
 
     @Published var text: String = ""
 
-    init(result: Result, router: AppRouterProtocol, useCase: SolvingQuizUseCase) {
+    init(result: QuizResult, router: AppRouterProtocol, useCase: SolvingQuizUseCase) {
         self.result = result
         self.router = router
         self.useCase = useCase
