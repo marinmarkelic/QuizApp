@@ -1,8 +1,7 @@
+import Combine
 import UIKit
 
 class QuizResultViewController: UIViewController {
-
-    private let text: String
 
     private let viewModel: QuizResultViewModel
 
@@ -12,8 +11,9 @@ class QuizResultViewController: UIViewController {
     private var label: UILabel!
     private var button: UIButton!
 
-    init(text: String, viewModel: QuizResultViewModel) {
-        self.text = text
+    private var cancellables = Set<AnyCancellable>()
+
+    init(viewModel: QuizResultViewModel) {
         self.viewModel = viewModel
 
         super.init(nibName: nil, bundle: nil)
@@ -21,10 +21,21 @@ class QuizResultViewController: UIViewController {
         createViews()
         styleViews()
         defineLayoutForViews()
+        bindViewModel()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    private func bindViewModel() {
+        viewModel
+            .$text
+            .removeDuplicates()
+            .sink { [weak self] text in
+                self?.label.text = text
+            }
+            .store(in: &cancellables)
     }
 
 }
@@ -46,10 +57,11 @@ extension QuizResultViewController: ConstructViewsProtocol {
     }
 
     func styleViews() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem()
+
         label.font = UIFont(name: "SourceSansPro-Bold", size: 88)
         label.textColor = .white
         label.textAlignment = .center
-        label.text = text
 
         button.setTitle("Finish Quiz", for: .normal)
         button.titleLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 16)

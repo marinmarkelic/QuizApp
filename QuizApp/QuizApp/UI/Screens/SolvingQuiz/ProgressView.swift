@@ -18,8 +18,6 @@ class ProgressView: UIView {
     }
 
     func set(colors: [UIColor]) {
-        set(total: colors.count)
-
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
 
         for color in colors {
@@ -31,16 +29,8 @@ class ProgressView: UIView {
         }
     }
 
-    private func set(total: Int) {
-        guard let current = label.text?.components(separatedBy: "/")[0] else { return }
-
-        label.text = "\(current)/\(total)"
-    }
-
-    func set(current: Int) {
-        guard let total = label.text?.components(separatedBy: "/")[1] else { return }
-
-        label.text = "\(current)/\(total)"
+    func set(text: String) {
+        label.text = text
     }
 
 }

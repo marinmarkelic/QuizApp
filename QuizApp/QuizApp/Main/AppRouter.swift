@@ -6,6 +6,10 @@ class AppRouter: AppRouterProtocol {
     private let navigationController: UINavigationController
     private let container: Resolver
 
+    private var tabBarController: TabBarController? {
+        return navigationController.viewControllers.first as? TabBarController
+    }
+
     init(container: Resolver) {
         self.container = container
         navigationController = UINavigationController()
@@ -24,6 +28,11 @@ class AppRouter: AppRouterProtocol {
     }
 
     func showHome() {
+        if tabBarController != nil {
+            navigationController.popToRootViewController(animated: true)
+            return
+        }
+
         let quizViewController = container.resolve(QuizViewController.self)
         let userViewController = container.resolve(UserViewController.self)
 
@@ -44,9 +53,9 @@ class AppRouter: AppRouterProtocol {
         navigationController.pushViewController(solvingQuizViewController, animated: true)
     }
 
-    func showResults(with text: String) {
-        let quizResultViewController = container.resolve(QuizResultViewController.self, args: text)
-        navigationController.setViewControllers([quizResultViewController], animated: true)
+    func showResults(with result: Result) {
+        let quizResultViewController = container.resolve(QuizResultViewController.self, args: result)
+        navigationController.pushViewController(quizResultViewController, animated: true)
     }
 
     func goBack() {

@@ -70,16 +70,20 @@ class SolvingQuizViewController: UIViewController {
         viewModel
             .$currentQuestionIndex
             .removeDuplicates()
-            .sink { [weak self] questionIndex in
-                guard let self = self else { return }
-
+            .sink { [weak self] currentQuestionIndex in
                 let scrollDelayInMillis = 400
 
-                self.progressView.set(current: questionIndex + 1)
-
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(scrollDelayInMillis)) {
-                    self.questionsView.scrollToQuestion(at: questionIndex)
+                    self?.questionsView.scrollToQuestion(at: currentQuestionIndex)
                 }
+            }
+            .store(in: &cancellables)
+
+        viewModel
+            .$progressText
+            .removeDuplicates()
+            .sink { [weak self] progressText in
+                self?.progressView.set(text: progressText)
             }
             .store(in: &cancellables)
 

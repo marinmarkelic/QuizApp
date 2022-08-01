@@ -1,12 +1,18 @@
+import Combine
+
 class QuizResultViewModel {
+
+    private let result: Result
 
     private let router: AppRouterProtocol
     private let useCase: SolvingQuizUseCase
 
-    init(router: AppRouterProtocol, useCase: SolvingQuizUseCase) {
+    init(result: Result, router: AppRouterProtocol, useCase: SolvingQuizUseCase) {
+        self.result = result
         self.router = router
         self.useCase = useCase
 
+        setText()
         endQuiz()
     }
 
@@ -20,6 +26,10 @@ class QuizResultViewModel {
                 print(err)
             }
         }
+    @Published var text: String = ""
+
+    private func setText() {
+        text = "\(result.correctQuestions)/\(result.totalQuestions)"
     }
 
     func exitQuiz() {
