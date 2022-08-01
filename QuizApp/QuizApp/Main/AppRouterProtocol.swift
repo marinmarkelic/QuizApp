@@ -12,7 +12,7 @@ protocol AppRouterProtocol {
 
     func showQuiz(with id: Int)
 
-    func showResults(with text: String)
+    func showResults(with result: Result)
 
     func goBack()
 

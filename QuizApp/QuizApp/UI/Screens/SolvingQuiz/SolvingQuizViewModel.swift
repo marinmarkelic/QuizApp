@@ -83,8 +83,10 @@ Please try again.
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(delayInMillis)) { [weak self] in
             guard let self = self else { return }
 
-            let text = "\(self.correctQuestions)/\(self.quiz.questions.count)"
-            self.router.showResults(with: text)
+            let result = Result(
+                correctQuestions: self.correctQuestions,
+                totalQuestions: self.quiz.questions.count)
+            self.router.showResults(with: result)
         }
     }
 
