@@ -15,10 +15,9 @@ class QuizResultViewModel {
         self.useCase = useCase
 
         setText()
-        endQuiz()
     }
 
-    private func endQuiz() {
+    func endQuiz() {
         Task {
             do {
                 let request = QuizEndRequest(id: result.sessionId, numberOfCorrectQuestions: result.correctQuestions)

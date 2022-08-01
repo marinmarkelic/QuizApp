@@ -90,7 +90,7 @@ Please try again.
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(delayInMillis)) { [weak self] in
             guard let self = self else { return }
 
-    let result = QuizResult(
+            let result = QuizResult(
                 sessionId: self.quiz.sessionId,
                 correctQuestions: self.correctQuestions,
                 totalQuestions: self.quiz.questions.count)

@@ -32,22 +32,14 @@ class QuizNetworkClient: QuizNetworkClientProtocol {
     }
 
     func startQuiz(with request: QuizStartRequestNetworkDataModel) async throws -> QuizStartResponseNetworkDataModel {
-        try await networkClient.post(path: getStartQuizPath(id: request.id), body: request)
-    }
-
-    private func getStartQuizPath(id: Int) -> String {
-        "/v1/quiz/\(id)/session/start"
+        try await networkClient.post(path: "/v1/quiz/\(request.id)/session/start", body: request)
     }
 
     func endQuiz(
         with request: QuizEndRequestNetworkDataModel,
         id: String
     ) async throws -> QuizEndResponseNetworkDataModel {
-        try await networkClient.post(path: getEndQuizPath(id: id), body: request)
-    }
-
-    private func getEndQuizPath(id: String) -> String {
-        "/v1/quiz/session/\(id)/end"
+        try await networkClient.post(path: "/v1/quiz/session/\(id)/end", body: request)
     }
 
 }
