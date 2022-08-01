@@ -1,4 +1,4 @@
-struct Result {
+struct QuizResult {
 
     let sessionId: String
     let correctQuestions: Int
