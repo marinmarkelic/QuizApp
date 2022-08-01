@@ -167,3 +167,33 @@ extension QuizEndResponseDataModel {
     }
 
 }
+
+struct LeaderboardDataModel {
+
+    let leaderboardPoints: [LeaderboardPointsDataModel]
+
+}
+
+struct LeaderboardPointsDataModel {
+
+    let name: String
+    let points: Int
+
+}
+
+extension LeaderboardDataModel {
+
+    init(_ model: LeaderboardNetworkDataModel) {
+        leaderboardPoints = model.leaderboardPoints.map({ LeaderboardPointsDataModel($0) })
+    }
+
+}
+
+extension LeaderboardPointsDataModel {
+
+    init(_ model: LeaderboardPointsNetworkDataModel) {
+        name = model.name
+        points = model.points
+    }
+
+}
