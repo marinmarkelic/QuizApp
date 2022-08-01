@@ -11,6 +11,7 @@ class SolvingQuizViewModel {
     @Published var quiz: QuizStartResponse = .empty
     @Published var progressColors: [UIColor] = []
     @Published var currentQuestionIndex: Int = 0
+    @Published var progressText: String = ""
     @Published var errorMessage: String = ""
 
     private var correctQuestions: Int = 0
@@ -31,6 +32,7 @@ class SolvingQuizViewModel {
                 let unansweredColor: UIColor = .white.withAlphaComponent(0.3)
                 progressColors = [UIColor](repeating: unansweredColor, count: quiz.questions.count)
                 progressColors[0] = .white
+                setProgressText()
             } catch {
                 errorMessage = """
 Couldn't start quiz.
@@ -59,6 +61,7 @@ Please try again.
         if currentQuestionIndex < progressColors.count - 1 {
             progressColors[currentQuestionIndex + 1] = .white
             currentQuestionIndex += 1
+            setProgressText()
         } else {
             finishQuiz()
         }
@@ -72,6 +75,10 @@ Please try again.
         }
 
         return false
+    }
+
+    private func setProgressText() {
+            progressText = "\(currentQuestionIndex + 1)/\(quiz.questions.count)"
     }
 
     private func changeAnswerColors(for question: Question, selectedAnswerId: Int) {
