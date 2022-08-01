@@ -1,8 +1,11 @@
+import Combine
 import UIKit
 
 class LeaderboardViewController: UIViewController {
 
     private let viewModel: LeaderboardViewModel
+
+    private var leaderboard: Leaderboard = .empty
 
     private var gradientView: GradientView!
     private var mainView: UIView!
@@ -12,6 +15,8 @@ class LeaderboardViewController: UIViewController {
 
     private var tableView: UITableView!
 
+    private var cancellables = Set<AnyCancellable>()
+
     init(viewModel: LeaderboardViewModel) {
         self.viewModel = viewModel
 
@@ -20,6 +25,7 @@ class LeaderboardViewController: UIViewController {
         createViews()
         styleViews()
         defineLayoutForViews()
+        bindViewModel()
     }
 
     required init?(coder: NSCoder) {
@@ -29,6 +35,18 @@ class LeaderboardViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.fetchLeaderboard()
+    }
+
+    private func bindViewModel() {
+        viewModel
+            .$leaderboard
+            .sink { [weak self] leaderboard in
+                self?.leaderboard = leaderboard
+                self?.tableView.reloadData()
+
+                print(leaderboard)
+            }
+            .store(in: &cancellables)
     }
 
 }
@@ -57,6 +75,8 @@ extension LeaderboardViewController: ConstructViewsProtocol {
 
         pointsLabel.text = "Points"
 
+        tableView.backgroundColor = .clear
+        tableView.allowsSelection = false
         tableView.register(LeaderboardCell.self, forCellReuseIdentifier: LeaderboardCell.reuseIdentifier)
         tableView.dataSource = self
     }
@@ -93,7 +113,8 @@ extension LeaderboardViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        print(leaderboard.leaderboardPoints.count)
+        return leaderboard.leaderboardPoints.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -102,8 +123,11 @@ extension LeaderboardViewController: UITableViewDataSource {
         else {
             return LeaderboardCell()
         }
+        let points = leaderboard.leaderboardPoints[indexPath.row]
 
+        cell.set(rank: indexPath.row, name: points.name, score: points.points)
 
+        return cell
     }
 
 }

@@ -13,6 +13,7 @@ class LeaderboardViewModel {
         self.useCase = useCase
     }
 
+    @MainActor
     func fetchLeaderboard() {
         Task {
             do {

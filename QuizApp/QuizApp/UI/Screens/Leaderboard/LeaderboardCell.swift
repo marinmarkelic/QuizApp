@@ -20,6 +20,12 @@ class LeaderboardCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func set(rank: Int, name: String, score: Int) {
+        rankLabel.text = "\(String(rank))."
+        nameLabel.text = name
+        scoreLabel.text = String(score)
+    }
+
 }
 
 extension LeaderboardCell: ConstructViewsProtocol {
@@ -35,22 +41,21 @@ extension LeaderboardCell: ConstructViewsProtocol {
     }
 
     func styleViews() {
-
+        backgroundColor = .clear
     }
 
     func defineLayoutForViews() {
         rankLabel.snp.makeConstraints {
-            $0.leading.equalToSuperview().inset(20)
-            $0.top.bottom.equalToSuperview().inset(10)
+            $0.leading.top.bottom.equalToSuperview().inset(10)
         }
 
         nameLabel.snp.makeConstraints {
-            $0.leading.equalTo(rankLabel).offset(5)
+            $0.leading.equalTo(rankLabel.snp.trailing).offset(5)
             $0.top.bottom.equalTo(rankLabel)
         }
 
         scoreLabel.snp.makeConstraints {
-            $0.leading.lessThanOrEqualTo(nameLabel)
+            $0.leading.greaterThanOrEqualTo(nameLabel)
             $0.trailing.equalToSuperview().inset(20)
             $0.top.bottom.equalTo(rankLabel)
         }
