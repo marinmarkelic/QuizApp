@@ -138,3 +138,18 @@ extension AnswerDataModel {
     }
 
 }
+
+struct QuizEndRequestDataModel {
+
+    let id: String
+    let numberOfCorrectQuestions: Int
+
+}
+
+extension QuizEndRequestNetworkDataModel {
+
+    init(_ model: QuizEndRequestDataModel) {
+        numberOfCorrectQuestions = model.numberOfCorrectQuestions
+    }
+
+}

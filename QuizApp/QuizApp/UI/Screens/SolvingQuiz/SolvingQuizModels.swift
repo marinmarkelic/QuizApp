@@ -113,3 +113,19 @@ extension Answer: Equatable {
     }
 
 }
+
+struct QuizEndRequest {
+
+    let id: String
+    let numberOfCorrectQuestions: Int
+
+}
+
+extension QuizEndRequestModel {
+
+    init(_ model: QuizEndRequest) {
+        id = model.id
+        numberOfCorrectQuestions = model.numberOfCorrectQuestions
+    }
+
+}

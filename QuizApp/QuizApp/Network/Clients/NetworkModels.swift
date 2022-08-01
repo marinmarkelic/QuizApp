@@ -82,3 +82,9 @@ struct AnswerNetworkDataModel: Decodable {
     let id: Int
 
 }
+
+struct QuizEndRequestNetworkDataModel: Encodable {
+
+    let numberOfCorrectQuestions: Int
+
+}

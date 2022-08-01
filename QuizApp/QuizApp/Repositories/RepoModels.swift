@@ -136,3 +136,19 @@ extension AnswerRepoModel {
     }
 
 }
+
+struct QuizEndRequestRepoModel {
+
+    let id: String
+    let numberOfCorrectQuestions: Int
+
+}
+
+extension QuizEndRequestDataModel {
+
+    init(_ model: QuizEndRequestRepoModel) {
+        id = model.id
+        numberOfCorrectQuestions = model.numberOfCorrectQuestions
+    }
+
+}
