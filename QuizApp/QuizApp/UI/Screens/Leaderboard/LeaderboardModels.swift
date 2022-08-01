@@ -17,6 +17,8 @@ extension Leaderboard {
         leaderboardPoints = model.leaderboardPoints.map({ LeaderboardPoints($0) })
     }
 
+    static let empty = Leaderboard(leaderboardPoints: [])
+
 }
 
 extension LeaderboardPoints {
