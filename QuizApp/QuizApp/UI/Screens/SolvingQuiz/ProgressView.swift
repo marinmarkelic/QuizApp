@@ -20,17 +20,17 @@ class ProgressView: UIView {
     func set(colors: [UIColor]) {
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
 
-        for index in 0..<colors.count {
-            if colors[index] == UIColor.white {
-                label.text = "\(index + 1)/\(colors.count)"
-            }
-
+        for color in colors {
             let cell = UIView()
-            cell.backgroundColor = colors[index]
+            cell.backgroundColor = color
             cell.layer.cornerRadius = 2
 
             stackView.addArrangedSubview(cell)
         }
+    }
+
+    func set(text: String) {
+        label.text = text
     }
 
 }
@@ -48,6 +48,7 @@ extension ProgressView: ConstructViewsProtocol {
     func styleViews() {
         label.textColor = .white
         label.font = UIFont(name: "SourceSansPro-Bold", size: 18)
+        label.text = "0/0"
 
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
