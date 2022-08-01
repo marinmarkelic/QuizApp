@@ -160,7 +160,7 @@ class AppDependencies {
 
         container
             .register { (_, args) -> QuizResultViewModel in
-                let result: Result = args.get()
+                let result: QuizResult = args.get()
                 return QuizResultViewModel(result: result, router: container.resolve())
             }
             .scope(.unique)
@@ -195,7 +195,7 @@ class AppDependencies {
 
         container
             .register { (_, args) -> QuizResultViewController in
-                let result: Result = args.get()
+                let result: QuizResult = args.get()
                 return QuizResultViewController(viewModel: container.resolve(args: result))
             }
             .scope(.unique)

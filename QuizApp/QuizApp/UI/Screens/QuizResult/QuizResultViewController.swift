@@ -86,6 +86,7 @@ extension QuizResultViewController: ConstructViewsProtocol {
         }
 
         label.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(20)
             $0.center.equalToSuperview()
         }
 
