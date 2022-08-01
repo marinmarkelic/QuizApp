@@ -285,7 +285,6 @@
 				9C1C76D228803AA9006217A9 /* UserNetworkClient.swift */,
 				9CFCC2FF28858A1E00B01343 /* QuizNetworkClient.swift */,
 				9CC33B32287DA19F002E9853 /* NetworkClient.swift */,
-				9C0481E1288FEFFD0095247C /* SolvingQuizUseCase.swift */,
 			);
 			path = Clients;
 			sourceTree = "<group>";
@@ -408,6 +407,7 @@
 				9C20BAD1287EF25D009378FB /* UserUseCase.swift */,
 				9C20BAD7287F17F2009378FB /* LogOutUseCase.swift */,
 				9CFCC2FD2885871000B01343 /* QuizUseCase.swift */,
+				9C0481E1288FEFFD0095247C /* SolvingQuizUseCase.swift */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
