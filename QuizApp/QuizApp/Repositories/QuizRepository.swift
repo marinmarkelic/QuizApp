@@ -4,6 +4,8 @@ protocol QuizRepositoryProtocol {
 
     func fetchAllQuizzes() async throws -> [QuizRepoModel]
 
+    func fetchLeaderboard(for id: Int) async throws -> LeaderboardRepoModel
+
     func startQuiz(with request: QuizStartRequestRepoModel) async throws -> QuizStartResponseRepoModel
 
     func endQuiz(with request: QuizEndRequestRepoModel) async throws -> QuizEndResponseRepoModel
@@ -29,6 +31,11 @@ class QuizRepository: QuizRepositoryProtocol {
         let quizzes = try await quizNetworkDataSource.fetchAllQuizzes()
         return quizzes
             .map { QuizRepoModel($0) }
+    }
+
+    func fetchLeaderboard(for id: Int) async throws -> LeaderboardRepoModel {
+        let response = try await quizNetworkDataSource.fetchLeaderboard(for: id)
+        return LeaderboardRepoModel(response)
     }
 
     func startQuiz(with request: QuizStartRequestRepoModel) async throws -> QuizStartResponseRepoModel {

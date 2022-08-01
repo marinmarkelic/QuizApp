@@ -4,6 +4,8 @@ protocol QuizNetworkClientProtocol {
 
     func fetchAllQuizzes() async throws -> [QuizNetworkDataModel]
 
+    func fetchLeaderboard(for id: Int) async throws -> LeaderboardNetworkDataModel
+
     func startQuiz(with request: QuizStartRequestNetworkDataModel) async throws -> QuizStartResponseNetworkDataModel
 
     func endQuiz(
@@ -18,6 +20,7 @@ class QuizNetworkClient: QuizNetworkClientProtocol {
     private let networkClient: NetworkClient
 
     private let quizPath = "/v1/quiz/list"
+    private let leaderboardPath = "/v1/quiz/leaderboard"
 
     init(networkClient: NetworkClient) {
         self.networkClient = networkClient
@@ -29,6 +32,10 @@ class QuizNetworkClient: QuizNetworkClientProtocol {
 
     func fetchAllQuizzes() async throws -> [QuizNetworkDataModel] {
         try await networkClient.get(path: "\(quizPath)")
+    }
+
+    func fetchLeaderboard(for id: Int) async throws -> LeaderboardNetworkDataModel {
+        try await networkClient.get(path: "\(leaderboardPath)?quizId=\(id)")
     }
 
     func startQuiz(with request: QuizStartRequestNetworkDataModel) async throws -> QuizStartResponseNetworkDataModel {
