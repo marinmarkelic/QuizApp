@@ -9,6 +9,8 @@ class QuizDetailsViewController: UIViewController {
 
     private var mainView: UIView!
 
+    private var leaderboardButton: UIButton!
+
     private var detailsView: DetailsView!
 
     private var cancellables = Set<AnyCancellable>()
@@ -48,6 +50,9 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
         mainView = UIView()
         gradientView.addSubview(mainView)
 
+        leaderboardButton = UIButton()
+        mainView.addSubview(leaderboardButton)
+
         detailsView = DetailsView()
         mainView.addSubview(detailsView)
     }
@@ -68,6 +73,14 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
         navigationItem.leftBarButtonItem?.tintColor = .white
 
         detailsView.delegate = self
+
+        leaderboardButton.setTitle("Leaderboard", for: .normal)
+        leaderboardButton.addTarget(self, action: #selector(pressedLeaderboard), for: .touchUpInside)
+    }
+
+    @objc
+    private func pressedLeaderboard() {
+        viewModel.showLeaderboard()
     }
 
     @objc
@@ -82,6 +95,11 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
 
         mainView.snp.makeConstraints {
             $0.edges.equalToSuperview()
+        }
+
+        leaderboardButton.snp.makeConstraints {
+            $0.top.equalTo(detailsView).offset(-20)
+            $0.trailing.equalToSuperview().inset(20)
         }
 
         detailsView.snp.makeConstraints {

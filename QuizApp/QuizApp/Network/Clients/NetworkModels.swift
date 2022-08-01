@@ -95,12 +95,6 @@ struct QuizEndResponseNetworkDataModel: Decodable {
 
 }
 
-struct LeaderboardNetworkDataModel: Decodable {
-
-    let leaderboardPoints: [LeaderboardPointsNetworkDataModel]
-
-}
-
 struct LeaderboardPointsNetworkDataModel: Decodable {
 
     let name: String

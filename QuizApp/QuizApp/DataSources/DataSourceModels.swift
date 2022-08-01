@@ -183,8 +183,8 @@ struct LeaderboardPointsDataModel {
 
 extension LeaderboardDataModel {
 
-    init(_ model: LeaderboardNetworkDataModel) {
-        leaderboardPoints = model.leaderboardPoints.map({ LeaderboardPointsDataModel($0) })
+    init(_ points: [LeaderboardPointsNetworkDataModel]) {
+        leaderboardPoints = points.map({ LeaderboardPointsDataModel($0) })
     }
 
 }
