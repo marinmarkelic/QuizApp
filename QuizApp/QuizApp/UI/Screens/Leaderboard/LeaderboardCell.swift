@@ -29,6 +29,7 @@ class LeaderboardCell: UITableViewCell {
 }
 
 extension LeaderboardCell: ConstructViewsProtocol {
+
     func createViews() {
         rankLabel = UILabel()
         addSubview(rankLabel)

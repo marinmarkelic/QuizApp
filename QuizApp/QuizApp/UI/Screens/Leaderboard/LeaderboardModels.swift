@@ -13,11 +13,11 @@ struct LeaderboardPoints {
 
 extension Leaderboard {
 
+    static let empty = Leaderboard(leaderboardPoints: [])
+
     init(_ model: LeaderboardModel) {
         leaderboardPoints = model.leaderboardPoints.map({ LeaderboardPoints($0) })
     }
-
-    static let empty = Leaderboard(leaderboardPoints: [])
 
 }
 

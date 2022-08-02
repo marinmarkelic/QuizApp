@@ -74,7 +74,6 @@ extension LeaderboardViewController: ConstructViewsProtocol {
         let titleView = UILabel()
         titleView.text = "Leaderboard"
         titleView.font = UIFont(name: "SourceSansPro-Regular", size: 24)
-
         navigationItem.titleView = titleView
 
         navigationItem.leftBarButtonItem = UIBarButtonItem()
@@ -82,7 +81,6 @@ extension LeaderboardViewController: ConstructViewsProtocol {
         let image = UIImage(systemName: "xmark", withConfiguration: UIImage.SymbolConfiguration(weight: .bold))
         let closeButton = UIBarButtonItem(image: image, style: .done, target: self, action: #selector(pressedClose))
         closeButton.tintColor = .white
-
         navigationItem.rightBarButtonItem = closeButton
 
         playerLabel.text = "Player"
@@ -99,7 +97,6 @@ extension LeaderboardViewController: ConstructViewsProtocol {
         border.autoresizingMask = [.flexibleWidth, .flexibleBottomMargin]
 
         tableView.addSubview(border)
-        tableView.layer.masksToBounds = true
         tableView.backgroundColor = .clear
         tableView.allowsSelection = false
         tableView.register(LeaderboardCell.self, forCellReuseIdentifier: LeaderboardCell.reuseIdentifier)
@@ -127,7 +124,9 @@ extension LeaderboardViewController: ConstructViewsProtocol {
         }
 
         pointsLabel.snp.makeConstraints {
+            $0.leading.greaterThanOrEqualTo(playerLabel.snp.trailing)
             $0.trailing.top.equalToSuperview().inset(20)
+            $0.bottom.equalTo(playerLabel)
         }
 
         tableView.snp.makeConstraints {
