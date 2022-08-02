@@ -41,10 +41,10 @@ class LeaderboardViewController: UIViewController {
         viewModel
             .$leaderboard
             .sink { [weak self] leaderboard in
-                self?.leaderboard = leaderboard
-                self?.tableView.reloadData()
+                guard let self = self else { return }
 
-                print(leaderboard)
+                self.leaderboard = leaderboard
+                self.tableView.reloadData()
             }
             .store(in: &cancellables)
     }
@@ -113,13 +113,14 @@ extension LeaderboardViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(leaderboard.leaderboardPoints.count)
-        return leaderboard.leaderboardPoints.count
+        leaderboard.leaderboardPoints.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard
-            let cell = tableView.dequeueReusableCell(withIdentifier: LeaderboardCell.reuseIdentifier, for: indexPath) as? LeaderboardCell
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: LeaderboardCell.reuseIdentifier,
+                for: indexPath) as? LeaderboardCell
         else {
             return LeaderboardCell()
         }

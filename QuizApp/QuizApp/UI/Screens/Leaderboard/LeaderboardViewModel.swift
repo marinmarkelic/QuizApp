@@ -19,9 +19,7 @@ class LeaderboardViewModel {
             do {
                 let response = try await useCase.fetchLeaderboard(for: id)
                 leaderboard = Leaderboard(response)
-            } catch let err {
-                print(err)
-            }
+            } catch _ {}
         }
     }
 
