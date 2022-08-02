@@ -94,3 +94,10 @@ struct QuizEndResponseNetworkDataModel: Decodable {
     let points: Int
 
 }
+
+struct LeaderboardPointsNetworkDataModel: Decodable {
+
+    let name: String
+    let points: Int
+
+}

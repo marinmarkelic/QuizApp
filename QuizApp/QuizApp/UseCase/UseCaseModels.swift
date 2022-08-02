@@ -175,3 +175,33 @@ extension QuizEndResponseModel {
     }
 
 }
+
+struct LeaderboardModel {
+
+    let leaderboardPoints: [LeaderboardPointsModel]
+
+}
+
+struct LeaderboardPointsModel {
+
+    let name: String
+    let points: Int
+
+}
+
+extension LeaderboardModel {
+
+    init(_ model: LeaderboardRepoModel) {
+        leaderboardPoints = model.leaderboardPoints.map { LeaderboardPointsModel($0) }
+    }
+
+}
+
+extension LeaderboardPointsModel {
+
+    init(_ model: LeaderboardPointsRepoModel) {
+        name = model.name
+        points = model.points
+    }
+
+}

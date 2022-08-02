@@ -20,4 +20,8 @@ class QuizDetailsViewModel {
         appRouter.goBack()
     }
 
+    func showLeaderboard() {
+        appRouter.showLeaderboard(with: quiz.id)
+    }
+
 }

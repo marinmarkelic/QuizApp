@@ -120,6 +120,11 @@ class AppDependencies {
             .scope(.application)
 
         container
+            .register { LeaderboardUseCase(repository: container.resolve()) }
+            .implements(LeaderboardUseCaseProtocol.self)
+            .scope(.application)
+
+        container
             .register { SolvingQuizUseCase(quizRepository: container.resolve()) }
             .implements(SolvingQuizUseCaseProtocol.self)
             .scope(.application)
@@ -146,6 +151,12 @@ class AppDependencies {
         container
             .register { (_, args) -> QuizDetailsViewModel in
                 QuizDetailsViewModel(quiz: args.get(), appRouter: container.resolve())
+            }
+            .scope(.unique)
+
+        container
+            .register { (_, args) -> LeaderboardViewModel in
+                LeaderboardViewModel(id: args.get(), useCase: container.resolve(), router: container.resolve())
             }
             .scope(.unique)
 
@@ -182,6 +193,13 @@ class AppDependencies {
             .register { (_, args) -> QuizDetailsViewController in
                 let quiz: Quiz = args.get()
                 return QuizDetailsViewController(viewModel: container.resolve(args: quiz))
+            }
+            .scope(.unique)
+
+        container
+            .register { (_, args) -> LeaderboardViewController in
+                let id: Int = args.get()
+                return LeaderboardViewController(viewModel: container.resolve(args: id))
             }
             .scope(.unique)
 

@@ -48,6 +48,11 @@ class AppRouter: AppRouterProtocol {
         navigationController.pushViewController(quizDetailsViewController, animated: true)
     }
 
+    func showLeaderboard(with id: Int) {
+        let leaderboardViewController = container.resolve(LeaderboardViewController.self, args: id)
+        navigationController.pushViewController(leaderboardViewController, animated: true)
+    }
+
     func showQuiz(with id: Int) {
         let solvingQuizViewController = container.resolve(SolvingQuizViewController.self, args: id)
         navigationController.pushViewController(solvingQuizViewController, animated: true)
