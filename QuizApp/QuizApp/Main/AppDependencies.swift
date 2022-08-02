@@ -157,7 +157,7 @@ class AppDependencies {
         container
             .register { (_, args) -> LeaderboardViewModel in
                 let id: Int = args.get()
-                return LeaderboardViewModel(id: id, useCase: container.resolve())
+                return LeaderboardViewModel(id: id, useCase: container.resolve(), router: container.resolve())
             }
             .scope(.unique)
 

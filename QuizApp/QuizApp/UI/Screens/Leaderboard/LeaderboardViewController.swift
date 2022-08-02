@@ -71,9 +71,25 @@ extension LeaderboardViewController: ConstructViewsProtocol {
     }
 
     func styleViews() {
+        let titleView = UILabel()
+        titleView.text = "Leaderboard"
+        titleView.font = UIFont(name: "SourceSansPro-Regular", size: 24)
+
+        navigationItem.titleView = titleView
+
+        navigationItem.leftBarButtonItem = UIBarButtonItem()
+
+        let image = UIImage(systemName: "xmark", withConfiguration: UIImage.SymbolConfiguration(weight: .bold))
+        let closeButton = UIBarButtonItem(image: image, style: .done, target: self, action: #selector(pressedClose))
+        closeButton.tintColor = .white
+
+        navigationItem.rightBarButtonItem = closeButton
+
         playerLabel.text = "Player"
+        playerLabel.font = UIFont(name: "SourceSansPro-Regular", size: 16)
 
         pointsLabel.text = "Points"
+        pointsLabel.font = UIFont(name: "SourceSansPro-Regular", size: 16)
 
         let border = CALayer()
         let onePixel = 1 / UIScreen.main.scale
@@ -90,6 +106,11 @@ extension LeaderboardViewController: ConstructViewsProtocol {
         tableView.dataSource = self
         tableView.separatorColor = .white
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+
+    @objc
+    private func pressedClose() {
+        viewModel.pressedClose()
     }
 
     func defineLayoutForViews() {

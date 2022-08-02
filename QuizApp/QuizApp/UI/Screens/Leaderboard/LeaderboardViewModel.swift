@@ -5,12 +5,14 @@ class LeaderboardViewModel {
     private let id: Int
 
     private let useCase: LeaderboardUseCaseProtocol
+    private let router: AppRouterProtocol
 
     @Published var leaderboard: Leaderboard = .empty
 
-    init(id: Int, useCase: LeaderboardUseCaseProtocol) {
+    init(id: Int, useCase: LeaderboardUseCaseProtocol, router: AppRouterProtocol) {
         self.id = id
         self.useCase = useCase
+        self.router = router
     }
 
     @MainActor
@@ -21,6 +23,10 @@ class LeaderboardViewModel {
                 leaderboard = Leaderboard(response)
             } catch _ {}
         }
+    }
+
+    func pressedClose() {
+        router.goBack()
     }
 
 }
