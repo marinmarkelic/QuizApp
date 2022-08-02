@@ -166,7 +166,8 @@ extension LeaderboardViewController: ConstructViewsProtocol {
         }
 
         errorView.snp.makeConstraints {
-            $0.center.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.centerY.equalToSuperview()
         }
 
         playerLabel.snp.makeConstraints {
