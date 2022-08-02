@@ -121,7 +121,6 @@ extension LeaderboardViewController: ConstructViewsProtocol {
         noPlayersErrorLabel.font = UIFont(name: "SourceSansPro-Bold", size: 16)
         noPlayersErrorLabel.textColor = .white
         noPlayersErrorLabel.textAlignment = .center
-        noPlayersErrorLabel.isHidden = true
 
         playerLabel.text = "Player"
         playerLabel.textColor = .white

@@ -42,6 +42,7 @@ class DetailsView: UIView {
             }
 
             imageView.snp.remakeConstraints {
+                $0.top.equalTo(title)
                 $0.leading.equalTo(snp.centerX).offset(10)
                 $0.trailing.equalToSuperview().inset(20)
                 $0.height.lessThanOrEqualTo(150)
