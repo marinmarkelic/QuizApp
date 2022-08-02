@@ -144,7 +144,7 @@ extension LeaderboardViewController: ConstructViewsProtocol {
         tableView.register(LeaderboardCell.self, forCellReuseIdentifier: LeaderboardCell.reuseIdentifier)
         tableView.dataSource = self
         tableView.separatorColor = .white
-        tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        tableView.separatorInset = .zero
     }
 
     @objc
@@ -175,7 +175,7 @@ extension LeaderboardViewController: ConstructViewsProtocol {
         }
 
         pointsLabel.snp.makeConstraints {
-            $0.leading.greaterThanOrEqualTo(playerLabel.snp.trailing)
+            $0.leading.greaterThanOrEqualTo(playerLabel.snp.trailing).offset(5)
             $0.trailing.top.equalToSuperview().inset(20)
             $0.bottom.equalTo(playerLabel)
         }
@@ -207,7 +207,7 @@ extension LeaderboardViewController: UITableViewDataSource {
 
         let points = leaderboard.leaderboardPoints[indexPath.row]
 
-        cell.set(rank: indexPath.row, name: points.name, score: points.points)
+        cell.set(rank: indexPath.row + 1, name: points.name, score: points.points)
 
         return cell
     }

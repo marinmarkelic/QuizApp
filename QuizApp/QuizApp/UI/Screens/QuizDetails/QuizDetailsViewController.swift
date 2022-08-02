@@ -99,7 +99,7 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
         }
 
         leaderboardButton.snp.makeConstraints {
-            $0.bottom.greaterThanOrEqualTo(detailsView.snp.top)
+            $0.bottom.equalTo(detailsView.snp.top)
             $0.trailing.equalToSuperview().inset(20)
         }
 
