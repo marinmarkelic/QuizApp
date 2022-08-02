@@ -75,10 +75,21 @@ extension LeaderboardViewController: ConstructViewsProtocol {
 
         pointsLabel.text = "Points"
 
+        let border = CALayer()
+        let onePixel = 1 / UIScreen.main.scale
+
+        border.borderWidth = 1
+        border.borderColor = UIColor.white.cgColor
+        border.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: onePixel)
+
+        tableView.layer.addSublayer(border)
+        tableView.layer.masksToBounds = true
         tableView.backgroundColor = .clear
         tableView.allowsSelection = false
         tableView.register(LeaderboardCell.self, forCellReuseIdentifier: LeaderboardCell.reuseIdentifier)
         tableView.dataSource = self
+        tableView.separatorColor = .white
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
 
     func defineLayoutForViews() {
@@ -99,7 +110,7 @@ extension LeaderboardViewController: ConstructViewsProtocol {
         }
 
         tableView.snp.makeConstraints {
-            $0.top.equalTo(playerLabel.snp.bottom)
+            $0.top.equalTo(playerLabel.snp.bottom).offset(5)
             $0.leading.trailing.bottom.equalToSuperview()
         }
     }
