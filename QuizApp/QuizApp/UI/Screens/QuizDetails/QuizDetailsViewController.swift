@@ -75,6 +75,7 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
         detailsView.delegate = self
 
         leaderboardButton.setTitle("Leaderboard", for: .normal)
+        leaderboardButton.titleLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 18)
         leaderboardButton.addTarget(self, action: #selector(pressedLeaderboard), for: .touchUpInside)
     }
 
@@ -98,7 +99,7 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
         }
 
         leaderboardButton.snp.makeConstraints {
-            $0.top.equalTo(detailsView).offset(-20)
+            $0.bottom.greaterThanOrEqualTo(detailsView.snp.top)
             $0.trailing.equalToSuperview().inset(20)
         }
 
