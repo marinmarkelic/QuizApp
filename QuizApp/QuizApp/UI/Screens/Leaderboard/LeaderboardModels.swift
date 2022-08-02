@@ -11,7 +11,7 @@ struct LeaderboardPoints {
 
 }
 
-extension Leaderboard {
+extension Leaderboard: Equatable {
 
     static let empty = Leaderboard(leaderboardPoints: [])
 
@@ -21,7 +21,7 @@ extension Leaderboard {
 
 }
 
-extension LeaderboardPoints {
+extension LeaderboardPoints: Equatable {
 
     init(_ model: LeaderboardPointsModel) {
         name = model.name

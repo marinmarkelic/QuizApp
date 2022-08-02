@@ -10,6 +10,9 @@ class LeaderboardViewController: UIViewController {
     private var gradientView: GradientView!
     private var mainView: UIView!
 
+    private var noPlayersErrorLabel: UILabel!
+    private var errorView: ErrorView!
+
     private var playerLabel: UILabel!
     private var pointsLabel: UILabel!
 
@@ -40,11 +43,36 @@ class LeaderboardViewController: UIViewController {
     private func bindViewModel() {
         viewModel
             .$leaderboard
+            .removeDuplicates()
             .sink { [weak self] leaderboard in
                 guard let self = self else { return }
 
+                self.mainView.isHidden = leaderboard.leaderboardPoints.isEmpty
+
                 self.leaderboard = leaderboard
                 self.tableView.reloadData()
+            }
+            .store(in: &cancellables)
+
+        viewModel
+            .$fetchingErrorMessage
+            .removeDuplicates()
+            .sink { [weak self] message in
+                guard let self = self else { return }
+
+                self.errorView.isHidden = message.isEmpty
+                self.errorView.set(description: message)
+            }
+            .store(in: &cancellables)
+
+        viewModel
+            .$noPlayersErrorMessage
+            .removeDuplicates()
+            .sink { [weak self] message in
+                guard let self = self else { return }
+
+                self.noPlayersErrorLabel.isHidden = message.isEmpty
+                self.noPlayersErrorLabel.text = message
             }
             .store(in: &cancellables)
     }
@@ -56,6 +84,12 @@ extension LeaderboardViewController: ConstructViewsProtocol {
     func createViews() {
         gradientView = GradientView()
         view.addSubview(gradientView)
+
+        noPlayersErrorLabel = UILabel()
+        gradientView.addSubview(noPlayersErrorLabel)
+
+        errorView = ErrorView()
+        gradientView.addSubview(errorView)
 
         mainView = UIView()
         gradientView.addSubview(mainView)
@@ -83,6 +117,11 @@ extension LeaderboardViewController: ConstructViewsProtocol {
         let closeButton = UIBarButtonItem(image: image, style: .done, target: self, action: #selector(pressedClose))
         closeButton.tintColor = .white
         navigationItem.rightBarButtonItem = closeButton
+
+        noPlayersErrorLabel.font = UIFont(name: "SourceSansPro-Bold", size: 16)
+        noPlayersErrorLabel.textColor = .white
+        noPlayersErrorLabel.textAlignment = .center
+        noPlayersErrorLabel.isHidden = true
 
         playerLabel.text = "Player"
         playerLabel.textColor = .white
@@ -120,6 +159,15 @@ extension LeaderboardViewController: ConstructViewsProtocol {
 
         mainView.snp.makeConstraints {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+
+        noPlayersErrorLabel.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(20)
+        }
+
+        errorView.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
 
         playerLabel.snp.makeConstraints {
