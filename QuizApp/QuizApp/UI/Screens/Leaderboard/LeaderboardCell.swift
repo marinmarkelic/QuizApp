@@ -63,7 +63,7 @@ extension LeaderboardCell: ConstructViewsProtocol {
         }
 
         scoreLabel.snp.makeConstraints {
-            $0.leading.greaterThanOrEqualTo(nameLabel)
+            $0.leading.greaterThanOrEqualTo(nameLabel.snp.trailing)
             $0.trailing.equalToSuperview().inset(20)
             $0.top.bottom.equalTo(rankLabel)
         }

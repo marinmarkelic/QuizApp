@@ -152,9 +152,8 @@ extension LeaderboardViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(
                 withIdentifier: LeaderboardCell.reuseIdentifier,
                 for: indexPath) as? LeaderboardCell
-        else {
-            return LeaderboardCell()
-        }
+        else { return LeaderboardCell() }
+
         let points = leaderboard.leaderboardPoints[indexPath.row]
 
         cell.set(rank: indexPath.row, name: points.name, score: points.points)
