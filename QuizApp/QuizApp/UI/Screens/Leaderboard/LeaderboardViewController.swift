@@ -105,7 +105,7 @@ extension LeaderboardViewController: ConstructViewsProtocol {
         tableView.register(LeaderboardCell.self, forCellReuseIdentifier: LeaderboardCell.reuseIdentifier)
         tableView.dataSource = self
         tableView.separatorColor = .white
-        tableView.separatorInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        tableView.separatorInset = .zero
     }
 
     @objc
