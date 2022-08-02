@@ -91,14 +91,14 @@ extension LeaderboardViewController: ConstructViewsProtocol {
         pointsLabel.text = "Points"
         pointsLabel.font = UIFont(name: "SourceSansPro-Regular", size: 16)
 
-        let border = CALayer()
+        let border = UIView()
         let onePixel = 1 / UIScreen.main.scale
 
-        border.borderWidth = 1
-        border.borderColor = UIColor.white.cgColor
         border.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: onePixel)
+        border.backgroundColor = .white
+        border.autoresizingMask = [.flexibleWidth, .flexibleBottomMargin]
 
-        tableView.layer.addSublayer(border)
+        tableView.addSubview(border)
         tableView.layer.masksToBounds = true
         tableView.backgroundColor = .clear
         tableView.allowsSelection = false
