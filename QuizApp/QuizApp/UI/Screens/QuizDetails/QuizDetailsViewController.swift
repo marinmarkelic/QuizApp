@@ -54,7 +54,7 @@ class QuizDetailsViewController: UIViewController {
             }
 
             detailsView.snp.remakeConstraints {
-                $0.leading.trailing.bottom.equalToSuperview().inset(20)
+                $0.leading.trailing.equalToSuperview().inset(20)
                 $0.center.equalToSuperview()
             }
         } else {

@@ -39,17 +39,16 @@ class DetailsView: UIView {
             desc.snp.remakeConstraints {
                 $0.top.equalTo(title.snp.bottom).offset(5)
                 $0.leading.trailing.equalTo(title)
-                $0.bottom.lessThanOrEqualTo(startButton.snp.top).offset(-10)
             }
 
             imageView.snp.remakeConstraints {
-                $0.top.equalTo(title)
                 $0.leading.equalTo(snp.centerX).offset(10)
                 $0.trailing.equalToSuperview().inset(20)
-                $0.bottom.equalTo(desc)
+                $0.height.lessThanOrEqualTo(150)
             }
 
             startButton.snp.remakeConstraints {
+                $0.top.equalTo(imageView.snp.bottom).offset(5)
                 $0.leading.trailing.bottom.equalToSuperview().inset(20)
                 $0.height.equalTo(45)
             }
