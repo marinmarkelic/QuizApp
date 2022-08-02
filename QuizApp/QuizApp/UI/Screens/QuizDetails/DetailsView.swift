@@ -126,26 +126,7 @@ extension DetailsView: ConstructViewsProtocol {
     }
 
     func defineLayoutForViews() {
-        title.snp.makeConstraints {
-            $0.leading.top.trailing.equalToSuperview().inset(20)
-        }
-
-        desc.snp.makeConstraints {
-            $0.top.equalTo(title.snp.bottom).offset(20)
-            $0.leading.trailing.equalToSuperview().inset(20)
-        }
-
-        imageView.snp.makeConstraints {
-            $0.top.equalTo(desc.snp.bottom).offset(20)
-            $0.centerX.equalToSuperview()
-            $0.width.height.lessThanOrEqualTo(150)
-        }
-
-        startButton.snp.makeConstraints {
-            $0.top.equalTo(imageView.snp.bottom).offset(20)
-            $0.leading.trailing.bottom.equalToSuperview().inset(20)
-            $0.height.equalTo(45)
-        }
+        remakeLayout()
     }
 
 }

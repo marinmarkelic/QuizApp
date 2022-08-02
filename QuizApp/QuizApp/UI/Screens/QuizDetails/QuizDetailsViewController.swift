@@ -130,16 +130,7 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
 
-        leaderboardButton.snp.makeConstraints {
-            $0.top.greaterThanOrEqualToSuperview().offset(5)
-            $0.bottom.equalTo(detailsView.snp.top).offset(-5)
-            $0.trailing.equalToSuperview().inset(20)
-        }
-
-        detailsView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(20)
-            $0.center.equalToSuperview()
-        }
+        remakeLayout()
     }
 
 }
