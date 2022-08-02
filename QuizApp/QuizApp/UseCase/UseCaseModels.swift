@@ -192,7 +192,7 @@ struct LeaderboardPointsModel {
 extension LeaderboardModel {
 
     init(_ model: LeaderboardRepoModel) {
-        leaderboardPoints = model.leaderboardPoints.map({ LeaderboardPointsModel($0) })
+        leaderboardPoints = model.leaderboardPoints.map { LeaderboardPointsModel($0) }
     }
 
 }

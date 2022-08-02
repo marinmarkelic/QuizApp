@@ -159,7 +159,7 @@ extension LeaderboardViewController: UITableViewDataSource {
 
         let points = leaderboard.leaderboardPoints[indexPath.row]
 
-        cell.set(rank: indexPath.row, name: points.name, score: points.points)
+        cell.set(rank: indexPath.row + 1, name: points.name, score: points.points)
 
         return cell
     }
