@@ -73,6 +73,7 @@ extension LeaderboardViewController: ConstructViewsProtocol {
     func styleViews() {
         let titleView = UILabel()
         titleView.text = "Leaderboard"
+        titleView.textColor = .white
         titleView.font = UIFont(name: "SourceSansPro-Regular", size: 24)
         navigationItem.titleView = titleView
 
@@ -84,9 +85,11 @@ extension LeaderboardViewController: ConstructViewsProtocol {
         navigationItem.rightBarButtonItem = closeButton
 
         playerLabel.text = "Player"
+        playerLabel.textColor = .white
         playerLabel.font = UIFont(name: "SourceSansPro-Regular", size: 16)
 
         pointsLabel.text = "Points"
+        pointsLabel.textColor = .white
         pointsLabel.font = UIFont(name: "SourceSansPro-Regular", size: 16)
 
         let border = UIView()
