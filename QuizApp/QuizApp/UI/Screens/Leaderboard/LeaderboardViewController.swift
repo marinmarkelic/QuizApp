@@ -127,7 +127,7 @@ extension LeaderboardViewController: ConstructViewsProtocol {
         }
 
         pointsLabel.snp.makeConstraints {
-            $0.leading.greaterThanOrEqualTo(playerLabel.snp.trailing)
+            $0.leading.greaterThanOrEqualTo(playerLabel.snp.trailing).offset(5)
             $0.trailing.top.equalToSuperview().inset(20)
             $0.bottom.equalTo(playerLabel)
         }
