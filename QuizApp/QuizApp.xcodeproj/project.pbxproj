@@ -50,6 +50,7 @@
 		9C25C8B22888428A000C4C90 /* UserModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C25C8B12888428A000C4C90 /* UserModels.swift */; };
 		9C327E50289A7F31003787C0 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C327E4F289A7F31003787C0 /* Fonts.swift */; };
 		9C327E52289A9D8C003787C0 /* SourceSansPro-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9C327E51289A9D49003787C0 /* SourceSansPro-SemiBold.ttf */; };
+		9C327E54289AB5E3003787C0 /* SourceSansPro-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9C327E53289AB5C4003787C0 /* SourceSansPro-Black.ttf */; };
 		9C42E0BE28819B1300B2B9FF /* CategorySlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C42E0BD28819B1300B2B9FF /* CategorySlider.swift */; };
 		9C42E0C028819E0200B2B9FF /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C42E0BF28819E0200B2B9FF /* CategoryCell.swift */; };
 		9C42E0C22881A81D00B2B9FF /* SourceSansPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9C42E0C12881A74700B2B9FF /* SourceSansPro-Bold.ttf */; };
@@ -131,6 +132,7 @@
 		9C25C8B12888428A000C4C90 /* UserModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModels.swift; sourceTree = "<group>"; };
 		9C327E4F289A7F31003787C0 /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		9C327E51289A9D49003787C0 /* SourceSansPro-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-SemiBold.ttf"; sourceTree = "<group>"; };
+		9C327E53289AB5C4003787C0 /* SourceSansPro-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Black.ttf"; sourceTree = "<group>"; };
 		9C42E0BD28819B1300B2B9FF /* CategorySlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySlider.swift; sourceTree = "<group>"; };
 		9C42E0BF28819E0200B2B9FF /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		9C42E0C12881A74700B2B9FF /* SourceSansPro-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SourceSansPro-Bold.ttf"; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 				9C1953A62876FB430051CEC6 /* SourceSansPro-Regular.ttf */,
 				9C42E0C12881A74700B2B9FF /* SourceSansPro-Bold.ttf */,
 				9C327E51289A9D49003787C0 /* SourceSansPro-SemiBold.ttf */,
+				9C327E53289AB5C4003787C0 /* SourceSansPro-Black.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -518,6 +521,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C327E54289AB5E3003787C0 /* SourceSansPro-Black.ttf in Resources */,
 				9C327E52289A9D8C003787C0 /* SourceSansPro-SemiBold.ttf in Resources */,
 				9C42E0C22881A81D00B2B9FF /* SourceSansPro-Bold.ttf in Resources */,
 				9C1953A72876FB6A0051CEC6 /* SourceSansPro-Regular.ttf in Resources */,

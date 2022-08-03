@@ -63,7 +63,7 @@ extension QuizCell: ConstructViewsProtocol {
         title.font = .heading3
 
         desc.textColor = .white
-        desc.font = .subtitle2
+        desc.font = .subtitle3
         desc.numberOfLines = 0
     }
 

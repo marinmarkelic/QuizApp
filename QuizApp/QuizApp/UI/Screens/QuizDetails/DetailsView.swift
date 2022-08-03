@@ -112,7 +112,7 @@ extension DetailsView: ConstructViewsProtocol {
         imageView.contentMode = .scaleAspectFit
 
         startButton.setTitle("Start Quiz", for: .normal)
-        startButton.titleLabel?.font = .subtitle1
+        startButton.titleLabel?.font = .subtitle2
         startButton.backgroundColor = .white
         startButton.setTitleColor(UIColor(red: 99 / 255, green: 41 / 255, blue: 222 / 255, alpha: 1.0), for: .normal)
         startButton.layer.cornerRadius = 20

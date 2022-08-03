@@ -44,14 +44,14 @@ extension LeaderboardCell: ConstructViewsProtocol {
     func styleViews() {
         backgroundColor = .clear
 
-        rankLabel.font = .heading4
+        rankLabel.font = .leaderboardIndex
         rankLabel.textAlignment = .center
         rankLabel.textColor = .white
 
-        nameLabel.font = .heading4
+        nameLabel.font = .subtitle1
         nameLabel.textColor = .white
 
-        scoreLabel.font = .heading4
+        scoreLabel.font = .leaderboardScore
         scoreLabel.textColor = .white
     }
 

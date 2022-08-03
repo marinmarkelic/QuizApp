@@ -34,7 +34,7 @@ extension TabBarController: ConstructViewsProtocol {
         let tabBarItemAppearance = UITabBarItemAppearance()
 
         tabBarItemAppearance.normal.titleTextAttributes = [NSAttributedString.Key.font: UIFont.body2]
-        tabBarItemAppearance.selected.titleTextAttributes = [NSAttributedString.Key.font: UIFont.subtitle3]
+        tabBarItemAppearance.selected.titleTextAttributes = [NSAttributedString.Key.font: UIFont.subtitle4]
 
         tabBarAppearance.stackedLayoutAppearance = tabBarItemAppearance
         tabBar.standardAppearance = tabBarAppearance
