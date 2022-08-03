@@ -135,7 +135,7 @@ extension LoginViewController: ConstructViewsProtocol {
     func styleViews() {
         label.text = "PopQuiz"
         label.textColor = .white
-        label.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 32), size: 32)
+        label.font = .heading1
 
         stackView.axis = .vertical
         stackView.alignment = .fill

@@ -60,10 +60,10 @@ extension QuizCell: ConstructViewsProtocol {
         imageView.contentMode = .scaleToFill
 
         title.textColor = .white
-        title.font = UIFont(name: "SourceSansPro-Bold", size: 24)
+        title.font = .heading3
 
         desc.textColor = .white
-        desc.font = UIFont(name: "SourceSansPro-Bold", size: 14)
+        desc.font = .subtitle3
         desc.numberOfLines = 0
     }
 

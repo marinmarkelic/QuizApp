@@ -93,7 +93,7 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
         let titleView = UILabel()
         titleView.text = "PopQuiz"
         titleView.textColor = .white
-        titleView.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 24), size: 24)
+        titleView.font = .heading3
         navigationItem.titleView = titleView
 
         let image = UIImage(systemName: "chevron.left")?.withTintColor(.white)
@@ -107,7 +107,7 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
         detailsView.delegate = self
 
         leaderboardButton.setTitle("Leaderboard", for: .normal)
-        leaderboardButton.titleLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 18)
+        leaderboardButton.titleLabel?.font = .heading5
         leaderboardButton.addTarget(self, action: #selector(pressedLeaderboard), for: .touchUpInside)
     }
 

@@ -100,11 +100,11 @@ extension DetailsView: ConstructViewsProtocol {
         layer.cornerRadius = 10
         clipsToBounds = true
 
-        title.font = UIFont(name: "SourceSansPro-Bold", size: 32)
+        title.font = .heading1
         title.textAlignment = .center
         title.textColor = .white
 
-        desc.font = UIFont(name: "SourceSansPro-Bold", size: 20)
+        desc.font = .heading4
         desc.textAlignment = .center
         desc.numberOfLines = 0
         desc.textColor = .white
@@ -112,7 +112,7 @@ extension DetailsView: ConstructViewsProtocol {
         imageView.contentMode = .scaleAspectFit
 
         startButton.setTitle("Start Quiz", for: .normal)
-        startButton.titleLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 16)
+        startButton.titleLabel?.font = .subtitle2
         startButton.backgroundColor = .white
         startButton.setTitleColor(UIColor(red: 99 / 255, green: 41 / 255, blue: 222 / 255, alpha: 1.0), for: .normal)
         startButton.layer.cornerRadius = 20
