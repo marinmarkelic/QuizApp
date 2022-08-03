@@ -43,11 +43,11 @@ extension ErrorView: ConstructViewsProtocol {
         imageView.tintColor = .white
 
         title.text = "Error"
-        title.font = UIFont(name: "SourceSansPro-Bold", size: 28)
+        title.font = .heading2
         title.textColor = .white
         title.textAlignment = .center
 
-        desc.font = UIFont(name: "SourceSansPro-Regular", size: 16)
+        desc.font = .body1
         desc.textColor = .white
         desc.numberOfLines = 0
         desc.textAlignment = .center

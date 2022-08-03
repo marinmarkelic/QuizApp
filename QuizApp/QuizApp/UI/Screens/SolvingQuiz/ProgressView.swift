@@ -47,7 +47,7 @@ extension ProgressView: ConstructViewsProtocol {
 
     func styleViews() {
         label.textColor = .white
-        label.font = UIFont(name: "SourceSansPro-Bold", size: 18)
+        label.font = .heading5
         label.text = "0/0"
 
         stackView.alignment = .fill

@@ -59,7 +59,7 @@ extension QuestionCell: ConstructViewsProtocol {
     func styleViews() {
         scrollView.showsVerticalScrollIndicator = false
 
-        label.font = UIFont(name: "SourceSansPro-Bold", size: 24)
+        label.font = .heading3
         label.textColor = .white
         label.numberOfLines = 0
 

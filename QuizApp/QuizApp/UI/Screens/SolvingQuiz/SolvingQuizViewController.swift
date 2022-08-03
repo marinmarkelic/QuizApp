@@ -127,7 +127,7 @@ extension SolvingQuizViewController: ConstructViewsProtocol {
         let titleView = UILabel()
         titleView.text = "PopQuiz"
         titleView.textColor = .white
-        titleView.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 24), size: 24)
+        titleView.font = .heading3
         navigationItem.titleView = titleView
 
         let image = UIImage(systemName: "chevron.left")?.withTintColor(.white)

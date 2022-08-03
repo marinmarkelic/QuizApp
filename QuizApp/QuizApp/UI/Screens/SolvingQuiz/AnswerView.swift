@@ -40,7 +40,7 @@ extension AnswerView: ConstructViewsProtocol {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(selectedAnswer))
         addGestureRecognizer(gesture)
 
-        label.font = UIFont(name: "SourceSansPro-Bold", size: 20)
+        label.font = .heading4
         label.textColor = .white
         label.numberOfLines = 0
     }

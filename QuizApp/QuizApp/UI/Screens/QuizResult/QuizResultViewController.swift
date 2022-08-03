@@ -64,12 +64,12 @@ extension QuizResultViewController: ConstructViewsProtocol {
     func styleViews() {
         navigationItem.leftBarButtonItem = UIBarButtonItem()
 
-        label.font = UIFont(name: "SourceSansPro-Bold", size: 88)
+        label.font = .result
         label.textColor = .white
         label.textAlignment = .center
 
         button.setTitle("Finish Quiz", for: .normal)
-        button.titleLabel?.font = UIFont(name: "SourceSansPro-Bold", size: 16)
+        button.titleLabel?.font = .heading6
         button.setTitleColor(UIColor(red: 99 / 255, green: 41 / 255, blue: 222 / 255, alpha: 1.0), for: .normal)
         button.backgroundColor = .white
         button.layer.cornerRadius = 20

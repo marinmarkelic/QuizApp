@@ -129,14 +129,14 @@ extension QuizViewController: ConstructViewsProtocol {
         let titleView = UILabel()
         titleView.text = "PopQuiz"
         titleView.textColor = .white
-        titleView.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 24), size: 24)
+        titleView.font = .heading3
         tabBarController?.navigationItem.titleView = titleView
 
         categorySlider.delegate = self
         quizView.delegate = self
 
         noQuizErrorLabel.text = "There are no quizzes for this category"
-        noQuizErrorLabel.font = UIFont(name: "SourceSansPro-Bold", size: 20)
+        noQuizErrorLabel.font = .heading4
         noQuizErrorLabel.textColor = .white
         noQuizErrorLabel.numberOfLines = 0
         noQuizErrorLabel.textAlignment = .center

@@ -33,7 +33,7 @@ extension QuizHeader: ConstructViewsProtocol {
     }
 
     func styleViews() {
-        label.font = UIFont(name: "SourceSansPro-Bold", size: 20)
+        label.font = .heading4
     }
 
     func defineLayoutForViews() {

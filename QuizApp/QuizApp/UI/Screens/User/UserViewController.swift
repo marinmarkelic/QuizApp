@@ -122,22 +122,22 @@ extension UserViewController: ConstructViewsProtocol {
         let titleView = UILabel()
         titleView.text = "PopQuiz"
         titleView.textColor = .white
-        titleView.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 24), size: 24)
+        titleView.font = .heading3
         navigationItem.titleView = titleView
 
         usernameLabel.text = "USERNAME"
-        usernameLabel.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 12), size: 12)
+        usernameLabel.font = .body2
         usernameLabel.textColor = .white
 
-        usernameText.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 20), size: 20)
+        usernameText.font = .heading4
         usernameText.textColor = .white
 
         nameLabel.text = "NAME"
-        nameLabel.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 12), size: 12)
+        nameLabel.font = .body2
         nameLabel.textColor = .white
 
         nameTextField.attributedPlaceholder = NSAttributedString("Name")
-        nameTextField.font = UIFont(descriptor: UIFontDescriptor(name: "SourceSansPro-Regular", size: 20), size: 20)
+        nameTextField.font = .heading4
         nameTextField.textColor = .white
         nameTextField.autocorrectionType = .no
         nameTextField.addTarget(self, action: #selector(textFieldEndedEditing), for: .editingDidEnd)
