@@ -126,14 +126,14 @@ extension UserViewController: ConstructViewsProtocol {
         navigationItem.titleView = titleView
 
         usernameLabel.text = "USERNAME"
-        usernameLabel.font = .body2
+        usernameLabel.font = .subtitle3
         usernameLabel.textColor = .white
 
         usernameText.font = .heading4
         usernameText.textColor = .white
 
         nameLabel.text = "NAME"
-        nameLabel.font = .body2
+        nameLabel.font = .subtitle3
         nameLabel.textColor = .white
 
         nameTextField.attributedPlaceholder = NSAttributedString("Name")

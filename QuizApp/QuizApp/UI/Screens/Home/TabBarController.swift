@@ -29,6 +29,15 @@ extension TabBarController: ConstructViewsProtocol {
     func styleViews() {
         tabBar.backgroundColor = .white
         tabBar.tintColor = .black
+
+        let tabBarAppearance = UITabBarAppearance()
+        let tabBarItemAppearance = UITabBarItemAppearance()
+
+        tabBarItemAppearance.normal.titleTextAttributes = [NSAttributedString.Key.font: UIFont.body2]
+        tabBarItemAppearance.selected.titleTextAttributes = [NSAttributedString.Key.font: UIFont.subtitle3]
+
+        tabBarAppearance.stackedLayoutAppearance = tabBarItemAppearance
+        tabBar.standardAppearance = tabBarAppearance
     }
 
     func defineLayoutForViews() {}
