@@ -36,6 +36,15 @@ class QuizDetailsViewController: UIViewController {
         detailsView.remakeLayout()
     }
 
+    private func bindModels() {
+        leaderboardButton
+            .tap
+            .sink { [weak self] _ in
+                self?.viewModel.showLeaderboard()
+            }
+            .store(in: &cancellables)
+    }
+
     private func bindViewModel() {
         viewModel
             .$quiz
@@ -108,12 +117,6 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
 
         leaderboardButton.setTitle("Leaderboard", for: .normal)
         leaderboardButton.titleLabel?.font = .heading5
-        leaderboardButton.addTarget(self, action: #selector(pressedLeaderboard), for: .touchUpInside)
-    }
-
-    @objc
-    private func pressedLeaderboard() {
-        viewModel.showLeaderboard()
     }
 
     @objc

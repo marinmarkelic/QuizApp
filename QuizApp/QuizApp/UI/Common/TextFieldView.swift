@@ -1,3 +1,4 @@
+import Combine
 import UIKit
 import SnapKit
 
@@ -7,12 +8,15 @@ class TextFieldView: UIView {
 
     private var textField: UITextField!
 
+    private var cancellables = Set<AnyCancellable>()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
 
         createViews()
         styleViews()
         defineLayoutForViews()
+        bindViews()
     }
 
     required init?(coder: NSCoder) {
@@ -27,6 +31,17 @@ class TextFieldView: UIView {
 
     func setSecure(_ bool: Bool) {
         textField.isSecureTextEntry = bool
+    }
+
+    private func bindViews() {
+        visibilityButton
+            .tap
+            .sink { [weak self] _ in
+                guard let self = self else { return }
+
+                self.textField.isSecureTextEntry = !self.textField.isSecureTextEntry
+            }
+            .store(in: &cancellables)
     }
 
 }
@@ -51,12 +66,11 @@ extension TextFieldView: ConstructViewsProtocol {
         textField.autocapitalizationType = .none
         textField.textColor = .white
         textField.delegate = self
-        textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged) //change
 
         visibilityButton.tintColor = .white
         visibilityButton.setBackgroundImage(UIImage(systemName: "eye.fill"), for: .normal)
         visibilityButton.isHidden = true
-        visibilityButton.addTarget(self, action: #selector(visibilityButtonTap), for: .touchUpInside)
     }
 
     func defineLayoutForViews() {
@@ -73,11 +87,6 @@ extension TextFieldView: ConstructViewsProtocol {
             $0.width.equalTo(20)
             $0.height.equalTo(18)
         }
-    }
-
-    @objc
-    private func visibilityButtonTap() {
-        textField.isSecureTextEntry = !textField.isSecureTextEntry
     }
 
     func toggleVisibilityButton(isVisible: Bool) {
