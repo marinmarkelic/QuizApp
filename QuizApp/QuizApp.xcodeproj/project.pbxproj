@@ -415,11 +415,11 @@
 			isa = PBXGroup;
 			children = (
 				9C5F21932886AFF5000C3511 /* Colors.swift */,
+				9C327E4F289A7F31003787C0 /* Fonts.swift */,
 				9C1953AA287725590051CEC6 /* TextFieldView.swift */,
 				9C19539B2876F1ED0051CEC6 /* GradientView.swift */,
 				9C20BAD5287F01AC009378FB /* CustomButton.swift */,
 				9C4807E3288A996C002D097D /* ErrorView.swift */,
-				9C327E4F289A7F31003787C0 /* Fonts.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
