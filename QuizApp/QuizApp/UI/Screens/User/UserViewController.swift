@@ -38,7 +38,7 @@ class UserViewController: UIViewController {
         createViews()
         styleViews()
         defineLayoutForViews()
-        addActions()
+        bindViews()
         bindViewModel()
     }
 
@@ -48,24 +48,29 @@ class UserViewController: UIViewController {
         viewModel.getUserInfo()
     }
 
-    @objc
-    private func pressedLogoutButton() {
-        viewModel.logOut()
-    }
+    private func bindViews() {
+        view
+            .tap
+            .sink { [weak self] _ in
+                self?.nameTextField.endEditing(true)
+            }
+            .store(in: &cancellables)
 
-    private func addActions() {
-        let tapGestureBackground = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped(_:)))
-        view.addGestureRecognizer(tapGestureBackground)
-    }
+        button
+            .tap
+            .sink { [weak self] _ in
+                self?.viewModel.logOut()
+            }
+            .store(in: &cancellables)
 
-    @objc
-    private func backgroundTapped(_ sender: UITapGestureRecognizer) {
-        nameTextField.endEditing(true)
-    }
+        nameTextField
+            .textDidEndEditing
+            .sink { [weak self] _ in
+                guard let self = self else { return }
 
-    @objc
-    private func textFieldEndedEditing() {
-        viewModel.save(username: usernameText.text ?? "", name: nameTextField.text ?? "")
+                self.viewModel.save(username: self.usernameText.text ?? "", name: self.nameTextField.text ?? "")
+            }
+            .store(in: &cancellables)
     }
 
     private func styleTabBarItem() {
@@ -140,12 +145,10 @@ extension UserViewController: ConstructViewsProtocol {
         nameTextField.font = .heading4
         nameTextField.textColor = .white
         nameTextField.autocorrectionType = .no
-        nameTextField.addTarget(self, action: #selector(textFieldEndedEditing), for: .editingDidEnd)
 
         button.setTitle("Log out", for: .normal)
         button.setTitleColor(.red, for: .normal)
         button.backgroundColor = .white
-        button.addTarget(self, action: #selector(pressedLogoutButton), for: .touchUpInside)
     }
 
     func defineLayoutForViews() {
