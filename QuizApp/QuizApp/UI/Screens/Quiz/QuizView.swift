@@ -1,13 +1,17 @@
+import Combine
 import UIKit
 
 class QuizView: UIView {
 
-    weak var delegate: QuizViewDelegate?
-
+    private let quizSubject = PassthroughSubject<Quiz, Never>()
     private var quizzes: [Quiz] = []
 
     private var collectionView: UICollectionView!
     private var collectionViewLayout: UICollectionViewFlowLayout!
+
+    var selectedQuiz: AnyPublisher<Quiz, Never> {
+        quizSubject.eraseToAnyPublisher()
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -36,12 +40,6 @@ class QuizView: UIView {
 
         collectionView.reloadData()
     }
-
-}
-
-protocol QuizViewDelegate: AnyObject {
-
-    func selected(quiz: Quiz)
 
 }
 
@@ -84,10 +82,8 @@ extension QuizView: ConstructViewsProtocol {
 extension QuizView: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let delegate = delegate else { return }
-
         let quiz: Quiz = quizzes[determineQuizIndex(collectionView, indexPath: indexPath)]
-        delegate.selected(quiz: quiz)
+        quizSubject.send(quiz)
     }
 
     private func determineQuizIndex(_ collectionView: UICollectionView, indexPath: IndexPath) -> Int {

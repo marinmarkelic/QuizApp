@@ -37,6 +37,7 @@ class QuizViewController: UIViewController {
         styleViews()
         defineLayoutForViews()
         bindViewModel()
+        bindViews()
 
         viewModel.loadCategories()
     }
@@ -90,12 +91,13 @@ class QuizViewController: UIViewController {
             .store(in: &cancellables)
     }
 
-}
-
-extension QuizViewController: QuizViewDelegate {
-
-    func selected(quiz: Quiz) {
-        viewModel.showQuizDetails(with: quiz)
+    private func bindViews() {
+        quizView
+            .selectedQuiz
+            .sink { [weak self] quiz in
+                self?.viewModel.showQuizDetails(with: quiz)
+            }
+            .store(in: &cancellables)
     }
 
 }
@@ -133,7 +135,6 @@ extension QuizViewController: ConstructViewsProtocol {
         tabBarController?.navigationItem.titleView = titleView
 
         categorySlider.delegate = self
-        quizView.delegate = self
 
         noQuizErrorLabel.text = "There are no quizzes for this category"
         noQuizErrorLabel.font = .heading4
