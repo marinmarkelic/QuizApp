@@ -2,13 +2,13 @@ import UIKit
 
 extension UIColor {
 
-    static let correctAnswerColor = UIColor(named: "CorrectAnswerColor") ?? .white
-    static let incorrectAnswerColor = UIColor(named: "IncorrectAnswerColor") ?? .white
+    static let correctAnswerColor = UIColor(named: "CorrectAnswerColor")!
+    static let incorrectAnswerColor = UIColor(named: "IncorrectAnswerColor")!
 
-    static let sportColor = UIColor(named: "SportColor") ?? .white
-    static let moviesColor = UIColor(named: "MoviesColor") ?? .white
-    static let musicColor = UIColor(named: "MusicColor") ?? .white
-    static let geographyColor = UIColor(named: "GeographyColor") ?? .white
-    static let allColor = UIColor(named: "AllColor") ?? .white
+    static let sportColor = UIColor(named: "SportColor")!
+    static let moviesColor = UIColor(named: "MoviesColor")!
+    static let musicColor = UIColor(named: "MusicColor")!
+    static let geographyColor = UIColor(named: "GeographyColor")!
+    static let allColor = UIColor(named: "AllColor")!
 
 }
