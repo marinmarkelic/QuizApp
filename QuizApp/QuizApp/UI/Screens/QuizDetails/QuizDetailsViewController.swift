@@ -30,6 +30,12 @@ class QuizDetailsViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        remakeLayout()
+        detailsView.remakeLayout()
+    }
+
     private func bindViewModel() {
         viewModel
             .$quiz
@@ -37,6 +43,32 @@ class QuizDetailsViewController: UIViewController {
                 self?.detailsView.set(quiz: quiz)
             }
             .store(in: &cancellables)
+    }
+
+    private func remakeLayout() {
+        if UIDevice.current.orientation.isLandscape {
+            leaderboardButton.snp.remakeConstraints {
+                $0.top.greaterThanOrEqualToSuperview().offset(5)
+                $0.bottom.equalTo(detailsView.snp.top).offset(-15)
+                $0.trailing.equalToSuperview().inset(20)
+            }
+
+            detailsView.snp.remakeConstraints {
+                $0.leading.trailing.equalToSuperview().inset(20)
+                $0.center.equalToSuperview()
+            }
+        } else {
+            leaderboardButton.snp.remakeConstraints {
+                $0.top.greaterThanOrEqualToSuperview().offset(5)
+                $0.bottom.equalTo(detailsView.snp.top).offset(-5)
+                $0.trailing.equalToSuperview().inset(20)
+            }
+
+            detailsView.snp.remakeConstraints {
+                $0.leading.trailing.equalToSuperview().inset(20)
+                $0.center.equalToSuperview()
+            }
+        }
     }
 
 }
@@ -95,18 +127,10 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
         }
 
         mainView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.edges.equalTo(view.safeAreaLayoutGuide)
         }
 
-        leaderboardButton.snp.makeConstraints {
-            $0.bottom.equalTo(detailsView.snp.top)
-            $0.trailing.equalToSuperview().inset(20)
-        }
-
-        detailsView.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(20)
-            $0.center.equalToSuperview()
-        }
+        remakeLayout()
     }
 
 }

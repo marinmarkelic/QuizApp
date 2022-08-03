@@ -27,6 +27,56 @@ class DetailsView: UIView {
         imageView.sd_setImage(with: URL(string: quiz.imageUrl))
     }
 
+    func remakeLayout() {
+        if UIDevice.current.orientation.isLandscape {
+            title.snp.remakeConstraints {
+                $0.height.equalTo(50)
+                $0.top.equalToSuperview().inset(10)
+                $0.leading.equalToSuperview().inset(20)
+                $0.trailing.equalTo(snp.centerX).offset(-10)
+            }
+
+            desc.snp.remakeConstraints {
+                $0.top.equalTo(title.snp.bottom).offset(5)
+                $0.leading.trailing.equalTo(title)
+            }
+
+            imageView.snp.remakeConstraints {
+                $0.top.equalTo(title)
+                $0.leading.equalTo(snp.centerX).offset(10)
+                $0.trailing.equalToSuperview().inset(20)
+                $0.height.lessThanOrEqualTo(150)
+            }
+
+            startButton.snp.remakeConstraints {
+                $0.top.equalTo(imageView.snp.bottom).offset(5)
+                $0.leading.trailing.bottom.equalToSuperview().inset(20)
+                $0.height.equalTo(45)
+            }
+        } else {
+            title.snp.remakeConstraints {
+                $0.leading.top.trailing.equalToSuperview().inset(20)
+            }
+
+            desc.snp.remakeConstraints {
+                $0.top.equalTo(title.snp.bottom).offset(20)
+                $0.leading.trailing.equalToSuperview().inset(20)
+            }
+
+            imageView.snp.remakeConstraints {
+                $0.top.equalTo(desc.snp.bottom).offset(20)
+                $0.centerX.equalToSuperview()
+                $0.width.height.lessThanOrEqualTo(150)
+            }
+
+            startButton.snp.remakeConstraints {
+                $0.top.equalTo(imageView.snp.bottom).offset(20)
+                $0.leading.trailing.bottom.equalToSuperview().inset(20)
+                $0.height.equalTo(45)
+            }
+        }
+    }
+
 }
 
 extension DetailsView: ConstructViewsProtocol {
@@ -76,26 +126,7 @@ extension DetailsView: ConstructViewsProtocol {
     }
 
     func defineLayoutForViews() {
-        title.snp.makeConstraints {
-            $0.leading.top.trailing.equalToSuperview().inset(20)
-        }
-
-        desc.snp.makeConstraints {
-            $0.top.equalTo(title.snp.bottom).offset(20)
-            $0.leading.trailing.equalToSuperview().inset(20)
-        }
-
-        imageView.snp.makeConstraints {
-            $0.top.equalTo(desc.snp.bottom).offset(20)
-            $0.leading.trailing.equalToSuperview().inset(20)
-            $0.height.equalTo(150)
-        }
-
-        startButton.snp.makeConstraints {
-            $0.top.equalTo(imageView.snp.bottom).offset(20)
-            $0.leading.trailing.bottom.equalToSuperview().inset(20)
-            $0.height.equalTo(45)
-        }
+        remakeLayout()
     }
 
 }
