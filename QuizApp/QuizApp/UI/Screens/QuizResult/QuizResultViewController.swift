@@ -64,7 +64,7 @@ extension QuizResultViewController: ConstructViewsProtocol {
     func styleViews() {
         navigationItem.leftBarButtonItem = UIBarButtonItem()
 
-        label.font = .result
+        label.font = .score
         label.textColor = .white
         label.textAlignment = .center
 

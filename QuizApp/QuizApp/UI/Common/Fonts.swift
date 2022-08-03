@@ -17,9 +17,6 @@ extension UIFont {
     static let body1 = UIFont(name: "SourceSansPro-Regular", size: 16)!
     static let body2 = UIFont(name: "SourceSansPro-Regular", size: 12)!
 
-    static let result = UIFont(name: "SourceSansPro-Bold", size: 88)!
-
-    static let leaderboardIndex = UIFont(name: "SourceSansPro-Black", size: 20)!
-    static let leaderboardScore = UIFont(name: "SourceSansPro-Bold", size: 26)!
+    static let score = UIFont(name: "SourceSansPro-Bold", size: 88)!
 
 }
