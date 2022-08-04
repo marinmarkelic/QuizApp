@@ -31,13 +31,6 @@ class SearchViewController: UIViewController {
     }
 
     private func bindViews() {
-//        view
-//            .tap
-//            .sink { [weak self] _ in
-//                self?.searchBar.endEditing()
-//            }
-//            .store(in: &cancellables)
-
         searchBar
             .searchText
             .sink { [weak self] text in
@@ -89,7 +82,6 @@ class SearchViewController: UIViewController {
                 self.noQuizzesErrorLabel.text = message
             }
             .store(in: &cancellables)
-
     }
 
     required init?(coder: NSCoder) {
