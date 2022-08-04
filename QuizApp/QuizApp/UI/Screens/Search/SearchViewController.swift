@@ -2,13 +2,17 @@ import UIKit
 
 class SearchViewController: UIViewController {
 
+    private let viewModel: SearchViewModel
+
     private var gradientView: GradientView!
     private var mainView: UIView!
 
     private var searchBar: SearchBar!
     private var quizView: QuizView!
 
-    init() {
+    init(viewModel: SearchViewModel) {
+        self.viewModel = viewModel
+
         super.init(nibName: nil, bundle: nil)
 
         createViews()

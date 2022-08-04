@@ -178,6 +178,10 @@ class AppDependencies {
                     useCase: container.resolve())
             }
             .scope(.unique)
+
+        container
+            .register { SearchViewModel(useCase: container.resolve()) }
+            .scope(.unique)
     }
 
     private func registerViewControllers(in container: Resolver) {
@@ -222,7 +226,7 @@ class AppDependencies {
             .scope(.unique)
 
         container
-            .register { SearchViewController() }
+            .register { SearchViewController(viewModel: container.resolve()) }
             .scope(.unique)
     }
 

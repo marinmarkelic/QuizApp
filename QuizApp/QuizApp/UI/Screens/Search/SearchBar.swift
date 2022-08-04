@@ -32,7 +32,7 @@ extension SearchBar: ConstructViewsProtocol {
     func styleViews() {
         textField.setPlaceholder(with: "Type here")
 
-        button.setTitle("Search", for: .normal)
+        button.setTitle("Search", for: .normal) // Style
     }
 
     func defineLayoutForViews() {
