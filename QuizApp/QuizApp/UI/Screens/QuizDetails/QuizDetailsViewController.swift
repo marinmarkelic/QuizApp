@@ -3,6 +3,8 @@ import UIKit
 
 class QuizDetailsViewController: UIViewController {
 
+    private let backSubject = PassthroughSubject<Void, Never>()
+
     private var viewModel: QuizDetailsViewModel!
 
     private var gradientView: GradientView!
@@ -14,6 +16,10 @@ class QuizDetailsViewController: UIViewController {
     private var detailsView: DetailsView!
 
     private var cancellables = Set<AnyCancellable>()
+
+    var onBackPress: AnyPublisher<Void, Never> {
+        backSubject.eraseToAnyPublisher()
+    }
 
     init(viewModel: QuizDetailsViewModel) {
         super.init(nibName: nil, bundle: nil)
@@ -46,9 +52,17 @@ class QuizDetailsViewController: UIViewController {
             .store(in: &cancellables)
 
         detailsView
-            .onStart
+            .onStartPress
             .sink { [weak self] _ in
                 self?.viewModel.startQuiz()
+            }
+            .store(in: &cancellables)
+
+        navigationItem
+            .leftBarButtonItem?
+            .tap
+            .sink { [weak self] _ in
+                self?.viewModel.goBack()
             }
             .store(in: &cancellables)
     }
@@ -118,16 +132,11 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
             image: image,
             style: .done,
             target: self,
-            action: #selector(pressedBack))
+            action: nil)
         navigationItem.leftBarButtonItem?.tintColor = .white
 
         leaderboardButton.setTitle("Leaderboard", for: .normal)
         leaderboardButton.titleLabel?.font = .heading5
-    }
-
-    @objc
-    private func pressedBack() {
-        viewModel.goBack()
     }
 
     func defineLayoutForViews() {

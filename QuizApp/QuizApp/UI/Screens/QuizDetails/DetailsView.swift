@@ -3,15 +3,17 @@ import UIKit
 
 class DetailsView: UIView {
 
+    private let startSubject = PassthroughSubject<Void, Never>()
+
     private var title: UILabel!
     private var desc: UILabel!
     private var imageView: UIImageView!
     private var startButton: UIButton!
 
-    var onStart: AnyPublisher<GestureType, Never> {
-        startButton
-            .tap
-            .eraseToAnyPublisher()
+    private var cancellables = Set<AnyCancellable>()
+
+    var onStartPress: AnyPublisher<Void, Never> {
+        startSubject.eraseToAnyPublisher()
     }
 
     override init(frame: CGRect) {
@@ -20,10 +22,20 @@ class DetailsView: UIView {
         createViews()
         styleViews()
         defineLayoutForViews()
+        bindViews()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    private func bindViews() {
+        startButton
+            .tap
+            .sink { [weak self] _ in
+                self?.startSubject.send()
+            }
+            .store(in: &cancellables)
     }
 
     func set(quiz: Quiz) {

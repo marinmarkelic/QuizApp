@@ -3,6 +3,7 @@ import UIKit
 
 class SolvingQuizViewController: UIViewController {
 
+    private let backSubject = PassthroughSubject<Void, Never>()
     private let viewModel: SolvingQuizViewModel
 
     private var isPortrait: Bool!
@@ -16,6 +17,10 @@ class SolvingQuizViewController: UIViewController {
     private var questionsView: QuestionsView!
 
     private var cancellables = Set<AnyCancellable>()
+
+    var onBackPress: AnyPublisher<Void, Never> {
+        backSubject.eraseToAnyPublisher()
+    }
 
     init(viewModel: SolvingQuizViewModel) {
         self.viewModel = viewModel
@@ -56,6 +61,14 @@ class SolvingQuizViewController: UIViewController {
             .selectedId
             .sink { [weak self] id in
                 self?.viewModel.selectedAnswer(with: id)
+            }
+            .store(in: &cancellables)
+
+        navigationItem
+            .leftBarButtonItem?
+            .tap
+            .sink { [weak self] _ in
+                self?.viewModel.goBack()
             }
             .store(in: &cancellables)
     }
@@ -145,13 +158,8 @@ extension SolvingQuizViewController: ConstructViewsProtocol {
             image: image,
             style: .done,
             target: self,
-            action: #selector(pressedBack))
+            action: nil)
         navigationItem.leftBarButtonItem?.tintColor = .white
-    }
-
-    @objc
-    private func pressedBack() {
-        viewModel.goBack()
     }
 
     func defineLayoutForViews() {
