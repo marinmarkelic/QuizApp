@@ -64,6 +64,20 @@ class LoginViewController: UIViewController {
                 self?.viewModel.pressedLoginButton()
             }
             .store(in: &cancellables)
+
+        emailView
+            .text
+            .sink { [weak self] text in
+                self?.viewModel.updatedEmail(with: text)
+            }
+            .store(in: &cancellables)
+
+        passwordView
+            .text
+            .sink { [weak self] text in
+                self?.viewModel.updatedPassword(with: text)
+            }
+            .store(in: &cancellables)
     }
 
     private func bindViewModel() {
@@ -79,20 +93,6 @@ class LoginViewController: UIViewController {
             .removeDuplicates()
             .sink { [weak self] errorText in
                 self?.showErrorText(with: errorText)
-            }
-            .store(in: &cancellables)
-
-        emailView
-            .text
-            .sink { [weak self] text in
-                self?.viewModel.updatedEmail(with: text)
-            }
-            .store(in: &cancellables)
-
-        passwordView
-            .text
-            .sink { [weak self] text in
-                self?.viewModel.updatedPassword(with: text)
             }
             .store(in: &cancellables)
     }

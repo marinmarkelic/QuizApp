@@ -3,7 +3,6 @@ import UIKit
 
 class LeaderboardViewController: UIViewController {
 
-    private let closeSubject = PassthroughSubject<Void, Never>()
     private let viewModel: LeaderboardViewModel
 
     private var leaderboard: Leaderboard = .empty
@@ -20,10 +19,6 @@ class LeaderboardViewController: UIViewController {
     private var tableView: UITableView!
 
     private var cancellables = Set<AnyCancellable>()
-
-    var onClosePress: AnyPublisher<Void, Never> {
-        closeSubject.eraseToAnyPublisher()
-    }
 
     init(viewModel: LeaderboardViewModel) {
         self.viewModel = viewModel

@@ -3,8 +3,6 @@ import UIKit
 
 class QuizDetailsViewController: UIViewController {
 
-    private let backSubject = PassthroughSubject<Void, Never>()
-
     private var viewModel: QuizDetailsViewModel!
 
     private var gradientView: GradientView!
@@ -16,10 +14,6 @@ class QuizDetailsViewController: UIViewController {
     private var detailsView: DetailsView!
 
     private var cancellables = Set<AnyCancellable>()
-
-    var onBackPress: AnyPublisher<Void, Never> {
-        backSubject.eraseToAnyPublisher()
-    }
 
     init(viewModel: QuizDetailsViewModel) {
         super.init(nibName: nil, bundle: nil)

@@ -3,7 +3,6 @@ import UIKit
 
 class SolvingQuizViewController: UIViewController {
 
-    private let backSubject = PassthroughSubject<Void, Never>()
     private let viewModel: SolvingQuizViewModel
 
     private var isPortrait: Bool!
@@ -17,10 +16,6 @@ class SolvingQuizViewController: UIViewController {
     private var questionsView: QuestionsView!
 
     private var cancellables = Set<AnyCancellable>()
-
-    var onBackPress: AnyPublisher<Void, Never> {
-        backSubject.eraseToAnyPublisher()
-    }
 
     init(viewModel: SolvingQuizViewModel) {
         self.viewModel = viewModel
