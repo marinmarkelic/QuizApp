@@ -23,6 +23,7 @@ class QuizDetailsViewController: UIViewController {
         createViews()
         styleViews()
         defineLayoutForViews()
+        bindModels()
         bindViewModel()
     }
 
@@ -34,6 +35,30 @@ class QuizDetailsViewController: UIViewController {
         super.viewWillLayoutSubviews()
         remakeLayout()
         detailsView.remakeLayout()
+    }
+
+    private func bindModels() {
+        leaderboardButton
+            .tap
+            .sink { [weak self] _ in
+                self?.viewModel.showLeaderboard()
+            }
+            .store(in: &cancellables)
+
+        detailsView
+            .onStartPress
+            .sink { [weak self] _ in
+                self?.viewModel.startQuiz()
+            }
+            .store(in: &cancellables)
+
+        navigationItem
+            .leftBarButtonItem?
+            .tap
+            .sink { [weak self] _ in
+                self?.viewModel.goBack()
+            }
+            .store(in: &cancellables)
     }
 
     private func bindViewModel() {
@@ -101,24 +126,11 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
             image: image,
             style: .done,
             target: self,
-            action: #selector(pressedBack))
+            action: nil)
         navigationItem.leftBarButtonItem?.tintColor = .white
-
-        detailsView.delegate = self
 
         leaderboardButton.setTitle("Leaderboard", for: .normal)
         leaderboardButton.titleLabel?.font = .heading5
-        leaderboardButton.addTarget(self, action: #selector(pressedLeaderboard), for: .touchUpInside)
-    }
-
-    @objc
-    private func pressedLeaderboard() {
-        viewModel.showLeaderboard()
-    }
-
-    @objc
-    private func pressedBack() {
-        viewModel.goBack()
     }
 
     func defineLayoutForViews() {
@@ -131,14 +143,6 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
         }
 
         remakeLayout()
-    }
-
-}
-
-extension QuizDetailsViewController: DetailsViewDelegate {
-
-    func startQuiz() {
-        viewModel.startQuiz()
     }
 
 }

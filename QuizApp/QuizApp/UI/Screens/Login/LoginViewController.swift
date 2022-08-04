@@ -33,7 +33,7 @@ class LoginViewController: UIViewController {
         createViews()
         styleViews()
         defineLayoutForViews()
-        addActions()
+        bindViews()
         bindViewModel()
     }
 
@@ -47,15 +47,37 @@ class LoginViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func addActions() {
-        let tapGestureBackground = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped(_:)))
-        view.addGestureRecognizer(tapGestureBackground)
-    }
+    private func bindViews() {
+        view
+            .tap
+            .sink { [weak self] _ in
+                guard let self = self else { return }
 
-    @objc
-    private func backgroundTapped(_ sender: UITapGestureRecognizer) {
-        emailView.endEditing(true)
-        passwordView.endEditing(true)
+                self.emailView.endEditing(true)
+                self.passwordView.endEditing(true)
+            }
+            .store(in: &cancellables)
+
+        loginButton
+            .tap
+            .sink { [weak self] _ in
+                self?.viewModel.pressedLoginButton()
+            }
+            .store(in: &cancellables)
+
+        emailView
+            .text
+            .sink { [weak self] text in
+                self?.viewModel.updatedEmail(with: text)
+            }
+            .store(in: &cancellables)
+
+        passwordView
+            .text
+            .sink { [weak self] text in
+                self?.viewModel.updatedPassword(with: text)
+            }
+            .store(in: &cancellables)
     }
 
     private func bindViewModel() {
@@ -89,11 +111,6 @@ class LoginViewController: UIViewController {
                     self.stackView.setCustomSpacing(20, after: self.passwordView)
                 }
             })
-    }
-
-    @objc
-    private func pressedLoginButton() {
-        viewModel.pressedLoginButton()
     }
 
 }
@@ -142,11 +159,6 @@ extension LoginViewController: ConstructViewsProtocol {
         stackView.distribution = .fillEqually
         stackView.spacing = 18
         stackView.setCustomSpacing(35, after: passwordView)
-
-        loginButton.addTarget(self, action: #selector(pressedLoginButton), for: .touchUpInside)
-
-        emailView.delegate = self
-        passwordView.delegate = self
     }
 
     func defineLayoutForViews() {
@@ -193,18 +205,6 @@ extension LoginViewController: ConstructViewsProtocol {
             loginButton.backgroundColor = .white.withAlphaComponent(0.6)
             loginButton.isEnabled = false
         }
-    }
-
-}
-
-extension LoginViewController: EmailViewDelegate, PasswordViewDelegate {
-
-    func passwordViewText(_ passwordView: PasswordView, text: String) {
-        viewModel.updatedPassword(with: text)
-    }
-
-    func emailViewText(_ emailView: EmailView, text: String) {
-        viewModel.updatedEmail(with: text)
     }
 
 }

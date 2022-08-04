@@ -28,6 +28,7 @@ class LeaderboardViewController: UIViewController {
         createViews()
         styleViews()
         defineLayoutForViews()
+        bindViews()
         bindViewModel()
     }
 
@@ -38,6 +39,16 @@ class LeaderboardViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.fetchLeaderboard()
+    }
+
+    private func bindViews() {
+        navigationItem
+            .rightBarButtonItem?
+            .tap
+            .sink { [weak self] _ in
+                self?.viewModel.pressedClose()
+            }
+            .store(in: &cancellables)
     }
 
     private func bindViewModel() {
@@ -114,7 +125,11 @@ extension LeaderboardViewController: ConstructViewsProtocol {
         navigationItem.leftBarButtonItem = UIBarButtonItem()
 
         let image = UIImage(systemName: "xmark", withConfiguration: UIImage.SymbolConfiguration(weight: .bold))
-        let closeButton = UIBarButtonItem(image: image, style: .done, target: self, action: #selector(pressedClose))
+        let closeButton = UIBarButtonItem(
+            image: image,
+            style: .done,
+            target: self,
+            action: nil)
         closeButton.tintColor = .white
         navigationItem.rightBarButtonItem = closeButton
 
@@ -144,11 +159,6 @@ extension LeaderboardViewController: ConstructViewsProtocol {
         tableView.dataSource = self
         tableView.separatorColor = .white
         tableView.separatorInset = .zero
-    }
-
-    @objc
-    private func pressedClose() {
-        viewModel.pressedClose()
     }
 
     func defineLayoutForViews() {

@@ -1,11 +1,20 @@
+import Combine
 import UIKit
 import SnapKit
 
 class TextFieldView: UIView {
 
-    var visibilityButton: UIButton!
+    private let textSubject = PassthroughSubject<String, Never>()
+
+    private var visibilityButton: UIButton!
 
     private var textField: UITextField!
+
+    private var cancellables = Set<AnyCancellable>()
+
+    var text: AnyPublisher<String, Never> {
+        textSubject.eraseToAnyPublisher()
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -13,6 +22,7 @@ class TextFieldView: UIView {
         createViews()
         styleViews()
         defineLayoutForViews()
+        bindViews()
     }
 
     required init?(coder: NSCoder) {
@@ -27,6 +37,24 @@ class TextFieldView: UIView {
 
     func setSecure(_ bool: Bool) {
         textField.isSecureTextEntry = bool
+    }
+
+    private func bindViews() {
+        visibilityButton
+            .tap
+            .sink { [weak self] _ in
+                guard let self = self else { return }
+
+                self.textField.isSecureTextEntry = !self.textField.isSecureTextEntry
+            }
+            .store(in: &cancellables)
+
+        textField
+            .textDidChange
+            .sink { [weak self] text in
+                self?.textSubject.send(text)
+            }
+            .store(in: &cancellables)
     }
 
 }
@@ -51,12 +79,10 @@ extension TextFieldView: ConstructViewsProtocol {
         textField.autocapitalizationType = .none
         textField.textColor = .white
         textField.delegate = self
-        textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
 
         visibilityButton.tintColor = .white
         visibilityButton.setBackgroundImage(UIImage(systemName: "eye.fill"), for: .normal)
         visibilityButton.isHidden = true
-        visibilityButton.addTarget(self, action: #selector(visibilityButtonTap), for: .touchUpInside)
     }
 
     func defineLayoutForViews() {
@@ -75,17 +101,9 @@ extension TextFieldView: ConstructViewsProtocol {
         }
     }
 
-    @objc
-    private func visibilityButtonTap() {
-        textField.isSecureTextEntry = !textField.isSecureTextEntry
-    }
-
     func toggleVisibilityButton(isVisible: Bool) {
         visibilityButton.isHidden = !isVisible
     }
-
-    @objc
-    func textFieldDidChange(sender: UITextField) {}
 
 }
 

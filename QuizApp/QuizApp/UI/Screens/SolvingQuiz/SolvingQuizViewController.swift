@@ -25,6 +25,7 @@ class SolvingQuizViewController: UIViewController {
         createViews()
         styleViews()
         defineLayoutForViews()
+        bindModels()
         bindViewModel()
     }
 
@@ -48,6 +49,23 @@ class SolvingQuizViewController: UIViewController {
             isPortrait = UIDevice.current.orientation.isPortrait
             questionsView.redraw(with: viewModel.currentQuestionIndex)
         }
+    }
+
+    private func bindModels() {
+        questionsView
+            .selectedId
+            .sink { [weak self] id in
+                self?.viewModel.selectedAnswer(with: id)
+            }
+            .store(in: &cancellables)
+
+        navigationItem
+            .leftBarButtonItem?
+            .tap
+            .sink { [weak self] _ in
+                self?.viewModel.goBack()
+            }
+            .store(in: &cancellables)
     }
 
     private func bindViewModel() {
@@ -135,15 +153,8 @@ extension SolvingQuizViewController: ConstructViewsProtocol {
             image: image,
             style: .done,
             target: self,
-            action: #selector(pressedBack))
+            action: nil)
         navigationItem.leftBarButtonItem?.tintColor = .white
-
-        questionsView.delegate = self
-    }
-
-    @objc
-    private func pressedBack() {
-        viewModel.goBack()
     }
 
     func defineLayoutForViews() {
@@ -167,14 +178,6 @@ extension SolvingQuizViewController: ConstructViewsProtocol {
             $0.top.equalTo(progressView.snp.bottom).offset(20)
             $0.leading.trailing.bottom.equalToSuperview().inset(20)
         }
-    }
-
-}
-
-extension SolvingQuizViewController: QuestionsViewDelegate {
-
-    func selectedAnswer(with id: Int) {
-        viewModel.selectedAnswer(with: id)
     }
 
 }

@@ -21,6 +21,7 @@ class QuizResultViewController: UIViewController {
         createViews()
         styleViews()
         defineLayoutForViews()
+        bindModels()
         bindViewModel()
     }
 
@@ -31,6 +32,15 @@ class QuizResultViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         viewModel.endQuiz()
+    }
+
+    private func bindModels() {
+        button
+            .tap
+            .sink { [weak self] _ in
+                self?.viewModel.exitQuiz()
+            }
+            .store(in: &cancellables)
     }
 
     private func bindViewModel() {
@@ -73,12 +83,6 @@ extension QuizResultViewController: ConstructViewsProtocol {
         button.setTitleColor(UIColor(red: 99 / 255, green: 41 / 255, blue: 222 / 255, alpha: 1.0), for: .normal)
         button.backgroundColor = .white
         button.layer.cornerRadius = 20
-        button.addTarget(self, action: #selector(exitQuiz), for: .touchUpInside)
-    }
-
-    @objc
-    private func exitQuiz() {
-        viewModel.exitQuiz()
     }
 
     func defineLayoutForViews() {

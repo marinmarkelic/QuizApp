@@ -1,16 +1,23 @@
+import Combine
 import UIKit
 
 class QuestionCell: UICollectionViewCell {
 
     static let reuseIdentifier = String(describing: QuestionCell.self)
 
-    weak var delegate: QuestionCellDelegate?
+    var cancellables = Set<AnyCancellable>()
+
+    private let idSubject = PassthroughSubject<Int, Never>()
 
     private var scrollView: UIScrollView!
     private var mainView: UIView!
 
     private var label: UILabel!
     private var stackView: UIStackView!
+
+    var selectedId: AnyPublisher<Int, Never> {
+        idSubject.eraseToAnyPublisher()
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -24,17 +31,28 @@ class QuestionCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        cancellables = []
+    }
+
     func set(title: String, answers: [Answer]) {
         label.text = title
 
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
 
-        answers.forEach {
+        answers.forEach { answer in
             let answerView = AnswerView()
-            answerView.set(answer: $0)
-            answerView.delegate = self
+            answerView.set(answer: answer)
 
             stackView.addArrangedSubview(answerView)
+
+            answerView
+                .tap
+                .sink { [weak self] _ in
+                    self?.idSubject.send(answer.id)
+                }
+                .store(in: &cancellables)
         }
     }
 
@@ -88,20 +106,6 @@ extension QuestionCell: ConstructViewsProtocol {
             $0.leading.trailing.equalToSuperview()
             $0.bottom.lessThanOrEqualToSuperview()
         }
-    }
-
-}
-
-protocol QuestionCellDelegate: AnyObject {
-
-    func selectedAnswer(with id: Int)
-
-}
-
-extension QuestionCell: AnswerViewDelegate {
-
-    func selectedAnswer(with id: Int) {
-        delegate?.selectedAnswer(with: id)
     }
 
 }

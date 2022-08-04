@@ -1,13 +1,20 @@
+import Combine
 import UIKit
 
 class DetailsView: UIView {
 
-    weak var delegate: DetailsViewDelegate?
+    private let startSubject = PassthroughSubject<Void, Never>()
 
     private var title: UILabel!
     private var desc: UILabel!
     private var imageView: UIImageView!
     private var startButton: UIButton!
+
+    private var cancellables = Set<AnyCancellable>()
+
+    var onStartPress: AnyPublisher<Void, Never> {
+        startSubject.eraseToAnyPublisher()
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -15,10 +22,20 @@ class DetailsView: UIView {
         createViews()
         styleViews()
         defineLayoutForViews()
+        bindViews()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    private func bindViews() {
+        startButton
+            .tap
+            .sink { [weak self] _ in
+                self?.startSubject.send()
+            }
+            .store(in: &cancellables)
     }
 
     func set(quiz: Quiz) {
@@ -117,22 +134,10 @@ extension DetailsView: ConstructViewsProtocol {
         startButton.setTitleColor(UIColor(red: 99 / 255, green: 41 / 255, blue: 222 / 255, alpha: 1.0), for: .normal)
         startButton.layer.cornerRadius = 20
         startButton.clipsToBounds = true
-        startButton.addTarget(self, action: #selector(buttonPress), for: .touchUpInside)
-    }
-
-    @objc
-    private func buttonPress() {
-        delegate?.startQuiz()
     }
 
     func defineLayoutForViews() {
         remakeLayout()
     }
-
-}
-
-protocol DetailsViewDelegate: AnyObject {
-
-    func startQuiz()
 
 }
