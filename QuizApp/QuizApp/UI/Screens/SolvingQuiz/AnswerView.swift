@@ -1,11 +1,18 @@
+import Combine
 import UIKit
 
 class AnswerView: UIView {
 
-    weak var delegate: AnswerViewDelegate?
+    private let idSubject = PassthroughSubject<Int, Never>()
 
     private var id: Int!
     private var label: UILabel!
+
+    private var cancellables = Set<AnyCancellable>()
+
+    var selectedId: AnyPublisher<Int, Never> {
+        idSubject.eraseToAnyPublisher()
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -13,6 +20,7 @@ class AnswerView: UIView {
         createViews()
         styleViews()
         defineLayoutForViews()
+        bindViews()
     }
 
     required init?(coder: NSCoder) {
@@ -23,6 +31,17 @@ class AnswerView: UIView {
         id = answer.id
         label.text = answer.answer
         backgroundColor = answer.color
+    }
+
+    private func bindViews() {
+        self
+            .tap
+            .sink { [weak self] _ in
+                guard let self = self else { return }
+
+                self.idSubject.send(self.id)
+            }
+            .store(in: &cancellables)
     }
 
 }
@@ -37,17 +56,9 @@ extension AnswerView: ConstructViewsProtocol {
     func styleViews() {
         layer.cornerRadius = 30
 
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(selectedAnswer))
-        addGestureRecognizer(gesture)
-
         label.font = .heading4
         label.textColor = .white
         label.numberOfLines = 0
-    }
-
-    @objc
-    private func selectedAnswer() {
-        delegate?.selectedAnswer(with: id)
     }
 
     func defineLayoutForViews() {
@@ -55,11 +66,5 @@ extension AnswerView: ConstructViewsProtocol {
             $0.edges.equalToSuperview().inset(20)
         }
     }
-
-}
-
-protocol AnswerViewDelegate: AnyObject {
-
-    func selectedAnswer(with id: Int)
 
 }

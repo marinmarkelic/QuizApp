@@ -1,13 +1,20 @@
+import Combine
 import UIKit
 
 class QuestionsView: UIView {
 
-    weak var delegate: QuestionsViewDelegate?
+    private let idSubject = PassthroughSubject<Int, Never>()
 
     private var questions: [Question] = []
 
     private var collectionViewLayout: UICollectionViewFlowLayout!
     private var collectionView: UICollectionView!
+
+    private var cancellables = Set<AnyCancellable>()
+
+    var selectedId: AnyPublisher<Int, Never> {
+        idSubject.eraseToAnyPublisher()
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -124,23 +131,15 @@ extension QuestionsView: UICollectionViewDataSource {
         cell.set(
             title: questions[indexPath.section].question,
             answers: questions[indexPath.section].answers)
-        cell.delegate = self
+
+        cell
+            .selectedId
+            .sink { [weak self] id in
+                self?.idSubject.send(id)
+            }
+            .store(in: &cancellables)
 
         return cell
-    }
-
-}
-
-protocol QuestionsViewDelegate: AnyObject {
-
-    func selectedAnswer(with id: Int)
-
-}
-
-extension QuestionsView: QuestionCellDelegate {
-
-    func selectedAnswer(with id: Int) {
-        delegate?.selectedAnswer(with: id)
     }
 
 }
