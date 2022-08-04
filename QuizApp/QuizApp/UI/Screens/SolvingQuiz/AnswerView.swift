@@ -3,10 +3,7 @@ import UIKit
 
 class AnswerView: UIView {
 
-    var id: Int!
     private var label: UILabel!
-
-    private var cancellables = Set<AnyCancellable>()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -21,7 +18,6 @@ class AnswerView: UIView {
     }
 
     func set(answer: Answer) {
-        id = answer.id
         label.text = answer.answer
         backgroundColor = answer.color
     }

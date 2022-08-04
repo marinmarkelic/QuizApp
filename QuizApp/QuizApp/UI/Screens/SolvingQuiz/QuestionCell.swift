@@ -41,16 +41,16 @@ class QuestionCell: UICollectionViewCell {
 
         stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
 
-        answers.forEach {
+        answers.forEach { answer in
             let answerView = AnswerView()
-            answerView.set(answer: $0)
+            answerView.set(answer: answer)
 
             stackView.addArrangedSubview(answerView)
 
             answerView
                 .tap
                 .sink { [weak self] _ in
-                    self?.idSubject.send(answerView.id)
+                    self?.idSubject.send(answer.id)
                 }
                 .store(in: &cancellables)
         }
