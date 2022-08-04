@@ -59,6 +59,7 @@ class SolvingQuizViewController: UIViewController {
     private func bindModels() {
         questionsView
             .selectedId
+            .removeDuplicates()
             .sink { [weak self] id in
                 self?.viewModel.selectedAnswer(with: id)
             }
