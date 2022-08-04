@@ -93,7 +93,7 @@ extension SearchViewController: ConstructViewsProtocol {
         searchBar = SearchBar()
         mainView.addSubview(searchBar)
 
-        quizView = QuizView()
+        quizView = QuizView(alwaysShowHeaders: true)
         mainView.addSubview(quizView)
     }
 
