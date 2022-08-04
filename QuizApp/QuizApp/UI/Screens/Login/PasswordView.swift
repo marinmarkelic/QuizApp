@@ -3,8 +3,6 @@ import SnapKit
 
 class PasswordView: TextFieldView {
 
-    weak var delegate: PasswordViewDelegate?
-
     override init(frame: CGRect) {
         super.init(frame: frame)
 
@@ -15,20 +13,5 @@ class PasswordView: TextFieldView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    @objc
-    override func textFieldDidChange(sender: UITextField) {
-        guard let text=sender.text else { return }
-
-        delegate?.passwordViewText(self, text: text)
-
-        toggleVisibilityButton(isVisible: !text.isEmpty)
-    }
-
-}
-
-protocol PasswordViewDelegate: AnyObject {
-
-    func passwordViewText(_ passwordView: PasswordView, text: String)
 
 }

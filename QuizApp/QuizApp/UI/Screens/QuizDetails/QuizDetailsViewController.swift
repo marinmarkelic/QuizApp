@@ -23,6 +23,7 @@ class QuizDetailsViewController: UIViewController {
         createViews()
         styleViews()
         defineLayoutForViews()
+        bindModels()
         bindViewModel()
     }
 
@@ -41,6 +42,13 @@ class QuizDetailsViewController: UIViewController {
             .tap
             .sink { [weak self] _ in
                 self?.viewModel.showLeaderboard()
+            }
+            .store(in: &cancellables)
+
+        detailsView
+            .onStart
+            .sink { [weak self] _ in
+                self?.viewModel.startQuiz()
             }
             .store(in: &cancellables)
     }
@@ -113,8 +121,6 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
             action: #selector(pressedBack))
         navigationItem.leftBarButtonItem?.tintColor = .white
 
-        detailsView.delegate = self
-
         leaderboardButton.setTitle("Leaderboard", for: .normal)
         leaderboardButton.titleLabel?.font = .heading5
     }
@@ -134,14 +140,6 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
         }
 
         remakeLayout()
-    }
-
-}
-
-extension QuizDetailsViewController: DetailsViewDelegate {
-
-    func startQuiz() {
-        viewModel.startQuiz()
     }
 
 }

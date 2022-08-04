@@ -4,11 +4,17 @@ import SnapKit
 
 class TextFieldView: UIView {
 
-    var visibilityButton: UIButton!
+    private let textSubject = PassthroughSubject<String, Never>()
+
+    private var visibilityButton: UIButton!
 
     private var textField: UITextField!
 
     private var cancellables = Set<AnyCancellable>()
+
+    var text: AnyPublisher<String, Never> {
+        textSubject.eraseToAnyPublisher()
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -42,6 +48,13 @@ class TextFieldView: UIView {
                 self.textField.isSecureTextEntry = !self.textField.isSecureTextEntry
             }
             .store(in: &cancellables)
+
+        textField
+            .textDidChange
+            .sink { [weak self] text in
+                self?.textSubject.send(text)
+            }
+            .store(in: &cancellables)
     }
 
 }
@@ -66,7 +79,6 @@ extension TextFieldView: ConstructViewsProtocol {
         textField.autocapitalizationType = .none
         textField.textColor = .white
         textField.delegate = self
-        textField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged) //change
 
         visibilityButton.tintColor = .white
         visibilityButton.setBackgroundImage(UIImage(systemName: "eye.fill"), for: .normal)
@@ -92,9 +104,6 @@ extension TextFieldView: ConstructViewsProtocol {
     func toggleVisibilityButton(isVisible: Bool) {
         visibilityButton.isHidden = !isVisible
     }
-
-    @objc
-    func textFieldDidChange(sender: UITextField) {}
 
 }
 

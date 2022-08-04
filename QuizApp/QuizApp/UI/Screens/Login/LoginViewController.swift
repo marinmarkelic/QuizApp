@@ -81,6 +81,20 @@ class LoginViewController: UIViewController {
                 self?.showErrorText(with: errorText)
             }
             .store(in: &cancellables)
+
+        emailView
+            .text
+            .sink { [weak self] text in
+                self?.viewModel.updatedEmail(with: text)
+            }
+            .store(in: &cancellables)
+
+        passwordView
+            .text
+            .sink { [weak self] text in
+                self?.viewModel.updatedPassword(with: text)
+            }
+            .store(in: &cancellables)
     }
 
     private func showErrorText(with errorText: String) {
@@ -145,9 +159,6 @@ extension LoginViewController: ConstructViewsProtocol {
         stackView.distribution = .fillEqually
         stackView.spacing = 18
         stackView.setCustomSpacing(35, after: passwordView)
-
-        emailView.delegate = self
-        passwordView.delegate = self
     }
 
     func defineLayoutForViews() {
@@ -194,18 +205,6 @@ extension LoginViewController: ConstructViewsProtocol {
             loginButton.backgroundColor = .white.withAlphaComponent(0.6)
             loginButton.isEnabled = false
         }
-    }
-
-}
-
-extension LoginViewController: EmailViewDelegate, PasswordViewDelegate {
-
-    func passwordViewText(_ passwordView: PasswordView, text: String) {
-        viewModel.updatedPassword(with: text)
-    }
-
-    func emailViewText(_ emailView: EmailView, text: String) {
-        viewModel.updatedEmail(with: text)
     }
 
 }
