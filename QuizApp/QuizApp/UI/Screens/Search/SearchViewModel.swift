@@ -2,13 +2,15 @@ import Combine
 
 class SearchViewModel {
 
+    private let router: AppRouterProtocol
     private let useCase: QuizUseCaseProtocol
 
     private var searchText: String = ""
 
     @Published var quizzes: [Quiz] = []
 
-    init(useCase: QuizUseCaseProtocol) {
+    init(router: AppRouterProtocol, useCase: QuizUseCaseProtocol) {
+        self.router = router
         self.useCase = useCase
     }
 
@@ -38,6 +40,10 @@ class SearchViewModel {
 
     func updatedSearchText(with text: String) {
         searchText = text
+    }
+
+    func showQuizDetails(with quiz: Quiz) {
+        router.showQuizDetails(with: quiz)
     }
 
 }

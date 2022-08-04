@@ -43,9 +43,16 @@ class SearchBar: UIView {
         button
             .tap
             .sink { [weak self] _ in
-                self?.searchSubject.send()
+                guard let self = self else { return }
+
+                self.searchSubject.send()
+                self.endEditing()
             }
             .store(in: &cancellables)
+    }
+
+    func endEditing() {
+        textField.endEditing(true)
     }
 
 }
@@ -63,7 +70,8 @@ extension SearchBar: ConstructViewsProtocol {
     func styleViews() {
         textField.setPlaceholder(with: "Type here")
 
-        button.setTitle("Search", for: .normal) // Style
+        button.setTitle("Search", for: .normal)
+        button.titleLabel?.font = .heading6
     }
 
     func defineLayoutForViews() {

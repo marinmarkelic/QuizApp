@@ -180,7 +180,7 @@ class AppDependencies {
             .scope(.unique)
 
         container
-            .register { SearchViewModel(useCase: container.resolve()) }
+            .register { SearchViewModel(router: container.resolve(), useCase: container.resolve()) }
             .scope(.unique)
     }
 
