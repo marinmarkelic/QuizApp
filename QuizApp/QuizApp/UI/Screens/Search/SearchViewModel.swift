@@ -4,6 +4,8 @@ class SearchViewModel {
 
     private let useCase: QuizUseCaseProtocol
 
+    private var searchText: String = ""
+
     @Published var quizzes: [Quiz] = []
 
     init(useCase: QuizUseCaseProtocol) {
@@ -11,13 +13,19 @@ class SearchViewModel {
     }
 
     @MainActor
-    func fetchQuizzes(with text: String) {
+    func fetchQuizzes() {
         Task {
             do {
                 let quizzes = try await useCase.fetchAllQuizzes()
+
+                if searchText == "" {
+                    self.quizzes = quizzes.map { Quiz($0) }
+                    return
+                }
+
                 self.quizzes = quizzes
                     .filter {
-                        $0.name.lowercased().contains(text.lowercased())
+                        $0.name.lowercased().contains(searchText.lowercased())
                     }
                     .map {
                         Quiz($0)
@@ -26,6 +34,10 @@ class SearchViewModel {
                 print(err) // change
             }
         }
+    }
+
+    func updatedSearchText(with text: String) {
+        searchText = text
     }
 
 }

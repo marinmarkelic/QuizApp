@@ -23,12 +23,24 @@ class SearchViewController: UIViewController {
         createViews()
         styleViews()
         defineLayoutForViews()
+        bindViews()
         bindViewModel()
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        viewModel.fetchQuizzes(with: "f")
+    private func bindViews() {
+        searchBar
+            .searchText
+            .sink { [weak self] text in
+                self?.viewModel.updatedSearchText(with: text)
+            }
+            .store(in: &cancellables)
+
+        searchBar
+            .onSearchPress
+            .sink { [weak self] _ in
+                self?.viewModel.fetchQuizzes()
+            }
+            .store(in: &cancellables)
     }
 
     private func bindViewModel() {
