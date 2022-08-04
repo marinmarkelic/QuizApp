@@ -220,6 +220,10 @@ class AppDependencies {
                 return QuizResultViewController(viewModel: container.resolve(args: result))
             }
             .scope(.unique)
+
+        container
+            .register { SearchViewController() }
+            .scope(.unique)
     }
 
 }
