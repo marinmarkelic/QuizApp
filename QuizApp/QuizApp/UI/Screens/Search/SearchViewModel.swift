@@ -24,12 +24,11 @@ class SearchViewModel {
 
                 if searchText == "" {
                     self.quizzes = quizzes.map { Quiz($0) }
-                    return
+                } else {
+                    self.quizzes = quizzes
+                        .filter { $0.name.lowercased().contains(searchText.lowercased()) }
+                        .map { Quiz($0) }
                 }
-
-                self.quizzes = quizzes
-                    .filter { $0.name.lowercased().contains(searchText.lowercased()) }
-                    .map { Quiz($0) }
 
                 fetchingErrorMessage = ""
                 noQuizzesErrorMessage = self.quizzes.isEmpty ?
