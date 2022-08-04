@@ -1,3 +1,4 @@
+import Combine
 import UIKit
 
 class SearchViewController: UIViewController {
@@ -10,15 +11,33 @@ class SearchViewController: UIViewController {
     private var searchBar: SearchBar!
     private var quizView: QuizView!
 
+    private var cancellables = Set<AnyCancellable>()
+
     init(viewModel: SearchViewModel) {
         self.viewModel = viewModel
 
         super.init(nibName: nil, bundle: nil)
 
+        styleTabBarItem()
+
         createViews()
         styleViews()
         defineLayoutForViews()
-        styleTabBarItem()
+        bindViewModel()
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        viewModel.fetchQuizzes(with: "f")
+    }
+
+    private func bindViewModel() {
+        viewModel
+            .$quizzes
+            .sink { [weak self] quizzes in
+                self?.quizView.reload(with: quizzes)
+            }
+            .store(in: &cancellables)
     }
 
     required init?(coder: NSCoder) {
@@ -30,8 +49,8 @@ class SearchViewController: UIViewController {
 
         tabBarItem = UITabBarItem(
             title: "Search",
-            image: UIImage(systemName: "rectangle.3.offgrid", withConfiguration: config),
-            selectedImage: UIImage(systemName: "rectangle.3.offgrid.fill", withConfiguration: config))
+            image: UIImage(systemName: "magnifyingglass", withConfiguration: config),
+            selectedImage: UIImage(systemName: "magnifyingglass", withConfiguration: config))
     }
 
 }
@@ -48,8 +67,8 @@ extension SearchViewController: ConstructViewsProtocol {
         searchBar = SearchBar()
         mainView.addSubview(searchBar)
 
-//        quizView = QuizView()
-//        mainView.addSubview(quizView)
+        quizView = QuizView()
+        mainView.addSubview(quizView)
     }
 
     func styleViews() {
@@ -67,6 +86,11 @@ extension SearchViewController: ConstructViewsProtocol {
 
         searchBar.snp.makeConstraints {
             $0.leading.top.trailing.equalToSuperview().inset(20)
+        }
+
+        quizView.snp.makeConstraints {
+            $0.top.equalTo(searchBar.snp.bottom).offset(10)
+            $0.leading.trailing.bottom.equalToSuperview().inset(20)
         }
     }
 
