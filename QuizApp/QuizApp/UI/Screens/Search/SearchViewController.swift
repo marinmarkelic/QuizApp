@@ -8,6 +8,9 @@ class SearchViewController: UIViewController {
     private var gradientView: GradientView!
     private var mainView: UIView!
 
+    private var noQuizzesErrorLabel: UILabel!
+    private var errorView: ErrorView!
+
     private var searchBar: SearchBar!
     private var quizView: QuizView!
 
@@ -64,6 +67,29 @@ class SearchViewController: UIViewController {
                 self?.quizView.reload(with: quizzes)
             }
             .store(in: &cancellables)
+
+        viewModel
+            .$fetchingErrorMessage
+            .removeDuplicates()
+            .sink { [weak self] message in
+                guard let self = self else { return }
+
+                self.errorView.isHidden = message.isEmpty
+                self.errorView.set(description: message)
+            }
+            .store(in: &cancellables)
+
+        viewModel
+            .$noQuizzesErrorMessage
+            .removeDuplicates()
+            .sink { [weak self] message in
+                guard let self = self else { return }
+
+                self.noQuizzesErrorLabel.isHidden = message.isEmpty
+                self.noQuizzesErrorLabel.text = message
+            }
+            .store(in: &cancellables)
+
     }
 
     required init?(coder: NSCoder) {
@@ -87,6 +113,12 @@ extension SearchViewController: ConstructViewsProtocol {
         gradientView = GradientView()
         view.addSubview(gradientView)
 
+        noQuizzesErrorLabel = UILabel()
+        gradientView.addSubview(noQuizzesErrorLabel)
+
+        errorView = ErrorView()
+        gradientView.addSubview(errorView)
+
         mainView = UIView()
         gradientView.addSubview(mainView)
 
@@ -98,7 +130,9 @@ extension SearchViewController: ConstructViewsProtocol {
     }
 
     func styleViews() {
-
+        noQuizzesErrorLabel.font = .heading6
+        noQuizzesErrorLabel.textColor = .white
+        noQuizzesErrorLabel.textAlignment = .center
     }
 
     func defineLayoutForViews() {
@@ -108,6 +142,16 @@ extension SearchViewController: ConstructViewsProtocol {
 
         mainView.snp.makeConstraints {
             $0.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+
+        noQuizzesErrorLabel.snp.makeConstraints {
+            $0.center.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(20)
+        }
+
+        errorView.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.centerY.equalToSuperview()
         }
 
         searchBar.snp.makeConstraints {

@@ -8,6 +8,8 @@ class SearchViewModel {
     private var searchText: String = ""
 
     @Published var quizzes: [Quiz] = []
+    @Published var fetchingErrorMessage: String = ""
+    @Published var noQuizzesErrorMessage: String = ""
 
     init(router: AppRouterProtocol, useCase: QuizUseCaseProtocol) {
         self.router = router
@@ -26,14 +28,20 @@ class SearchViewModel {
                 }
 
                 self.quizzes = quizzes
-                    .filter {
-                        $0.name.lowercased().contains(searchText.lowercased())
-                    }
-                    .map {
-                        Quiz($0)
-                    }
-            } catch let err {
-                print(err) // change
+                    .filter { $0.name.lowercased().contains(searchText.lowercased()) }
+                    .map { Quiz($0) }
+
+                fetchingErrorMessage = ""
+                noQuizzesErrorMessage = self.quizzes.isEmpty ?
+                "No quizzes found." :
+                ""
+
+            } catch _ {
+                noQuizzesErrorMessage = ""
+                fetchingErrorMessage = """
+Quizzes couldn't be loaded.
+Please try again.
+"""
             }
         }
     }
