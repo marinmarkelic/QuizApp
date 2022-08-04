@@ -137,7 +137,7 @@ extension QuestionsView: UICollectionViewDataSource {
             .sink { [weak self] id in
                 self?.idSubject.send(id)
             }
-            .store(in: &cancellables)
+            .store(in: &cell.cancellables)
 
         return cell
     }

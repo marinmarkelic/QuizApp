@@ -3,16 +3,10 @@ import UIKit
 
 class AnswerView: UIView {
 
-    private let idSubject = PassthroughSubject<Int, Never>()
-
-    private var id: Int!
+    var id: Int!
     private var label: UILabel!
 
     private var cancellables = Set<AnyCancellable>()
-
-    var selectedId: AnyPublisher<Int, Never> {
-        idSubject.eraseToAnyPublisher()
-    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -20,7 +14,6 @@ class AnswerView: UIView {
         createViews()
         styleViews()
         defineLayoutForViews()
-        bindViews()
     }
 
     required init?(coder: NSCoder) {
@@ -31,17 +24,6 @@ class AnswerView: UIView {
         id = answer.id
         label.text = answer.answer
         backgroundColor = answer.color
-    }
-
-    private func bindViews() {
-        self
-            .tap
-            .sink { [weak self] _ in
-                guard let self = self else { return }
-
-                self.idSubject.send(self.id)
-            }
-            .store(in: &cancellables)
     }
 
 }

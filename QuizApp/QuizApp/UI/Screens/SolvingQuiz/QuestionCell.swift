@@ -5,6 +5,8 @@ class QuestionCell: UICollectionViewCell {
 
     static let reuseIdentifier = String(describing: QuestionCell.self)
 
+    var cancellables = Set<AnyCancellable>()
+
     private let idSubject = PassthroughSubject<Int, Never>()
 
     private var scrollView: UIScrollView!
@@ -12,8 +14,6 @@ class QuestionCell: UICollectionViewCell {
 
     private var label: UILabel!
     private var stackView: UIStackView!
-
-    private var cancellables = Set<AnyCancellable>()
 
     var selectedId: AnyPublisher<Int, Never> {
         idSubject.eraseToAnyPublisher()
@@ -31,6 +31,11 @@ class QuestionCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        cancellables = []
+    }
+
     func set(title: String, answers: [Answer]) {
         label.text = title
 
@@ -43,9 +48,9 @@ class QuestionCell: UICollectionViewCell {
             stackView.addArrangedSubview(answerView)
 
             answerView
-                .selectedId
-                .sink { [weak self] id in
-                    self?.idSubject.send(id)
+                .tap
+                .sink { [weak self] _ in
+                    self?.idSubject.send(answerView.id)
                 }
                 .store(in: &cancellables)
         }
