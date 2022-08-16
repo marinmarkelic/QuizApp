@@ -4,7 +4,7 @@ import Resolver
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    private var appRouter: AppRouterProtocol!
+    private var router: AppRouterProtocol!
     private var appDependencies: AppDependencies!
 
     var window: UIWindow?
@@ -17,8 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         appDependencies = AppDependencies()
 
-        appRouter = appDependencies.appRouter
-        appRouter.start(in: window)
+        router = appDependencies.appRouter
+        router.start(in: window)
 
         self.window = window
         return true

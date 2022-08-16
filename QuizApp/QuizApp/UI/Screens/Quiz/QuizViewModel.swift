@@ -3,20 +3,20 @@ import UIKit
 
 class QuizViewModel {
 
-    private let appRouter: AppRouterProtocol
+    private let router: AppRouterProtocol
     private let useCase: QuizUseCaseProtocol
 
     @Published var quizzes: [Quiz] = []
     @Published var categories: [Category] = []
     @Published var errorMessage: String = ""
 
-    init(appRouter: AppRouterProtocol, useCase: QuizUseCaseProtocol) {
-        self.appRouter = appRouter
+    init(router: AppRouterProtocol, useCase: QuizUseCaseProtocol) {
+        self.router = router
         self.useCase = useCase
     }
 
     func showQuizDetails(with quiz: Quiz) {
-        appRouter.showQuizDetails(with: quiz)
+        router.showQuizDetails(with: quiz)
     }
 
     @MainActor

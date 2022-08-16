@@ -3,7 +3,7 @@ import UIKit
 
 class LoginViewModel {
 
-    private let appRouter: AppRouterProtocol
+    private let router: AppRouterProtocol
     private let useCase: LoginUseCaseProtocol
 
     @Published var isLoginButtonEnabled = false
@@ -12,8 +12,8 @@ class LoginViewModel {
     private var email = ""
     private var password = ""
 
-    init(appRouter: AppRouterProtocol, useCase: LoginUseCaseProtocol) {
-        self.appRouter = appRouter
+    init(router: AppRouterProtocol, useCase: LoginUseCaseProtocol) {
+        self.router = router
         self.useCase = useCase
     }
 
@@ -34,7 +34,7 @@ class LoginViewModel {
             do {
                 _ = try await useCase.logIn(username: email, password: password)
 
-                appRouter.showHome()
+                router.showHome()
             } catch let error as RequestError {
                 showError(error)
             }
