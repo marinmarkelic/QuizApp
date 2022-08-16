@@ -4,15 +4,15 @@ import UIKit
 class QuizViewModel {
 
     private let appRouter: AppRouterProtocol
-    private let quizUseCase: QuizUseCaseProtocol
+    private let useCase: QuizUseCaseProtocol
 
     @Published var quizzes: [Quiz] = []
     @Published var categories: [Category] = []
     @Published var errorMessage: String = ""
 
-    init(appRouter: AppRouterProtocol, quizUseCase: QuizUseCaseProtocol) {
+    init(appRouter: AppRouterProtocol, useCase: QuizUseCaseProtocol) {
         self.appRouter = appRouter
-        self.quizUseCase = quizUseCase
+        self.useCase = useCase
     }
 
     func showQuizDetails(with quiz: Quiz) {
@@ -57,13 +57,13 @@ Please try again
         let quizzes: [QuizModel]
 
         guard let categoryModel = CategoryModel(rawValue: type.rawValue) else {
-            quizzes = try await quizUseCase.fetchAllQuizzes()
+            quizzes = try await useCase.fetchAllQuizzes()
             self.quizzes = quizzes
                 .map { Quiz($0) }
             return
         }
 
-        quizzes = try await quizUseCase.fetchQuizzes(for: categoryModel)
+        quizzes = try await useCase.fetchQuizzes(for: categoryModel)
         self.quizzes = quizzes
             .map { Quiz($0) }
     }
