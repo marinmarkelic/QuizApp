@@ -1,4 +1,4 @@
-struct LoginResponseDataModel: Decodable {
+struct LoginResponseDataModel {
 
     let accessToken: String
 

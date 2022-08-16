@@ -23,7 +23,6 @@ class CategorySlider: UIView {
 
     func reload(with categories: [Category]) {
         self.categories = categories
-
         collectionView.reloadData()
     }
 

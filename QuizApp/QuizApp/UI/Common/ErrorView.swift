@@ -38,7 +38,8 @@ extension ErrorView: ConstructViewsProtocol {
     }
 
     func styleViews() {
-        let image = UIImage(systemName: "multiply.circle")
+        let config = UIImage.SymbolConfiguration(scale: .medium)
+        let image = UIImage(systemName: "multiply.circle", withConfiguration: config)
         imageView.image = image
         imageView.tintColor = .white
 

@@ -148,7 +148,8 @@ extension SolvingQuizViewController: ConstructViewsProtocol {
         titleView.font = .heading3
         navigationItem.titleView = titleView
 
-        let image = UIImage(systemName: "chevron.left")?.withTintColor(.white)
+        let config = UIImage.SymbolConfiguration(scale: .medium)
+        let image = UIImage(systemName: "chevron.left", withConfiguration: config)?.withTintColor(.white)
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: image,
             style: .done,

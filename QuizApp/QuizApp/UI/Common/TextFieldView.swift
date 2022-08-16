@@ -80,8 +80,10 @@ extension TextFieldView: ConstructViewsProtocol {
         textField.textColor = .white
         textField.delegate = self
 
+        let config = UIImage.SymbolConfiguration(scale: .medium)
+
         visibilityButton.tintColor = .white
-        visibilityButton.setBackgroundImage(UIImage(systemName: "eye.fill"), for: .normal)
+        visibilityButton.setBackgroundImage(UIImage(systemName: "eye.fill", withConfiguration: config), for: .normal)
         visibilityButton.isHidden = true
     }
 

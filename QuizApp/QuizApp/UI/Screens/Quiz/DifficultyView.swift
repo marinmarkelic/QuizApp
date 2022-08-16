@@ -40,8 +40,8 @@ class DifficultyView: UIView {
 extension DifficultyView: ConstructViewsProtocol {
 
     func createViews() {
-        let configuration = UIImage.SymbolConfiguration(scale: .small)
-        let square = UIImage(systemName: "square.fill", withConfiguration: configuration)
+        let config = UIImage.SymbolConfiguration(scale: .small)
+        let square = UIImage(systemName: "square.fill", withConfiguration: config)
 
         square1 = UIImageView(image: square)
         addSubview(square1)
