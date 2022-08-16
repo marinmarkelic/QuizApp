@@ -3,7 +3,7 @@ import UIKit
 
 class QuizDetailsViewController: UIViewController {
 
-    private var viewModel: QuizDetailsViewModel!
+    private let viewModel: QuizDetailsViewModel
 
     private var gradientView: GradientView!
 
@@ -16,9 +16,9 @@ class QuizDetailsViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
 
     init(viewModel: QuizDetailsViewModel) {
-        super.init(nibName: nil, bundle: nil)
-
         self.viewModel = viewModel
+
+        super.init(nibName: nil, bundle: nil)
 
         createViews()
         styleViews()
