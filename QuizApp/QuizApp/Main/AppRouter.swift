@@ -34,9 +34,10 @@ class AppRouter: AppRouterProtocol {
         }
 
         let quizViewController = container.resolve(QuizViewController.self)
+        let searchViewController = container.resolve(SearchViewController.self)
         let userViewController = container.resolve(UserViewController.self)
 
-        let viewControllers = [quizViewController, userViewController]
+        let viewControllers = [quizViewController, searchViewController, userViewController]
 
         let tabBarController = TabBarController(viewControllers: viewControllers)
 

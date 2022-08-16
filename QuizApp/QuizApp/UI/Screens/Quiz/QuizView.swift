@@ -6,6 +6,8 @@ class QuizView: UIView {
     private let quizSubject = PassthroughSubject<Quiz, Never>()
     private var quizzes: [Quiz] = []
 
+    private var alwaysShowHeaders: Bool
+
     private var collectionView: UICollectionView!
     private var collectionViewLayout: UICollectionViewFlowLayout!
 
@@ -13,7 +15,22 @@ class QuizView: UIView {
         quizSubject.eraseToAnyPublisher()
     }
 
+    // This is needed because QuizView doesn't need headers
+    // in QuizVC when there are only quizzes from one category.
+    // However headers always need to be shown in SearchVC.
+    init(alwaysShowHeaders: Bool = false) {
+        self.alwaysShowHeaders = alwaysShowHeaders
+
+        super.init(frame: .zero)
+
+        createViews()
+        styleViews()
+        defineLayoutForViews()
+    }
+
     override init(frame: CGRect) {
+        alwaysShowHeaders = false
+
         super.init(frame: frame)
 
         createViews()
@@ -152,7 +169,7 @@ extension QuizView: UICollectionViewDataSource {
 
         let categories = Array(Set(quizzes.map { $0.category })).sorted(by: {$0.name > $1.name})
 
-        quizHeader.isHidden = categories.count == 1
+        quizHeader.isHidden = !alwaysShowHeaders && categories.count == 1
 
         let sectionCategory = categories[indexPath.section]
         quizHeader.set(title: sectionCategory.name, color: sectionCategory.color)

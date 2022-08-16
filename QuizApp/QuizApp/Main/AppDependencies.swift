@@ -178,6 +178,10 @@ class AppDependencies {
                     useCase: container.resolve())
             }
             .scope(.unique)
+
+        container
+            .register { SearchViewModel(router: container.resolve(), useCase: container.resolve()) }
+            .scope(.unique)
     }
 
     private func registerViewControllers(in container: Resolver) {
@@ -219,6 +223,10 @@ class AppDependencies {
                 let result: QuizResult = args.get()
                 return QuizResultViewController(viewModel: container.resolve(args: result))
             }
+            .scope(.unique)
+
+        container
+            .register { SearchViewController(viewModel: container.resolve()) }
             .scope(.unique)
     }
 
