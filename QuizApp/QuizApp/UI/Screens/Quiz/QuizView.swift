@@ -80,6 +80,7 @@ extension QuizView: ConstructViewsProtocol {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = .clear
+        collectionView.automaticallyAdjustsScrollIndicatorInsets = false
     }
 
     func defineLayoutForViews() {
