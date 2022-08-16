@@ -10,21 +10,21 @@ protocol QuizUseCaseProtocol {
 
 class QuizUseCase: QuizUseCaseProtocol {
 
-    private let quizRepository: QuizRepositoryProtocol
+    private let repository: QuizRepositoryProtocol
 
-    init(quizRepository: QuizRepositoryProtocol) {
-        self.quizRepository = quizRepository
+    init(repository: QuizRepositoryProtocol) {
+        self.repository = repository
     }
 
     func fetchQuizzes(for type: CategoryModel) async throws -> [QuizModel] {
-        let quizzes = try await quizRepository.fetchQuizzes(
+        let quizzes = try await repository.fetchQuizzes(
             for: CategoryRepoModel(rawValue: type.rawValue)!)
         return quizzes
             .map { QuizModel($0) }
     }
 
     func fetchAllQuizzes() async throws -> [QuizModel] {
-        let quizzes = try await quizRepository.fetchAllQuizzes()
+        let quizzes = try await repository.fetchAllQuizzes()
         return quizzes
             .map { QuizModel($0) }
     }
