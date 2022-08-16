@@ -124,7 +124,8 @@ extension LeaderboardViewController: ConstructViewsProtocol {
 
         navigationItem.leftBarButtonItem = UIBarButtonItem()
 
-        let image = UIImage(systemName: "xmark", withConfiguration: UIImage.SymbolConfiguration(weight: .bold))
+        let config = UIImage.SymbolConfiguration(scale: .medium)
+        let image = UIImage(systemName: "xmark", withConfiguration: config)
         let closeButton = UIBarButtonItem(
             image: image,
             style: .done,

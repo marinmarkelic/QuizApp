@@ -3,7 +3,7 @@ import UIKit
 
 class QuizDetailsViewController: UIViewController {
 
-    private var viewModel: QuizDetailsViewModel!
+    private let viewModel: QuizDetailsViewModel
 
     private var gradientView: GradientView!
 
@@ -16,9 +16,9 @@ class QuizDetailsViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
 
     init(viewModel: QuizDetailsViewModel) {
-        super.init(nibName: nil, bundle: nil)
-
         self.viewModel = viewModel
+
+        super.init(nibName: nil, bundle: nil)
 
         createViews()
         styleViews()
@@ -121,7 +121,8 @@ extension QuizDetailsViewController: ConstructViewsProtocol {
         titleView.font = .heading3
         navigationItem.titleView = titleView
 
-        let image = UIImage(systemName: "chevron.left")?.withTintColor(.white)
+        let config = UIImage.SymbolConfiguration(scale: .medium)
+        let image = UIImage(systemName: "chevron.left", withConfiguration: config)?.withTintColor(.white)
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: image,
             style: .done,

@@ -6,14 +6,14 @@ protocol LoginUseCaseProtocol {
 
 class LoginUseCase: LoginUseCaseProtocol {
 
-    private let userRepository: UserRepositoryProtocol
+    private let repository: UserRepositoryProtocol
 
-    init(userRepository: UserRepositoryProtocol) {
-        self.userRepository = userRepository
+    init(repository: UserRepositoryProtocol) {
+        self.repository = repository
     }
 
     func logIn(username: String, password: String) async throws -> LoginResponseModel {
-        LoginResponseModel(try await userRepository.logIn(username: username, password: password))
+        LoginResponseModel(try await repository.logIn(username: username, password: password))
     }
 
 }

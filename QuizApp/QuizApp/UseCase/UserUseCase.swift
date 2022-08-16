@@ -8,20 +8,20 @@ protocol UserUseCaseProtocol {
 
 class UserUseCase: UserUseCaseProtocol {
 
-    private let userRepository: UserRepositoryProtocol
+    private let repository: UserRepositoryProtocol
 
     var userInfo: UserInfoModel {
         get async throws {
-            try await UserInfoModel(userRepository.userInfo)
+            try await UserInfoModel(repository.userInfo)
         }
     }
 
-    init(userRepository: UserRepositoryProtocol) {
-        self.userRepository = userRepository
+    init(repository: UserRepositoryProtocol) {
+        self.repository = repository
     }
 
     func save(userInfo: UserInfoModel) async throws -> UserInfoModel {
-        try await UserInfoModel(userRepository.save(userInfo: UserInfoRepoModel(userInfo)))
+        try await UserInfoModel(repository.save(userInfo: UserInfoRepoModel(userInfo)))
     }
 
 }

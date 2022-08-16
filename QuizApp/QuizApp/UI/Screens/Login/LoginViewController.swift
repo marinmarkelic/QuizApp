@@ -4,10 +4,10 @@ import SnapKit
 
 class LoginViewController: UIViewController {
 
+    private let viewModel: LoginViewModel
+
     private var hasValidInputForEmail = false
     private var hasValidInputForPassword = false
-
-    private var viewModel: LoginViewModel!
 
     private var gradientView: GradientView!
     private var mainView: UIView!
@@ -37,10 +37,9 @@ class LoginViewController: UIViewController {
         bindViewModel()
     }
 
-     init(viewModel: LoginViewModel) {
-        super.init(nibName: nil, bundle: nil)
-
+    init(viewModel: LoginViewModel) {
         self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
     }
 
     required init?(coder: NSCoder) {

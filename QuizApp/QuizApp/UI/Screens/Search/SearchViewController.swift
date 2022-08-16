@@ -30,6 +30,11 @@ class SearchViewController: UIViewController {
         bindViewModel()
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        quizView.redraw()
+    }
+
     private func bindViews() {
         searchBar
             .searchText

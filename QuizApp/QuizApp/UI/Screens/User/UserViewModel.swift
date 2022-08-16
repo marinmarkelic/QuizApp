@@ -3,14 +3,14 @@ import Foundation
 
 class UserViewModel {
 
-    private let appRouter: AppRouterProtocol
+    private let router: AppRouterProtocol
     private let userUseCase: UserUseCaseProtocol
     private let logoutUseCase: LogOutUseCaseProtocol
 
     @Published var userInfo: UserInfo = UserInfo()
 
-    init(appRouter: AppRouterProtocol, userUseCase: UserUseCaseProtocol, logoutUseCase: LogOutUseCaseProtocol) {
-        self.appRouter = appRouter
+    init(router: AppRouterProtocol, userUseCase: UserUseCaseProtocol, logoutUseCase: LogOutUseCaseProtocol) {
+        self.router = router
         self.userUseCase = userUseCase
         self.logoutUseCase = logoutUseCase
     }
@@ -38,7 +38,7 @@ class UserViewModel {
             guard let self = self else { return }
 
             self.logoutUseCase.logOut()
-            self.appRouter.showLogin()
+            self.router.showLogin()
         }
     }
 

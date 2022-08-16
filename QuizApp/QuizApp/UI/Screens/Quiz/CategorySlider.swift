@@ -23,7 +23,6 @@ class CategorySlider: UIView {
 
     func reload(with categories: [Category]) {
         self.categories = categories
-
         collectionView.reloadData()
     }
 
@@ -44,7 +43,6 @@ extension CategorySlider: ConstructViewsProtocol {
     func styleViews() {
         collectionViewLayout.scrollDirection = .horizontal
 
-        collectionView.collectionViewLayout = collectionViewLayout
         collectionView.register(CategoryCell.self, forCellWithReuseIdentifier: CategoryCell.reuseIdentifier)
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.delegate = self

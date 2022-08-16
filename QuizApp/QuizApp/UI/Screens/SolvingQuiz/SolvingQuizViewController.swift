@@ -91,7 +91,7 @@ class SolvingQuizViewController: UIViewController {
             .sink { [weak self] currentQuestionIndex in
                 let scrollDelayInMillis = 400
 
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(scrollDelayInMillis)) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(scrollDelayInMillis)) { [weak self] in
                     self?.questionsView.scrollToQuestion(at: currentQuestionIndex)
                 }
             }
@@ -148,7 +148,8 @@ extension SolvingQuizViewController: ConstructViewsProtocol {
         titleView.font = .heading3
         navigationItem.titleView = titleView
 
-        let image = UIImage(systemName: "chevron.left")?.withTintColor(.white)
+        let config = UIImage.SymbolConfiguration(scale: .medium)
+        let image = UIImage(systemName: "chevron.left", withConfiguration: config)?.withTintColor(.white)
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             image: image,
             style: .done,

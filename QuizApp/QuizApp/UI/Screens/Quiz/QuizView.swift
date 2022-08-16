@@ -71,7 +71,6 @@ extension QuizView: ConstructViewsProtocol {
     }
 
     func styleViews() {
-        collectionView.collectionViewLayout = collectionViewLayout
         collectionView.register(QuizCell.self, forCellWithReuseIdentifier: QuizCell.reuseIdentifier)
         collectionView.register(
             QuizHeader.self,
@@ -81,6 +80,7 @@ extension QuizView: ConstructViewsProtocol {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = .clear
+        collectionView.automaticallyAdjustsScrollIndicatorInsets = false
     }
 
     func defineLayoutForViews() {

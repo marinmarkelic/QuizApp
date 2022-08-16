@@ -6,14 +6,14 @@ protocol LogOutUseCaseProtocol {
 
 class LogOutUseCase: LogOutUseCaseProtocol {
 
-    private let userRepository: UserRepositoryProtocol
+    private let repository: UserRepositoryProtocol
 
-    init(userRepository: UserRepositoryProtocol) {
-        self.userRepository = userRepository
+    init(repository: UserRepositoryProtocol) {
+        self.repository = repository
     }
 
     func logOut() {
-        userRepository.logOut()
+        repository.logOut()
     }
 
 }

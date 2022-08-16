@@ -72,7 +72,7 @@ class AppDependencies {
             .scope(.application)
 
         container
-            .register { QuizNetworkDataSource(quizNetworkClient: container.resolve()) }
+            .register { QuizNetworkDataSource(networkClient: container.resolve()) }
             .implements(QuizNetworkDataSourceProtocol.self)
             .scope(.application)
 
@@ -100,22 +100,22 @@ class AppDependencies {
 
     private func registerUseCases(in container: Resolver) {
         container
-            .register { LoginUseCase(userRepository: container.resolve()) }
+            .register { LoginUseCase(repository: container.resolve()) }
             .implements(LoginUseCaseProtocol.self)
             .scope(.application)
 
         container
-            .register { UserUseCase(userRepository: container.resolve()) }
+            .register { UserUseCase(repository: container.resolve()) }
             .implements(UserUseCaseProtocol.self)
             .scope(.application)
 
         container
-            .register { LogOutUseCase(userRepository: container.resolve()) }
+            .register { LogOutUseCase(repository: container.resolve()) }
             .implements(LogOutUseCaseProtocol.self)
             .scope(.application)
 
         container
-            .register { QuizUseCase(quizRepository: container.resolve()) }
+            .register { QuizUseCase(repository: container.resolve()) }
             .implements(QuizUseCaseProtocol.self)
             .scope(.application)
 
@@ -125,24 +125,24 @@ class AppDependencies {
             .scope(.application)
 
         container
-            .register { SolvingQuizUseCase(quizRepository: container.resolve()) }
+            .register { SolvingQuizUseCase(repository: container.resolve()) }
             .implements(SolvingQuizUseCaseProtocol.self)
             .scope(.application)
     }
 
     private func registerViewModels(in container: Resolver) {
         container
-            .register { LoginViewModel(appRouter: container.resolve(), loginUseCase: container.resolve()) }
+            .register { LoginViewModel(router: container.resolve(), useCase: container.resolve()) }
             .scope(.unique)
 
         container
-            .register { QuizViewModel(appRouter: container.resolve(), quizUseCase: container.resolve()) }
+            .register { QuizViewModel(router: container.resolve(), useCase: container.resolve()) }
             .scope(.unique)
 
         container
             .register {
                 UserViewModel(
-                    appRouter: container.resolve(),
+                    router: container.resolve(),
                     userUseCase: container.resolve(),
                     logoutUseCase: container.resolve())
             }
@@ -150,7 +150,7 @@ class AppDependencies {
 
         container
             .register { (_, args) -> QuizDetailsViewModel in
-                QuizDetailsViewModel(quiz: args.get(), appRouter: container.resolve())
+                QuizDetailsViewModel(quiz: args.get(), router: container.resolve())
             }
             .scope(.unique)
 
@@ -171,9 +171,8 @@ class AppDependencies {
 
         container
             .register { (_, args) -> QuizResultViewModel in
-                let result: QuizResult = args.get()
-                return QuizResultViewModel(
-                    result: result,
+                QuizResultViewModel(
+                    result: args.get(),
                     router: container.resolve(),
                     useCase: container.resolve())
             }
@@ -195,15 +194,13 @@ class AppDependencies {
 
         container
             .register { (_, args) -> QuizDetailsViewController in
-                let quiz: Quiz = args.get()
-                return QuizDetailsViewController(viewModel: container.resolve(args: quiz))
+                QuizDetailsViewController(viewModel: container.resolve(args: args.get()))
             }
             .scope(.unique)
 
         container
             .register { (_, args) -> LeaderboardViewController in
-                let id: Int = args.get()
-                return LeaderboardViewController(viewModel: container.resolve(args: id))
+                LeaderboardViewController(viewModel: container.resolve(args: args.get()))
             }
             .scope(.unique)
 
@@ -213,15 +210,13 @@ class AppDependencies {
 
         container
             .register { (_, args) -> SolvingQuizViewController in
-                let id: Int = args.get()
-                return SolvingQuizViewController(viewModel: container.resolve(args: id))
+                SolvingQuizViewController(viewModel: container.resolve(args: args.get()))
             }
             .scope(.unique)
 
         container
             .register { (_, args) -> QuizResultViewController in
-                let result: QuizResult = args.get()
-                return QuizResultViewController(viewModel: container.resolve(args: result))
+                QuizResultViewController(viewModel: container.resolve(args: args.get()))
             }
             .scope(.unique)
 
