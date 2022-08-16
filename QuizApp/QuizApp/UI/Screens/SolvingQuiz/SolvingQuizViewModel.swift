@@ -70,7 +70,7 @@ Please try again.
     }
 
     private func isQuestionAnswered(for id: Int) -> Bool {
-        if didFinishQuiz { return true }
+        guard !didFinishQuiz else { return true }
 
         for index in 0..<currentQuestionIndex {
             if quiz.questions[index].answers.contains(where: { $0.id == id }) {
