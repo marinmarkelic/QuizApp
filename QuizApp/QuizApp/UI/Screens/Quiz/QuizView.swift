@@ -169,9 +169,7 @@ extension QuizView: UICollectionViewDataSource {
 
         let categories = Array(Set(quizzes.map { $0.category })).sorted(by: {$0.name > $1.name})
 
-        if !alwaysShowHeaders {
-            quizHeader.isHidden = categories.count == 1
-        }
+        quizHeader.isHidden = !alwaysShowHeaders && categories.count == 1
 
         let sectionCategory = categories[indexPath.section]
         quizHeader.set(title: sectionCategory.name, color: sectionCategory.color)
