@@ -171,9 +171,8 @@ class AppDependencies {
 
         container
             .register { (_, args) -> QuizResultViewModel in
-                let result: QuizResult = args.get()
-                return QuizResultViewModel(
-                    result: result,
+                QuizResultViewModel(
+                    result: args.get(),
                     router: container.resolve(),
                     useCase: container.resolve())
             }
@@ -195,15 +194,13 @@ class AppDependencies {
 
         container
             .register { (_, args) -> QuizDetailsViewController in
-                let quiz: Quiz = args.get()
-                return QuizDetailsViewController(viewModel: container.resolve(args: quiz))
+                QuizDetailsViewController(viewModel: container.resolve(args: args.get()))
             }
             .scope(.unique)
 
         container
             .register { (_, args) -> LeaderboardViewController in
-                let id: Int = args.get()
-                return LeaderboardViewController(viewModel: container.resolve(args: id))
+                LeaderboardViewController(viewModel: container.resolve(args: args.get()))
             }
             .scope(.unique)
 
@@ -213,15 +210,13 @@ class AppDependencies {
 
         container
             .register { (_, args) -> SolvingQuizViewController in
-                let id: Int = args.get()
-                return SolvingQuizViewController(viewModel: container.resolve(args: id))
+                SolvingQuizViewController(viewModel: container.resolve(args: args.get()))
             }
             .scope(.unique)
 
         container
             .register { (_, args) -> QuizResultViewController in
-                let result: QuizResult = args.get()
-                return QuizResultViewController(viewModel: container.resolve(args: result))
+                QuizResultViewController(viewModel: container.resolve(args: args.get()))
             }
             .scope(.unique)
 
