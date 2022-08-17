@@ -3,14 +3,14 @@ import SwiftUI
 
 extension UIColor {
 
-    static let correctAnswerColor = UIColor(named: "CorrectAnswer")!
-    static let incorrectAnswerColor = UIColor(named: "IncorrectAnswer")!
+    static let correctAnswer = UIColor(named: "CorrectAnswer")!
+    static let incorrectAnswer = UIColor(named: "IncorrectAnswer")!
 
-    static let sportColor = UIColor(named: "Sport")!
-    static let moviesColor = UIColor(named: "Movies")!
-    static let musicColor = UIColor(named: "Music")!
-    static let geographyColor = UIColor(named: "Geography")!
-    static let allColor = UIColor(named: "All")!
+    static let sport = UIColor(named: "Sport")!
+    static let movies = UIColor(named: "Movies")!
+    static let music = UIColor(named: "Music")!
+    static let geography = UIColor(named: "Geography")!
+    static let all = UIColor(named: "All")!
 
 }
 

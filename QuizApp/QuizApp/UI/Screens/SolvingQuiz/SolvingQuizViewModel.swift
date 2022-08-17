@@ -53,10 +53,10 @@ Please try again.
 
         let isAnswerCorrect = quiz.questions[currentQuestionIndex].correctAnswerId == id
         if isAnswerCorrect {
-            progressColors[currentQuestionIndex] = .correctAnswerColor
+            progressColors[currentQuestionIndex] = .correctAnswer
             correctQuestions += 1
         } else {
-            progressColors[currentQuestionIndex] = .incorrectAnswerColor
+            progressColors[currentQuestionIndex] = .incorrectAnswer
         }
 
         if currentQuestionIndex < progressColors.count - 1 {
