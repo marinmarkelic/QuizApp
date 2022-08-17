@@ -13,7 +13,11 @@ struct LoginView: View {
 
             Spacer()
 
-            UserInfoView(username: $viewModel.email, password: $viewModel.password, errorText: viewModel.errorText)
+            UserInfoView(
+                username: $viewModel.email,
+                password: $viewModel.password,
+                errorText: viewModel.errorText,
+                isLoginButtonEnabled: viewModel.isLoginButtonEnabled)
                 .onLoginTap {
                     viewModel.pressedLoginButton()
                 }
@@ -33,36 +37,25 @@ struct LoginView_Previews: PreviewProvider {
 
 }
 
-struct GradientBackground: View {
-
-    var body: some View {
-        LinearGradient(
-            colors: [
-                Color(red: 0.45, green: 0.31, blue: 0.64),
-                Color(red: 0.15, green: 0.19, blue: 0.46)],
-            startPoint: .top,
-            endPoint: .bottom)
-        .ignoresSafeArea()
-    }
-
-}
-
 struct UserInfoView: View {
 
     let username: Binding<String>
     let password: Binding<String>
     let errorText: String
+    let isLoginButtonEnabled: Bool
     let onLoginTap: () -> Void
 
     init(
         username: Binding<String>,
         password: Binding<String>,
         errorText: String,
+        isLoginButtonEnabled: Bool,
         onLoginTap: @escaping () -> Void = { }
     ) {
         self.username = username
         self.password = password
         self.errorText = errorText
+        self.isLoginButtonEnabled = isLoginButtonEnabled
         self.onLoginTap = onLoginTap
     }
 
@@ -81,10 +74,12 @@ struct UserInfoView: View {
 
             Button(action: { onLoginTap() }, label: {
                 Text("Login")
+                    .foregroundColor(Color(red: 0.39, green: 0.16, blue: 0.87)) // change
                     .frame(maxWidth: .infinity)
             })
+            .disabled(!isLoginButtonEnabled)
             .padding()
-            .background(.white)
+            .background(isLoginButtonEnabled ? .white : .white.opacity(0.7))
             .cornerRadius(25)
             .padding(.top)
         }
@@ -92,7 +87,12 @@ struct UserInfoView: View {
     }
 
     func onLoginTap(_ onLoginTap: @escaping () -> Void) -> UserInfoView {
-        UserInfoView(username: username, password: password, errorText: errorText, onLoginTap: onLoginTap)
+        UserInfoView(
+            username: username,
+            password: password,
+            errorText: errorText,
+            isLoginButtonEnabled: isLoginButtonEnabled,
+            onLoginTap: onLoginTap)
     }
 
 }
@@ -101,15 +101,20 @@ struct CustomTextField: View {
 
     let placeholder: String
     let isSecure: Bool
-
-    @Binding var text: String
+    let text: Binding<String>
 
     @State private var isVisible: Bool = false
+
+    init(placeholder: String, isSecure: Bool, text: Binding<String>) {
+        self.placeholder = placeholder
+        self.isSecure = isSecure
+        self.text = text
+    }
 
     var body: some View {
         ZStack {
             if isSecure && !isVisible {
-                SecureField("", text: $text)
+                SecureField("", text: text)
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
                     .foregroundColor(.white)
@@ -118,7 +123,7 @@ struct CustomTextField: View {
                     .cornerRadius(25)
                     .frame(height: 50, alignment: .center)
             } else {
-                TextField("", text: $text)
+                TextField("", text: text)
                     .autocapitalization(.none)
                     .disableAutocorrection(true)
                     .foregroundColor(.white)
@@ -128,7 +133,7 @@ struct CustomTextField: View {
                     .frame(height: 50, alignment: .center)
             }
 
-            if text.isEmpty {
+            if text.wrappedValue.isEmpty {
                 HStack {
                     Text(placeholder)
                         .padding(.leading)

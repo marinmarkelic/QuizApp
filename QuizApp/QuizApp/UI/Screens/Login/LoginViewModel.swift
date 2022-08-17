@@ -3,29 +3,41 @@ import UIKit
 
 class LoginViewModel: ObservableObject {
 
-    private var router: AppRouterProtocol!
-    private var useCase: LoginUseCaseProtocol!
-
     @Published var isLoginButtonEnabled = false
     @Published var errorText = ""
     @Published var email = ""
     @Published var password = ""
 
+    private var router: AppRouterProtocol!
+    private var useCase: LoginUseCaseProtocol!
+
+    private var cancellables = Set<AnyCancellable>()
+
     init(router: AppRouterProtocol, useCase: LoginUseCaseProtocol) {
         self.router = router
         self.useCase = useCase
+
+        bindViewModel()
     }
 
-    init() { }
-
-    func updatedEmail(with text: String) {
-        email = text
-        checkInputValidity()
+    init() {
+        bindViewModel()
     }
 
-    func updatedPassword(with text: String) {
-        password = text
-        checkInputValidity()
+    private func bindViewModel() {
+        $email
+            .removeDuplicates()
+            .sink { [weak self] _ in
+                self?.checkInputValidity()
+            }
+            .store(in: &cancellables)
+
+        $password
+            .removeDuplicates()
+            .sink { [weak self] _ in
+                self?.checkInputValidity()
+            }
+            .store(in: &cancellables)
     }
 
     @MainActor
