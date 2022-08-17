@@ -25,6 +25,7 @@ struct UserInputView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
             LoginTextField(placeholder: "Username", isSecure: false, text: username)
+
             LoginTextField(placeholder: "Password", isSecure: true, text: password)
 
             if !errorText.isEmpty {

@@ -26,6 +26,7 @@ struct LoginTextField: View {
                         .padding(.leading)
                         .foregroundColor(.white.opacity(0.7))
                         .allowsHitTesting(false)
+
                     Spacer()
                 }
             } else if isVisible || isSecure {
@@ -33,6 +34,7 @@ struct LoginTextField: View {
                     let imageName = isVisible ? "eye.fill" : "eye"
 
                     Spacer()
+
                     Image(systemName: imageName)
                         .foregroundColor(.white.opacity(0.7))
                         .padding(.trailing)
