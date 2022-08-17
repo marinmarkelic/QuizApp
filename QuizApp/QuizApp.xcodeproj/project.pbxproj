@@ -72,6 +72,7 @@
 		9C7523CA289041EE00E8AAB2 /* QuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7523C9289041EE00E8AAB2 /* QuestionCell.swift */; };
 		9CA94DF9288ECB6B0038315F /* QuizDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA94DF8288ECB6B0038315F /* QuizDetailsViewController.swift */; };
 		9CA94DFB288ECCBC0038315F /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CA94DFA288ECCBC0038315F /* DetailsView.swift */; };
+		9CADE93D28AD343500B04380 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CADE93C28AD343500B04380 /* SettingsView.swift */; };
 		9CC33B22287D6848002E9853 /* UserDatabaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC33B21287D6848002E9853 /* UserDatabaseDataSource.swift */; };
 		9CC33B24287D6889002E9853 /* UserRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC33B23287D6889002E9853 /* UserRepository.swift */; };
 		9CC33B26287D6E2B002E9853 /* SecureStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC33B25287D6E2B002E9853 /* SecureStorage.swift */; };
@@ -156,6 +157,7 @@
 		9C7523C9289041EE00E8AAB2 /* QuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCell.swift; sourceTree = "<group>"; };
 		9CA94DF8288ECB6B0038315F /* QuizDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizDetailsViewController.swift; sourceTree = "<group>"; };
 		9CA94DFA288ECCBC0038315F /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
+		9CADE93C28AD343500B04380 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		9CC33B21287D6848002E9853 /* UserDatabaseDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDatabaseDataSource.swift; sourceTree = "<group>"; };
 		9CC33B23287D6889002E9853 /* UserRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepository.swift; sourceTree = "<group>"; };
 		9CC33B25287D6E2B002E9853 /* SecureStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStorage.swift; sourceTree = "<group>"; };
@@ -416,6 +418,7 @@
 				9CC33B35287DBCB1002E9853 /* UserViewController.swift */,
 				9C20BACF287EF1DB009378FB /* UserViewModel.swift */,
 				9C25C8B12888428A000C4C90 /* UserModels.swift */,
+				9CADE93C28AD343500B04380 /* SettingsView.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -616,6 +619,7 @@
 				9CC4D6DD287C1C6B0061F149 /* RequestError.swift in Sources */,
 				9C4807E4288A996D002D097D /* ErrorView.swift in Sources */,
 				9C0481ED28903E8F0095247C /* QuestionsView.swift in Sources */,
+				9CADE93D28AD343500B04380 /* SettingsView.swift in Sources */,
 				9CC33B31287D9F59002E9853 /* CheckNetworkClient.swift in Sources */,
 				9C0481E7288FFCA50095247C /* SolvingQuizViewController.swift in Sources */,
 				9C1953B5287871E20051CEC6 /* AppRouterProtocol.swift in Sources */,
