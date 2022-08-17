@@ -31,7 +31,7 @@ struct UserInputView: View {
                 Text(errorText)
                     .lineLimit(nil)
                     .foregroundColor(.red)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .frame(maxWidth: .infinity)
                     .multilineTextAlignment(.center)
             }
 
