@@ -106,13 +106,13 @@ extension Category {
     init(from model: CategoryModel) {
         switch model {
         case .sport:
-            self.init(type: CategoryType.sport, color: .sportColor)
+            self.init(type: CategoryType.sport, color: .sport)
         case .movies:
-            self.init(type: CategoryType.movies, color: .moviesColor)
+            self.init(type: CategoryType.movies, color: .movies)
         case .music:
-            self.init(type: CategoryType.music, color: .musicColor)
+            self.init(type: CategoryType.music, color: .music)
         case .geography:
-            self.init(type: CategoryType.geography, color: .geographyColor)
+            self.init(type: CategoryType.geography, color: .geography)
         }
     }
 

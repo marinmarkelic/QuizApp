@@ -49,12 +49,12 @@ extension Question {
             if selectedAnswerId == model.correctAnswerId {
                 return Answer(
                     $0,
-                    color: $0.id == model.correctAnswerId ? .correctAnswerColor : .white.withAlphaComponent(0.3))
+                    color: $0.id == model.correctAnswerId ? .correctAnswer : .white.withAlphaComponent(0.3))
             } else {
                 if $0.id == selectedAnswerId {
-                    return Answer($0, color: .incorrectAnswerColor)
+                    return Answer($0, color: .incorrectAnswer)
                 } else if $0.id == model.correctAnswerId {
-                    return Answer($0, color: .correctAnswerColor)
+                    return Answer($0, color: .correctAnswer)
                 } else {
                     return Answer($0, color: .white.withAlphaComponent(0.3))
                 }

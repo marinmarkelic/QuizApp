@@ -1,39 +1,52 @@
 import Combine
 import UIKit
 
-class LoginViewModel {
-
-    private let router: AppRouterProtocol
-    private let useCase: LoginUseCaseProtocol
+class LoginViewModel: ObservableObject {
 
     @Published var isLoginButtonEnabled = false
     @Published var errorText = ""
+    @Published var email = ""
+    @Published var password = ""
 
-    private var email = ""
-    private var password = ""
+    private var router: AppRouterProtocol!
+    private var useCase: LoginUseCaseProtocol!
+
+    private var cancellables = Set<AnyCancellable>()
 
     init(router: AppRouterProtocol, useCase: LoginUseCaseProtocol) {
         self.router = router
         self.useCase = useCase
+
+        bindViewModel()
     }
 
-    func updatedEmail(with text: String) {
-        email = text
-        checkInputValidity()
+    init() {
+        bindViewModel()
     }
 
-    func updatedPassword(with text: String) {
-        password = text
-        checkInputValidity()
+    private func bindViewModel() {
+        $email
+            .removeDuplicates()
+            .sink { [weak self] _ in
+                self?.checkInputValidity()
+            }
+            .store(in: &cancellables)
+
+        $password
+            .removeDuplicates()
+            .sink { [weak self] _ in
+                self?.checkInputValidity()
+            }
+            .store(in: &cancellables)
     }
 
     @MainActor
     func pressedLoginButton() {
-        errorText = ""
         Task {
             do {
                 _ = try await useCase.logIn(username: email, password: password)
 
+                errorText = ""
                 router.showHome()
             } catch let error as RequestError {
                 showError(error)
