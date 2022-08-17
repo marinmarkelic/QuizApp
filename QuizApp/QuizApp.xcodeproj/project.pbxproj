@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9C01635428ACDCFF004C7270 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C01635328ACDCFF004C7270 /* LoginView.swift */; };
 		9C01635628ACE1CC004C7270 /* GradientBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C01635528ACE1CC004C7270 /* GradientBackground.swift */; };
+		9C01635828ACEA9D004C7270 /* UserInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C01635728ACEA9D004C7270 /* UserInputView.swift */; };
 		9C030BDC289BEDE4001F1182 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C030BDB289BEDE4001F1182 /* SearchBar.swift */; };
 		9C030BDE289BF3AF001F1182 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C030BDD289BF3AF001F1182 /* SearchViewModel.swift */; };
 		9C0481E2288FEFFD0095247C /* SolvingQuizUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0481E1288FEFFD0095247C /* SolvingQuizUseCase.swift */; };
@@ -92,6 +93,7 @@
 /* Begin PBXFileReference section */
 		9C01635328ACDCFF004C7270 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		9C01635528ACE1CC004C7270 /* GradientBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackground.swift; sourceTree = "<group>"; };
+		9C01635728ACEA9D004C7270 /* UserInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInputView.swift; sourceTree = "<group>"; };
 		9C030BDB289BEDE4001F1182 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		9C030BDD289BF3AF001F1182 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		9C0481E1288FEFFD0095247C /* SolvingQuizUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolvingQuizUseCase.swift; sourceTree = "<group>"; };
@@ -258,6 +260,7 @@
 			children = (
 				9C1953AE287826BD0051CEC6 /* LoginViewModel.swift */,
 				9C01635328ACDCFF004C7270 /* LoginView.swift */,
+				9C01635728ACEA9D004C7270 /* UserInputView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -631,6 +634,7 @@
 				9C327E57289AC7CF003787C0 /* Combine+Extensions.swift in Sources */,
 				9C5F21942886AFF5000C3511 /* Colors.swift in Sources */,
 				9C08B86D289819EB001F56BD /* LeaderboardViewModel.swift in Sources */,
+				9C01635828ACEA9D004C7270 /* UserInputView.swift in Sources */,
 				9CFCC2F82885547600B01343 /* QuizModels.swift in Sources */,
 				9CF3E36A289BEC550058E30F /* SearchViewController.swift in Sources */,
 				9C0D815228940B3200C6D236 /* QuizResultViewController.swift in Sources */,
