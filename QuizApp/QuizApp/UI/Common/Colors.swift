@@ -18,4 +18,13 @@ extension Color {
 
     static let purpleTextColor = Color("PurpleTextColor")
 
+    static let correctAnswerColor = Color("CorrectAnswerColor")
+    static let incorrectAnswerColor = Color("IncorrectAnswerColor")
+
+    static let sportColor = Color("SportColor")
+    static let moviesColor = Color("MoviesColor")
+    static let musicColor = Color("MusicColor")
+    static let geographyColor = Color("GeographyColor")
+    static let allColor = Color("AllColor")
+
 }
