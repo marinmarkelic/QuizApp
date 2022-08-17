@@ -37,7 +37,7 @@ class AppRouter: AppRouterProtocol {
 
         let quizViewController = container.resolve(QuizViewController.self)
         let searchViewController = container.resolve(SearchViewController.self)
-        let userViewController = container.resolve(UserViewController.self)
+        let userViewController = container.resolve(UIHostingController<SettingsView>.self)
 
         let viewControllers = [quizViewController, searchViewController, userViewController]
 

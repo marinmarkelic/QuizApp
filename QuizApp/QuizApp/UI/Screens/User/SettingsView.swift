@@ -5,7 +5,7 @@ struct SettingsView: View {
     @ObservedObject var viewModel: UserViewModel
 
     var body: some View {
-        VStack(alignment: .leading) {
+        return VStack(alignment: .leading) {
             UserInfoView(
                 username: viewModel.username,
                 name: $viewModel.name)

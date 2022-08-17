@@ -12,13 +12,29 @@ class UserViewModel: ObservableObject {
     private var userUseCase: UserUseCaseProtocol!
     private var logoutUseCase: LogOutUseCaseProtocol!
 
+    private var cancellables = Set<AnyCancellable>()
+
     init(router: AppRouterProtocol, userUseCase: UserUseCaseProtocol, logoutUseCase: LogOutUseCaseProtocol) {
         self.router = router
         self.userUseCase = userUseCase
         self.logoutUseCase = logoutUseCase
+
+        Task {
+            await getUserInfo()
+        }
+        bindViewModel()
     }
 
     init() {}
+
+    private func bindViewModel() {
+        $name
+            .removeDuplicates()
+            .sink { [weak self] name in
+                print(name)
+            }
+            .store(in: &cancellables)
+    }
 
     @MainActor
     func save(username: String, name: String) {
