@@ -4,27 +4,22 @@ struct LoginTextField: View {
 
     let placeholder: String
     let isSecure: Bool
-    let text: Binding<String>
+
+    @Binding var text: String
 
     @State private var isVisible: Bool = false
-
-    init(placeholder: String, isSecure: Bool, text: Binding<String>) {
-        self.placeholder = placeholder
-        self.isSecure = isSecure
-        self.text = text
-    }
 
     var body: some View {
         ZStack {
             if isSecure && !isVisible {
-                SecureField("", text: text)
+                SecureField("", text: $text)
                     .styleForLogin()
             } else {
-                TextField("", text: text)
+                TextField("", text: $text)
                     .styleForLogin()
             }
 
-            if text.wrappedValue.isEmpty {
+            if text.isEmpty {
                 HStack {
                     Text(placeholder)
                         .padding(.leading)
