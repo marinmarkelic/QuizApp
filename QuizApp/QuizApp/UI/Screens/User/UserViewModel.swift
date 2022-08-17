@@ -1,19 +1,24 @@
 import Combine
 import Foundation
 
-class UserViewModel {
-
-    private let router: AppRouterProtocol
-    private let userUseCase: UserUseCaseProtocol
-    private let logoutUseCase: LogOutUseCaseProtocol
+class UserViewModel: ObservableObject {
 
     @Published var userInfo: UserInfo = UserInfo()
+
+    @Published var username: String = ""
+    @Published var name: String = ""
+
+    private var router: AppRouterProtocol!
+    private var userUseCase: UserUseCaseProtocol!
+    private var logoutUseCase: LogOutUseCaseProtocol!
 
     init(router: AppRouterProtocol, userUseCase: UserUseCaseProtocol, logoutUseCase: LogOutUseCaseProtocol) {
         self.router = router
         self.userUseCase = userUseCase
         self.logoutUseCase = logoutUseCase
     }
+
+    init() {}
 
     @MainActor
     func save(username: String, name: String) {
@@ -29,6 +34,8 @@ class UserViewModel {
         Task {
             do {
                 userInfo = try await UserInfo(userUseCase.userInfo)
+                username = userInfo.username
+                name = userInfo.name
             } catch _ {}
         }
     }

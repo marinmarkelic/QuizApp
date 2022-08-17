@@ -2,9 +2,13 @@ import SwiftUI
 
 struct SettingsView: View {
 
+    @ObservedObject var viewModel: UserViewModel
+
     var body: some View {
         VStack(alignment: .leading) {
-            UserInfoView()
+            UserInfoView(
+                username: viewModel.username,
+                name: $viewModel.name)
 
             Spacer()
         }.background(LinearGradient.background.ignoresSafeArea())
@@ -15,7 +19,7 @@ struct SettingsView: View {
 struct SettingsView_Previews: PreviewProvider {
 
     static var previews: some View {
-        SettingsView()
+        SettingsView(viewModel: UserViewModel())
     }
 
 }
@@ -24,15 +28,12 @@ struct UserInfoView: View {
 
     let username: String
     let name: Binding<String>
+    let onLogoutTap: () -> Void
 
-    init(username: String, name: Binding<String>) {
+    init(username: String, name: Binding<String>, onLogoutTap: @escaping () -> Void = {}) {
         self.username = username
         self.name = name
-    }
-
-    init() {
-        username = "Username"
-        name = Binding.constant("name")
+        self.onLogoutTap = onLogoutTap
     }
 
     var body: some View {
@@ -59,19 +60,27 @@ struct UserInfoView: View {
 
                 Spacer()
 
-                Button(action: {} ) {
+                Button(action: { onLogoutTap() }, label: {
                     Text("LogOut")
                         .foregroundColor(.red)
-                }
+                })
                 .padding()
                 .frame(maxWidth: .infinity)
                 .background(.white)
                 .cornerRadius(25)
 
-            }.padding()
+            }
+            .padding()
 
             Spacer()
         }
+    }
+
+    func onLogoutTap(_ onLogoutTap: @escaping () -> Void) -> UserInfoView {
+        UserInfoView(
+            username: username,
+            name: name,
+            onLogoutTap: onLogoutTap)
     }
 
 }
