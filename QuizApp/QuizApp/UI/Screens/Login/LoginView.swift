@@ -8,7 +8,6 @@ struct LoginView: View {
         VStack {
             Text("PopQuiz")
                 .font(.heading1)
-                .fontWeight(.bold)
                 .foregroundColor(.white)
 
             Spacer()
