@@ -18,22 +18,10 @@ struct LoginTextField: View {
         ZStack {
             if isSecure && !isVisible {
                 SecureField("", text: text)
-                    .autocapitalization(.none)
-                    .disableAutocorrection(true)
-                    .foregroundColor(.white)
-                    .padding()
-                    .background(.white.opacity(0.3))
-                    .cornerRadius(25)
-                    .frame(height: 50, alignment: .center)
+                    .styleForLogin()
             } else {
                 TextField("", text: text)
-                    .autocapitalization(.none)
-                    .disableAutocorrection(true)
-                    .foregroundColor(.white)
-                    .padding()
-                    .background(.white.opacity(0.3))
-                    .cornerRadius(25)
-                    .frame(height: 50, alignment: .center)
+                    .styleForLogin()
             }
 
             if text.wrappedValue.isEmpty {
@@ -58,6 +46,36 @@ struct LoginTextField: View {
                 }
             }
         }
+    }
+
+}
+
+extension SecureField {
+
+    func styleForLogin() -> some View {
+        self
+            .autocapitalization(.none)
+            .disableAutocorrection(true)
+            .foregroundColor(.white)
+            .padding()
+            .background(.white.opacity(0.3))
+            .cornerRadius(25)
+            .frame(height: 50, alignment: .center)
+    }
+
+}
+
+extension TextField {
+
+    func styleForLogin() -> some View {
+        self
+            .autocapitalization(.none)
+            .disableAutocorrection(true)
+            .foregroundColor(.white)
+            .padding()
+            .background(.white.opacity(0.3))
+            .cornerRadius(25)
+            .frame(height: 50, alignment: .center)
     }
 
 }
