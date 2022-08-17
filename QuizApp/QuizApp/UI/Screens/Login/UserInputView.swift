@@ -37,7 +37,7 @@ struct UserInputView: View {
 
             Button(action: { onLoginTap() }, label: {
                 Text("Login")
-                    .foregroundColor(Color(red: 0.39, green: 0.16, blue: 0.87)) // change
+                    .foregroundColor(.purpleTextColor)
                     .frame(maxWidth: .infinity)
             })
             .disabled(!isLoginButtonEnabled)

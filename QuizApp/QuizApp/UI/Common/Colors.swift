@@ -1,4 +1,5 @@
 import UIKit
+import SwiftUI
 
 extension UIColor {
 
@@ -10,5 +11,11 @@ extension UIColor {
     static let musicColor = UIColor(named: "MusicColor")!
     static let geographyColor = UIColor(named: "GeographyColor")!
     static let allColor = UIColor(named: "AllColor")!
+
+}
+
+extension Color {
+
+    static let purpleTextColor = Color("PurpleTextColor")
 
 }
