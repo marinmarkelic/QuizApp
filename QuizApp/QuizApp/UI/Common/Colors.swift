@@ -16,6 +16,9 @@ extension UIColor {
 
 extension Color {
 
-    static let purpleTextColor = Color("PurpleTextColor")
+    static let purpleText = Color("PurpleTextColor")
+
+    static let backgroundFirst = Color(red: 0.45, green: 0.31, blue: 0.64)
+    static let backgroundSecond = Color(red: 0.15, green: 0.19, blue: 0.46)
 
 }
