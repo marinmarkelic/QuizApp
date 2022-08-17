@@ -18,13 +18,13 @@ struct LoginView: View {
                 password: $viewModel.password,
                 errorText: viewModel.errorText,
                 isLoginButtonEnabled: viewModel.isLoginButtonEnabled)
-                .onLoginTap {
-                    viewModel.pressedLoginButton()
-                }
+            .onLoginTap {
+                viewModel.pressedLoginButton()
+            }
 
             Spacer()
         }
-        .background(GradientBackground())
+        .background(LinearGradient.background.ignoresSafeArea())
     }
 
 }

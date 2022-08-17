@@ -71,15 +71,15 @@ Please try again
     private func findColor(for type: CategoryType) -> UIColor {
         switch type {
         case .sport:
-            return .sportColor
+            return .sport
         case .movies:
-            return .moviesColor
+            return .movies
         case .music:
-            return .musicColor
+            return .music
         case .geography:
-            return .geographyColor
+            return .geography
         case .all:
-            return .allColor
+            return .all
         }
     }
 

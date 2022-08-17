@@ -37,7 +37,7 @@ struct UserInputView: View {
 
             Button(action: { onLoginTap() }, label: {
                 Text("Login")
-                    .foregroundColor(.purpleTextColor)
+                    .foregroundColor(.purpleText)
                     .font(.heading6)
                     .frame(maxWidth: .infinity)
             })

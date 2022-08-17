@@ -13,10 +13,10 @@ struct LoginTextField: View {
         ZStack {
             if isSecure && !isVisible {
                 SecureField("", text: $text)
-                    .styleForLogin()
+                    .loginStyle()
             } else {
                 TextField("", text: $text)
-                    .styleForLogin()
+                    .loginStyle()
             }
 
             if text.isEmpty {
@@ -37,7 +37,7 @@ struct LoginTextField: View {
                         .foregroundColor(.white.opacity(0.7))
                         .padding(.trailing)
                         .onTapGesture {
-                            isVisible = !isVisible
+                            isVisible.toggle()
                         }
                 }
             }
@@ -48,7 +48,7 @@ struct LoginTextField: View {
 
 extension SecureField {
 
-    func styleForLogin() -> some View {
+    func loginStyle() -> some View {
         self
             .font(.body1)
             .autocapitalization(.none)
@@ -64,7 +64,7 @@ extension SecureField {
 
 extension TextField {
 
-    func styleForLogin() -> some View {
+    func loginStyle() -> some View {
         self
             .font(.body1)
             .autocapitalization(.none)
