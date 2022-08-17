@@ -1,5 +1,6 @@
 import UIKit
 import Resolver
+import SwiftUI
 
 class AppRouter: AppRouterProtocol {
 
@@ -13,6 +14,7 @@ class AppRouter: AppRouterProtocol {
     init(container: Resolver) {
         self.container = container
         navigationController = UINavigationController()
+        navigationController.setNavigationBarHidden(true, animated: false)
     }
 
     func start(in window: UIWindow) {
@@ -23,7 +25,7 @@ class AppRouter: AppRouterProtocol {
     }
 
     func showLogin() {
-        let loginViewController = container.resolve(LoginViewController.self)
+        let loginViewController = container.resolve(UIHostingController<LoginView>.self)
         navigationController.setViewControllers([loginViewController], animated: true)
     }
 

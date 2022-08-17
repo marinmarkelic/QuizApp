@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9C01635428ACDCFF004C7270 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C01635328ACDCFF004C7270 /* LoginView.swift */; };
 		9C030BDC289BEDE4001F1182 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C030BDB289BEDE4001F1182 /* SearchBar.swift */; };
 		9C030BDE289BF3AF001F1182 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C030BDD289BF3AF001F1182 /* SearchViewModel.swift */; };
 		9C0481E2288FEFFD0095247C /* SolvingQuizUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0481E1288FEFFD0095247C /* SolvingQuizUseCase.swift */; };
@@ -93,6 +94,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9C01635328ACDCFF004C7270 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		9C030BDB289BEDE4001F1182 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		9C030BDD289BF3AF001F1182 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		9C0481E1288FEFFD0095247C /* SolvingQuizUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolvingQuizUseCase.swift; sourceTree = "<group>"; };
@@ -263,11 +265,12 @@
 			isa = PBXGroup;
 			children = (
 				9C19536E287584750051CEC6 /* LoginViewController.swift */,
-				9C1953AE287826BD0051CEC6 /* LoginViewModel.swift */,
 				9C1953932876D3860051CEC6 /* EmailView.swift */,
 				9C1953952876D65C0051CEC6 /* PasswordView.swift */,
 				9C1953B02878366A0051CEC6 /* ErrorLabel.swift */,
 				9C1953992876DD7D0051CEC6 /* LoginButton.swift */,
+				9C1953AE287826BD0051CEC6 /* LoginViewModel.swift */,
+				9C01635328ACDCFF004C7270 /* LoginView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -639,6 +642,7 @@
 				9CC33B26287D6E2B002E9853 /* SecureStorage.swift in Sources */,
 				9C1C76D128802471006217A9 /* QuizViewController.swift in Sources */,
 				9C08B86F28981AA0001F56BD /* LeaderboardModels.swift in Sources */,
+				9C01635428ACDCFF004C7270 /* LoginView.swift in Sources */,
 				9C0481E9288FFD1B0095247C /* SolvingQuizViewModel.swift in Sources */,
 				9C327E57289AC7CF003787C0 /* Combine+Extensions.swift in Sources */,
 				9C5F21942886AFF5000C3511 /* Colors.swift in Sources */,

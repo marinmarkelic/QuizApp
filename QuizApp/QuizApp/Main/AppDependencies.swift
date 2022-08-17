@@ -1,5 +1,6 @@
 import Resolver
 import UIKit
+import SwiftUI
 
 class AppDependencies {
 
@@ -185,7 +186,7 @@ class AppDependencies {
 
     private func registerViewControllers(in container: Resolver) {
         container
-            .register { LoginViewController(viewModel: container.resolve()) }
+            .register { UIHostingController(rootView: LoginView(viewModel: container.resolve())) }
             .scope(.unique)
 
         container

@@ -1,21 +1,22 @@
 import Combine
 import UIKit
 
-class LoginViewModel {
+class LoginViewModel: ObservableObject {
 
-    private let router: AppRouterProtocol
-    private let useCase: LoginUseCaseProtocol
+    private var router: AppRouterProtocol!
+    private var useCase: LoginUseCaseProtocol!
 
     @Published var isLoginButtonEnabled = false
     @Published var errorText = ""
-
-    private var email = ""
-    private var password = ""
+    @Published var email = ""
+    @Published var password = ""
 
     init(router: AppRouterProtocol, useCase: LoginUseCaseProtocol) {
         self.router = router
         self.useCase = useCase
     }
+
+    init() { }
 
     func updatedEmail(with text: String) {
         email = text
