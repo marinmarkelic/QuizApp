@@ -21,19 +21,13 @@ extension Color {
     static let backgroundPrimary = Color("BackgroundPrimary")
     static let backgroundSecondary = Color("BackgroundSecondary")
 
-}
+    static let correctAnswer = Color("CorrectAnswer")
+    static let incorrectAnswer = Color("IncorrectAnswer")
 
-extension Color {
-
-    static let purpleTextColor = Color("PurpleTextColor")
-
-    static let correctAnswerColor = Color("CorrectAnswerColor")
-    static let incorrectAnswerColor = Color("IncorrectAnswerColor")
-
-    static let sportColor = Color("SportColor")
-    static let moviesColor = Color("MoviesColor")
-    static let musicColor = Color("MusicColor")
-    static let geographyColor = Color("GeographyColor")
-    static let allColor = Color("AllColor")
+    static let sport = Color("Sport")
+    static let movies = Color("Movies")
+    static let music = Color("Music")
+    static let geography = Color("Geography")
+    static let all = Color("All")
 
 }
