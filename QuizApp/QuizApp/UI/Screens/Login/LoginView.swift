@@ -24,9 +24,7 @@ struct LoginView: View {
 
             Spacer()
         }
-        .background(
-            LinearGradient.background
-                .ignoresSafeArea())
+        .background(LinearGradient.background.ignoresSafeArea())
     }
 
 }

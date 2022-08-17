@@ -13,10 +13,10 @@ struct LoginTextField: View {
         ZStack {
             if isSecure && !isVisible {
                 SecureField("", text: $text)
-                    .styleForLogin()
+                    .loginStyle()
             } else {
                 TextField("", text: $text)
-                    .styleForLogin()
+                    .loginStyle()
             }
 
             if text.isEmpty {
@@ -25,6 +25,7 @@ struct LoginTextField: View {
                         .padding(.leading)
                         .foregroundColor(.white.opacity(0.7))
                         .allowsHitTesting(false)
+
                     Spacer()
                 }
             } else if isVisible || isSecure {
@@ -32,11 +33,12 @@ struct LoginTextField: View {
                     let imageName = isVisible ? "eye.fill" : "eye"
 
                     Spacer()
+
                     Image(systemName: imageName)
                         .foregroundColor(.white.opacity(0.7))
                         .padding(.trailing)
                         .onTapGesture {
-                            isVisible = !isVisible
+                            isVisible.toggle()
                         }
                 }
             }
@@ -47,7 +49,7 @@ struct LoginTextField: View {
 
 extension SecureField {
 
-    func styleForLogin() -> some View {
+    func loginStyle() -> some View {
         self
             .autocapitalization(.none)
             .disableAutocorrection(true)
@@ -62,7 +64,7 @@ extension SecureField {
 
 extension TextField {
 
-    func styleForLogin() -> some View {
+    func loginStyle() -> some View {
         self
             .autocapitalization(.none)
             .disableAutocorrection(true)
