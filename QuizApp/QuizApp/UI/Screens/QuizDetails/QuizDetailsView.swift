@@ -15,7 +15,7 @@ struct QuizDetailsView: View {
                     viewModel.showLeaderboard()
                 }
 
-            DetailsView()
+            DetailsView(quiz: viewModel.quiz)
 
             Spacer()
         }

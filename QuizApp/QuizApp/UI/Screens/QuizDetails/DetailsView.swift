@@ -2,15 +2,18 @@ import SwiftUI
 
 struct DetailsView: View {
 
+    let quiz: Quiz
+
     var body: some View {
         VStack {
-            Text("Title")
+            Text(quiz.name)
                 .font(.heading1)
                 .foregroundColor(.white)
 
-            Text("Info")
+            Text(quiz.description)
                 .font(.heading4)
                 .foregroundColor(.white)
+                .multilineTextAlignment(.center)
 
             Image(systemName: "circle")
                 .resizable()
