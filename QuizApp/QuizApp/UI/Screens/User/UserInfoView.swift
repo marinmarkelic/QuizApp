@@ -56,12 +56,14 @@ struct UserInfoView: View {
     func onLogoutTap(_ onLogoutTap: @escaping () -> Void) -> UserInfoView {
         UserInfoView(
             userInfo: userInfo,
-            onLogoutTap: onLogoutTap)
+            onLogoutTap: onLogoutTap,
+            onNameChange: onNameChange)
     }
 
     func onNameChange(_ onNameChange: @escaping () -> Void) -> UserInfoView {
         UserInfoView(
             userInfo: userInfo,
+            onLogoutTap: onLogoutTap,
             onNameChange: onNameChange)
     }
 
