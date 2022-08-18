@@ -21,7 +21,8 @@ struct LeaderboardCell: View {
                 .font(.heading2)
                 .foregroundColor(.white)
         }
-        .padding()
+        .padding([.leading, .trailing])
+        .padding([.top, .bottom], 10)
     }
 
 }

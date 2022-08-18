@@ -11,7 +11,6 @@ struct LeaderboardView: View {
             LeaderboardList(leaderboard: $viewModel.leaderboard)
 
             Spacer()
-
         }
         .background(LinearGradient.background.ignoresSafeArea())
         .onAppear {
