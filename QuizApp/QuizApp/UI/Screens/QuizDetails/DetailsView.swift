@@ -1,4 +1,5 @@
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct DetailsView: View {
 
@@ -15,9 +16,10 @@ struct DetailsView: View {
                 .foregroundColor(.white)
                 .multilineTextAlignment(.center)
 
-            Image(systemName: "circle")
+            WebImage(url: URL(string: quiz.imageUrl))
                 .resizable()
                 .aspectRatio(contentMode: .fit)
+                .cornerRadius(10)
                 .padding()
 
             Button(action: {}, label: {

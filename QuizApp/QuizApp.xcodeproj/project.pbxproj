@@ -74,6 +74,7 @@
 		9C668AA928AE5CE3001D6920 /* LeaderboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C668AA828AE5CE3001D6920 /* LeaderboardCell.swift */; };
 		9C668AAD28AE84C8001D6920 /* QuizDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C668AAC28AE84C8001D6920 /* QuizDetailsView.swift */; };
 		9C668AAF28AE896C001D6920 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C668AAE28AE896C001D6920 /* DetailsView.swift */; };
+		9C668AB228AE8BA1001D6920 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 9C668AB128AE8BA1001D6920 /* SDWebImageSwiftUI */; };
 		9C7523CA289041EE00E8AAB2 /* QuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C7523C9289041EE00E8AAB2 /* QuestionCell.swift */; };
 		9CADE93D28AD343500B04380 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CADE93C28AD343500B04380 /* SettingsView.swift */; };
 		9CC33B22287D6848002E9853 /* UserDatabaseDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC33B21287D6848002E9853 /* UserDatabaseDataSource.swift */; };
@@ -185,6 +186,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9C668AB228AE8BA1001D6920 /* SDWebImageSwiftUI in Frameworks */,
 				9C25C89428882613000C4C90 /* SDWebImage in Frameworks */,
 				9CC33B2B287D77E5002E9853 /* KeychainSwift in Frameworks */,
 				9C4807EA288AE033002D097D /* Resolver in Frameworks */,
@@ -498,6 +500,7 @@
 				9CC33B2A287D77E5002E9853 /* KeychainSwift */,
 				9C25C89328882613000C4C90 /* SDWebImage */,
 				9C4807E9288AE033002D097D /* Resolver */,
+				9C668AB128AE8BA1001D6920 /* SDWebImageSwiftUI */,
 			);
 			productName = QuizApp;
 			productReference = 9C195367287584750051CEC6 /* QuizApp.app */;
@@ -532,6 +535,7 @@
 				9CC33B29287D77E5002E9853 /* XCRemoteSwiftPackageReference "keychain-swift" */,
 				9C25C89228882613000C4C90 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				9C4807E8288AE033002D097D /* XCRemoteSwiftPackageReference "Resolver" */,
+				9C668AB028AE8BA1001D6920 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = 9C195368287584750051CEC6 /* Products */;
 			projectDirPath = "";
@@ -891,6 +895,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		9C668AB028AE8BA1001D6920 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		9CC33B29287D77E5002E9853 /* XCRemoteSwiftPackageReference "keychain-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/evgenyneu/keychain-swift";
@@ -916,6 +928,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9C4807E8288AE033002D097D /* XCRemoteSwiftPackageReference "Resolver" */;
 			productName = Resolver;
+		};
+		9C668AB128AE8BA1001D6920 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9C668AB028AE8BA1001D6920 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
 		};
 		9CC33B2A287D77E5002E9853 /* KeychainSwift */ = {
 			isa = XCSwiftPackageProductDependency;
