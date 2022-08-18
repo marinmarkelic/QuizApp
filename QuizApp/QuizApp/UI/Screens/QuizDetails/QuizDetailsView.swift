@@ -5,21 +5,19 @@ struct QuizDetailsView: View {
     @ObservedObject var viewModel: QuizDetailsViewModel
 
     var body: some View {
-        VStack(alignment: .trailing) {
-            Spacer()
+        VScrollView {
+            VStack(alignment: .trailing) {
+                Text("Leaderboard")
+                    .font(.heading5)
+                    .foregroundColor(.white)
+                    .onTapGesture {
+                        viewModel.showLeaderboard()
+                    }
 
-            Text("Leaderboard")
-                .font(.heading5)
-                .foregroundColor(.white)
-                .onTapGesture {
-                    viewModel.showLeaderboard()
-                }
-
-            DetailsView(quiz: viewModel.quiz)
-
-            Spacer()
+                DetailsView(quiz: viewModel.quiz)
+            }
+            .padding()
         }
-        .padding()
         .background(LinearGradient.background.ignoresSafeArea())
     }
 

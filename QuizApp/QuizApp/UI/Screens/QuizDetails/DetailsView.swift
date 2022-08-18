@@ -10,9 +10,10 @@ struct DetailsView: View {
             Text(quiz.name)
                 .font(.heading1)
                 .foregroundColor(.white)
+                .padding(.vertical, 15)
 
             Text(quiz.description)
-                .font(.heading4)
+                .font(.subtitle1)
                 .foregroundColor(.white)
                 .multilineTextAlignment(.center)
 
@@ -20,7 +21,8 @@ struct DetailsView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .cornerRadius(10)
-                .padding()
+                .padding(.vertical, 10)
+                .frame(maxHeight: 200)
 
             Button(action: {}, label: {
                 Text("Start Quiz")
