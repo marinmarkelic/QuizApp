@@ -1,13 +1,12 @@
-import Combine
 import Foundation
 
-class UserViewModel {
+class UserViewModel: ObservableObject {
 
-    private let router: AppRouterProtocol
-    private let userUseCase: UserUseCaseProtocol
-    private let logoutUseCase: LogOutUseCaseProtocol
+    var userInfo: UserInfo = UserInfo()
 
-    @Published var userInfo: UserInfo = UserInfo()
+    private var router: AppRouterProtocol!
+    private var userUseCase: UserUseCaseProtocol!
+    private var logoutUseCase: LogOutUseCaseProtocol!
 
     init(router: AppRouterProtocol, userUseCase: UserUseCaseProtocol, logoutUseCase: LogOutUseCaseProtocol) {
         self.router = router
@@ -15,20 +14,30 @@ class UserViewModel {
         self.logoutUseCase = logoutUseCase
     }
 
+    init() {}
+
     @MainActor
-    func save(username: String, name: String) {
+    func save() {
         Task {
             do {
-                userInfo = try await UserInfo(userUseCase.save(userInfo: UserInfoModel(username: username, name: name)))
+                let userInfo = try await userUseCase.save(
+                    userInfo: UserInfoModel(
+                        username: userInfo.username,
+                        name: userInfo.name))
+
+                self.userInfo.apply(userInfo)
             } catch _ {}
         }
     }
 
     @MainActor
     func getUserInfo() {
+        guard let userUseCase = userUseCase else { return }
+
         Task {
             do {
-                userInfo = try await UserInfo(userUseCase.userInfo)
+                let userInfo = try await userUseCase.userInfo
+                self.userInfo.apply(userInfo)
             } catch _ {}
         }
     }

@@ -206,7 +206,7 @@ class AppDependencies {
             .scope(.unique)
 
         container
-            .register { UserViewController(viewModel: container.resolve()) }
+            .register { UIHostingController(rootView: SettingsView(viewModel: container.resolve())) }
             .scope(.unique)
 
         container
