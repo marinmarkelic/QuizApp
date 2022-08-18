@@ -58,8 +58,8 @@ class AppRouter: AppRouterProtocol {
     }
 
     func showQuizDetails(with quiz: Quiz) {
-//        let quizDetailsViewController = container.resolve(QuizDetailsViewController.self, args: quiz)
-//        navigationController.pushViewController(quizDetailsViewController, animated: true)
+        let quizDetailsViewController = container.resolve(UIHostingController<QuizDetailsView>.self, args: quiz)
+        navigationController.pushViewController(quizDetailsViewController, animated: true)
     }
 
     func showLeaderboard(with id: Int) {

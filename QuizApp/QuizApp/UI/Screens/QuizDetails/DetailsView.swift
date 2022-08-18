@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct DetailsView: View {
+
     var body: some View {
         VStack {
             Text("Title")
@@ -32,4 +33,5 @@ struct DetailsView: View {
         .background(.white.opacity(0.3))
         .cornerRadius(10)
     }
+
 }

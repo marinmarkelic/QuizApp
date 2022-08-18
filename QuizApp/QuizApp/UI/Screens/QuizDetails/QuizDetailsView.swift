@@ -2,6 +2,8 @@ import SwiftUI
 
 struct QuizDetailsView: View {
 
+    @ObservedObject var viewModel: QuizDetailsViewModel
+
     var body: some View {
         VStack(alignment: .trailing) {
             Spacer()
@@ -9,6 +11,9 @@ struct QuizDetailsView: View {
             Text("Leaderboard")
                 .font(.heading5)
                 .foregroundColor(.white)
+                .onTapGesture {
+                    viewModel.showLeaderboard()
+                }
 
             DetailsView()
 
@@ -23,7 +28,7 @@ struct QuizDetailsView: View {
 struct QuizDetailsPreview: PreviewProvider {
 
     static var previews: some View {
-        QuizDetailsView()
+        QuizDetailsView(viewModel: QuizDetailsViewModel())
     }
 
 }
