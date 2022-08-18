@@ -1,11 +1,11 @@
 import Combine
 
-class LeaderboardViewModel {
+class LeaderboardViewModel: ObservableObject {
 
-    private let id: Int
+    private var id: Int!
 
-    private let useCase: LeaderboardUseCaseProtocol
-    private let router: AppRouterProtocol
+    private var useCase: LeaderboardUseCaseProtocol!
+    private var router: AppRouterProtocol!
 
     @Published var leaderboard: Leaderboard = .empty
     @Published var fetchingErrorMessage: String = ""
@@ -17,8 +17,12 @@ class LeaderboardViewModel {
         self.router = router
     }
 
+    init() {}
+
     @MainActor
     func fetchLeaderboard() {
+        guard let useCase = useCase else { return }
+
         Task {
             do {
                 let response = try await useCase.fetchLeaderboard(for: id)
