@@ -22,6 +22,7 @@ struct LoginTextField: View {
             if text.isEmpty {
                 HStack {
                     Text(placeholder)
+                        .font(.body1)
                         .padding(.leading)
                         .foregroundColor(.white.opacity(0.7))
                         .allowsHitTesting(false)
@@ -51,6 +52,7 @@ extension SecureField {
 
     func loginStyle() -> some View {
         self
+            .font(.body1)
             .autocapitalization(.none)
             .disableAutocorrection(true)
             .foregroundColor(.white)
@@ -66,6 +68,7 @@ extension TextField {
 
     func loginStyle() -> some View {
         self
+            .font(.body1)
             .autocapitalization(.none)
             .disableAutocorrection(true)
             .foregroundColor(.white)
