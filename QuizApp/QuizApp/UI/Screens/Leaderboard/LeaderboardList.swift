@@ -5,7 +5,7 @@ struct LeaderboardList: View {
     let leaderboard: Leaderboard
 
     var body: some View {
-        ScrollView(.vertical) {
+        ScrollView {
             ForEach(leaderboard.leaderboardPoints, id: \.index) {
                 Divider()
                     .background(.white.opacity(0.6))
