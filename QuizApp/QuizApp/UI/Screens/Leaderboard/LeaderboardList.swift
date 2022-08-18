@@ -2,7 +2,7 @@ import SwiftUI
 
 struct LeaderboardList: View {
 
-    var leaderboard: Leaderboard
+    let leaderboard: Leaderboard
 
     var body: some View {
         ScrollView(.vertical) {

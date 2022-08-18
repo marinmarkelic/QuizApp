@@ -17,9 +17,9 @@ extension Leaderboard: Equatable {
     static let empty = Leaderboard(leaderboardPoints: [])
 
     init(_ model: LeaderboardModel) {
-        leaderboardPoints = model.leaderboardPoints.enumerated().map({ index, element in
+        leaderboardPoints = model.leaderboardPoints.enumerated().map { index, element in
             LeaderboardPoints(element, index: index + 1)
-        })
+        }
     }
 
 }

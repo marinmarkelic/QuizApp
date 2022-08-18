@@ -21,6 +21,8 @@ class LeaderboardViewModel: ObservableObject {
 
     @MainActor
     func fetchLeaderboard() {
+        guard let useCase = useCase else { return }
+
         Task {
             do {
                 let response = try await useCase.fetchLeaderboard(for: id)
