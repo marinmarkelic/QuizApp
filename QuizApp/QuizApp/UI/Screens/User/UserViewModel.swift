@@ -34,6 +34,8 @@ class UserViewModel: ObservableObject {
 
     @MainActor
     func getUserInfo() {
+        guard let userUseCase = userUseCase else { return }
+
         Task {
             do {
                 let userInfo = try await userUseCase.userInfo
