@@ -8,7 +8,7 @@ struct LeaderboardView: View {
         VStack {
             LeaderboardHeader()
 
-            LeaderboardList(leaderboard: $viewModel.leaderboard)
+            LeaderboardList(leaderboard: viewModel.leaderboard)
 
             Spacer()
         }

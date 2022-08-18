@@ -2,12 +2,11 @@ import SwiftUI
 
 struct LeaderboardCell: View {
 
-    let index: Int
     let data: LeaderboardPoints
 
     var body: some View {
         HStack {
-            Text("\(index + 1).")
+            Text("\(data.index).")
                 .font(.heading4)
                 .foregroundColor(.white)
 
@@ -21,8 +20,8 @@ struct LeaderboardCell: View {
                 .font(.heading2)
                 .foregroundColor(.white)
         }
-        .padding([.leading, .trailing])
-        .padding([.top, .bottom], 10)
+        .padding(.horizontal)
+        .padding(.vertical, 10)
     }
 
 }

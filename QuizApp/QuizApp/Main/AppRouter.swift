@@ -64,11 +64,11 @@ class AppRouter: AppRouterProtocol {
 
     func showLeaderboard(with id: Int) {
         let leaderboardViewController = container.resolve(UIHostingController<LeaderboardView>.self, args: id)
-        styleLeaderboardTabBar(leaderboardViewController)
+        styleLeaderboardNavigationBar(leaderboardViewController)
         navigationController.pushViewController(leaderboardViewController, animated: true)
     }
 
-    private func styleLeaderboardTabBar(_ viewController: UIViewController) {
+    private func styleLeaderboardNavigationBar(_ viewController: UIViewController) {
         let titleView = UILabel()
         titleView.text = "Leaderboard"
         titleView.textColor = .white

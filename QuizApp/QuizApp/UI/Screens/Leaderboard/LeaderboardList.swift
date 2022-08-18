@@ -2,15 +2,15 @@ import SwiftUI
 
 struct LeaderboardList: View {
 
-    @Binding var leaderboard: Leaderboard
+    var leaderboard: Leaderboard
 
     var body: some View {
         ScrollView(.vertical) {
-            ForEach(Array(leaderboard.leaderboardPoints.enumerated()), id: \.offset) { index, element in
+            ForEach(leaderboard.leaderboardPoints, id: \.index) {
                 Divider()
                     .background(.white.opacity(0.6))
 
-                LeaderboardCell(index: index, data: element)
+                LeaderboardCell(data: $0)
             }
 
             Divider()
