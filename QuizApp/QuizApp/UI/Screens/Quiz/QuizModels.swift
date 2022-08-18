@@ -14,6 +14,15 @@ struct Quiz: Equatable {
 
 extension Quiz {
 
+    static let empty = Quiz(
+        id: 0,
+        name: "",
+        description: "",
+        category: Category(from: .all),
+        difficulty: .easy,
+        imageUrl: "",
+        numberOfQuestions: 0)
+
     init(_ quiz: QuizModel) {
         id = quiz.id
         name = quiz.name

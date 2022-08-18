@@ -17,7 +17,8 @@ struct QuizDetailsView: View {
                         Rectangle()
                             .frame(maxHeight: 2)
                             .cornerRadius(2)
-                            .offset(x: 0, y: 2),
+                            .offset(x: 0, y: 2)
+                            .background(.white),
                         alignment: .bottom)
 
                 DetailsView(quiz: viewModel.quiz)

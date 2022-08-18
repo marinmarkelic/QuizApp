@@ -2,7 +2,7 @@ import Combine
 
 class QuizDetailsViewModel: ObservableObject {
 
-    @Published var quiz: Quiz!
+    @Published var quiz: Quiz = .empty
 
     private var router: AppRouterProtocol!
 
@@ -16,10 +16,6 @@ class QuizDetailsViewModel: ObservableObject {
     @MainActor
     func startQuiz() {
         router.showQuiz(with: quiz.id)
-    }
-
-    func goBack() {
-        router.goBack()
     }
 
     func showLeaderboard() {
