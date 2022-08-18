@@ -2,11 +2,12 @@ import SwiftUI
 
 struct LeaderboardCell: View {
 
-    let data: MockResult
+    let index: Int
+    let data: LeaderboardPoints
 
     var body: some View {
         HStack {
-            Text("1.")
+            Text("\(index + 1).")
                 .font(.heading4)
                 .foregroundColor(.white)
 

@@ -8,12 +8,15 @@ struct LeaderboardView: View {
         VStack {
             LeaderboardHeader()
 
-            LeaderboardList()
+            LeaderboardList(leaderboard: $viewModel.leaderboard)
 
             Spacer()
 
         }
         .background(LinearGradient.background.ignoresSafeArea())
+        .onAppear {
+            viewModel.fetchLeaderboard()
+        }
     }
 
 }
@@ -23,18 +26,5 @@ struct LeaderboardPreview: PreviewProvider {
     static var previews: some View {
         LeaderboardView(viewModel: LeaderboardViewModel())
     }
-
-}
-
-public let mockData = [
-    MockResult(name: "a", points: 21),
-    MockResult(name: "b", points: 21),
-    MockResult(name: "c", points: 21),
-    MockResult(name: "d", points: 21)]
-
-public struct MockResult {
-
-    let name: String
-    let points: Int
 
 }
