@@ -40,6 +40,7 @@ struct UserInfoView: View {
                 Button(action: { onLogoutTap() }, label: {
                     Text("LogOut")
                         .foregroundColor(.red)
+                        .font(.heading6)
                         .frame(maxWidth: .infinity)
                 })
                 .padding()
