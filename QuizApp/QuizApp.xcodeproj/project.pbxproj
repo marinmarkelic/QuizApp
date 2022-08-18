@@ -79,7 +79,6 @@
 		9CC33B2B287D77E5002E9853 /* KeychainSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9CC33B2A287D77E5002E9853 /* KeychainSwift */; };
 		9CC33B31287D9F59002E9853 /* CheckNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC33B30287D9F59002E9853 /* CheckNetworkClient.swift */; };
 		9CC33B33287DA19F002E9853 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC33B32287DA19F002E9853 /* NetworkClient.swift */; };
-		9CC33B36287DBCB1002E9853 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC33B35287DBCB1002E9853 /* UserViewController.swift */; };
 		9CC4D6D6287C10450061F149 /* LoginNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4D6D5287C10450061F149 /* LoginNetworkClient.swift */; };
 		9CC4D6DD287C1C6B0061F149 /* RequestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4D6DC287C1C6B0061F149 /* RequestError.swift */; };
 		9CC4D6E0287C5A720061F149 /* AppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4D6DF287C5A720061F149 /* AppDependencies.swift */; };
@@ -163,7 +162,6 @@
 		9CC33B25287D6E2B002E9853 /* SecureStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureStorage.swift; sourceTree = "<group>"; };
 		9CC33B30287D9F59002E9853 /* CheckNetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckNetworkClient.swift; sourceTree = "<group>"; };
 		9CC33B32287DA19F002E9853 /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
-		9CC33B35287DBCB1002E9853 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		9CC4D6D5287C10450061F149 /* LoginNetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginNetworkClient.swift; sourceTree = "<group>"; };
 		9CC4D6DC287C1C6B0061F149 /* RequestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestError.swift; sourceTree = "<group>"; };
 		9CC4D6DF287C5A720061F149 /* AppDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependencies.swift; sourceTree = "<group>"; };
@@ -415,7 +413,6 @@
 		9CC33B34287DBC97002E9853 /* User */ = {
 			isa = PBXGroup;
 			children = (
-				9CC33B35287DBCB1002E9853 /* UserViewController.swift */,
 				9C20BACF287EF1DB009378FB /* UserViewModel.swift */,
 				9C25C8B12888428A000C4C90 /* UserModels.swift */,
 				9CADE93C28AD343500B04380 /* SettingsView.swift */,
@@ -633,7 +630,6 @@
 				9C25C8B22888428A000C4C90 /* UserModels.swift in Sources */,
 				9CFCC2F42885532A00B01343 /* QuizViewModel.swift in Sources */,
 				9C0481E2288FEFFD0095247C /* SolvingQuizUseCase.swift in Sources */,
-				9CC33B36287DBCB1002E9853 /* UserViewController.swift in Sources */,
 				9CC33B26287D6E2B002E9853 /* SecureStorage.swift in Sources */,
 				9C1C76D128802471006217A9 /* QuizViewController.swift in Sources */,
 				9C08B86F28981AA0001F56BD /* LeaderboardModels.swift in Sources */,
