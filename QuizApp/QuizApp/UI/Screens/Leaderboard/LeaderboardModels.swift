@@ -1,14 +1,11 @@
-import Foundation
-
 struct Leaderboard {
 
     let leaderboardPoints: [LeaderboardPoints]
 
 }
 
-struct LeaderboardPoints: Identifiable {
+struct LeaderboardPoints {
 
-    let id = UUID()
     let name: String
     let points: Int
 

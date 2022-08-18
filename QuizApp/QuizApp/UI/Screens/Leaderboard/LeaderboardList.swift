@@ -6,7 +6,7 @@ struct LeaderboardList: View {
 
     var body: some View {
         ScrollView(.vertical) {
-            ForEach(Array(leaderboard.leaderboardPoints.enumerated()), id: \.element.id) { index, element in
+            ForEach(Array(leaderboard.leaderboardPoints.enumerated()), id: \.offset) { index, element in
                 Divider()
                     .background(.white.opacity(0.6))
 
