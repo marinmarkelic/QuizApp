@@ -1,15 +1,12 @@
-import Combine
 import Foundation
 
 class UserViewModel: ObservableObject {
 
-    @Published var userInfo: UserInfo = UserInfo()
+    var userInfo: UserInfo = UserInfo()
 
     private var router: AppRouterProtocol!
     private var userUseCase: UserUseCaseProtocol!
     private var logoutUseCase: LogOutUseCaseProtocol!
-
-    private var cancellables = Set<AnyCancellable>()
 
     init(router: AppRouterProtocol, userUseCase: UserUseCaseProtocol, logoutUseCase: LogOutUseCaseProtocol) {
         self.router = router
