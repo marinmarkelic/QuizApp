@@ -63,8 +63,8 @@ class AppRouter: AppRouterProtocol {
     }
 
     func showLeaderboard(with id: Int) {
-        let leaderboardViewController = container.resolve(LeaderboardViewController.self, args: id)
-        navigationController.pushViewController(leaderboardViewController, animated: true)
+//        let leaderboardViewController = container.resolve(LeaderboardViewController.self, args: id)
+//        navigationController.pushViewController(leaderboardViewController, animated: true)
     }
 
     func showQuiz(with id: Int) {
