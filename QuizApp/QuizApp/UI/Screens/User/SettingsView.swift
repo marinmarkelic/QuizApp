@@ -11,6 +11,9 @@ struct SettingsView: View {
             .onLogoutTap {
                 viewModel.logOut()
             }
+            .onNameChange {
+                viewModel.save()
+            }
             .onAppear {
                 viewModel.getUserInfo()
             }
@@ -33,12 +36,14 @@ struct SettingsView_Previews: PreviewProvider {
 struct UserInfoView: View {
 
     let onLogoutTap: () -> Void
+    let onNameChange: () -> Void
 
     @ObservedObject var userInfo: UserInfo
 
-    init(userInfo: UserInfo, onLogoutTap: @escaping () -> Void = {}) {
+    init(userInfo: UserInfo, onLogoutTap: @escaping () -> Void = {}, onNameChange: @escaping () -> Void = {}) {
         self.userInfo = userInfo
         self.onLogoutTap = onLogoutTap
+        self.onNameChange = onNameChange
     }
 
     var body: some View {
@@ -59,7 +64,7 @@ struct UserInfoView: View {
                     .foregroundColor(.white)
                     .padding(.top, 40)
 
-                TextField("", text: $userInfo.name)
+                TextField("", text: $userInfo.name, onCommit: { onNameChange() })
                     .font(.heading4)
                     .foregroundColor(.white)
 
@@ -85,6 +90,12 @@ struct UserInfoView: View {
         UserInfoView(
             userInfo: userInfo,
             onLogoutTap: onLogoutTap)
+    }
+
+    func onNameChange(_ onNameChange: @escaping () -> Void) -> UserInfoView {
+        UserInfoView(
+            userInfo: userInfo,
+            onNameChange: onNameChange)
     }
 
 }
