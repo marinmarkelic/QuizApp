@@ -2,6 +2,8 @@ import SwiftUI
 
 struct LeaderboardView: View {
 
+    @ObservedObject var viewModel: LeaderboardViewModel
+
     var body: some View {
         VStack {
             LeaderboardHeader()
@@ -19,7 +21,7 @@ struct LeaderboardView: View {
 struct LeaderboardPreview: PreviewProvider {
 
     static var previews: some View {
-        LeaderboardView()
+        LeaderboardView(viewModel: LeaderboardViewModel())
     }
 
 }

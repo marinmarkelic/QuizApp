@@ -199,11 +199,11 @@ class AppDependencies {
             }
             .scope(.unique)
 
-//        container
-//            .register { (_, args) -> LeaderboardViewController in
-//                LeaderboardViewController(viewModel: container.resolve(args: args.get()))
-//            }
-//            .scope(.unique)
+        container
+            .register { (_, args) -> UIHostingController<LeaderboardView> in
+                UIHostingController(rootView: LeaderboardView(viewModel: container.resolve(args: args.get())))
+            }
+            .scope(.unique)
 
         container
             .register { UIHostingController(rootView: SettingsView(viewModel: container.resolve())) }
