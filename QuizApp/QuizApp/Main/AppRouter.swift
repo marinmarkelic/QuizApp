@@ -64,7 +64,33 @@ class AppRouter: AppRouterProtocol {
 
     func showLeaderboard(with id: Int) {
         let leaderboardViewController = container.resolve(UIHostingController<LeaderboardView>.self, args: id)
+        styleLeaderboardTabBar(leaderboardViewController)
         navigationController.pushViewController(leaderboardViewController, animated: true)
+    }
+
+    private func styleLeaderboardTabBar(_ viewController: UIViewController) {
+        let titleView = UILabel()
+        titleView.text = "Leaderboard"
+        titleView.textColor = .white
+        titleView.font = .heading3
+        viewController.navigationItem.titleView = titleView
+
+        viewController.navigationItem.hidesBackButton = true
+
+        let config = UIImage.SymbolConfiguration(scale: .medium)
+        let image = UIImage(systemName: "xmark", withConfiguration: config)
+        let closeButton = UIBarButtonItem(
+            image: image,
+            style: .done,
+            target: self,
+            action: #selector(tappedClose))
+        closeButton.tintColor = .white
+        viewController.navigationItem.rightBarButtonItem = closeButton
+    }
+
+    @objc
+    private func tappedClose() {
+        navigationController.popViewController(animated: true)
     }
 
     func showQuiz(with id: Int) {
