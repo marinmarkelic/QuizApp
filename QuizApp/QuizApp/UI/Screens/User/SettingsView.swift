@@ -9,6 +9,9 @@ struct SettingsView: View {
             UserInfoView(
                 username: viewModel.username,
                 name: $viewModel.name)
+            .onLogoutTap {
+                viewModel.logOut()
+            }
 
             Spacer()
         }.background(LinearGradient.background.ignoresSafeArea())
@@ -63,6 +66,7 @@ struct UserInfoView: View {
                 Button(action: { onLogoutTap() }, label: {
                     Text("LogOut")
                         .foregroundColor(.red)
+                        .frame(maxWidth: .infinity)
                 })
                 .padding()
                 .frame(maxWidth: .infinity)
