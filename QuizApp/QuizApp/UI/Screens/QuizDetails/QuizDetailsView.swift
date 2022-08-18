@@ -10,35 +10,7 @@ struct QuizDetailsView: View {
                 .font(.heading5)
                 .foregroundColor(.white)
 
-            VStack {
-                Text("Title")
-                    .font(.heading1)
-                    .foregroundColor(.white)
-
-                Text("Info")
-                    .font(.heading4)
-                    .foregroundColor(.white)https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg
-
-                Image(systemName: "circle")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .padding()
-
-                Button(action: {}, label: {
-                    Text("Start Quiz")
-                        .foregroundColor(.purpleText)
-                        .font(.heading6)
-                        .frame(maxWidth: .infinity)
-                })
-                .padding()
-                .frame(maxWidth: .infinity)
-                .background(.white)
-                .cornerRadius(25)
-            }
-            .frame(maxWidth: .infinity)
-            .padding()
-            .background(.white.opacity(0.3))
-            .cornerRadius(10)
+            DetailsView()
 
             Spacer()
         }
