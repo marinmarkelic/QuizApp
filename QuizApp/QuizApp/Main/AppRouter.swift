@@ -39,11 +39,22 @@ class AppRouter: AppRouterProtocol {
         let searchViewController = container.resolve(SearchViewController.self)
         let userViewController = container.resolve(UIHostingController<SettingsView>.self)
 
+        styleTabBarItems(userViewController: userViewController)
+
         let viewControllers = [quizViewController, searchViewController, userViewController]
 
         let tabBarController = TabBarController(viewControllers: viewControllers)
 
         navigationController.setViewControllers([tabBarController], animated: true)
+    }
+
+    private func styleTabBarItems(userViewController: UIHostingController<SettingsView>) {
+        let config = UIImage.SymbolConfiguration(scale: .medium)
+
+        userViewController.tabBarItem = UITabBarItem(
+            title: "Settings",
+            image: UIImage(systemName: "gearshape", withConfiguration: config),
+            selectedImage: UIImage(systemName: "gearshape.fill", withConfiguration: config))
     }
 
     func showQuizDetails(with quiz: Quiz) {
