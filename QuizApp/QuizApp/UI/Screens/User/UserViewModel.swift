@@ -5,9 +5,6 @@ class UserViewModel: ObservableObject {
 
     @Published var userInfo: UserInfo = UserInfo()
 
-    @Published var username: String = ""
-    @Published var name: String = ""
-
     private var router: AppRouterProtocol!
     private var userUseCase: UserUseCaseProtocol!
     private var logoutUseCase: LogOutUseCaseProtocol!
@@ -18,29 +15,22 @@ class UserViewModel: ObservableObject {
         self.router = router
         self.userUseCase = userUseCase
         self.logoutUseCase = logoutUseCase
-
-        Task {
-            await getUserInfo()
-        }
-        bindViewModel()
     }
 
     init() {}
 
-    private func bindViewModel() {
-        $name
-            .removeDuplicates()
-            .sink { [weak self] name in
-                print(name)
-            }
-            .store(in: &cancellables)
-    }
-
     @MainActor
-    func save(username: String, name: String) {
+    func save() {
         Task {
             do {
-                userInfo = try await UserInfo(userUseCase.save(userInfo: UserInfoModel(username: username, name: name)))
+                let userInfo = try await userUseCase.save(
+                    userInfo: UserInfoModel(
+                        username: userInfo.username,
+                        name: userInfo.name))
+
+                self.userInfo.set(
+                    username: userInfo.username,
+                    name: userInfo.name)
             } catch _ {}
         }
     }
@@ -49,9 +39,10 @@ class UserViewModel: ObservableObject {
     func getUserInfo() {
         Task {
             do {
-                userInfo = try await UserInfo(userUseCase.userInfo)
-                username = userInfo.username
-                name = userInfo.name
+                let userInfo = try await userUseCase.userInfo
+                self.userInfo.set(
+                    username: userInfo.username,
+                    name: userInfo.name)
             } catch _ {}
         }
     }

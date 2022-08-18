@@ -5,16 +5,19 @@ struct SettingsView: View {
     @ObservedObject var viewModel: UserViewModel
 
     var body: some View {
-        return VStack(alignment: .leading) {
+        VStack(alignment: .leading) {
             UserInfoView(
-                username: viewModel.username,
-                name: $viewModel.name)
+                userInfo: viewModel.userInfo)
             .onLogoutTap {
                 viewModel.logOut()
             }
+            .onAppear {
+                viewModel.getUserInfo()
+            }
 
             Spacer()
-        }.background(LinearGradient.background.ignoresSafeArea())
+        }
+        .background(LinearGradient.background.ignoresSafeArea())
     }
 
 }
@@ -29,13 +32,12 @@ struct SettingsView_Previews: PreviewProvider {
 
 struct UserInfoView: View {
 
-    let username: String
-    let name: Binding<String>
     let onLogoutTap: () -> Void
 
-    init(username: String, name: Binding<String>, onLogoutTap: @escaping () -> Void = {}) {
-        self.username = username
-        self.name = name
+    @ObservedObject var userInfo: UserInfo
+
+    init(userInfo: UserInfo, onLogoutTap: @escaping () -> Void = {}) {
+        self.userInfo = userInfo
         self.onLogoutTap = onLogoutTap
     }
 
@@ -47,7 +49,7 @@ struct UserInfoView: View {
                     .foregroundColor(.white)
                     .padding(.top, 40)
 
-                TextField("", text: Binding.constant(username))
+                TextField("", text: $userInfo.username)
                     .font(.heading4)
                     .foregroundColor(.white)
                     .disabled(true)
@@ -57,7 +59,7 @@ struct UserInfoView: View {
                     .foregroundColor(.white)
                     .padding(.top, 40)
 
-                TextField("", text: name)
+                TextField("", text: $userInfo.name)
                     .font(.heading4)
                     .foregroundColor(.white)
 
@@ -72,7 +74,6 @@ struct UserInfoView: View {
                 .frame(maxWidth: .infinity)
                 .background(.white)
                 .cornerRadius(25)
-
             }
             .padding()
 
@@ -82,8 +83,7 @@ struct UserInfoView: View {
 
     func onLogoutTap(_ onLogoutTap: @escaping () -> Void) -> UserInfoView {
         UserInfoView(
-            username: username,
-            name: name,
+            userInfo: userInfo,
             onLogoutTap: onLogoutTap)
     }
 

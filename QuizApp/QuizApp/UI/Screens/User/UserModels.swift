@@ -1,29 +1,13 @@
-struct UserInfo {
+import Combine
 
-    let username: String
-    let name: String
+class UserInfo: ObservableObject {
 
-}
+    @Published var username: String = ""
+    @Published var name: String = ""
 
-extension UserInfo {
-
-    init() {
-        username = ""
-        name = ""
-    }
-
-    init(_ userInfo: UserInfoModel) {
-        username = userInfo.username
-        name = userInfo.name
-    }
-
-}
-
-extension UserInfoModel {
-
-    init(_ userInfo: UserInfo) {
-        username = userInfo.username
-        name = userInfo.name
+    func set(username: String, name: String) {
+        self.username = username
+        self.name = name
     }
 
 }
