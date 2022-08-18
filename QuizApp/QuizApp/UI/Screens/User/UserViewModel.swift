@@ -25,9 +25,7 @@ class UserViewModel: ObservableObject {
                         username: userInfo.username,
                         name: userInfo.name))
 
-                self.userInfo.set(
-                    username: userInfo.username,
-                    name: userInfo.name)
+                self.userInfo.apply(userInfo)
             } catch _ {}
         }
     }
@@ -39,9 +37,7 @@ class UserViewModel: ObservableObject {
         Task {
             do {
                 let userInfo = try await userUseCase.userInfo
-                self.userInfo.set(
-                    username: userInfo.username,
-                    name: userInfo.name)
+                self.userInfo.apply(userInfo)
             } catch _ {}
         }
     }

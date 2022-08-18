@@ -14,13 +14,13 @@ struct SettingsView: View {
             .onNameChange {
                 viewModel.save()
             }
-            .onAppear {
-                viewModel.getUserInfo()
-            }
 
             Spacer()
         }
         .background(LinearGradient.background.ignoresSafeArea())
+        .onAppear {
+            viewModel.getUserInfo()
+        }
     }
 
 }

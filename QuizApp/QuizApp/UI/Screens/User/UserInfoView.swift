@@ -31,9 +31,12 @@ struct UserInfoView: View {
                     .foregroundColor(.white)
                     .padding(.top, 40)
 
-                TextField("", text: $userInfo.name, onCommit: { onNameChange() })
+                TextField("", text: $userInfo.name)
                     .font(.heading4)
                     .foregroundColor(.white)
+                    .onSubmit {
+                        onNameChange()
+                    }
 
                 Spacer()
 
