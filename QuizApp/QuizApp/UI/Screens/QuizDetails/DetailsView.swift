@@ -5,6 +5,13 @@ struct DetailsView: View {
 
     let quiz: Quiz
 
+    let onStartQuizTap: () -> Void
+
+    init(quiz: Quiz, onStartQuizTap: @escaping () -> Void = {}) {
+        self.quiz = quiz
+        self.onStartQuizTap = onStartQuizTap
+    }
+
     var body: some View {
         VStack {
             Text(quiz.name)
@@ -24,7 +31,7 @@ struct DetailsView: View {
                 .padding(.vertical, 10)
                 .frame(maxHeight: 200)
 
-            Button(action: {}, label: {
+            Button(action: { onStartQuizTap() }, label: {
                 Text("Start Quiz")
                     .foregroundColor(.purpleText)
                     .font(.heading6)
@@ -39,6 +46,10 @@ struct DetailsView: View {
         .padding()
         .background(.white.opacity(0.3))
         .cornerRadius(10)
+    }
+
+    func onStartQuizTap(_ onStartQuizTap: @escaping () -> Void = {}) -> DetailsView {
+        DetailsView(quiz: quiz, onStartQuizTap: onStartQuizTap)
     }
 
 }

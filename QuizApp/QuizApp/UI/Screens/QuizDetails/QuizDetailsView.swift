@@ -15,6 +15,9 @@ struct QuizDetailsView: View {
                     }
 
                 DetailsView(quiz: viewModel.quiz)
+                    .onStartQuizTap {
+                        viewModel.startQuiz()
+                    }
             }
             .padding()
         }
