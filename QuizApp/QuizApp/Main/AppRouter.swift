@@ -74,13 +74,13 @@ class AppRouter: AppRouterProtocol {
 
         let config = UIImage.SymbolConfiguration(scale: .medium)
         let image = UIImage(systemName: "chevron.left", withConfiguration: config)
-        let closeButton = UIBarButtonItem(
+        let backButton = UIBarButtonItem(
             image: image,
             style: .done,
             target: self,
             action: #selector(tappedClose))
-        closeButton.tintColor = .white
-        viewController.navigationItem.leftBarButtonItem = closeButton
+        backButton.tintColor = .white
+        viewController.navigationItem.leftBarButtonItem = backButton
     }
 
     func showLeaderboard(with id: Int) {
