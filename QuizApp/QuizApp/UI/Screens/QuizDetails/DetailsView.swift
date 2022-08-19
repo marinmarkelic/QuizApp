@@ -29,7 +29,7 @@ struct DetailsView: View {
                 .aspectRatio(contentMode: .fit)
                 .cornerRadius(10)
                 .padding(.vertical, 10)
-                .maxHeight(200)
+                .frame(height: 200)
 
             Button(action: { onStartQuizTap() }, label: {
                 Text("Start Quiz")

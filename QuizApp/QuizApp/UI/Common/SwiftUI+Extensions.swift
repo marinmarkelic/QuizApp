@@ -3,29 +3,21 @@ import SwiftUI
 extension View {
 
     // MARK: - Resizing
-    func maxWidth(_ value: CGFloat) -> some View {
-        self
-            .frame(maxWidth: value)
+    func maxWidth() -> some View {
+        frame(maxWidth: .infinity)
     }
 
-    func maxHeight(_ value: CGFloat) -> some View {
-        self
-            .frame(maxHeight: value)
+    func maxHeight() -> some View {
+        frame(maxHeight: .infinity)
     }
 
-    func minWidth(_ value: CGFloat) -> some View {
-        self
-            .frame(minWidth: value)
-    }
-
-    func minHeight(_ value: CGFloat) -> some View {
-        self
-            .frame(minHeight: value)
+    func maxSize() -> some View {
+        frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
     // MARK: - Pushing
     func pushedLeft() -> some View {
-        HStack {
+        HStack(spacing: 0) {
             self
 
             Spacer()
@@ -33,7 +25,7 @@ extension View {
     }
 
     func pushedRight() -> some View {
-        HStack {
+        HStack(spacing: 0) {
             Spacer()
 
             self
@@ -41,7 +33,7 @@ extension View {
     }
 
     func pushedUp() -> some View {
-        VStack {
+        VStack(spacing: 0) {
             self
 
             Spacer()
@@ -49,7 +41,7 @@ extension View {
     }
 
     func pushedDown() -> some View {
-        VStack {
+        VStack(spacing: 0) {
             Spacer()
 
             self
