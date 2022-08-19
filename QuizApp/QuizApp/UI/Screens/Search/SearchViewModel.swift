@@ -25,7 +25,8 @@ class SearchViewModel: ObservableObject {
                 let quizzes = try await useCase.fetchAllQuizzes()
 
                 if searchText == "" {
-                    self.quizzes = quizzes.map { Quiz($0) }
+                    self.quizzes = quizzes
+                        .map { Quiz($0) }
                 } else {
                     self.quizzes = quizzes
                         .filter { $0.name.lowercased().contains(searchText.lowercased()) }
