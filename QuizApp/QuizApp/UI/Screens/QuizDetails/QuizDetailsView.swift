@@ -15,10 +15,10 @@ struct QuizDetailsView: View {
                     }
                     .overlay(
                         Rectangle()
-                            .frame(maxHeight: 2)
-                            .cornerRadius(2)
                             .offset(x: 0, y: 2)
-                            .background(.white),
+                            .frame(maxHeight: 2)
+                            .background(.white)
+                            .cornerRadius(2),
                         alignment: .bottom)
 
                 DetailsView(quiz: viewModel.quiz)
