@@ -194,8 +194,8 @@ class AppDependencies {
             .scope(.unique)
 
         container
-            .register { (_, args) -> QuizDetailsViewController in
-                QuizDetailsViewController(viewModel: container.resolve(args: args.get()))
+            .register { (_, args) -> UIHostingController<QuizDetailsView> in
+                UIHostingController(rootView: QuizDetailsView(viewModel: container.resolve(args: args.get())))
             }
             .scope(.unique)
 

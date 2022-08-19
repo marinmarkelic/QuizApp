@@ -58,8 +58,29 @@ class AppRouter: AppRouterProtocol {
     }
 
     func showQuizDetails(with quiz: Quiz) {
-        let quizDetailsViewController = container.resolve(QuizDetailsViewController.self, args: quiz)
+        let quizDetailsViewController = container.resolve(UIHostingController<QuizDetailsView>.self, args: quiz)
+        styleQuizDetailsNavigationBar(quizDetailsViewController)
         navigationController.pushViewController(quizDetailsViewController, animated: true)
+    }
+
+    private func styleQuizDetailsNavigationBar(_ viewController: UIViewController) {
+        let titleView = UILabel()
+        titleView.text = "PopQuiz"
+        titleView.textColor = .white
+        titleView.font = .heading3
+        viewController.navigationItem.titleView = titleView
+
+        viewController.navigationItem.hidesBackButton = true
+
+        let config = UIImage.SymbolConfiguration(scale: .medium)
+        let image = UIImage(systemName: "chevron.left", withConfiguration: config)
+        let backButton = UIBarButtonItem(
+            image: image,
+            style: .done,
+            target: self,
+            action: #selector(tappedClose))
+        backButton.tintColor = .white
+        viewController.navigationItem.leftBarButtonItem = backButton
     }
 
     func showLeaderboard(with id: Int) {

@@ -1,143 +1,54 @@
-import Combine
-import UIKit
+import SwiftUI
+import SDWebImageSwiftUI
 
-class DetailsView: UIView {
+struct DetailsView: View {
 
-    private let startSubject = PassthroughSubject<Void, Never>()
+    let quiz: Quiz
 
-    private var title: UILabel!
-    private var desc: UILabel!
-    private var imageView: UIImageView!
-    private var startButton: UIButton!
+    let onStartQuizTap: () -> Void
 
-    private var cancellables = Set<AnyCancellable>()
-
-    var onStartPress: AnyPublisher<Void, Never> {
-        startSubject.eraseToAnyPublisher()
+    init(quiz: Quiz, onStartQuizTap: @escaping () -> Void = {}) {
+        self.quiz = quiz
+        self.onStartQuizTap = onStartQuizTap
     }
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    var body: some View {
+        VStack {
+            Text(quiz.name)
+                .font(.heading1)
+                .foregroundColor(.white)
+                .padding(.vertical, 15)
 
-        createViews()
-        styleViews()
-        defineLayoutForViews()
-        bindViews()
-    }
+            Text(quiz.description)
+                .font(.subtitle1)
+                .foregroundColor(.white)
+                .multilineTextAlignment(.center)
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+            WebImage(url: URL(string: quiz.imageUrl))
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .cornerRadius(10)
+                .padding(.vertical, 10)
+                .frame(height: 200)
 
-    private func bindViews() {
-        startButton
-            .tap
-            .sink { [weak self] _ in
-                self?.startSubject.send()
-            }
-            .store(in: &cancellables)
-    }
-
-    func set(quiz: Quiz) {
-        title.text = quiz.name
-        desc.text = quiz.description
-        imageView.sd_setImage(with: URL(string: quiz.imageUrl))
-    }
-
-    func remakeLayout() {
-        if UIDevice.current.orientation.isLandscape {
-            title.snp.remakeConstraints {
-                $0.height.equalTo(50)
-                $0.top.equalToSuperview().inset(10)
-                $0.leading.equalToSuperview().inset(20)
-                $0.trailing.equalTo(snp.centerX).offset(-10)
-            }
-
-            desc.snp.remakeConstraints {
-                $0.top.equalTo(title.snp.bottom).offset(5)
-                $0.leading.trailing.equalTo(title)
-            }
-
-            imageView.snp.remakeConstraints {
-                $0.top.equalTo(title)
-                $0.leading.equalTo(snp.centerX).offset(10)
-                $0.trailing.equalToSuperview().inset(20)
-                $0.height.lessThanOrEqualTo(150)
-            }
-
-            startButton.snp.remakeConstraints {
-                $0.top.equalTo(imageView.snp.bottom).offset(5)
-                $0.leading.trailing.bottom.equalToSuperview().inset(20)
-                $0.height.equalTo(45)
-            }
-        } else {
-            title.snp.remakeConstraints {
-                $0.leading.top.trailing.equalToSuperview().inset(20)
-            }
-
-            desc.snp.remakeConstraints {
-                $0.top.equalTo(title.snp.bottom).offset(20)
-                $0.leading.trailing.equalToSuperview().inset(20)
-            }
-
-            imageView.snp.remakeConstraints {
-                $0.top.equalTo(desc.snp.bottom).offset(20)
-                $0.centerX.equalToSuperview()
-                $0.width.height.lessThanOrEqualTo(150)
-            }
-
-            startButton.snp.remakeConstraints {
-                $0.top.equalTo(imageView.snp.bottom).offset(20)
-                $0.leading.trailing.bottom.equalToSuperview().inset(20)
-                $0.height.equalTo(45)
-            }
+            Button(action: { onStartQuizTap() }, label: {
+                Text("Start Quiz")
+                    .foregroundColor(.purpleText)
+                    .font(.heading6)
+                    .maxWidth()
+            })
+            .padding()
+            .background(.white)
+            .cornerRadius(25)
         }
+        .maxWidth()
+        .padding()
+        .background(.white.opacity(0.3))
+        .cornerRadius(10)
     }
 
-}
-
-extension DetailsView: ConstructViewsProtocol {
-
-    func createViews() {
-        title = UILabel()
-        addSubview(title)
-
-        desc = UILabel()
-        addSubview(desc)
-
-        imageView = UIImageView()
-        addSubview(imageView)
-
-        startButton = UIButton()
-        addSubview(startButton)
-    }
-
-    func styleViews() {
-        backgroundColor = .white.withAlphaComponent(0.3)
-        layer.cornerRadius = 10
-        clipsToBounds = true
-
-        title.font = .heading1
-        title.textAlignment = .center
-        title.textColor = .white
-
-        desc.font = .heading4
-        desc.textAlignment = .center
-        desc.numberOfLines = 0
-        desc.textColor = .white
-
-        imageView.contentMode = .scaleAspectFit
-
-        startButton.setTitle("Start Quiz", for: .normal)
-        startButton.titleLabel?.font = .subtitle2
-        startButton.backgroundColor = .white
-        startButton.setTitleColor(UIColor(red: 99 / 255, green: 41 / 255, blue: 222 / 255, alpha: 1.0), for: .normal)
-        startButton.layer.cornerRadius = 20
-        startButton.clipsToBounds = true
-    }
-
-    func defineLayoutForViews() {
-        remakeLayout()
+    func onStartQuizTap(_ onStartQuizTap: @escaping () -> Void = {}) -> DetailsView {
+        DetailsView(quiz: quiz, onStartQuizTap: onStartQuizTap)
     }
 
 }
