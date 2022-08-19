@@ -15,7 +15,7 @@ struct SearchView: View {
 
     private var content: some View {
         HStack {
-            LoginTextField(placeholder: "Type here", isSecure: false, text: $text)
+            RoundedTextField(placeholder: "Type here", isSecure: false, text: $text)
 
             Text("Search")
                 .font(.heading6)

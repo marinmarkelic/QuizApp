@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct LoginTextField: View {
+struct RoundedTextField: View {
 
     let placeholder: String
     let isSecure: Bool
