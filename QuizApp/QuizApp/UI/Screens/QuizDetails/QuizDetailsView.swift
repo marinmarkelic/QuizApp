@@ -13,13 +13,13 @@ struct QuizDetailsView: View {
                     .onTapGesture {
                         viewModel.showLeaderboard()
                     }
-                    .overlay(
+                    .overlay(alignment: .bottom) {
                         Rectangle()
-                            .offset(x: 0, y: 2)
                             .frame(maxHeight: 2)
-                            .background(.white)
-                            .cornerRadius(2),
-                        alignment: .bottom)
+                            .foregroundColor(.white)
+                            .cornerRadius(2)
+                            .offset(x: 0, y: 2)
+                    }
 
                 DetailsView(quiz: viewModel.quiz)
                     .onStartQuizTap {
