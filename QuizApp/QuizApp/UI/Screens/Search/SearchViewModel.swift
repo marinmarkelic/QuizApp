@@ -1,20 +1,22 @@
 import Combine
 
-class SearchViewModel {
-
-    private let router: AppRouterProtocol
-    private let useCase: QuizUseCaseProtocol
-
-    private var searchText: String = ""
+class SearchViewModel: ObservableObject {
 
     @Published var quizzes: [Quiz] = []
     @Published var fetchingErrorMessage: String = ""
     @Published var noQuizzesErrorMessage: String = ""
 
+    private var searchText: String = ""
+
+    private var router: AppRouterProtocol!
+    private var useCase: QuizUseCaseProtocol!
+
     init(router: AppRouterProtocol, useCase: QuizUseCaseProtocol) {
         self.router = router
         self.useCase = useCase
     }
+
+    init() {}
 
     @MainActor
     func fetchQuizzes() {

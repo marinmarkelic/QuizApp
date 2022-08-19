@@ -222,7 +222,7 @@ class AppDependencies {
             .scope(.unique)
 
         container
-            .register { SearchViewController(viewModel: container.resolve()) }
+            .register { UIHostingController(rootView: SearchView(viewModel: container.resolve())) }
             .scope(.unique)
     }
 

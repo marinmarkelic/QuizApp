@@ -2,6 +2,8 @@ import SwiftUI
 
 struct SearchView: View {
 
+    @ObservedObject var viewModel: SearchViewModel
+
     @State var text = ""
 
     var body: some View {
@@ -14,7 +16,7 @@ struct SearchView: View {
     }
 
     private var content: some View {
-        SearchBar()
+        SearchBar(text: $text)
         .pushedUp()
     }
 
@@ -23,7 +25,7 @@ struct SearchView: View {
 struct SearchPreview: PreviewProvider {
 
     static var previews: some View {
-        SearchView()
+        SearchView(viewModel: SearchViewModel())
     }
 
 }

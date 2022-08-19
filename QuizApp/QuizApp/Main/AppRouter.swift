@@ -36,7 +36,7 @@ class AppRouter: AppRouterProtocol {
         }
 
         let quizViewController = container.resolve(QuizViewController.self)
-        let searchViewController = container.resolve(SearchViewController.self)
+        let searchViewController = container.resolve(UIHostingController<SearchView>.self)
         let userViewController = container.resolve(UIHostingController<SettingsView>.self)
 
         styleSettingsTabBar(userViewController)
