@@ -37,7 +37,7 @@ extension Quiz {
 
 enum Difficulty: String, Comparable {
 
-    private var level: Int {
+    var level: Int {
         switch self {
         case .easy:
             return 1

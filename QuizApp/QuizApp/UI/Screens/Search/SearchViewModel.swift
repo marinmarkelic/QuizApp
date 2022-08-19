@@ -2,11 +2,11 @@ import Combine
 
 class SearchViewModel: ObservableObject {
 
+    @Published var searchText: String = ""
+
     @Published var quizzes: [Quiz] = []
     @Published var fetchingErrorMessage: String = ""
     @Published var noQuizzesErrorMessage: String = ""
-
-    private var searchText: String = ""
 
     private var router: AppRouterProtocol!
     private var useCase: QuizUseCaseProtocol!

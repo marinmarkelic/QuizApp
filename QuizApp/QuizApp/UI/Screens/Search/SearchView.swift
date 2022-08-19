@@ -1,10 +1,9 @@
 import SwiftUI
+import SDWebImageSwiftUI
 
 struct SearchView: View {
 
     @ObservedObject var viewModel: SearchViewModel
-
-    @State var text = ""
 
     var body: some View {
         VStack {
@@ -16,8 +15,14 @@ struct SearchView: View {
     }
 
     private var content: some View {
-        SearchBar(text: $text)
-        .pushedUp()
+        VStack {
+            SearchBar(text: $viewModel.searchText)
+                .onSearchTap {
+                    viewModel.fetchQuizzes()
+                }
+
+            QuizListView(quizzes: viewModel.quizzes)
+        }
     }
 
 }
