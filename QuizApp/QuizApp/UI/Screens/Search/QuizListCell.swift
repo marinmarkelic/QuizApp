@@ -5,6 +5,8 @@ struct QuizListCell: View {
 
     var quiz: Quiz
 
+    var onQuizTap: (_ quiz: Quiz) -> Void = { _ in }
+
     var body: some View {
         HStack {
             WebImage(url: URL(string: quiz.imageUrl))
@@ -34,6 +36,13 @@ struct QuizListCell: View {
         .maxWidth()
         .background(.white.opacity(0.3))
         .cornerRadius(10)
+        .onTapGesture {
+            onQuizTap(quiz)
+        }
+    }
+
+    func onQuizTap(_ onQuizTap: @escaping (_ quiz: Quiz) -> Void) -> QuizListCell {
+        QuizListCell(quiz: quiz, onQuizTap: onQuizTap)
     }
 
 }

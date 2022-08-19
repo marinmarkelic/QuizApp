@@ -4,6 +4,8 @@ struct QuizListView: View {
 
     var quizzes: [Quiz]
 
+    var onQuizTap: (_ quiz: Quiz) -> Void = { _ in }
+
     var sections: [QuizSection] {
         var value: [QuizSection] = []
 
@@ -23,6 +25,9 @@ struct QuizListView: View {
                     Section(content: {
                         ForEach(section.quizzes, id: \.id) {
                             QuizListCell(quiz: $0)
+                                .onQuizTap {
+                                    onQuizTap($0)
+                                }
                         }
                     }, header: {
                         Text(section.category.name)
@@ -34,6 +39,10 @@ struct QuizListView: View {
                 }
             }
         }
+    }
+
+    func onQuizTap(_ onQuizTap: @escaping (_ quiz: Quiz) -> Void) -> QuizListView {
+        QuizListView(quizzes: quizzes, onQuizTap: onQuizTap)
     }
 
 }
