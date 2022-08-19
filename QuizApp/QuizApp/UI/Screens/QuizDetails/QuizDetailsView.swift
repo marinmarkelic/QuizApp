@@ -7,9 +7,6 @@ struct QuizDetailsView: View {
     var body: some View {
         CenteredScrollView {
             VStack {
-                HStack {
-                    Spacer()
-
                     Text("Leaderboard")
                         .font(.heading5)
                         .foregroundColor(.white)
@@ -23,7 +20,7 @@ struct QuizDetailsView: View {
                                 .cornerRadius(2)
                                 .offset(x: 0, y: 2)
                         }
-                }
+                        .pushedRight()
 
                 DetailsView(quiz: viewModel.quiz)
                     .onStartQuizTap {

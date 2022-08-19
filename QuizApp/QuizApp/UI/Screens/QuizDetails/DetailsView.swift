@@ -29,20 +29,19 @@ struct DetailsView: View {
                 .aspectRatio(contentMode: .fit)
                 .cornerRadius(10)
                 .padding(.vertical, 10)
-                .frame(maxHeight: 200)
+                .maxHeight(200)
 
             Button(action: { onStartQuizTap() }, label: {
                 Text("Start Quiz")
                     .foregroundColor(.purpleText)
                     .font(.heading6)
-                    .frame(maxWidth: .infinity)
+                    .maxWidth(.infinity)
             })
             .padding()
-            .frame(maxWidth: .infinity)
             .background(.white)
             .cornerRadius(25)
         }
-        .frame(maxWidth: .infinity)
+        .maxWidth(.infinity)
         .padding()
         .background(.white.opacity(0.3))
         .cornerRadius(10)
