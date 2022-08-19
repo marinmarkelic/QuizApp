@@ -14,13 +14,7 @@ struct SearchView: View {
     }
 
     private var content: some View {
-        HStack {
-            RoundedTextField(placeholder: "Type here", isSecure: false, text: $text)
-
-            Text("Search")
-                .font(.heading6)
-                .foregroundColor(.white)
-        }
+        SearchBar()
         .pushedUp()
     }
 
