@@ -141,7 +141,12 @@ class AppRouter: AppRouterProtocol {
 
     func showResults(with result: QuizResult) {
         let quizResultViewController = container.resolve(UIHostingController<QuizResultView>.self, args: result)
+        styleQuizResultNavigationBar(quizResultViewController)
         navigationController.pushViewController(quizResultViewController, animated: true)
+    }
+
+    private func styleQuizResultNavigationBar(_ viewController: UIViewController) {
+        viewController.navigationItem.hidesBackButton = true
     }
 
     func goBack() {
