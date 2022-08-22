@@ -14,7 +14,7 @@ struct QuizView: View {
                     viewModel.loadCategories()
                 }
 
-            QuizListView(quizzes: viewModel.quizzes)
+            QuizListView(quizzes: viewModel.quizzes, alwaysShowSections: false)
                 .onQuizTap {
                     viewModel.showQuizDetails(with: $0)
                 }
