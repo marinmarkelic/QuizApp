@@ -65,6 +65,14 @@ Please try again.
             progressColors[currentQuestionIndex] = .incorrectAnswer
         }
 
+        let scrollDelayInMillis = 400
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(scrollDelayInMillis)) { [weak self] in
+            self?.changeQuestion(with: id)
+        }
+    }
+
+    private func changeQuestion(with id: Int) {
         if currentQuestionIndex < progressColors.count - 1 {
             progressColors[currentQuestionIndex + 1] = .white
             currentQuestionIndex += 1

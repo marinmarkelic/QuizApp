@@ -16,7 +16,7 @@ struct ProgressView: View {
                 ForEach(progressColors, id: \.hashValue) {color in
                     Rectangle()
                         .foregroundColor(Color(color))
-                        .frame(height: 2)
+                        .frame(height: 5)
                         .cornerRadius(2)
                 }
             }

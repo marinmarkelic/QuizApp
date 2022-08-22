@@ -5,10 +5,8 @@ struct SolvingQuizView: View {
     @ObservedObject var viewModel: SolvingQuizViewModel
 
     var body: some View {
-        VStack {
+        VStack(spacing: 50) {
             ProgressView(progressText: viewModel.progressText, progressColors: viewModel.progressColors)
-
-            Spacer()
 
             QuestionsView(quiz: viewModel.quiz, currentQuestionIndex: viewModel.currentQuestionIndex)
                 .onAnswerTap {
@@ -55,10 +53,12 @@ struct QuestionsView: View {
 
     var body: some View {
         VStack {
-            QuestionView(text: currentQuestion.question, answers: currentQuestion.answers)
-                .onAnswerTap {
-                    onAnswerTap($0)
-                }
+            ScrollView(showsIndicators: false) {
+                QuestionView(text: currentQuestion.question, answers: currentQuestion.answers)
+                    .onAnswerTap {
+                        onAnswerTap($0)
+                    }
+            }
         }
     }
 
@@ -85,6 +85,7 @@ struct QuestionView: View {
             Text(text)
                 .font(.heading3)
                 .foregroundColor(.white)
+                .maxWidth(alignment: .leading)
 
             ForEach(answers, id: \.id) { answer in
                 Button(action: { onAnswerTap(answer.id) }, label: {
@@ -94,8 +95,9 @@ struct QuestionView: View {
                         .font(.heading4)
                         .maxWidth(alignment: .leading)
                 })
-                .padding()
-                .background(.white.opacity(0.3))
+                .padding(.vertical, 20)
+                .padding(.horizontal, 25)
+                .background(Color(answer.color))
                 .cornerRadius(30)
             }
         }
