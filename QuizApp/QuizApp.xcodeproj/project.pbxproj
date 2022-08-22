@@ -298,6 +298,16 @@
 			path = Quiz;
 			sourceTree = "<group>";
 		};
+		9C22EA8028B3A57D00F8E069 /* QuizList */ = {
+			isa = PBXGroup;
+			children = (
+				9C42646528AFBEDD008D4C20 /* QuizListView.swift */,
+				9C42646728AFBEFF008D4C20 /* QuizListCell.swift */,
+				9C42646928AFBF23008D4C20 /* QuizListDifficultyView.swift */,
+			);
+			path = QuizList;
+			sourceTree = "<group>";
+		};
 		9C25C88A2888109A000C4C90 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
@@ -428,6 +438,7 @@
 		9CC33B37287DBD1F002E9853 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				9C22EA8028B3A57D00F8E069 /* QuizList */,
 				9C5F21932886AFF5000C3511 /* Colors.swift */,
 				9C327E4F289A7F31003787C0 /* Fonts.swift */,
 				9C1953AA287725590051CEC6 /* TextFieldView.swift */,
@@ -471,9 +482,6 @@
 				9C030BDD289BF3AF001F1182 /* SearchViewModel.swift */,
 				9C42646328AFA74D008D4C20 /* SearchView.swift */,
 				9C030BDB289BEDE4001F1182 /* SearchBar.swift */,
-				9C42646528AFBEDD008D4C20 /* QuizListView.swift */,
-				9C42646728AFBEFF008D4C20 /* QuizListCell.swift */,
-				9C42646928AFBF23008D4C20 /* QuizListDifficultyView.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -637,7 +645,6 @@
 				9C1953B5287871E20051CEC6 /* AppRouterProtocol.swift in Sources */,
 				9C01635A28ACEB23004C7270 /* RoundedTextField.swift in Sources */,
 				9C5024D7289172B200B93FDB /* AnswerView.swift in Sources */,
-				9C4807DA2889556B002D097D /* QuizHeader.swift in Sources */,
 				9C42646628AFBEDD008D4C20 /* QuizListView.swift in Sources */,
 				9C327E59289ACBD0003787C0 /* UIControl+Extensions.swift in Sources */,
 				9C25C88C288810B5000C4C90 /* QuizRepository.swift in Sources */,
