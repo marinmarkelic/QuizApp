@@ -71,6 +71,7 @@ struct QuestionsView: View {
                     }
                 }
             }
+            .scrollEnabled(false)
         }
     }
 
