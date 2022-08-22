@@ -3,6 +3,7 @@ import SwiftUI
 struct QuizListView: View {
 
     let quizzes: [Quiz]
+    let alwaysShowSections: Bool
     let onQuizTap: (Quiz) -> Void
 
     private var sections: [QuizSection] {
@@ -17,8 +18,9 @@ struct QuizListView: View {
         return value
     }
 
-    init(quizzes: [Quiz], onQuizTap: @escaping (Quiz) -> Void = { _ in }) {
+    init(quizzes: [Quiz], alwaysShowSections: Bool = true, onQuizTap: @escaping (Quiz) -> Void = { _ in }) {
         self.quizzes = quizzes
+        self.alwaysShowSections = alwaysShowSections
         self.onQuizTap = onQuizTap
     }
 
@@ -34,7 +36,11 @@ struct QuizListView: View {
                                 }
                         }
                     }, header: {
-                        Text(section.category.name)
+                        let title = alwaysShowSections || sections.count > 1 ?
+                            section.category.name :
+                            ""
+
+                        Text(title)
                             .font(.heading4)
                             .foregroundColor(Color(uiColor: section.category.color))
                             .maxWidth(alignment: .leading)
@@ -46,7 +52,7 @@ struct QuizListView: View {
     }
 
     func onQuizTap(_ onQuizTap: @escaping (Quiz) -> Void) -> QuizListView {
-        QuizListView(quizzes: quizzes, onQuizTap: onQuizTap)
+        QuizListView(quizzes: quizzes, alwaysShowSections: alwaysShowSections, onQuizTap: onQuizTap)
     }
 
 }

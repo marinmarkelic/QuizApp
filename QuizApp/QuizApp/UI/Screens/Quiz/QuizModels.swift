@@ -35,6 +35,18 @@ extension Quiz {
 
 }
 
+extension Quiz: Comparable {
+
+    static func < (lhs: Quiz, rhs: Quiz) -> Bool {
+        if lhs.difficulty == rhs.difficulty {
+            return lhs.name < rhs.name
+        }
+
+        return lhs.difficulty < rhs.difficulty
+    }
+
+}
+
 enum Difficulty: String, Comparable {
 
     var level: Int {
@@ -111,7 +123,7 @@ extension Category {
         self.type = type
         switch type {
         case .all:
-            color = .white
+            color = .all
         case .sport:
             color = .sport
         case .movies:

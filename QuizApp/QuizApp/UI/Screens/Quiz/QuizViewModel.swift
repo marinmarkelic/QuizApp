@@ -1,19 +1,21 @@
 import Combine
 import UIKit
 
-class QuizViewModel {
-
-    private let router: AppRouterProtocol
-    private let useCase: QuizUseCaseProtocol
+class QuizViewModel: ObservableObject {
 
     @Published var quizzes: [Quiz] = []
     @Published var categories: [Category] = []
     @Published var errorMessage: String = ""
 
+    private var router: AppRouterProtocol!
+    private var useCase: QuizUseCaseProtocol!
+
     init(router: AppRouterProtocol, useCase: QuizUseCaseProtocol) {
         self.router = router
         self.useCase = useCase
     }
+
+    init() {}
 
     func showQuizDetails(with quiz: Quiz) {
         router.showQuizDetails(with: quiz)
@@ -60,12 +62,14 @@ Please try again
             quizzes = try await useCase.fetchAllQuizzes()
             self.quizzes = quizzes
                 .map { Quiz($0) }
+                .sorted()
             return
         }
 
         quizzes = try await useCase.fetchQuizzes(for: categoryModel)
         self.quizzes = quizzes
             .map { Quiz($0) }
+            .sorted()
     }
 
     private func findColor(for type: CategoryType) -> UIColor {
