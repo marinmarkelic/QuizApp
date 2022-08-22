@@ -2,8 +2,8 @@ import SwiftUI
 
 struct QuizListDifficultyView: View {
 
-    var difficulty: Difficulty
-    var uiColor: UIColor
+    let difficulty: Difficulty
+    let uiColor: UIColor
 
     var color: Color {
         Color(uiColor: uiColor)

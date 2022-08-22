@@ -3,9 +3,13 @@ import SDWebImageSwiftUI
 
 struct QuizListCell: View {
 
-    var quiz: Quiz
+    let quiz: Quiz
+    let onQuizTap: (Quiz) -> Void
 
-    var onQuizTap: (_ quiz: Quiz) -> Void = { _ in }
+    init(quiz: Quiz, onQuizTap: @escaping (Quiz) -> Void = { _ in }) {
+        self.quiz = quiz
+        self.onQuizTap = onQuizTap
+    }
 
     var body: some View {
         HStack {
@@ -40,7 +44,7 @@ struct QuizListCell: View {
         }
     }
 
-    func onQuizTap(_ onQuizTap: @escaping (_ quiz: Quiz) -> Void) -> QuizListCell {
+    func onQuizTap(_ onQuizTap: @escaping (Quiz) -> Void) -> QuizListCell {
         QuizListCell(quiz: quiz, onQuizTap: onQuizTap)
     }
 

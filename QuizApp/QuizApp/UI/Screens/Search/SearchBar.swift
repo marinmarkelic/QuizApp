@@ -2,15 +2,19 @@ import SwiftUI
 
 struct SearchBar: View {
 
-    @Binding var text: String
-
     @FocusState var isTextFieldFocused: Bool
 
-    var onSearchTap: () -> Void = {}
+    var text: Binding<String>
+    var onSearchTap: () -> Void
+
+    init(text: Binding<String>, onSearchTap: @escaping () -> Void = {}) {
+        self.text = text
+        self.onSearchTap = onSearchTap
+    }
 
     var body: some View {
         HStack {
-            RoundedTextField(placeholder: "Type here", isSecure: false, text: $text)
+            RoundedTextField(placeholder: "Type here", isSecure: false, text: text)
                 .focused($isTextFieldFocused)
 
             Text("Search")
@@ -24,7 +28,7 @@ struct SearchBar: View {
     }
 
     func onSearchTap(_ onSearchTap: @escaping () -> Void) -> SearchBar {
-        SearchBar(text: $text, onSearchTap: onSearchTap)
+        SearchBar(text: text, onSearchTap: onSearchTap)
     }
 
 }

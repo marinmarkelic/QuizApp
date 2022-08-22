@@ -17,7 +17,7 @@ struct QuizListView: View {
         return value
     }
 
-    init(quizzes: [Quiz], onQuizTap: @escaping (_ quiz: Quiz) -> Void = { _ in }) {
+    init(quizzes: [Quiz], onQuizTap: @escaping (Quiz) -> Void = { _ in }) {
         self.quizzes = quizzes
         self.onQuizTap = onQuizTap
     }
@@ -45,7 +45,7 @@ struct QuizListView: View {
         }
     }
 
-    func onQuizTap(_ onQuizTap: @escaping (_ quiz: Quiz) -> Void) -> QuizListView {
+    func onQuizTap(_ onQuizTap: @escaping (Quiz) -> Void) -> QuizListView {
         QuizListView(quizzes: quizzes, onQuizTap: onQuizTap)
     }
 
