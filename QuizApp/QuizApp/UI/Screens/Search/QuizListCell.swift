@@ -15,7 +15,7 @@ struct QuizListCell: View {
                 .cornerRadius(5)
                 .padding(.trailing)
 
-            VStack(spacing: 0) {
+            VStack(alignment: .leading, spacing: 0) {
                 QuizListDifficultyView(difficulty: quiz.difficulty, uiColor: quiz.category.color)
                     .pushedRight()
 
@@ -23,14 +23,13 @@ struct QuizListCell: View {
                     .font(.heading3)
                     .foregroundColor(.white)
                     .padding(.bottom, 5)
-                    .pushedLeft()
 
                 Text(quiz.description)
                     .font(.subtitle3)
                     .foregroundColor(.white)
-                    .pushedLeft()
+
+                Spacer()
             }
-            .pushedUp()
         }
         .padding(20)
         .maxWidth()

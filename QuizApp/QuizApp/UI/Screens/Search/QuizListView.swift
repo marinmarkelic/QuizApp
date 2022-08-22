@@ -2,11 +2,10 @@ import SwiftUI
 
 struct QuizListView: View {
 
-    var quizzes: [Quiz]
+    let quizzes: [Quiz]
+    let onQuizTap: (Quiz) -> Void
 
-    var onQuizTap: (_ quiz: Quiz) -> Void = { _ in }
-
-    var sections: [QuizSection] {
+    private var sections: [QuizSection] {
         var value: [QuizSection] = []
 
         for category in CategoryType.allCases {
@@ -16,6 +15,11 @@ struct QuizListView: View {
             value.append(QuizSection(category: Category(from: category), quizzes: quizzesForCategory))
         }
         return value
+    }
+
+    init(quizzes: [Quiz], onQuizTap: @escaping (_ quiz: Quiz) -> Void = { _ in }) {
+        self.quizzes = quizzes
+        self.onQuizTap = onQuizTap
     }
 
     var body: some View {
