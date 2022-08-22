@@ -52,12 +52,24 @@ struct QuestionsView: View {
     }
 
     var body: some View {
-        VStack {
-            ScrollView(showsIndicators: false) {
-                QuestionView(text: currentQuestion.question, answers: currentQuestion.answers)
-                    .onAnswerTap {
-                        onAnswerTap($0)
+        GeometryReader { geometry in
+            ScrollView(.horizontal, showsIndicators: false) {
+                ScrollViewReader { proxy in
+                    HStack {
+                        ForEach(quiz.questions, id: \.id) { question in
+                            QuestionView(text: question.question, answers: question.answers)
+                                .onAnswerTap {
+                                    onAnswerTap($0)
+                                }
+                                .frame(width: geometry.size.width)
+                        }
                     }
+                    .onChange(of: currentQuestion) { question in
+                        withAnimation {
+                            proxy.scrollTo(question.id)
+                        }
+                    }
+                }
             }
         }
     }

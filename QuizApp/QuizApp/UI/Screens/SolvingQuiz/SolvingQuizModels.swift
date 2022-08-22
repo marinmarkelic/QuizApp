@@ -68,6 +68,14 @@ extension Question {
 
 }
 
+extension Question: Equatable {
+
+    static func == (lhs: Question, rhs: Question) -> Bool {
+        lhs.id == rhs.id
+    }
+
+}
+
 struct Answer {
 
     let id: Int
@@ -95,7 +103,7 @@ extension QuizStartResponse: Equatable {
 
 }
 
-extension Question: Equatable {
+extension Question {
 
     init(_ question: QuestionModel) {
         answers = question.answers.map { Answer($0) }
