@@ -25,8 +25,8 @@ struct CategorySlider: View {
         }
     }
 
-    func onCategoryTap(onCategoryTap: @escaping (Category) -> Void) -> Slider {
-        Slider(onCategoryTap: onCategoryTap)
+    func onCategoryTap(onCategoryTap: @escaping (Category) -> Void) -> CategorySlider {
+        CategorySlider(onCategoryTap: onCategoryTap)
     }
 
 }
