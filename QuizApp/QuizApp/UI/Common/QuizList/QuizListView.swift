@@ -43,7 +43,7 @@ struct QuizListView: View {
                         Text(title)
                             .font(.heading4)
                             .foregroundColor(Color(uiColor: section.category.color))
-                            .pushedLeft()
+                            .maxWidth(alignment: .leading)
                             .padding(.top, 10)
                     })
                 }
