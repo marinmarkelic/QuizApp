@@ -2,17 +2,19 @@ import SwiftUI
 
 struct QuizResultView: View {
 
+    @ObservedObject var viewModel: QuizResultViewModel
+
     var body: some View {
         VStack {
             Spacer()
 
-            Text("aaaa")
+            Text(viewModel.text)
                 .font(.score)
                 .foregroundColor(.white)
 
             Spacer()
 
-            Button(action: {}, label: {
+            Button(action: { viewModel.exitQuiz() }, label: {
                 Text("Finish Quiz")
                     .foregroundColor(.purpleText)
                     .font(.heading6)
@@ -34,7 +36,7 @@ struct QuizResultView: View {
 struct QuizResultViewPreview: PreviewProvider {
 
     static var previews: some View {
-        QuizResultView()
+        QuizResultView(viewModel: QuizResultViewModel())
     }
 
 }

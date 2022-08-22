@@ -140,7 +140,7 @@ class AppRouter: AppRouterProtocol {
     }
 
     func showResults(with result: QuizResult) {
-        let quizResultViewController = container.resolve(QuizResultViewController.self, args: result)
+        let quizResultViewController = container.resolve(UIHostingController<QuizResultView>.self, args: result)
         navigationController.pushViewController(quizResultViewController, animated: true)
     }
 
