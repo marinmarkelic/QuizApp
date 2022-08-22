@@ -3,16 +3,16 @@ import SwiftUI
 extension View {
 
     // MARK: - Resizing
-    func maxWidth() -> some View {
-        frame(maxWidth: .infinity)
+    func maxWidth(alignment: Alignment = .center) -> some View {
+        frame(maxWidth: .infinity, alignment: alignment)
     }
 
-    func maxHeight() -> some View {
-        frame(maxHeight: .infinity)
+    func maxHeight(alignment: Alignment = .center) -> some View {
+        frame(maxHeight: .infinity, alignment: alignment)
     }
 
-    func maxSize() -> some View {
-        frame(maxWidth: .infinity, maxHeight: .infinity)
+    func maxSize(alignment: Alignment = .center) -> some View {
+        frame(maxWidth: .infinity, maxHeight: .infinity, alignment: Alignment)
     }
 
     // MARK: - Pushing

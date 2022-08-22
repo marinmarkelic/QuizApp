@@ -1,88 +1,34 @@
-import Combine
-import UIKit
+import SwiftUI
 
-class SearchBar: UIView {
+struct SearchBar: View {
 
-    private let textSubject = PassthroughSubject<String, Never>()
-    private let searchSubject = PassthroughSubject<Void, Never>()
+    @FocusState var isTextFieldFocused: Bool
 
-    private var textField: TextFieldView!
-    private var button: UIButton!
+    var text: Binding<String>
+    var onSearchTap: () -> Void
 
-    private var cancellables = Set<AnyCancellable>()
-
-    var searchText: AnyPublisher<String, Never> {
-        textSubject.eraseToAnyPublisher()
+    init(text: Binding<String>, onSearchTap: @escaping () -> Void = {}) {
+        self.text = text
+        self.onSearchTap = onSearchTap
     }
 
-    var onSearchPress: AnyPublisher<Void, Never> {
-        searchSubject.eraseToAnyPublisher()
-    }
+    var body: some View {
+        HStack {
+            RoundedTextField(placeholder: "Type here", isSecure: false, text: text)
+                .focused($isTextFieldFocused)
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-
-        createViews()
-        styleViews()
-        defineLayoutForViews()
-        bindViews()
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    private func bindViews() {
-        textField
-            .text
-            .sink { [weak self] text in
-                self?.textSubject.send(text)
-            }
-            .store(in: &cancellables)
-
-        button
-            .tap
-            .sink { [weak self] _ in
-                guard let self = self else { return }
-
-                self.searchSubject.send()
-                self.endEditing()
-            }
-            .store(in: &cancellables)
-    }
-
-    func endEditing() {
-        textField.endEditing(true)
-    }
-
-}
-
-extension SearchBar: ConstructViewsProtocol {
-
-    func createViews() {
-        textField = TextFieldView()
-        addSubview(textField)
-
-        button = UIButton()
-        addSubview(button)
-    }
-
-    func styleViews() {
-        textField.setPlaceholder(with: "Type here")
-
-        button.setTitle("Search", for: .normal)
-        button.titleLabel?.font = .heading6
-    }
-
-    func defineLayoutForViews() {
-        textField.snp.makeConstraints {
-            $0.leading.top.bottom.equalToSuperview()
+            Text("Search")
+                .font(.heading6)
+                .foregroundColor(.white)
+                .onTapGesture {
+                    onSearchTap()
+                    isTextFieldFocused = false
+                }
         }
+    }
 
-        button.snp.makeConstraints {
-            $0.top.trailing.bottom.equalToSuperview()
-            $0.leading.equalTo(textField.snp.trailing).offset(10)
-        }
+    func onSearchTap(_ onSearchTap: @escaping () -> Void) -> SearchBar {
+        SearchBar(text: text, onSearchTap: onSearchTap)
     }
 
 }

@@ -37,7 +37,7 @@ extension Quiz {
 
 enum Difficulty: String, Comparable {
 
-    private var level: Int {
+    var level: Int {
         switch self {
         case .easy:
             return 1
@@ -109,7 +109,18 @@ extension Category {
 
     init(from type: CategoryType) {
         self.type = type
-        color = .white
+        switch type {
+        case .all:
+            color = .white
+        case .sport:
+            color = .sport
+        case .movies:
+            color = .movies
+        case .music:
+            color = .music
+        case .geography:
+            color = .geography
+        }
     }
 
     init(from model: CategoryModel) {
