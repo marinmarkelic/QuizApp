@@ -2,11 +2,11 @@ import SwiftUI
 
 struct CategorySlider: View {
 
-    var onCategoryTap: (Category) -> Void
+    let categories: [Category]
+    let onCategoryTap: (Category) -> Void
 
-    private var categories = CategoryType.allCases.map { Category(from: $0) }
-
-    init(onCategoryTap: @escaping (Category) -> Void = { _ in }) {
+    init(categories: [Category], onCategoryTap: @escaping (Category) -> Void = { _ in }) {
+        self.categories = categories
         self.onCategoryTap = onCategoryTap
     }
 
@@ -26,7 +26,7 @@ struct CategorySlider: View {
     }
 
     func onCategoryTap(onCategoryTap: @escaping (Category) -> Void) -> CategorySlider {
-        CategorySlider(onCategoryTap: onCategoryTap)
+        CategorySlider(categories: categories, onCategoryTap: onCategoryTap)
     }
 
 }

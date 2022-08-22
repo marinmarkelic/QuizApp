@@ -111,7 +111,7 @@ extension Category {
         self.type = type
         switch type {
         case .all:
-            color = .white
+            color = .all
         case .sport:
             color = .sport
         case .movies:

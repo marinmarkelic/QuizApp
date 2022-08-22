@@ -2,17 +2,27 @@ import SwiftUI
 
 struct QuizView: View {
 
+    @ObservedObject var viewModel: QuizViewModel
+
     var body: some View {
         VStack {
-            CategorySlider()
+            CategorySlider(categories: viewModel.categories)
                 .onCategoryTap {
-                    print($0)
+                    viewModel.changeCategory(for: $0.type)
+                }
+                .onAppear {
+                    viewModel.loadCategories()
+                }
+
+            QuizListView(quizzes: viewModel.quizzes)
+                .onQuizTap {
+                    viewModel.showQuizDetails(with: $0)
                 }
         }
         .maxWidth()
         .maxHeight()
+        .padding()
         .background(LinearGradient.background.ignoresSafeArea())
-
     }
 
 }
@@ -20,7 +30,7 @@ struct QuizView: View {
 struct QuizViewPreview: PreviewProvider {
 
     static var previews: some View {
-        QuizView()
+        QuizView(viewModel: QuizViewModel())
     }
 
 }

@@ -190,7 +190,7 @@ class AppDependencies {
             .scope(.unique)
 
         container
-            .register { UIHostingController(rootView: QuizView()) }
+            .register { UIHostingController(rootView: QuizView(viewModel: container.resolve())) }
             .scope(.unique)
 
         container
