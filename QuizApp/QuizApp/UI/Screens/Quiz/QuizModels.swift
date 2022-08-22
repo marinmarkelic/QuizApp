@@ -35,6 +35,18 @@ extension Quiz {
 
 }
 
+extension Quiz: Comparable {
+
+    static func < (lhs: Quiz, rhs: Quiz) -> Bool {
+        if lhs.difficulty == rhs.difficulty {
+            return lhs.name < rhs.name
+        }
+
+        return lhs.difficulty < rhs.difficulty
+    }
+
+}
+
 enum Difficulty: String, Comparable {
 
     var level: Int {

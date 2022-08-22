@@ -62,14 +62,14 @@ Please try again
             quizzes = try await useCase.fetchAllQuizzes()
             self.quizzes = quizzes
                 .map { Quiz($0) }
-                .sorted { $0.difficulty < $1.difficulty }
+                .sorted()
             return
         }
 
         quizzes = try await useCase.fetchQuizzes(for: categoryModel)
         self.quizzes = quizzes
             .map { Quiz($0) }
-            .sorted { $0.difficulty < $1.difficulty }
+            .sorted()
     }
 
     private func findColor(for type: CategoryType) -> UIColor {
