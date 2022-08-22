@@ -12,7 +12,7 @@ extension View {
     }
 
     func maxSize(alignment: Alignment = .center) -> some View {
-        frame(maxWidth: .infinity, maxHeight: .infinity, alignment: Alignment)
+        frame(maxWidth: .infinity, maxHeight: .infinity, alignment: alignment)
     }
 
     // MARK: - Pushing
