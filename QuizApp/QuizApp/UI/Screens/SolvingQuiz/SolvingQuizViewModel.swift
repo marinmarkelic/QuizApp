@@ -1,18 +1,18 @@
 import Combine
 import UIKit
 
-class SolvingQuizViewModel {
-
-    private let id: Int
-
-    private let router: AppRouterProtocol
-    private let useCase: SolvingQuizUseCaseProtocol
+class SolvingQuizViewModel: ObservableObject {
 
     @Published var quiz: QuizStartResponse = .empty
     @Published var progressColors: [UIColor] = []
     @Published var currentQuestionIndex: Int = 0
     @Published var progressText: String = ""
     @Published var errorMessage: String = ""
+
+    private var id: Int!
+
+    private var router: AppRouterProtocol!
+    private var useCase: SolvingQuizUseCaseProtocol!
 
     private var correctQuestions: Int = 0
     private var didFinishQuiz: Bool = false
@@ -21,7 +21,13 @@ class SolvingQuizViewModel {
         self.id = id
         self.router = router
         self.useCase = useCase
+
+        Task {
+            await startQuiz()
+        }
     }
+
+    init() {}
 
     @MainActor
     func startQuiz() {
