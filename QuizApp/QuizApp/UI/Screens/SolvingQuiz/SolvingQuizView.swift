@@ -11,6 +11,9 @@ struct SolvingQuizView: View {
             Spacer()
 
             QuestionsView(quiz: viewModel.quiz, currentQuestionIndex: viewModel.currentQuestionIndex)
+                .onAnswerTap {
+                    viewModel.selectedAnswer(with: $0)
+                }
 
             Spacer()
         }
@@ -34,6 +37,7 @@ struct QuestionsView: View {
 
     let quiz: QuizStartResponse
     let currentQuestionIndex: Int
+    let onAnswerTap: (Int) -> Void
 
     var currentQuestion: Question {
         if quiz.questions.count == 0 {
@@ -43,10 +47,23 @@ struct QuestionsView: View {
         return quiz.questions[currentQuestionIndex]
     }
 
+    init(quiz: QuizStartResponse, currentQuestionIndex: Int, onAnswerTap: @escaping (Int) -> Void = { _ in }) {
+        self.quiz = quiz
+        self.currentQuestionIndex = currentQuestionIndex
+        self.onAnswerTap = onAnswerTap
+    }
+
     var body: some View {
         VStack {
             QuestionView(text: currentQuestion.question, answers: currentQuestion.answers)
+                .onAnswerTap {
+                    onAnswerTap($0)
+                }
         }
+    }
+
+    func onAnswerTap(onAnswerTap: @escaping (Int) -> Void) -> QuestionsView {
+        QuestionsView(quiz: quiz, currentQuestionIndex: currentQuestionIndex, onAnswerTap: onAnswerTap)
     }
 
 }
@@ -55,6 +72,13 @@ struct QuestionView: View {
 
     let text: String
     let answers: [Answer]
+    let onAnswerTap: (Int) -> Void
+
+    init(text: String, answers: [Answer], onAnswerTap: @escaping (Int) -> Void = { _ in }) {
+        self.text = text
+        self.answers = answers
+        self.onAnswerTap = onAnswerTap
+    }
 
     var body: some View {
         VStack {
@@ -63,7 +87,7 @@ struct QuestionView: View {
                 .foregroundColor(.white)
 
             ForEach(answers, id: \.id) { answer in
-                Button(action: {  }, label: {
+                Button(action: { onAnswerTap(answer.id) }, label: {
                     Text(answer.answer)
                         .multilineTextAlignment(.leading)
                         .foregroundColor(.white)
@@ -75,6 +99,10 @@ struct QuestionView: View {
                 .cornerRadius(30)
             }
         }
+    }
+
+    func onAnswerTap(onAnswerTap: @escaping (Int) -> Void) -> QuestionView {
+        QuestionView(text: text, answers: answers, onAnswerTap: onAnswerTap)
     }
 
 }
