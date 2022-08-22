@@ -135,7 +135,7 @@ class AppRouter: AppRouterProtocol {
     }
 
     func showQuiz(with id: Int) {
-        let solvingQuizViewController = container.resolve(SolvingQuizViewController.self, args: id)
+        let solvingQuizViewController = container.resolve(UIHostingController<SolvingQuizView>.self, args: id)
         navigationController.pushViewController(solvingQuizViewController, animated: true)
     }
 
