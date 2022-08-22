@@ -13,7 +13,7 @@ class QuizViewController: UIViewController {
     private var quizContainer: UIView!
 
     private var categorySlider: CategorySlider!
-    private var quizView: QuizView!
+//    private var quizView: QuizView!
 
     private var noQuizErrorLabel: UILabel!
     private var errorView: ErrorView!
@@ -46,7 +46,7 @@ class QuizViewController: UIViewController {
         super.viewDidLayoutSubviews()
 
         categorySlider.redraw()
-        quizView.redraw()
+//        quizView.redraw()
     }
 
     func styleTabBarItem() {
@@ -66,7 +66,7 @@ class QuizViewController: UIViewController {
             .sink { [weak self] quizzes in
                 guard let self = self else { return }
 
-                self.quizView.reload(with: quizzes)
+//                self.quizView.reload(with: quizzes)
                 self.noQuizErrorLabel.isHidden = !quizzes.isEmpty
             }
             .store(in: &cancellables)
@@ -92,12 +92,12 @@ class QuizViewController: UIViewController {
     }
 
     private func bindViews() {
-        quizView
-            .selectedQuiz
-            .sink { [weak self] quiz in
-                self?.viewModel.showQuizDetails(with: quiz)
-            }
-            .store(in: &cancellables)
+//        quizView
+//            .selectedQuiz
+//            .sink { [weak self] quiz in
+//                self?.viewModel.showQuizDetails(with: quiz)
+//            }
+//            .store(in: &cancellables)
     }
 
 }
@@ -117,8 +117,8 @@ extension QuizViewController: ConstructViewsProtocol {
         categorySlider = CategorySlider()
         quizContainer.addSubview(categorySlider)
 
-        quizView = QuizView()
-        quizContainer.addSubview(quizView)
+//        quizView = QuizView()
+//        quizContainer.addSubview(quizView)
 
         noQuizErrorLabel = UILabel()
         mainView.addSubview(noQuizErrorLabel)
@@ -164,10 +164,10 @@ extension QuizViewController: ConstructViewsProtocol {
             $0.height.equalTo(30)
         }
 
-        quizView.snp.makeConstraints {
-            $0.top.equalTo(categorySlider.snp.bottom).offset(20)
-            $0.leading.trailing.bottom.equalToSuperview()
-        }
+//        quizView.snp.makeConstraints {
+//            $0.top.equalTo(categorySlider.snp.bottom).offset(20)
+//            $0.leading.trailing.bottom.equalToSuperview()
+//        }
 
         noQuizErrorLabel.snp.makeConstraints {
             $0.center.equalToSuperview()
