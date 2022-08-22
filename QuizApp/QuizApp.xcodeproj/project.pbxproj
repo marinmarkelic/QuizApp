@@ -637,6 +637,7 @@
 				9C1953B5287871E20051CEC6 /* AppRouterProtocol.swift in Sources */,
 				9C01635A28ACEB23004C7270 /* RoundedTextField.swift in Sources */,
 				9C5024D7289172B200B93FDB /* AnswerView.swift in Sources */,
+				9C4807DA2889556B002D097D /* QuizHeader.swift in Sources */,
 				9C42646628AFBEDD008D4C20 /* QuizListView.swift in Sources */,
 				9C327E59289ACBD0003787C0 /* UIControl+Extensions.swift in Sources */,
 				9C25C88C288810B5000C4C90 /* QuizRepository.swift in Sources */,
