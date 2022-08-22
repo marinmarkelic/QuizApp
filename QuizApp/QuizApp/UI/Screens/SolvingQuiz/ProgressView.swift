@@ -13,7 +13,7 @@ struct ProgressView: View {
                 .maxWidth(alignment: .leading)
 
             HStack(spacing: 5) {
-                ForEach(progressColors) {color in
+                ForEach(progressColors, id: \.hashValue) {color in
                     Rectangle()
                         .foregroundColor(Color(color))
                         .frame(height: 2)

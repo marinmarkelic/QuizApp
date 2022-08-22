@@ -43,6 +43,8 @@ struct Question {
 
 extension Question {
 
+    static let empty = Question(id: 0, answers: [], correctAnswerId: 0, question: "")
+
     init(_ model: Question, selectedAnswerId: Int) {
         id = model.id
         answers = model.answers.map {

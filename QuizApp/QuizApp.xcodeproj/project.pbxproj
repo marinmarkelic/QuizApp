@@ -42,7 +42,6 @@
 		9C22EA8228B3AE2F00F8E069 /* QuizResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C22EA8128B3AE2F00F8E069 /* QuizResultView.swift */; };
 		9C22EA8428B3BA7300F8E069 /* SolvingQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C22EA8328B3BA7300F8E069 /* SolvingQuizView.swift */; };
 		9C22EA8628B3C01C00F8E069 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C22EA8528B3C01C00F8E069 /* ProgressView.swift */; };
-		9C22EA8828B3C04F00F8E069 /* UIKit+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C22EA8728B3C04F00F8E069 /* UIKit+Extensions.swift */; };
 		9C25C88C288810B5000C4C90 /* QuizRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C25C88B288810B5000C4C90 /* QuizRepository.swift */; };
 		9C25C88E28881111000C4C90 /* QuizNetworkDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C25C88D28881111000C4C90 /* QuizNetworkDataSource.swift */; };
 		9C25C89428882613000C4C90 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 9C25C89328882613000C4C90 /* SDWebImage */; };
@@ -130,7 +129,6 @@
 		9C22EA8128B3AE2F00F8E069 /* QuizResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultView.swift; sourceTree = "<group>"; };
 		9C22EA8328B3BA7300F8E069 /* SolvingQuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolvingQuizView.swift; sourceTree = "<group>"; };
 		9C22EA8528B3C01C00F8E069 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
-		9C22EA8728B3C04F00F8E069 /* UIKit+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIKit+Extensions.swift"; sourceTree = "<group>"; };
 		9C25C88B288810B5000C4C90 /* QuizRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizRepository.swift; sourceTree = "<group>"; };
 		9C25C88D28881111000C4C90 /* QuizNetworkDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizNetworkDataSource.swift; sourceTree = "<group>"; };
 		9C25C8B12888428A000C4C90 /* UserModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModels.swift; sourceTree = "<group>"; };
@@ -442,7 +440,6 @@
 				9C668AB328AE8F89001D6920 /* CenteredScrollView.swift */,
 				9C01635928ACEB23004C7270 /* RoundedTextField.swift */,
 				9C42645F28AF858F008D4C20 /* SwiftUI+Extensions.swift */,
-				9C22EA8728B3C04F00F8E069 /* UIKit+Extensions.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -610,7 +607,6 @@
 				9C25C88E28881111000C4C90 /* QuizNetworkDataSource.swift in Sources */,
 				9CC4D6E0287C5A720061F149 /* AppDependencies.swift in Sources */,
 				9C4807DC28899E24002D097D /* UseCaseModels.swift in Sources */,
-				9C22EA8828B3C04F00F8E069 /* UIKit+Extensions.swift in Sources */,
 				9C20BAD2287EF25D009378FB /* UserUseCase.swift in Sources */,
 				9CFCC30028858A1E00B01343 /* QuizNetworkClient.swift in Sources */,
 				9C19539C2876F1ED0051CEC6 /* GradientView.swift in Sources */,
