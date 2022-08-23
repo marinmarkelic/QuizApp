@@ -44,33 +44,6 @@ class AppRouter: AppRouterProtocol {
         navigationController.setViewControllers([tabBarController], animated: true)
     }
 
-    private func styleQuizTabBar(_ viewController: UIViewController) {
-        let config = UIImage.SymbolConfiguration(scale: .medium)
-
-        viewController.tabBarItem = UITabBarItem(
-            title: "Quiz",
-            image: UIImage(systemName: "rectangle.3.offgrid", withConfiguration: config),
-            selectedImage: UIImage(systemName: "rectangle.3.offgrid.fill", withConfiguration: config))
-    }
-
-    private func styleSettingsTabBar(_ viewController: UIViewController) {
-        let config = UIImage.SymbolConfiguration(scale: .medium)
-
-        viewController.tabBarItem = UITabBarItem(
-            title: "Settings",
-            image: UIImage(systemName: "gearshape", withConfiguration: config),
-            selectedImage: UIImage(systemName: "gearshape.fill", withConfiguration: config))
-    }
-
-    private func styleSearchTabBar(_ viewController: UIViewController) {
-        let config = UIImage.SymbolConfiguration(scale: .medium)
-
-        viewController.tabBarItem = UITabBarItem(
-            title: "Search",
-            image: UIImage(systemName: "magnifyingglass", withConfiguration: config),
-            selectedImage: UIImage(systemName: "magnifyingglass", withConfiguration: config))
-    }
-
     func showQuizDetails(with quiz: Quiz) {
         let quizDetailsViewController = container.resolve(UIHostingController<QuizDetailsView>.self, args: quiz)
         styleQuizDetailsNavigationBar(quizDetailsViewController)
