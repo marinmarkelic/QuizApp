@@ -12,11 +12,8 @@ struct SolvingQuizView: View {
                 .onAnswerTap {
                     viewModel.selectedAnswer(with: $0)
                 }
-
-            Spacer()
         }
-        .maxWidth()
-        .maxHeight()
+        .maxSize()
         .padding()
         .background(LinearGradient.background.ignoresSafeArea())
     }
@@ -52,27 +49,12 @@ struct QuestionsView: View {
     }
 
     var body: some View {
-        GeometryReader { geometry in
-            ScrollView(.horizontal, showsIndicators: false) {
-                ScrollViewReader { proxy in
-                    HStack {
-                        ForEach(quiz.questions, id: \.id) { question in
-                            QuestionView(text: question.question, answers: question.answers)
-                                .onAnswerTap {
-                                    onAnswerTap($0)
-                                }
-                                .frame(width: geometry.size.width)
-                        }
-                    }
-                    .onChange(of: currentQuestion) { question in
-                        withAnimation {
-                            proxy.scrollTo(question.id)
-                        }
-                    }
-                }
+        QuestionView(text: currentQuestion.question, answers: currentQuestion.answers)
+            .onAnswerTap {
+                onAnswerTap($0)
             }
-            .scrollEnabled(false)
-        }
+            .transition(.slide)
+            .id(currentQuestionIndex)
     }
 
     func onAnswerTap(onAnswerTap: @escaping (Int) -> Void) -> QuestionsView {
@@ -94,24 +76,26 @@ struct QuestionView: View {
     }
 
     var body: some View {
-        VStack {
-            Text(text)
-                .font(.heading3)
-                .foregroundColor(.white)
-                .maxWidth(alignment: .leading)
+        ScrollView(showsIndicators: false) {
+            VStack {
+                Text(text)
+                    .font(.heading3)
+                    .foregroundColor(.white)
+                    .maxWidth(alignment: .leading)
 
-            ForEach(answers, id: \.id) { answer in
-                Button(action: { onAnswerTap(answer.id) }, label: {
-                    Text(answer.answer)
-                        .multilineTextAlignment(.leading)
-                        .foregroundColor(.white)
-                        .font(.heading4)
-                        .maxWidth(alignment: .leading)
-                })
-                .padding(.vertical, 20)
-                .padding(.horizontal, 25)
-                .background(Color(answer.color))
-                .cornerRadius(30)
+                ForEach(answers, id: \.id) { answer in
+                    Button(action: { onAnswerTap(answer.id) }, label: {
+                        Text(answer.answer)
+                            .multilineTextAlignment(.leading)
+                            .foregroundColor(.white)
+                            .font(.heading4)
+                            .maxWidth(alignment: .leading)
+                    })
+                    .padding(.vertical, 20)
+                    .padding(.horizontal, 25)
+                    .background(Color(answer.color))
+                    .cornerRadius(30)
+                }
             }
         }
     }
