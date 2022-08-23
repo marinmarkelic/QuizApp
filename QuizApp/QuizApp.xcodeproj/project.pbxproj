@@ -23,7 +23,6 @@
 		9C08B86828981775001F56BD /* LeaderboardUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C08B86728981775001F56BD /* LeaderboardUseCase.swift */; };
 		9C08B86D289819EB001F56BD /* LeaderboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C08B86C289819EB001F56BD /* LeaderboardViewModel.swift */; };
 		9C08B86F28981AA0001F56BD /* LeaderboardModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C08B86E28981AA0001F56BD /* LeaderboardModels.swift */; };
-		9C0D815228940B3200C6D236 /* QuizResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0D815128940B3200C6D236 /* QuizResultViewController.swift */; };
 		9C0D815428940D2C00C6D236 /* QuizResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C0D815328940D2C00C6D236 /* QuizResultViewModel.swift */; };
 		9C19536B287584750051CEC6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C19536A287584750051CEC6 /* AppDelegate.swift */; };
 		9C195374287584770051CEC6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9C195373287584770051CEC6 /* Assets.xcassets */; };
@@ -43,6 +42,7 @@
 		9C20BAD6287F01AC009378FB /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C20BAD5287F01AC009378FB /* CustomButton.swift */; };
 		9C20BAD8287F17F2009378FB /* LogOutUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C20BAD7287F17F2009378FB /* LogOutUseCase.swift */; };
 		9C22EA7F28B386DE00F8E069 /* CategorySlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C22EA7E28B386DE00F8E069 /* CategorySlider.swift */; };
+		9C22EA8228B3AE2F00F8E069 /* QuizResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C22EA8128B3AE2F00F8E069 /* QuizResultView.swift */; };
 		9C25C88C288810B5000C4C90 /* QuizRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C25C88B288810B5000C4C90 /* QuizRepository.swift */; };
 		9C25C88E28881111000C4C90 /* QuizNetworkDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C25C88D28881111000C4C90 /* QuizNetworkDataSource.swift */; };
 		9C25C89428882613000C4C90 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 9C25C89328882613000C4C90 /* SDWebImage */; };
@@ -112,7 +112,6 @@
 		9C08B86728981775001F56BD /* LeaderboardUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardUseCase.swift; sourceTree = "<group>"; };
 		9C08B86C289819EB001F56BD /* LeaderboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardViewModel.swift; sourceTree = "<group>"; };
 		9C08B86E28981AA0001F56BD /* LeaderboardModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaderboardModels.swift; sourceTree = "<group>"; };
-		9C0D815128940B3200C6D236 /* QuizResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultViewController.swift; sourceTree = "<group>"; };
 		9C0D815328940D2C00C6D236 /* QuizResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultViewModel.swift; sourceTree = "<group>"; };
 		9C195367287584750051CEC6 /* QuizApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuizApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9C19536A287584750051CEC6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -133,6 +132,7 @@
 		9C20BAD5287F01AC009378FB /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		9C20BAD7287F17F2009378FB /* LogOutUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutUseCase.swift; sourceTree = "<group>"; };
 		9C22EA7E28B386DE00F8E069 /* CategorySlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySlider.swift; sourceTree = "<group>"; };
+		9C22EA8128B3AE2F00F8E069 /* QuizResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizResultView.swift; sourceTree = "<group>"; };
 		9C25C88B288810B5000C4C90 /* QuizRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizRepository.swift; sourceTree = "<group>"; };
 		9C25C88D28881111000C4C90 /* QuizNetworkDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizNetworkDataSource.swift; sourceTree = "<group>"; };
 		9C25C8B12888428A000C4C90 /* UserModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModels.swift; sourceTree = "<group>"; };
@@ -227,9 +227,9 @@
 		9C0D815028940B1B00C6D236 /* QuizResult */ = {
 			isa = PBXGroup;
 			children = (
-				9C0D815128940B3200C6D236 /* QuizResultViewController.swift */,
 				9C0D815328940D2C00C6D236 /* QuizResultViewModel.swift */,
 				9C08B8632897D02C001F56BD /* QuizResultModels.swift */,
+				9C22EA8128B3AE2F00F8E069 /* QuizResultView.swift */,
 			);
 			path = QuizResult;
 			sourceTree = "<group>";
@@ -652,6 +652,7 @@
 				9C25C8B22888428A000C4C90 /* UserModels.swift in Sources */,
 				9C42646A28AFBF23008D4C20 /* QuizListDifficultyView.swift in Sources */,
 				9CFCC2F42885532A00B01343 /* QuizViewModel.swift in Sources */,
+				9C22EA8228B3AE2F00F8E069 /* QuizResultView.swift in Sources */,
 				9C0481E2288FEFFD0095247C /* SolvingQuizUseCase.swift in Sources */,
 				9C668AA528AE5ACB001D6920 /* LeaderboardHeader.swift in Sources */,
 				9CC33B26287D6E2B002E9853 /* SecureStorage.swift in Sources */,
@@ -667,7 +668,6 @@
 				9C01635828ACEA9D004C7270 /* UserInputView.swift in Sources */,
 				9CFCC2F82885547600B01343 /* QuizModels.swift in Sources */,
 				9C668AA728AE5CC1001D6920 /* LeaderboardList.swift in Sources */,
-				9C0D815228940B3200C6D236 /* QuizResultViewController.swift in Sources */,
 				9C20BAD0287EF1DB009378FB /* UserViewModel.swift in Sources */,
 				9C1953AF287826BD0051CEC6 /* LoginViewModel.swift in Sources */,
 			);

@@ -1,13 +1,13 @@
 import Combine
 
-class QuizResultViewModel {
-
-    private let result: QuizResult
-
-    private let router: AppRouterProtocol
-    private let useCase: SolvingQuizUseCase
+class QuizResultViewModel: ObservableObject {
 
     @Published var text: String = ""
+
+    private var result: QuizResult!
+
+    private var router: AppRouterProtocol!
+    private var useCase: SolvingQuizUseCase!
 
     init(result: QuizResult, router: AppRouterProtocol, useCase: SolvingQuizUseCase) {
         self.result = result
@@ -17,14 +17,7 @@ class QuizResultViewModel {
         setText()
     }
 
-    func endQuiz() {
-        Task {
-            do {
-                let request = QuizEndRequest(id: result.sessionId, numberOfCorrectQuestions: result.correctQuestions)
-                _ = try await useCase.endQuiz(with: QuizEndRequestModel(request))
-            } catch _ {}
-        }
-    }
+    init() {}
 
     private func setText() {
         text = "\(result.correctQuestions)/\(result.totalQuestions)"
