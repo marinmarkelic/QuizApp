@@ -11,15 +11,13 @@ class SolvingQuizViewModel: ObservableObject {
 
     private var id: Int!
 
-    private var router: AppRouterProtocol!
     private var useCase: SolvingQuizUseCaseProtocol!
 
     private var correctQuestions: Int = 0
     private var didFinishQuiz: Bool = false
 
-    init(id: Int, router: AppRouterProtocol, useCase: SolvingQuizUseCaseProtocol) {
+    init(id: Int, useCase: SolvingQuizUseCaseProtocol) {
         self.id = id
-        self.router = router
         self.useCase = useCase
 
         Task {
@@ -112,12 +110,7 @@ Please try again.
                 sessionId: self.quiz.sessionId,
                 correctQuestions: self.correctQuestions,
                 totalQuestions: self.quiz.questions.count)
-            self.router.showResults(with: result)
         }
-    }
-
-    func goBack() {
-        router.goBack()
     }
 
 }

@@ -4,12 +4,10 @@ class UserViewModel: ObservableObject {
 
     var userInfo: UserInfo = UserInfo()
 
-    private var router: AppRouterProtocol!
     private var userUseCase: UserUseCaseProtocol!
     private var logoutUseCase: LogOutUseCaseProtocol!
 
-    init(router: AppRouterProtocol, userUseCase: UserUseCaseProtocol, logoutUseCase: LogOutUseCaseProtocol) {
-        self.router = router
+    init(userUseCase: UserUseCaseProtocol, logoutUseCase: LogOutUseCaseProtocol) {
         self.userUseCase = userUseCase
         self.logoutUseCase = logoutUseCase
     }
@@ -47,7 +45,6 @@ class UserViewModel: ObservableObject {
             guard let self = self else { return }
 
             self.logoutUseCase.logOut()
-            self.router.showLogin()
         }
     }
 

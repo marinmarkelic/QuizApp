@@ -10,9 +10,9 @@ struct QuizDetailsView: View {
                     Text("Leaderboard")
                         .font(.heading5)
                         .foregroundColor(.white)
-                        .onTapGesture {
-                            viewModel.showLeaderboard()
-                        }
+//                        .onTapGesture {
+//                            viewModel.showLeaderboard()
+//                        }
                         .overlay(alignment: .bottom) {
                             Rectangle()
                                 .frame(maxHeight: 2)
@@ -23,9 +23,9 @@ struct QuizDetailsView: View {
                         .pushedRight()
 
                 DetailsView(quiz: viewModel.quiz)
-                    .onStartQuizTap {
-                        viewModel.startQuiz()
-                    }
+//                    .onStartQuizTap {
+//                        viewModel.startQuiz()
+//                    }
             }
             .padding(.horizontal)
         }

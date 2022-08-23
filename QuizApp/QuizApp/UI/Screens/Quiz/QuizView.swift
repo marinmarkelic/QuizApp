@@ -15,9 +15,9 @@ struct QuizView: View {
                 }
 
             QuizListView(quizzes: viewModel.quizzes, alwaysShowSections: false)
-                .onQuizTap {
-                    viewModel.showQuizDetails(with: $0)
-                }
+//                .onQuizTap {
+//                    viewModel.showQuizDetails(with: $0)
+//                }
         }
         .maxWidth()
         .maxHeight()

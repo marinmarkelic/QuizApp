@@ -6,22 +6,13 @@ class AppDependencies {
 
     private let baseUrl = "https://five-ios-quiz-app.herokuapp.com/api"
 
-    private lazy var container: Resolver = {
+    lazy var container: Resolver = {
         let container = Resolver()
         registerDependencies(in: container)
         return container
     }()
 
-    lazy var appRouter: AppRouterProtocol = {
-        container.resolve()
-    }()
-
     func registerDependencies(in container: Resolver) {
-        container
-            .register { AppRouter(container: container) }
-            .implements(AppRouterProtocol.self)
-            .scope(.application)
-
         container
             .register { SecureStorage() }
             .implements(SecureStorageProtocol.self)
@@ -133,54 +124,45 @@ class AppDependencies {
 
     private func registerViewModels(in container: Resolver) {
         container
-            .register { LoginViewModel(router: container.resolve(), useCase: container.resolve()) }
+            .register { LoginViewModel(useCase: container.resolve()) }
             .scope(.unique)
 
         container
-            .register { QuizViewModel(router: container.resolve(), useCase: container.resolve()) }
+            .register { QuizViewModel(useCase: container.resolve()) }
             .scope(.unique)
 
         container
             .register {
-                UserViewModel(
-                    router: container.resolve(),
-                    userUseCase: container.resolve(),
-                    logoutUseCase: container.resolve())
+                UserViewModel( userUseCase: container.resolve(), logoutUseCase: container.resolve())
             }
             .scope(.unique)
 
         container
             .register { (_, args) -> QuizDetailsViewModel in
-                QuizDetailsViewModel(quiz: args.get(), router: container.resolve())
+                QuizDetailsViewModel(quiz: args.get())
             }
             .scope(.unique)
 
         container
             .register { (_, args) -> LeaderboardViewModel in
-                LeaderboardViewModel(id: args.get(), useCase: container.resolve(), router: container.resolve())
+                LeaderboardViewModel(id: args.get(), useCase: container.resolve())
             }
             .scope(.unique)
 
         container
             .register { (_, args) -> SolvingQuizViewModel in
-                SolvingQuizViewModel(
-                    id: args.get(),
-                    router: container.resolve(),
-                    useCase: container.resolve())
+                SolvingQuizViewModel(id: args.get(), useCase: container.resolve())
             }
             .scope(.unique)
 
         container
             .register { (_, args) -> QuizResultViewModel in
-                QuizResultViewModel(
-                    result: args.get(),
-                    router: container.resolve(),
-                    useCase: container.resolve())
+                QuizResultViewModel(result: args.get(), useCase: container.resolve())
             }
             .scope(.unique)
 
         container
-            .register { SearchViewModel(router: container.resolve(), useCase: container.resolve()) }
+            .register { SearchViewModel(useCase: container.resolve()) }
             .scope(.unique)
     }
 

@@ -30,8 +30,6 @@
 		9C1953A9287716FE0051CEC6 /* ConstructViewsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1953A8287716FE0051CEC6 /* ConstructViewsProtocol.swift */; };
 		9C1953AB287725590051CEC6 /* TextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1953AA287725590051CEC6 /* TextFieldView.swift */; };
 		9C1953AF287826BD0051CEC6 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1953AE287826BD0051CEC6 /* LoginViewModel.swift */; };
-		9C1953B3287871CC0051CEC6 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1953B2287871CC0051CEC6 /* AppRouter.swift */; };
-		9C1953B5287871E20051CEC6 /* AppRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1953B4287871E20051CEC6 /* AppRouterProtocol.swift */; };
 		9C1C76D328803AA9006217A9 /* UserNetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C1C76D228803AA9006217A9 /* UserNetworkClient.swift */; };
 		9C20BAC8287EE642009378FB /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C20BAC7287EE642009378FB /* TabBarController.swift */; };
 		9C20BAD0287EF1DB009378FB /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C20BACF287EF1DB009378FB /* UserViewModel.swift */; };
@@ -120,8 +118,6 @@
 		9C1953A8287716FE0051CEC6 /* ConstructViewsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructViewsProtocol.swift; sourceTree = "<group>"; };
 		9C1953AA287725590051CEC6 /* TextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldView.swift; sourceTree = "<group>"; };
 		9C1953AE287826BD0051CEC6 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
-		9C1953B2287871CC0051CEC6 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
-		9C1953B4287871E20051CEC6 /* AppRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouterProtocol.swift; sourceTree = "<group>"; };
 		9C1C76D228803AA9006217A9 /* UserNetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNetworkClient.swift; sourceTree = "<group>"; };
 		9C20BAC7287EE642009378FB /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		9C20BACF287EF1DB009378FB /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
@@ -371,9 +367,7 @@
 			isa = PBXGroup;
 			children = (
 				9C1953A8287716FE0051CEC6 /* ConstructViewsProtocol.swift */,
-				9C1953B4287871E20051CEC6 /* AppRouterProtocol.swift */,
 				9C19536A287584750051CEC6 /* AppDelegate.swift */,
-				9C1953B2287871CC0051CEC6 /* AppRouter.swift */,
 				9CC4D6DF287C5A720061F149 /* AppDependencies.swift */,
 				9C327E56289AC7CF003787C0 /* Combine+Extensions.swift */,
 				9C327E58289ACBD0003787C0 /* UIControl+Extensions.swift */,
@@ -627,7 +621,6 @@
 				9C20BAC8287EE642009378FB /* TabBarController.swift in Sources */,
 				9C42E0C42881A9A100B2B9FF /* QuizView.swift in Sources */,
 				9CC5FAE728B4D9AA0085254F /* QuestionView.swift in Sources */,
-				9C1953B3287871CC0051CEC6 /* AppRouter.swift in Sources */,
 				9CC4D6D6287C10450061F149 /* LoginNetworkClient.swift in Sources */,
 				9C4807E028899EF7002D097D /* DataSourceModels.swift in Sources */,
 				9CC4D6E2287C6AB30061F149 /* UserNetworkDataSource.swift in Sources */,
@@ -642,7 +635,6 @@
 				9C668AAD28AE84C8001D6920 /* QuizDetailsView.swift in Sources */,
 				9CADE93D28AD343500B04380 /* SettingsView.swift in Sources */,
 				9CC33B31287D9F59002E9853 /* CheckNetworkClient.swift in Sources */,
-				9C1953B5287871E20051CEC6 /* AppRouterProtocol.swift in Sources */,
 				9C01635A28ACEB23004C7270 /* RoundedTextField.swift in Sources */,
 				9C42646628AFBEDD008D4C20 /* QuizListView.swift in Sources */,
 				9C327E59289ACBD0003787C0 /* UIControl+Extensions.swift in Sources */,

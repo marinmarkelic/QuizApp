@@ -14,7 +14,7 @@ struct QuizResultView: View {
 
             Spacer()
 
-            Button(action: { viewModel.exitQuiz() }, label: {
+            Button(action: { /* // */ }, label: {
                 Text("Finish Quiz")
                     .foregroundColor(.purpleText)
                     .font(.heading6)

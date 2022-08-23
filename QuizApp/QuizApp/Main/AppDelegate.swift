@@ -1,11 +1,29 @@
 import UIKit
 import Resolver
+import SwiftUI
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    private var router: AppRouterProtocol!
     private var appDependencies: AppDependencies!
+    private var container: Resolver!
+
+    private var initialView: some View {
+        get async {
+            do {
+                let userNetworkDataSource = container.resolve(UserNetworkDataSourceProtocol.self)
+                try await userNetworkDataSource.check()
+
+                return AnyView(TabBarView(
+                    quizViewModel: container.resolve(),
+                    searchViewModel: container.resolve(),
+                    userViewModel: container.resolve()))
+            } catch {
+                container.resolve(SecureStorageProtocol.self).deleteAccessToken()
+                return AnyView(LoginView(viewModel: container.resolve()))
+            }
+        }
+    }
 
     var window: UIWindow?
 
@@ -16,10 +34,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let window = UIWindow(frame: UIScreen.main.bounds)
 
         appDependencies = AppDependencies()
+        container = appDependencies.container
 
-        router = appDependencies.appRouter
-        router.start(in: window)
-
+        Task {
+            let viewController = await UIHostingController(rootView: initialView)
+            window.rootViewController = viewController
+            window.makeKeyAndVisible()
+        }
         self.window = window
         return true
     }
