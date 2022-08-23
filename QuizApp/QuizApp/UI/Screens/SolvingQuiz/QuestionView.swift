@@ -14,7 +14,6 @@ struct QuestionView: View {
         return quiz.questions[currentQuestionIndex]
     }
 
-
     init(quiz: QuizStartResponse, currentQuestionIndex: Int, onAnswerTap: @escaping (Int) -> Void = { _ in }) {
         self.quiz = quiz
         self.currentQuestionIndex = currentQuestionIndex
@@ -23,11 +22,10 @@ struct QuestionView: View {
 
     var body: some View {
         ScrollView(showsIndicators: false) {
-            VStack {
+            VStack(alignment: .leading) {
                 Text(currentQuestion.question)
                     .font(.heading3)
                     .foregroundColor(.white)
-                    .maxWidth(alignment: .leading)
 
                 ForEach(currentQuestion.answers, id: \.id) { answer in
                     Button(action: { onAnswerTap(answer.id) }, label: {

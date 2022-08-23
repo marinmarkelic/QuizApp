@@ -6,11 +6,10 @@ struct ProgressView: View {
     let progressColors: [UIColor]
 
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             Text(progressText)
                 .font(.heading5)
                 .foregroundColor(.white)
-                .maxWidth(alignment: .leading)
 
             HStack(spacing: 5) {
                 ForEach(progressColors) {color in
