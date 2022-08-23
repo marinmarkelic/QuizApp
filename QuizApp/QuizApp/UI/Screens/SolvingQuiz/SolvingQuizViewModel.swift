@@ -65,9 +65,9 @@ Please try again.
             progressColors[currentQuestionIndex] = .incorrectAnswer
         }
 
-        let scrollDelayInMillis = 400
+        let questionChangeDelay = 400
 
-        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(scrollDelayInMillis)) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(questionChangeDelay)) { [weak self] in
             self?.changeQuestion(with: id)
         }
     }

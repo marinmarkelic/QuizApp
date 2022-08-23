@@ -7,11 +7,9 @@ struct QuestionView: View {
     let onAnswerTap: (Int) -> Void
 
     var currentQuestion: Question {
-        if quiz.questions.count == 0 {
-            return .empty
-        }
-
-        return quiz.questions[currentQuestionIndex]
+        quiz.questions.count == 0 ?
+            .empty :
+            quiz.questions[currentQuestionIndex]
     }
 
     init(quiz: QuizStartResponse, currentQuestionIndex: Int, onAnswerTap: @escaping (Int) -> Void = { _ in }) {
