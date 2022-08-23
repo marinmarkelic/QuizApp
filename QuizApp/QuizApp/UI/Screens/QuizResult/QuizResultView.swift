@@ -21,12 +21,11 @@ struct QuizResultView: View {
                     .frame(maxWidth: .infinity)
             })
             .padding()
-            .frame(maxWidth: .infinity)
+            .maxWidth()
             .background(.white)
             .cornerRadius(25)
         }
-        .maxWidth()
-        .maxHeight()
+        .maxSize()
         .padding()
         .background(LinearGradient.background.ignoresSafeArea())
     }
