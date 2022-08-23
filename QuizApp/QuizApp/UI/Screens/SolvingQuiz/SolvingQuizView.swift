@@ -12,6 +12,7 @@ struct SolvingQuizView: View {
                 .onAnswerTap {
                     viewModel.selectedAnswer(with: $0)
                 }
+                .animation(.spring(), value: viewModel.currentQuestionIndex)
         }
         .maxSize()
         .padding()
@@ -53,8 +54,6 @@ struct QuestionsView: View {
             .onAnswerTap {
                 onAnswerTap($0)
             }
-            .transition(.slide)
-            .id(currentQuestionIndex)
     }
 
     func onAnswerTap(onAnswerTap: @escaping (Int) -> Void) -> QuestionsView {
