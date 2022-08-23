@@ -2,13 +2,30 @@ import SwiftUI
 
 struct TabBarView: View {
 
+    let quizViewModel: QuizViewModel
+    let searchViewModel: SearchViewModel
+    let userViewModel: UserViewModel
+
     var body: some View {
         TabView {
-            QuizView(viewModel: QuizViewModel())
+            QuizView(viewModel: quizViewModel)
+                .tabItem {
+                    Label("Quiz", systemImage: "gearshape")
+                }
 
-            SearchView(viewModel: SearchViewModel())
+            SearchView(viewModel: searchViewModel)
+                .tabItem {
+                    Label("Search", systemImage: "magnifyingglass")
+                }
 
-            SettingsView(viewModel: UserViewModel())
+            SettingsView(viewModel: userViewModel)
+                .tabItem {
+                    Label("Settings", systemImage: "gearshape")
+                }
+        }
+        .onAppear {
+            UITabBar.appearance().backgroundColor = .white
+            UITabBar.appearance().barTintColor = .gray
         }
     }
 
@@ -17,7 +34,10 @@ struct TabBarView: View {
 struct TabBarViewPreview: PreviewProvider {
 
     static var previews: some View {
-        TabBarView()
+        TabBarView(
+            quizViewModel: QuizViewModel(),
+            searchViewModel: SearchViewModel(),
+            userViewModel: UserViewModel())
     }
 
 }
