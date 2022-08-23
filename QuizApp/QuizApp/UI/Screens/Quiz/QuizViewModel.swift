@@ -56,6 +56,8 @@ Please try again
 
     @MainActor
     private func fetchQuizzes(for type: CategoryType) async throws {
+        guard let useCase = useCase else { return }
+
         let quizzes: [QuizModel]
 
         guard let categoryModel = CategoryModel(rawValue: type.rawValue) else {
