@@ -18,7 +18,7 @@ struct QuizResultView: View {
                 Text("Finish Quiz")
                     .foregroundColor(.purpleText)
                     .font(.heading6)
-                    .frame(maxWidth: .infinity)
+                    .maxWidth()
             })
             .padding()
             .maxWidth()
