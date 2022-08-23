@@ -6,7 +6,7 @@ struct QuestionView: View {
     let currentQuestionIndex: Int
     let onAnswerTap: (Int) -> Void
 
-    var currentQuestion: Question {
+    private var currentQuestion: Question {
         quiz.questions.count == 0 ?
             .empty :
             quiz.questions[currentQuestionIndex]

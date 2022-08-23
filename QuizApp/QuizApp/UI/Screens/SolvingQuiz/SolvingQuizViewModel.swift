@@ -1,10 +1,10 @@
 import Combine
-import UIKit
+import SwiftUI
 
 class SolvingQuizViewModel: ObservableObject {
 
     @Published var quiz: QuizStartResponse = .empty
-    @Published var progressColors: [UIColor] = []
+    @Published var progressData: [ProgressData] = []
     @Published var currentQuestionIndex: Int = 0
     @Published var progressText: String = ""
     @Published var errorMessage: String = ""
@@ -36,9 +36,15 @@ class SolvingQuizViewModel: ObservableObject {
                 let quiz = try await useCase.startQuiz(with: QuizStartRequestModel(id: id))
                 self.quiz = QuizStartResponse(quiz)
 
-                let unansweredColor: UIColor = .white.withAlphaComponent(0.3)
-                progressColors = [UIColor](repeating: unansweredColor, count: quiz.questions.count)
-                progressColors[0] = .white
+                let unansweredColor: Color = .white.opacity(0.3)
+                for question in quiz.questions {
+                    if question.id == quiz.questions.first?.id {
+                        progressData.append(ProgressData(id: question.id, color: .white))
+                    } else {
+                        progressData.append(ProgressData(id: question.id, color: unansweredColor))
+                    }
+                }
+
                 setProgressText()
             } catch {
                 errorMessage = """
@@ -57,12 +63,14 @@ Please try again.
 
         changeAnswerColors(for: question, selectedAnswerId: id)
 
+        let currentProgressData = progressData[currentQuestionIndex]
         let isAnswerCorrect = quiz.questions[currentQuestionIndex].correctAnswerId == id
+
         if isAnswerCorrect {
-            progressColors[currentQuestionIndex] = .correctAnswer
+            progressData[currentQuestionIndex] = currentProgressData.color(.correctAnswer)
             correctQuestions += 1
         } else {
-            progressColors[currentQuestionIndex] = .incorrectAnswer
+            progressData[currentQuestionIndex] = currentProgressData.color(.incorrectAnswer)
         }
 
         let questionChangeDelay = 400
@@ -73,8 +81,9 @@ Please try again.
     }
 
     private func changeQuestion(with id: Int) {
-        if currentQuestionIndex < progressColors.count - 1 {
-            progressColors[currentQuestionIndex + 1] = .white
+        if currentQuestionIndex < progressData.count - 1 {
+            progressData[currentQuestionIndex + 1] = progressData[currentQuestionIndex + 1].color(.white)
+
             currentQuestionIndex += 1
             setProgressText()
         } else {

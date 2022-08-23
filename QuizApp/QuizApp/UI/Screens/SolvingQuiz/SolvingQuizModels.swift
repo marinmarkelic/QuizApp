@@ -1,3 +1,4 @@
+import SwiftUI
 import UIKit
 
 struct QuizStartRequest {
@@ -150,6 +151,17 @@ extension QuizEndResponse {
 
     init(_ model: QuizEndResponseModel) {
         points = model.points
+    }
+
+}
+
+struct ProgressData: Identifiable {
+
+    let id: Int
+    let color: Color
+
+    func color(_ color: Color) -> ProgressData {
+        ProgressData(id: id, color: color)
     }
 
 }
