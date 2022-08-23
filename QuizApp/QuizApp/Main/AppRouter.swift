@@ -7,8 +7,8 @@ class AppRouter: AppRouterProtocol {
     private let navigationController: UINavigationController
     private let container: Resolver
 
-    private var tabBarController: TabBarController? {
-        return navigationController.viewControllers.first as? TabBarController
+    private var tabBarController: UIHostingController<TabBarView>? {
+        return navigationController.viewControllers.first as? UIHostingController<TabBarView>
     }
 
     init(container: Resolver) {
@@ -35,17 +35,11 @@ class AppRouter: AppRouterProtocol {
             return
         }
 
-        let quizViewController = container.resolve(UIHostingController<QuizView>.self)
-        let searchViewController = container.resolve(UIHostingController<SearchView>.self)
-        let userViewController = container.resolve(UIHostingController<SettingsView>.self)
-
-        styleQuizTabBar(quizViewController)
-        styleSettingsTabBar(userViewController)
-        styleSearchTabBar(searchViewController)
-
-        let viewControllers = [quizViewController, searchViewController, userViewController]
-
-        let tabBarController = TabBarController(viewControllers: viewControllers)
+        let tabBarController = UIHostingController(
+            rootView: TabBarView(
+                quizViewModel: container.resolve(),
+                searchViewModel: container.resolve(),
+                userViewModel: container.resolve()))
 
         navigationController.setViewControllers([tabBarController], animated: true)
     }
