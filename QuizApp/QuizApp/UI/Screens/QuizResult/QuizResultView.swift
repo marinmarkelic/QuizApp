@@ -18,15 +18,14 @@ struct QuizResultView: View {
                 Text("Finish Quiz")
                     .foregroundColor(.purpleText)
                     .font(.heading6)
-                    .frame(maxWidth: .infinity)
+                    .maxWidth()
             })
             .padding()
-            .frame(maxWidth: .infinity)
+            .maxWidth()
             .background(.white)
             .cornerRadius(25)
         }
-        .maxWidth()
-        .maxHeight()
+        .maxSize()
         .padding()
         .background(LinearGradient.background.ignoresSafeArea())
     }
