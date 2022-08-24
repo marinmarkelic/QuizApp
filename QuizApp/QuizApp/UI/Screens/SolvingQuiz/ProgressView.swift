@@ -12,7 +12,7 @@ struct ProgressView: View {
                 .foregroundColor(.white)
 
             HStack(spacing: 5) {
-                ForEach(progressData, id: \.id) {data in
+                ForEach(progressData) { data in
                     Rectangle()
                         .foregroundColor(data.color)
                         .frame(height: 5)
