@@ -22,9 +22,9 @@ struct SearchView: View {
                 }
 
             QuizListView(quizzes: viewModel.quizzes)
-//                .onQuizTap { quiz in
-//                    viewModel.showQuizDetails(with: quiz)
-//                }
+                .onQuizTap { quiz in
+                    viewModel.showQuizDetails(with: quiz)
+                }
         }
     }
 

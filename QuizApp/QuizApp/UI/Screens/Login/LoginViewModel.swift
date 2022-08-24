@@ -8,11 +8,13 @@ class LoginViewModel: ObservableObject {
     @Published var email = ""
     @Published var password = ""
 
+    private var router: AppRouterProtocol!
     private var useCase: LoginUseCaseProtocol!
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(useCase: LoginUseCaseProtocol) {
+    init(router: AppRouterProtocol, useCase: LoginUseCaseProtocol) {
+        self.router = router
         self.useCase = useCase
 
         bindViewModel()
@@ -45,6 +47,7 @@ class LoginViewModel: ObservableObject {
                 _ = try await useCase.logIn(username: email, password: password)
 
                 errorText = ""
+                router.showHome()
             } catch let error as RequestError {
                 showError(error)
             }

@@ -7,13 +7,19 @@ class QuizViewModel: ObservableObject {
     @Published var categories: [Category] = []
     @Published var errorMessage: String = ""
 
+    private var router: AppRouterProtocol!
     private var useCase: QuizUseCaseProtocol!
 
-    init(useCase: QuizUseCaseProtocol) {
+    init(router: AppRouterProtocol, useCase: QuizUseCaseProtocol) {
+        self.router = router
         self.useCase = useCase
     }
 
     init() {}
+
+    func showQuizDetails(with quiz: Quiz) {
+        router.showQuizDetails(with: quiz)
+    }
 
     @MainActor
     func loadCategories() {
