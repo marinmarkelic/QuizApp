@@ -1,3 +1,4 @@
+import SwiftUI
 import UIKit
 
 struct QuizStartRequest {
@@ -43,6 +44,8 @@ struct Question {
 
 extension Question {
 
+    static let empty = Question(id: 0, answers: [], correctAnswerId: 0, question: "")
+
     init(_ model: Question, selectedAnswerId: Int) {
         id = model.id
         answers = model.answers.map {
@@ -62,6 +65,14 @@ extension Question {
         }
         self.correctAnswerId = model.correctAnswerId
         question = model.question
+    }
+
+}
+
+extension Question: Equatable {
+
+    static func == (lhs: Question, rhs: Question) -> Bool {
+        lhs.id == rhs.id
     }
 
 }
@@ -93,7 +104,7 @@ extension QuizStartResponse: Equatable {
 
 }
 
-extension Question: Equatable {
+extension Question {
 
     init(_ question: QuestionModel) {
         answers = question.answers.map { Answer($0) }
@@ -140,6 +151,17 @@ extension QuizEndResponse {
 
     init(_ model: QuizEndResponseModel) {
         points = model.points
+    }
+
+}
+
+struct ProgressData: Identifiable {
+
+    let id: Int
+    let color: Color
+
+    func color(_ color: Color) -> ProgressData {
+        ProgressData(id: id, color: color)
     }
 
 }

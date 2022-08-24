@@ -1,70 +1,24 @@
-import UIKit
+import SwiftUI
 
-class ProgressView: UIView {
+struct ProgressView: View {
 
-    private var label: UILabel!
-    private var stackView: UIStackView!
+    let progressText: String
+    let progressData: [ProgressData]
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(progressText)
+                .font(.heading5)
+                .foregroundColor(.white)
 
-        createViews()
-        styleViews()
-        defineLayoutForViews()
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    func set(colors: [UIColor]) {
-        stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-
-        for color in colors {
-            let cell = UIView()
-            cell.backgroundColor = color
-            cell.layer.cornerRadius = 2
-
-            stackView.addArrangedSubview(cell)
+            HStack(spacing: 5) {
+                ForEach(progressData) { data in
+                    Rectangle()
+                        .foregroundColor(data.color)
+                        .frame(height: 5)
+                        .cornerRadius(2)
+                }
+            }
         }
     }
-
-    func set(text: String) {
-        label.text = text
-    }
-
-}
-
-extension ProgressView: ConstructViewsProtocol {
-
-    func createViews() {
-        label = UILabel()
-        addSubview(label)
-
-        stackView = UIStackView()
-        addSubview(stackView)
-    }
-
-    func styleViews() {
-        label.textColor = .white
-        label.font = .heading5
-        label.text = "0/0"
-
-        stackView.alignment = .fill
-        stackView.distribution = .fillEqually
-        stackView.spacing = 5
-    }
-
-    func defineLayoutForViews() {
-        label.snp.makeConstraints {
-            $0.leading.top.trailing.equalToSuperview()
-        }
-
-        stackView.snp.makeConstraints {
-            $0.top.equalTo(label.snp.bottom).offset(5)
-            $0.leading.trailing.bottom.equalToSuperview()
-            $0.height.equalTo(5)
-        }
-    }
-
 }

@@ -1,18 +1,18 @@
 import Combine
-import UIKit
+import SwiftUI
 
-class SolvingQuizViewModel {
-
-    private let id: Int
-
-    private let router: AppRouterProtocol
-    private let useCase: SolvingQuizUseCaseProtocol
+class SolvingQuizViewModel: ObservableObject {
 
     @Published var quiz: QuizStartResponse = .empty
-    @Published var progressColors: [UIColor] = []
+    @Published var progressData: [ProgressData] = []
     @Published var currentQuestionIndex: Int = 0
     @Published var progressText: String = ""
     @Published var errorMessage: String = ""
+
+    private var id: Int!
+
+    private var router: AppRouterProtocol!
+    private var useCase: SolvingQuizUseCaseProtocol!
 
     private var correctQuestions: Int = 0
     private var didFinishQuiz: Bool = false
@@ -21,7 +21,13 @@ class SolvingQuizViewModel {
         self.id = id
         self.router = router
         self.useCase = useCase
+
+        Task {
+            await startQuiz()
+        }
     }
+
+    init() {}
 
     @MainActor
     func startQuiz() {
@@ -30,9 +36,15 @@ class SolvingQuizViewModel {
                 let quiz = try await useCase.startQuiz(with: QuizStartRequestModel(id: id))
                 self.quiz = QuizStartResponse(quiz)
 
-                let unansweredColor: UIColor = .white.withAlphaComponent(0.3)
-                progressColors = [UIColor](repeating: unansweredColor, count: quiz.questions.count)
-                progressColors[0] = .white
+                let unansweredColor: Color = .white.opacity(0.3)
+                for question in quiz.questions {
+                    if question.id == quiz.questions.first?.id {
+                        progressData.append(ProgressData(id: question.id, color: .white))
+                    } else {
+                        progressData.append(ProgressData(id: question.id, color: unansweredColor))
+                    }
+                }
+
                 setProgressText()
             } catch {
                 errorMessage = """
@@ -51,16 +63,27 @@ Please try again.
 
         changeAnswerColors(for: question, selectedAnswerId: id)
 
+        let currentProgressData = progressData[currentQuestionIndex]
         let isAnswerCorrect = quiz.questions[currentQuestionIndex].correctAnswerId == id
+
         if isAnswerCorrect {
-            progressColors[currentQuestionIndex] = .correctAnswer
+            progressData[currentQuestionIndex] = currentProgressData.color(.correctAnswer)
             correctQuestions += 1
         } else {
-            progressColors[currentQuestionIndex] = .incorrectAnswer
+            progressData[currentQuestionIndex] = currentProgressData.color(.incorrectAnswer)
         }
 
-        if currentQuestionIndex < progressColors.count - 1 {
-            progressColors[currentQuestionIndex + 1] = .white
+        let questionChangeDelay = 400
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(questionChangeDelay)) { [weak self] in
+            self?.changeQuestion(with: id)
+        }
+    }
+
+    private func changeQuestion(with id: Int) {
+        if currentQuestionIndex < progressData.count - 1 {
+            progressData[currentQuestionIndex + 1] = progressData[currentQuestionIndex + 1].color(.white)
+
             currentQuestionIndex += 1
             setProgressText()
         } else {

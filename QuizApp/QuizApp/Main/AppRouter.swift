@@ -135,8 +135,29 @@ class AppRouter: AppRouterProtocol {
     }
 
     func showQuiz(with id: Int) {
-        let solvingQuizViewController = container.resolve(SolvingQuizViewController.self, args: id)
+        let solvingQuizViewController = container.resolve(UIHostingController<SolvingQuizView>.self, args: id)
+        styleSolvingQuizNavigationBar(solvingQuizViewController)
         navigationController.pushViewController(solvingQuizViewController, animated: true)
+    }
+
+    private func styleSolvingQuizNavigationBar(_ viewController: UIViewController) {
+        let titleView = UILabel()
+        titleView.text = "PopQuiz"
+        titleView.textColor = .white
+        titleView.font = .heading3
+        viewController.navigationItem.titleView = titleView
+
+        viewController.navigationItem.hidesBackButton = true
+
+        let config = UIImage.SymbolConfiguration(scale: .medium)
+        let image = UIImage(systemName: "chevron.left", withConfiguration: config)
+        let backButton = UIBarButtonItem(
+            image: image,
+            style: .done,
+            target: self,
+            action: #selector(tappedClose))
+        backButton.tintColor = .white
+        viewController.navigationItem.leftBarButtonItem = backButton
     }
 
     func showResults(with result: QuizResult) {
