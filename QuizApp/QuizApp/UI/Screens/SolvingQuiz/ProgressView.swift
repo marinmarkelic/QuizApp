@@ -3,7 +3,7 @@ import SwiftUI
 struct ProgressView: View {
 
     let progressText: String
-    let progressColors: [UIColor]
+    let progressData: [ProgressData]
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -12,9 +12,9 @@ struct ProgressView: View {
                 .foregroundColor(.white)
 
             HStack(spacing: 5) {
-                ForEach(progressColors) {color in
+                ForEach(progressData) { data in
                     Rectangle()
-                        .foregroundColor(Color(color))
+                        .foregroundColor(data.color)
                         .frame(height: 5)
                         .cornerRadius(2)
                 }

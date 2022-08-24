@@ -6,7 +6,9 @@ struct SolvingQuizView: View {
 
     var body: some View {
         VStack(spacing: 50) {
-            ProgressView(progressText: viewModel.progressText, progressColors: viewModel.progressColors)
+            ProgressView(
+                progressText: viewModel.progressText,
+                progressData: viewModel.progressData)
 
             QuestionView(quiz: viewModel.quiz, currentQuestionIndex: viewModel.currentQuestionIndex)
                 .onAnswerTap {
