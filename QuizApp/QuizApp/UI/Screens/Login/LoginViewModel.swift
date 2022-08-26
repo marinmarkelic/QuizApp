@@ -9,13 +9,11 @@ class LoginViewModel: ObservableObject {
     @Published var email = ""
     @Published var password = ""
 
-    private var router: AppRouterProtocol!
     private var useCase: LoginUseCaseProtocol!
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(router: AppRouterProtocol, useCase: LoginUseCaseProtocol) {
-        self.router = router
+    init(useCase: LoginUseCaseProtocol) {
         self.useCase = useCase
 
         bindViewModel()

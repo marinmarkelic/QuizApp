@@ -6,12 +6,10 @@ class QuizResultViewModel: ObservableObject {
 
     private var result: QuizResult!
 
-    private var router: AppRouterProtocol!
     private var useCase: SolvingQuizUseCase!
 
-    init(result: QuizResult, router: AppRouterProtocol, useCase: SolvingQuizUseCase) {
+    init(result: QuizResult, useCase: SolvingQuizUseCase) {
         self.result = result
-        self.router = router
         self.useCase = useCase
 
         setText()
@@ -24,7 +22,6 @@ class QuizResultViewModel: ObservableObject {
     }
 
     func exitQuiz() {
-        router.showHome()
     }
 
 }

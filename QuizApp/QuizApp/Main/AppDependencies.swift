@@ -15,11 +15,6 @@ class AppDependencies: ObservableObject {
 
     func registerDependencies(in container: Resolver) {
         container
-            .register { AppRouter(container: container) }
-            .implements(AppRouterProtocol.self)
-            .scope(.application)
-
-        container
             .register { SecureStorage() }
             .implements(SecureStorageProtocol.self)
             .scope(.application)
@@ -130,17 +125,16 @@ class AppDependencies: ObservableObject {
 
     private func registerViewModels(in container: Resolver) {
         container
-            .register { LoginViewModel(router: container.resolve(), useCase: container.resolve()) }
+            .register { LoginViewModel(useCase: container.resolve()) }
             .scope(.unique)
 
         container
-            .register { QuizViewModel(router: container.resolve(), useCase: container.resolve()) }
+            .register { QuizViewModel(useCase: container.resolve()) }
             .scope(.unique)
 
         container
             .register {
                 UserViewModel(
-                    router: container.resolve(),
                     userUseCase: container.resolve(),
                     logoutUseCase: container.resolve())
             }
@@ -148,13 +142,13 @@ class AppDependencies: ObservableObject {
 
         container
             .register { (_, args) -> QuizDetailsViewModel in
-                QuizDetailsViewModel(quiz: args.get(), router: container.resolve())
+                QuizDetailsViewModel(quiz: args.get())
             }
             .scope(.unique)
 
         container
             .register { (_, args) -> LeaderboardViewModel in
-                LeaderboardViewModel(id: args.get(), useCase: container.resolve(), router: container.resolve())
+                LeaderboardViewModel(id: args.get(), useCase: container.resolve())
             }
             .scope(.unique)
 
@@ -162,7 +156,6 @@ class AppDependencies: ObservableObject {
             .register { (_, args) -> SolvingQuizViewModel in
                 SolvingQuizViewModel(
                     id: args.get(),
-                    router: container.resolve(),
                     useCase: container.resolve())
             }
             .scope(.unique)
@@ -171,13 +164,12 @@ class AppDependencies: ObservableObject {
             .register { (_, args) -> QuizResultViewModel in
                 QuizResultViewModel(
                     result: args.get(),
-                    router: container.resolve(),
                     useCase: container.resolve())
             }
             .scope(.unique)
 
         container
-            .register { SearchViewModel(router: container.resolve(), useCase: container.resolve()) }
+            .register { SearchViewModel(useCase: container.resolve()) }
             .scope(.unique)
     }
 

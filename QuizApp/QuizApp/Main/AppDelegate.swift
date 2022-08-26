@@ -5,7 +5,6 @@ import SwiftUI
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    private var router: AppRouterProtocol!
     private var appDependencies: AppDependencies!
 
     var window: UIWindow?
