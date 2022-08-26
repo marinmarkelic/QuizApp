@@ -6,7 +6,7 @@ struct QuizView: View {
     @ObservedObject var viewModel: QuizViewModel
 
     var body: some View {
-        return VStack {
+        VStack {
             CategorySlider(categories: viewModel.categories)
                 .onCategoryTap {
                     viewModel.changeCategory(for: $0.type)

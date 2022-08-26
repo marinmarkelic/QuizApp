@@ -24,7 +24,6 @@ class AppDependencies: ObservableObject {
         registerRepos(in: container)
         registerUseCases(in: container)
         registerViewModels(in: container)
-        registerViewControllers(in: container)
     }
 
     private func registerNetworkClients(in container: Resolver) {
@@ -170,48 +169,6 @@ class AppDependencies: ObservableObject {
 
         container
             .register { SearchViewModel(useCase: container.resolve()) }
-            .scope(.unique)
-    }
-
-    private func registerViewControllers(in container: Resolver) {
-        container
-            .register { UIHostingController(rootView: LoginView(viewModel: container.resolve())) }
-            .scope(.unique)
-
-        container
-            .register { UIHostingController(rootView: QuizView(viewModel: container.resolve())) }
-            .scope(.unique)
-
-        container
-            .register { (_, args) -> UIHostingController<QuizDetailsView> in
-                UIHostingController(rootView: QuizDetailsView(viewModel: container.resolve(args: args.get())))
-            }
-            .scope(.unique)
-
-        container
-            .register { (_, args) -> UIHostingController<LeaderboardView> in
-                UIHostingController(rootView: LeaderboardView(viewModel: container.resolve(args: args.get())))
-            }
-            .scope(.unique)
-
-        container
-            .register { UIHostingController(rootView: SettingsView(viewModel: container.resolve())) }
-            .scope(.unique)
-
-        container
-            .register { (_, args) -> UIHostingController<SolvingQuizView> in
-                UIHostingController(rootView: SolvingQuizView(viewModel: container.resolve(args: args)))
-            }
-            .scope(.unique)
-
-        container
-            .register { (_, args) -> UIHostingController<QuizResultView> in
-                UIHostingController(rootView: QuizResultView(viewModel: container.resolve(args: args.get())))
-            }
-            .scope(.unique)
-
-        container
-            .register { UIHostingController(rootView: SearchView(viewModel: container.resolve())) }
             .scope(.unique)
     }
 
