@@ -11,9 +11,6 @@ struct QuizView: View {
                 .onCategoryTap {
                     viewModel.changeCategory(for: $0.type)
                 }
-                .onAppear {
-                    viewModel.loadCategories()
-                }
 
             QuizListView(quizzes: viewModel.quizzes, alwaysShowSections: false)
                 .onQuizTap {
@@ -24,6 +21,9 @@ struct QuizView: View {
         .maxHeight()
         .padding()
         .background(LinearGradient.background.ignoresSafeArea())
+        .onAppear {
+            viewModel.loadCategories()
+        }
     }
 
 }

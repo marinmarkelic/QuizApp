@@ -39,24 +39,18 @@ class LoginViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
-    @MainActor
-    func pressedLoginButton() -> Bool {
-        do {
-            _ = try login()
-            errorText = ""
-
-            return true
-        } catch let error as RequestError {
-            showError(error)
-            return false
-        } catch {
-            return false
-        }
-    }
-
-    private func login() throws {
+    func pressedLoginButton(_ completion: @escaping (Bool) -> Void) {
         Task {
-            try await useCase.logIn(username: email, password: password)
+            do {
+                _ = try await useCase.logIn(username: email, password: password)
+                errorText = ""
+                completion(true)
+            } catch let error as RequestError {
+                showError(error)
+                completion(false)
+            } catch {
+                completion(false)
+            }
         }
     }
 
