@@ -1,11 +1,12 @@
 import SwiftUI
+import Resolver
 
 struct QuizView: View {
 
     @ObservedObject var viewModel: QuizViewModel
 
     var body: some View {
-        VStack {
+        return VStack {
             CategorySlider(categories: viewModel.categories)
                 .onCategoryTap {
                     viewModel.changeCategory(for: $0.type)

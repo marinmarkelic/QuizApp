@@ -30,18 +30,15 @@ class AppRouter: AppRouterProtocol {
     }
 
     func showHome() {
-        if tabBarController != nil {
-            navigationController.popToRootViewController(animated: true)
-            return
-        }
-
-        let tabBarController = UIHostingController(
-            rootView: TabBarView(
-                quizViewModel: container.resolve(),
-                searchViewModel: container.resolve(),
-                userViewModel: container.resolve()))
-
-        navigationController.setViewControllers([tabBarController], animated: true)
+//        if tabBarController != nil {
+//            navigationController.popToRootViewController(animated: true)
+//            return
+//        }
+//
+//        let tabBarController = UIHostingController(
+//            rootView: TabBarView()
+//
+//        navigationController.setViewControllers([tabBarController], animated: true)
     }
 
     func showQuizDetails(with quiz: Quiz) {

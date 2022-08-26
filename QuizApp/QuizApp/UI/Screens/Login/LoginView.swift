@@ -2,6 +2,8 @@ import SwiftUI
 
 struct LoginView: View {
 
+    @EnvironmentObject var loginCheck: LoginCheck
+
     @ObservedObject var viewModel: LoginViewModel
 
     var body: some View {
@@ -18,7 +20,7 @@ struct LoginView: View {
                 errorText: viewModel.errorText,
                 isLoginButtonEnabled: viewModel.isLoginButtonEnabled)
             .onLoginTap {
-                viewModel.pressedLoginButton()
+                loginCheck.isLoggedIn = viewModel.pressedLoginButton()
             }
 
             Spacer()

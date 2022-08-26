@@ -1,4 +1,5 @@
 import Combine
+import SwiftUI
 import UIKit
 
 class LoginViewModel: ObservableObject {
@@ -41,16 +42,23 @@ class LoginViewModel: ObservableObject {
     }
 
     @MainActor
-    func pressedLoginButton() {
-        Task {
-            do {
-                _ = try await useCase.logIn(username: email, password: password)
+    func pressedLoginButton() -> Bool {
+        do {
+            _ = try login()
+            errorText = ""
 
-                errorText = ""
-                router.showHome()
-            } catch let error as RequestError {
-                showError(error)
-            }
+            return true
+        } catch let error as RequestError {
+            showError(error)
+            return false
+        } catch {
+            return false
+        }
+    }
+
+    private func login() throws {
+        Task {
+            try await useCase.logIn(username: email, password: password)
         }
     }
 

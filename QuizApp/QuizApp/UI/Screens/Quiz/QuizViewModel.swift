@@ -90,3 +90,7 @@ Please try again
     }
 
 }
+
+protocol ViewModelProtocol {}
+
+extension QuizViewModel: ViewModelProtocol {}

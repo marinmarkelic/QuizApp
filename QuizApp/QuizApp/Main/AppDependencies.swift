@@ -2,19 +2,16 @@ import Resolver
 import UIKit
 import SwiftUI
 
-class AppDependencies {
+class AppDependencies: ObservableObject {
 
     private let baseUrl = "https://five-ios-quiz-app.herokuapp.com/api"
 
-    private lazy var container: Resolver = {
+    var container: Resolver {
+        print("rerdolvier init")
         let container = Resolver()
         registerDependencies(in: container)
         return container
-    }()
-
-    lazy var appRouter: AppRouterProtocol = {
-        container.resolve()
-    }()
+    }
 
     func registerDependencies(in container: Resolver) {
         container
@@ -227,3 +224,5 @@ class AppDependencies {
     }
 
 }
+
+extension Resolver: ObservableObject {}

@@ -1,5 +1,6 @@
 import UIKit
 import Resolver
+import SwiftUI
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,8 +18,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         appDependencies = AppDependencies()
 
-        router = appDependencies.appRouter
-        router.start(in: window)
+//        router = appDependencies.appRouter
+//        router.start(in: window)
+
+        window.rootViewController = UIHostingController(rootView: ContentView(container: appDependencies.container))
+        window.makeKeyAndVisible()
 
         self.window = window
         return true

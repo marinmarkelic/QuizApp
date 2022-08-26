@@ -1,32 +1,33 @@
 import SwiftUI
+import Resolver
 
 struct TabBarView: View {
 
-    let quizViewModel: QuizViewModel
-    let searchViewModel: SearchViewModel
-    let userViewModel: UserViewModel
+    @EnvironmentObject var container: Resolver
 
     var body: some View {
-        TabView {
-            QuizView(viewModel: quizViewModel)
-                .tabItem {
-                    Label("Quiz", systemImage: "gearshape")
-                }
+//        ResolverView { container in
+            TabView {
+                QuizView(viewModel: container.resolve())
+                    .tabItem {
+                        Label("Quiz", systemImage: "gearshape")
+                    }
 
-            SearchView(viewModel: searchViewModel)
-                .tabItem {
-                    Label("Search", systemImage: "magnifyingglass")
-                }
+                SearchView(viewModel: container.resolve())
+                    .tabItem {
+                        Label("Search", systemImage: "magnifyingglass")
+                    }
 
-            SettingsView(viewModel: userViewModel)
-                .tabItem {
-                    Label("Settings", systemImage: "gearshape")
-                }
-        }
-        .onAppear {
-            UITabBar.appearance().backgroundColor = .white
-            UITabBar.appearance().barTintColor = .gray
-        }
+                SettingsView(viewModel: container.resolve())
+                    .tabItem {
+                        Label("Settings", systemImage: "gearshape")
+                    }
+            }
+            .onAppear {
+                UITabBar.appearance().backgroundColor = .white
+                UITabBar.appearance().barTintColor = .gray
+            }
+//        }
     }
 
 }
@@ -34,10 +35,23 @@ struct TabBarView: View {
 struct TabBarViewPreview: PreviewProvider {
 
     static var previews: some View {
-        TabBarView(
-            quizViewModel: QuizViewModel(),
-            searchViewModel: SearchViewModel(),
-            userViewModel: UserViewModel())
+        TabBarView()
+    }
+
+}
+
+struct ResolverView<Destination: View>: View {
+
+    let content: (Resolver) -> Destination
+
+    @EnvironmentObject var container: Resolver
+
+    init(content: @escaping (Resolver) -> Destination) {
+        self.content = content
+    }
+
+    var body: some View {
+        content(container)
     }
 
 }
