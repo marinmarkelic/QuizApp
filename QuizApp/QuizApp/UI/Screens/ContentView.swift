@@ -15,7 +15,7 @@ struct ContentView: View {
                 TabBarView()
             case false:
                 LoginView(viewModel: container.resolve())
-            case nil:
+            default:
                 Text("")
                     .task {
                         do {
@@ -28,8 +28,6 @@ struct ContentView: View {
                             loginCheck.isLoggedIn = false
                         }
                     }
-            default:
-                EmptyView()
             }
         }
         .environmentObject(container)

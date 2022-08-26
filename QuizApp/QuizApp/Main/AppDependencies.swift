@@ -2,12 +2,11 @@ import Resolver
 import UIKit
 import SwiftUI
 
-class AppDependencies: ObservableObject {
+class AppDependencies {
 
     private let baseUrl = "https://five-ios-quiz-app.herokuapp.com/api"
 
     var container: Resolver {
-        print("rerdolvier init")
         let container = Resolver()
         registerDependencies(in: container)
         return container
