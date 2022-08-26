@@ -6,11 +6,11 @@ class AppDependencies {
 
     private let baseUrl = "https://five-ios-quiz-app.herokuapp.com/api"
 
-    var container: Resolver {
+    lazy var container: Resolver = {
         let container = Resolver()
         registerDependencies(in: container)
         return container
-    }
+    }()
 
     func registerDependencies(in container: Resolver) {
         container

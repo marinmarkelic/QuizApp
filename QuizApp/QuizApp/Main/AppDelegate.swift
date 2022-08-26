@@ -17,9 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         appDependencies = AppDependencies()
 
-//        router = appDependencies.appRouter
-//        router.start(in: window)
-
         window.rootViewController = UIHostingController(rootView: ContentView(container: appDependencies.container))
         window.makeKeyAndVisible()
 
