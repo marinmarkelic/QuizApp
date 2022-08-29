@@ -16,6 +16,7 @@ struct LeaderboardView: View {
         .onAppear {
             viewModel.fetchLeaderboard()
         }
+        .navigationBarTitle("Leaderboard")
     }
 
 }

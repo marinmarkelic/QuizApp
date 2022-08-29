@@ -18,7 +18,7 @@ struct SearchView: View {
             .maxWidth()
             .padding()
             .background(LinearGradient.background.ignoresSafeArea())
-            .navigationBarTitle("PopQuiz", displayMode: .inline)
+            .navigationBarTitle("PopQuiz")
         }
     }
 

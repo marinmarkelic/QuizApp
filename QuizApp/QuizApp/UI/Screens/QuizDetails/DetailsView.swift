@@ -48,7 +48,7 @@ struct DetailsView: View {
         .padding()
         .background(.white.opacity(0.3))
         .cornerRadius(10)
-        .navigationBarTitle("PopQuiz", displayMode: .inline)
+        .navigationBarTitle("PopQuiz")
     }
 
 }

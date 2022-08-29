@@ -22,7 +22,7 @@ struct QuizView: View {
             .onAppear {
                 viewModel.loadCategories()
             }
-            .navigationBarTitle("PopQuiz", displayMode: .inline)
+            .navigationBarTitle("PopQuiz")
         }
     }
 
