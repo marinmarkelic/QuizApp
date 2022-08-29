@@ -1,8 +1,10 @@
 import SwiftUI
 import LazyViewSwiftUI
+import Resolver
 
 struct QuizListView: View {
 
+    @EnvironmentObject var container: Resolver
     @EnvironmentObject var quizStates: QuizStates
 
     let quizzes: [Quiz]
@@ -27,15 +29,21 @@ struct QuizListView: View {
 
     var body: some View {
         ScrollView(showsIndicators: false) {
+            NavigationLink("", isActive: $quizStates.didSelectQuiz) {
+                LazyView(
+                    QuizDetailsView(
+                        viewModel: container.resolve(QuizDetailsViewModel.self, args: quizStates.selectedQuiz)))
+            }
+
             LazyVStack {
                 ForEach(sections) { section in
                     Section(content: {
                         ForEach(section.quizzes, id: \.id) { quiz in
-                            NavigationLink(
-                                destination: LazyView(QuizDetailsView(viewModel: QuizDetailsViewModel(quiz: quiz)))
-                            ) {
-                                QuizListCell(quiz: quiz)
-                            }
+                            QuizListCell(quiz: quiz)
+                                .onTapGesture {
+                                    quizStates.selectedQuiz = quiz
+                                    quizStates.didSelectQuiz = true
+                                }
                         }
                     }, header: {
                         let title = alwaysShowSections || sections.count > 1 ?

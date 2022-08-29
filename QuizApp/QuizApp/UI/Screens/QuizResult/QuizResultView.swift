@@ -2,6 +2,8 @@ import SwiftUI
 
 struct QuizResultView: View {
 
+    @EnvironmentObject var states: QuizStates
+
     @ObservedObject var viewModel: QuizResultViewModel
 
     var body: some View {
@@ -14,7 +16,7 @@ struct QuizResultView: View {
 
             Spacer()
 
-            Button(action: { viewModel.exitQuiz() }, label: {
+            Button(action: { states.reset() }, label: {
                 Text("Finish Quiz")
                     .foregroundColor(.purpleText)
                     .font(.heading6)
@@ -28,6 +30,7 @@ struct QuizResultView: View {
         .maxSize()
         .padding()
         .background(LinearGradient.background.ignoresSafeArea())
+        .navigationBarBackButtonHidden(true)
     }
 
 }

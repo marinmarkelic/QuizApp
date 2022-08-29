@@ -38,6 +38,12 @@ struct QuizViewPreview: PreviewProvider {
 
 class QuizStates: ObservableObject {
 
+    @Published var didSelectQuiz: Bool = false
     @Published var selectedQuiz: Quiz?
+
+    func reset() {
+        didSelectQuiz = false
+        selectedQuiz = nil
+    }
 
 }

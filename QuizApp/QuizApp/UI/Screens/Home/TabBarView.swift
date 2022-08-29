@@ -27,12 +27,5 @@ struct TabBarView: View {
             UITabBar.appearance().barTintColor = .gray
         }
     }
-}
 
-//struct TabBarViewPreview: PreviewProvider {
-//
-//    static var previews: some View {
-//        TabBarView()
-//    }
-//
-//}
+}

@@ -8,6 +8,9 @@ class SolvingQuizViewModel: ObservableObject {
     @Published var currentQuestionIndex: Int = 0
     @Published var progressText: String = ""
     @Published var errorMessage: String = ""
+    @Published var isFinished: Bool = false
+
+    var result: QuizResult?
 
     private var id: Int!
 
@@ -115,10 +118,12 @@ Please try again.
         DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(delayInMillis)) { [weak self] in
             guard let self = self else { return }
 
-            let result = QuizResult(
+            self.result = QuizResult(
                 sessionId: self.quiz.sessionId,
                 correctQuestions: self.correctQuestions,
                 totalQuestions: self.quiz.questions.count)
+
+            self.isFinished = true
         }
     }
 

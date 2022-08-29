@@ -1,6 +1,10 @@
 import SwiftUI
+import Resolver
+import LazyViewSwiftUI
 
 struct SolvingQuizView: View {
+
+    @EnvironmentObject var container: Resolver
 
     @ObservedObject var viewModel: SolvingQuizViewModel
 
@@ -15,6 +19,10 @@ struct SolvingQuizView: View {
                     viewModel.selectedAnswer(with: $0)
                 }
                 .animation(.spring(), value: viewModel.currentQuestionIndex)
+
+            NavigationLink("", isActive: $viewModel.isFinished) {
+                LazyView(QuizResultView(viewModel: container.resolve(QuizResultViewModel.self, args: viewModel.result)))
+            }
         }
         .maxSize()
         .padding()
