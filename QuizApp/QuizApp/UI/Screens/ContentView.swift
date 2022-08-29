@@ -31,6 +31,7 @@ struct ContentView: View {
         }
         .environmentObject(container)
         .environmentObject(loginCheck)
+        .environmentObject(QuizStates())
     }
 
 }

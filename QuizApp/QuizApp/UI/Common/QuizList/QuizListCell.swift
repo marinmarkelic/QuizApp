@@ -39,9 +39,6 @@ struct QuizListCell: View {
         .maxWidth()
         .background(.white.opacity(0.3))
         .cornerRadius(10)
-        .onTapGesture {
-            onQuizTap(quiz)
-        }
     }
 
     func onQuizTap(_ onQuizTap: @escaping (Quiz) -> Void) -> QuizListCell {

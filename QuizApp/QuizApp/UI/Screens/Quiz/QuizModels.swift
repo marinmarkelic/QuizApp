@@ -47,6 +47,8 @@ extension Quiz: Comparable {
 
 }
 
+extension Quiz: Hashable {}
+
 enum Difficulty: String, Comparable {
 
     var level: Int {

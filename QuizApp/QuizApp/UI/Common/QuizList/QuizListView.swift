@@ -1,6 +1,9 @@
 import SwiftUI
+import LazyViewSwiftUI
 
 struct QuizListView: View {
+
+    @EnvironmentObject var quizStates: QuizStates
 
     let quizzes: [Quiz]
     let alwaysShowSections: Bool
@@ -29,16 +32,17 @@ struct QuizListView: View {
             LazyVStack {
                 ForEach(sections) { section in
                     Section(content: {
-                        ForEach(section.quizzes, id: \.id) {
-                            QuizListCell(quiz: $0)
-                                .onQuizTap {
-                                    onQuizTap($0)
-                                }
+                        ForEach(section.quizzes, id: \.id) { quiz in
+                            NavigationLink(
+                                destination: LazyView(QuizDetailsView(viewModel: QuizDetailsViewModel(quiz: quiz)))
+                            ) {
+                                QuizListCell(quiz: quiz)
+                            }
                         }
                     }, header: {
                         let title = alwaysShowSections || sections.count > 1 ?
-                            section.category.name :
-                            ""
+                        section.category.name :
+                        ""
 
                         Text(title)
                             .font(.heading4)
