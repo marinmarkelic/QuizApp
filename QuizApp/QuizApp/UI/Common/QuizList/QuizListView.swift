@@ -47,8 +47,8 @@ struct QuizListView: View {
                         }
                     }, header: {
                         let title = alwaysShowSections || sections.count > 1 ?
-                        section.category.name :
-                        ""
+                            section.category.name :
+                            ""
 
                         Text(title)
                             .font(.heading4)

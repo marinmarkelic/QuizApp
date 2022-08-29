@@ -4,12 +4,6 @@ import SDWebImageSwiftUI
 struct QuizListCell: View {
 
     let quiz: Quiz
-    let onQuizTap: (Quiz) -> Void
-
-    init(quiz: Quiz, onQuizTap: @escaping (Quiz) -> Void = { _ in }) {
-        self.quiz = quiz
-        self.onQuizTap = onQuizTap
-    }
 
     var body: some View {
         HStack {
@@ -39,10 +33,6 @@ struct QuizListCell: View {
         .maxWidth()
         .background(.white.opacity(0.3))
         .cornerRadius(10)
-    }
-
-    func onQuizTap(_ onQuizTap: @escaping (Quiz) -> Void) -> QuizListCell {
-        QuizListCell(quiz: quiz, onQuizTap: onQuizTap)
     }
 
 }
