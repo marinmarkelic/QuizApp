@@ -6,24 +6,19 @@ struct SearchView: View {
     @ObservedObject var viewModel: SearchViewModel
 
     var body: some View {
-        VStack {
-            content
-                .padding()
-        }
-        .maxWidth()
-        .background(LinearGradient.background.ignoresSafeArea())
-    }
+        NavigationView {
+            VStack {
+                SearchBar(text: $viewModel.searchText)
+                    .onSearchTap {
+                        viewModel.fetchQuizzes()
+                    }
 
-    private var content: some View {
-        VStack {
-            SearchBar(text: $viewModel.searchText)
-                .onSearchTap {
-                    viewModel.fetchQuizzes()
-                }
-
-            QuizListView(quizzes: viewModel.quizzes)
-                .onQuizTap { quiz in
-                }
+                QuizListView(quizzes: viewModel.quizzes)
+            }
+            .maxWidth()
+            .padding()
+            .background(LinearGradient.background.ignoresSafeArea())
+            .navigationBarTitle("PopQuiz", displayMode: .inline)
         }
     }
 

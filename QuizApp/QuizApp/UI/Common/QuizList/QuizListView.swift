@@ -7,7 +7,6 @@ struct QuizListView: View {
 
     let quizzes: [Quiz]
     let alwaysShowSections: Bool
-    let onQuizTap: (Quiz) -> Void
 
     private var sections: [QuizSection] {
         var value: [QuizSection] = []
@@ -21,10 +20,9 @@ struct QuizListView: View {
         return value
     }
 
-    init(quizzes: [Quiz], alwaysShowSections: Bool = true, onQuizTap: @escaping (Quiz) -> Void = { _ in }) {
+    init(quizzes: [Quiz], alwaysShowSections: Bool = true) {
         self.quizzes = quizzes
         self.alwaysShowSections = alwaysShowSections
-        self.onQuizTap = onQuizTap
     }
 
     var body: some View {
@@ -53,10 +51,6 @@ struct QuizListView: View {
                 }
             }
         }
-    }
-
-    func onQuizTap(_ onQuizTap: @escaping (Quiz) -> Void) -> QuizListView {
-        QuizListView(quizzes: quizzes, alwaysShowSections: alwaysShowSections, onQuizTap: onQuizTap)
     }
 
 }
