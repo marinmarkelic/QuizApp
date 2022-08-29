@@ -19,6 +19,7 @@ struct SolvingQuizView: View {
         .maxSize()
         .padding()
         .background(LinearGradient.background.ignoresSafeArea())
+        .navigationBarTitle("PopQuiz", displayMode: .inline)
     }
 
 }

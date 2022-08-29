@@ -22,8 +22,6 @@ struct QuizDetailsView: View {
                         .pushedRight()
 
                 DetailsView(quiz: viewModel.quiz)
-                    .onStartQuizTap {
-                    }
             }
             .padding(.horizontal)
         }
