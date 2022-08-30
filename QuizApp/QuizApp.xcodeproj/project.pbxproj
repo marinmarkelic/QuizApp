@@ -91,6 +91,7 @@
 		9CDADEF828BE059000B6404B /* UIPilot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDADEF728BE059000B6404B /* UIPilot.swift */; };
 		9CDADEFA28BE05CF00B6404B /* QuizSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDADEF928BE05CF00B6404B /* QuizSelectionView.swift */; };
 		9CDADEFC28BE0CE000B6404B /* SearchSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDADEFB28BE0CE000B6404B /* SearchSelectionView.swift */; };
+		9CDADEFE28BE2D2600B6404B /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDADEFD28BE2D2600B6404B /* AppData.swift */; };
 		9CE188D128B7A1BB0034E07D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE188D028B7A1BB0034E07D /* ContentView.swift */; };
 		9CE188D928B91EAB0034E07D /* LazyViewSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 9CE188D828B91EAB0034E07D /* LazyViewSwiftUI */; };
 		9CFCC2F42885532A00B01343 /* QuizViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFCC2F32885532A00B01343 /* QuizViewModel.swift */; };
@@ -180,6 +181,7 @@
 		9CDADEF728BE059000B6404B /* UIPilot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPilot.swift; sourceTree = "<group>"; };
 		9CDADEF928BE05CF00B6404B /* QuizSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizSelectionView.swift; sourceTree = "<group>"; };
 		9CDADEFB28BE0CE000B6404B /* SearchSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSelectionView.swift; sourceTree = "<group>"; };
+		9CDADEFD28BE2D2600B6404B /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
 		9CE188D028B7A1BB0034E07D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9CFCC2F32885532A00B01343 /* QuizViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewModel.swift; sourceTree = "<group>"; };
 		9CFCC2F72885547600B01343 /* QuizModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizModels.swift; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 				9C42646528AFBEDD008D4C20 /* QuizListView.swift */,
 				9C42646728AFBEFF008D4C20 /* QuizListCell.swift */,
 				9C42646928AFBF23008D4C20 /* QuizListDifficultyView.swift */,
+				9CDADEFD28BE2D2600B6404B /* AppData.swift */,
 			);
 			path = QuizList;
 			sourceTree = "<group>";
@@ -661,6 +664,7 @@
 				9C01635A28ACEB23004C7270 /* RoundedTextField.swift in Sources */,
 				9C42646628AFBEDD008D4C20 /* QuizListView.swift in Sources */,
 				9C327E59289ACBD0003787C0 /* UIControl+Extensions.swift in Sources */,
+				9CDADEFE28BE2D2600B6404B /* AppData.swift in Sources */,
 				9C25C88C288810B5000C4C90 /* QuizRepository.swift in Sources */,
 				9CC33B24287D6889002E9853 /* UserRepository.swift in Sources */,
 				9C25C8B22888428A000C4C90 /* UserModels.swift in Sources */,
