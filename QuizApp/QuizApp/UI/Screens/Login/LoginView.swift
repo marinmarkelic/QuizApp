@@ -21,9 +21,7 @@ struct LoginView: View {
                 isLoginButtonEnabled: viewModel.isLoginButtonEnabled)
             .onLoginTap {
                 viewModel.pressedLoginButton { value in
-                    DispatchQueue.main.async {
                         appData.loginStatus = value ? .loggedIn : .notLoggedIn
-                    }
                 }
             }
 

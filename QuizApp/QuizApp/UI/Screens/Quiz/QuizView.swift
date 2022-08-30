@@ -6,24 +6,24 @@ struct QuizView: View {
     @ObservedObject var viewModel: QuizViewModel
 
     var body: some View {
-            VStack {
-                CategorySlider(categories: viewModel.categories)
-                    .onCategoryTap {
-                        viewModel.changeCategory(for: $0.type)
-                    }
+        VStack {
+            CategorySlider(categories: viewModel.categories)
+                .onCategoryTap {
+                    viewModel.changeCategory(for: $0.type)
+                }
 
-                QuizListView(quizzes: viewModel.quizzes, alwaysShowSections: false)
-            }
-            .maxWidth()
-            .maxHeight()
-            .padding()
-            .background(LinearGradient.background.ignoresSafeArea())
-            .onAppear {
-                viewModel.loadCategories()
-            }
-            .navigationBarTitle("PopQuiz")
-            .navigationBarBackButtonHidden(true)
+            QuizListView(quizzes: viewModel.quizzes, alwaysShowSections: false)
         }
+        .maxWidth()
+        .maxHeight()
+        .padding()
+        .background(LinearGradient.background.ignoresSafeArea())
+        .onAppear {
+            viewModel.loadCategories()
+        }
+        .navigationBarTitle("PopQuiz")
+        .navigationBarBackButtonHidden(true)
+    }
 
 }
 

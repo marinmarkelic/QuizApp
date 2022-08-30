@@ -6,11 +6,11 @@ struct SearchSelectionView: View {
 
     @EnvironmentObject var container: Resolver
 
-    @StateObject var quizzesPilot = UIPilot(initial: SearchAppRoute.search)
+    @StateObject var pilot = UIPilot(initial: SearchAppRoute.search)
 
     var body: some View {
         VStack {
-            UIPilotHost(quizzesPilot) { route in
+            UIPilotHost(pilot) { route in
                 AnyView(makeScreen(route))
             }
         }

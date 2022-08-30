@@ -21,8 +21,6 @@ struct ContentView: View {
                     }
             }
         }
-        .environmentObject(container)
-        .environmentObject(appData)
     }
 
     private func checkLoginStatus() {
