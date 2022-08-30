@@ -3,7 +3,6 @@ import Resolver
 
 struct TabBarView: View {
 
-    @EnvironmentObject var container: Resolver
     @EnvironmentObject var appData: AppData
 
     var body: some View {

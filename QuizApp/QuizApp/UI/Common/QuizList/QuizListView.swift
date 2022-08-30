@@ -4,7 +4,6 @@ import UIPilot
 
 struct QuizListView: View {
 
-    @EnvironmentObject var container: Resolver
     @EnvironmentObject var quizzesPilot: UIPilot<QuizAppRoute>
     @EnvironmentObject var searchPilot: UIPilot<SearchAppRoute>
     @EnvironmentObject var appData: AppData
