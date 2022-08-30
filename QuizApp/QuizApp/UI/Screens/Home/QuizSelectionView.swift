@@ -11,13 +11,22 @@ struct QuizSelectionView: View {
     var body: some View {
         VStack {
             UIPilotHost(quizzesPilot) { route in
-                switch route {
-                case .all: return AnyView(QuizView(viewModel: container.resolve()))
-                case .details(let quiz): return AnyView(QuizDetailsView(viewModel: container.resolve(args: quiz)))
-                case .solving(let quizId): return AnyView(SolvingQuizView(viewModel: container.resolve(args: quizId)))
-                case .finished(let results): return AnyView(QuizResultView(viewModel: container.resolve(args: results)))
-                }
+                AnyView(makeScreen(route))
             }
+        }
+    }
+
+    @ViewBuilder
+    private func makeScreen(_ route: QuizAppRoute) -> some View {
+        switch route {
+        case .all:
+            QuizView(viewModel: container.resolve())
+        case .details(let quiz):
+            QuizDetailsView(viewModel: container.resolve(args: quiz))
+        case .solving(let quizId):
+            SolvingQuizView(viewModel: container.resolve(args: quizId))
+        case .finished(let results):
+            QuizResultView(viewModel: container.resolve(args: results))
         }
     }
 

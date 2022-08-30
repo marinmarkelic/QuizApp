@@ -6,6 +6,7 @@ import SwiftUI
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private var appDependencies: AppDependencies!
+    private var appData: AppData!
 
     var window: UIWindow?
 
@@ -16,8 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let window = UIWindow(frame: UIScreen.main.bounds)
 
         appDependencies = AppDependencies()
+        appData = AppData()
 
-        let viewController = UIHostingController(rootView: ContentView(container: appDependencies.container))
+        let viewController = UIHostingController(
+            rootView:
+                ContentView()
+                .environmentObject(appDependencies.container)
+                .environmentObject(appData))
 
         window.rootViewController = viewController
         window.makeKeyAndVisible()

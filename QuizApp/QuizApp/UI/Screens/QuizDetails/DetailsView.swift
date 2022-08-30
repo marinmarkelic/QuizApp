@@ -9,7 +9,7 @@ struct DetailsView: View {
     @EnvironmentObject var container: Resolver
     @EnvironmentObject var quizzesPilot: UIPilot<QuizAppRoute>
     @EnvironmentObject var searchPilot: UIPilot<SearchAppRoute>
-    @EnvironmentObject var shared: Shared
+    @EnvironmentObject var appData: AppData
 
     let quiz: Quiz
 
@@ -33,9 +33,9 @@ struct DetailsView: View {
                 .frame(height: 200)
 
             Button(action: {
-                if shared.selectedTab == .quizzes {
+                if appData.selectedTab == .quizzes {
                     quizzesPilot.push(.solving(quiz.id))
-                } else if shared.selectedTab == .search {
+                } else if appData.selectedTab == .search {
                     searchPilot.push(.solving(quiz.id))
                 }
             }, label: {

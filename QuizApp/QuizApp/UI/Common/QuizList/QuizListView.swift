@@ -8,7 +8,7 @@ struct QuizListView: View {
     @EnvironmentObject var container: Resolver
     @EnvironmentObject var quizzesPilot: UIPilot<QuizAppRoute>
     @EnvironmentObject var searchPilot: UIPilot<SearchAppRoute>
-    @EnvironmentObject var shared: Shared
+    @EnvironmentObject var appData: AppData
 
     let quizzes: [Quiz]
     let alwaysShowSections: Bool
@@ -38,9 +38,9 @@ struct QuizListView: View {
                         ForEach(section.quizzes, id: \.id) { quiz in
                             QuizListCell(quiz: quiz)
                                 .onTapGesture {
-                                    if shared.selectedTab == .quizzes {
+                                    if appData.selectedTab == .quizzes {
                                         quizzesPilot.push(.details(quiz))
-                                    } else if shared.selectedTab == .search {
+                                    } else if appData.selectedTab == .search {
                                         searchPilot.push(.details(quiz))
                                     }
                                 }

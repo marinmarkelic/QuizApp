@@ -2,7 +2,7 @@ import SwiftUI
 
 struct SettingsView: View {
 
-    @EnvironmentObject var shared: Shared
+    @EnvironmentObject var appData: AppData
 
     @ObservedObject var viewModel: UserViewModel
 
@@ -12,7 +12,7 @@ struct SettingsView: View {
                 userInfo: viewModel.userInfo)
             .onLogoutTap {
                 viewModel.logOut()
-                shared.loginStatus = .unknown
+                appData.loginStatus = .unknown
             }
             .onNameChange {
                 viewModel.save()

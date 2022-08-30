@@ -105,7 +105,7 @@ class NetworkClient {
     }
 
     func handle(urlRequest: URLRequest) async throws -> (Data, URLResponse) {
-        guard let (data, response) = try? await URLSession.shared.data(for: urlRequest) else {
+        guard let (data, response) = try? await URLSession.appData.data(for: urlRequest) else {
             throw RequestError.serverError
         }
 

@@ -8,7 +8,7 @@ struct SolvingQuizView: View {
     @EnvironmentObject var container: Resolver
     @EnvironmentObject var quizzesPilot: UIPilot<QuizAppRoute>
     @EnvironmentObject var searchPilot: UIPilot<SearchAppRoute>
-    @EnvironmentObject var shared: Shared
+    @EnvironmentObject var appData: AppData
 
     @ObservedObject var viewModel: SolvingQuizViewModel
 
@@ -30,9 +30,9 @@ struct SolvingQuizView: View {
         .background(LinearGradient.background.ignoresSafeArea())
         .navigationBarTitle("PopQuiz")
         .onChange(of: viewModel.result) { result in
-            if shared.selectedTab == .quizzes {
+            if appData.selectedTab == .quizzes {
                 quizzesPilot.push(.finished(result))
-            } else if shared.selectedTab == .search {
+            } else if appData.selectedTab == .search {
                 searchPilot.push(.finished(result))
             }
         }

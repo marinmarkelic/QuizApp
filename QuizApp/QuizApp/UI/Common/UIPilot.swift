@@ -23,9 +23,3 @@ enum SearchAppRoute: Equatable {
     case finished(_ results: QuizResult)
 
 }
-
-enum SettingsAppRoute: Equatable {
-
-    case settings
-
-}

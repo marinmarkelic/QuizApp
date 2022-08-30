@@ -2,7 +2,7 @@ import SwiftUI
 
 struct LoginView: View {
 
-    @EnvironmentObject var shared: Shared
+    @EnvironmentObject var appData: AppData
 
     @ObservedObject var viewModel: LoginViewModel
 
@@ -21,7 +21,9 @@ struct LoginView: View {
                 isLoginButtonEnabled: viewModel.isLoginButtonEnabled)
             .onLoginTap {
                 viewModel.pressedLoginButton { value in
-                    shared.loginStatus = value ? .loggedIn : .notLoggedIn
+                    DispatchQueue.main.async {
+                        appData.loginStatus = value ? .loggedIn : .notLoggedIn
+                    }
                 }
             }
 

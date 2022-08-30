@@ -6,7 +6,7 @@ struct QuizResultView: View {
     @ObservedObject var viewModel: QuizResultViewModel
     @EnvironmentObject var quizzesPilot: UIPilot<QuizAppRoute>
     @EnvironmentObject var searchPilot: UIPilot<SearchAppRoute>
-    @EnvironmentObject var shared: Shared
+    @EnvironmentObject var appData: AppData
 
     var body: some View {
         VStack {
@@ -19,9 +19,9 @@ struct QuizResultView: View {
             Spacer()
 
             Button(action: {
-                if shared.selectedTab == .quizzes {
+                if appData.selectedTab == .quizzes {
                     quizzesPilot.push(.all)
-                } else if shared.selectedTab == .search {
+                } else if appData.selectedTab == .search {
                     searchPilot.push(.search)
                 }
             }, label: {

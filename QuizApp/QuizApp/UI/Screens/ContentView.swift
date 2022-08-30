@@ -4,26 +4,25 @@ import UIPilot
 
 struct ContentView: View {
 
-    var container: Resolver
-
-    @ObservedObject var shared = Shared()
+    @EnvironmentObject var container: Resolver
+    @EnvironmentObject var appData: AppData
 
     var body: some View {
         Group {
-            switch shared.loginStatus {
+            switch appData.loginStatus {
             case .loggedIn:
                 TabBarView()
             case .notLoggedIn:
                 LoginView(viewModel: container.resolve())
             case .unknown:
-                Text("")
+                Text("Checking access token")
+                    .onAppear {
+                        checkLoginStatus()
+                    }
             }
         }
-        .onAppear {
-            checkLoginStatus()
-        }
         .environmentObject(container)
-        .environmentObject(shared)
+        .environmentObject(appData)
     }
 
     private func checkLoginStatus() {
@@ -32,17 +31,17 @@ struct ContentView: View {
                 let userNetworkDataSource = container.resolve(UserNetworkDataSourceProtocol.self)
                 try await userNetworkDataSource.check()
 
-                shared.loginStatus = .loggedIn
+                appData.loginStatus = .loggedIn
             } catch {
                 container.resolve(SecureStorageProtocol.self).deleteAccessToken()
-                shared.loginStatus = .notLoggedIn
+                appData.loginStatus = .notLoggedIn
             }
         }
     }
 
 }
 
-class Shared: ObservableObject {
+class AppData: ObservableObject {
 
     @Published var loginStatus: LoginStatus = .unknown
     @Published var selectedTab: AppRoute = .quizzes

@@ -38,6 +38,7 @@ class LoginViewModel: ObservableObject {
             .store(in: &cancellables)
     }
 
+    @MainActor
     func pressedLoginButton(_ completion: @escaping (Bool) -> Void) {
         Task {
             do {
