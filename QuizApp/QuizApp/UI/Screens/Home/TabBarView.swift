@@ -35,9 +35,3 @@ struct TabBarView: View {
     }
 
 }
-
-class Shared: ObservableObject {
-
-    @Published var selectedTab: AppRoute = .quizzes
-
-}

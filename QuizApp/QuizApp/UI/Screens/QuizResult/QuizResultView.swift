@@ -3,8 +3,6 @@ import UIPilot
 
 struct QuizResultView: View {
 
-    @EnvironmentObject var states: QuizStates
-
     @ObservedObject var viewModel: QuizResultViewModel
     @EnvironmentObject var quizzesPilot: UIPilot<QuizAppRoute>
     @EnvironmentObject var searchPilot: UIPilot<SearchAppRoute>

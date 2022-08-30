@@ -6,40 +6,53 @@ struct ContentView: View {
 
     var container: Resolver
 
-    @ObservedObject var loginCheck = LoginCheck()
+    @ObservedObject var shared = Shared()
 
     var body: some View {
         Group {
-            switch loginCheck.isLoggedIn {
-            case true:
+            switch shared.loginStatus {
+            case .loggedIn:
                 TabBarView()
-            case false:
+            case .notLoggedIn:
                 LoginView(viewModel: container.resolve())
-            default:
+            case .unknown:
                 Text("")
-                    .task {
-                        do {
-                            let userNetworkDataSource = container.resolve(UserNetworkDataSourceProtocol.self)
-                            try await userNetworkDataSource.check()
-
-                            loginCheck.isLoggedIn = true
-                        } catch {
-                            container.resolve(SecureStorageProtocol.self).deleteAccessToken()
-                            loginCheck.isLoggedIn = false
-                        }
-                    }
             }
         }
+        .onAppear {
+            checkLoginStatus()
+        }
         .environmentObject(container)
-        .environmentObject(loginCheck)
-        .environmentObject(QuizStates())
-        .environmentObject(Shared())
+        .environmentObject(shared)
+    }
+
+    private func checkLoginStatus() {
+        Task {
+            do {
+                let userNetworkDataSource = container.resolve(UserNetworkDataSourceProtocol.self)
+                try await userNetworkDataSource.check()
+
+                shared.loginStatus = .loggedIn
+            } catch {
+                container.resolve(SecureStorageProtocol.self).deleteAccessToken()
+                shared.loginStatus = .notLoggedIn
+            }
+        }
     }
 
 }
 
-class LoginCheck: ObservableObject {
+class Shared: ObservableObject {
 
-    @Published var isLoggedIn: Bool?
+    @Published var loginStatus: LoginStatus = .unknown
+    @Published var selectedTab: AppRoute = .quizzes
+
+}
+
+enum LoginStatus {
+
+    case unknown
+    case notLoggedIn
+    case loggedIn
 
 }
