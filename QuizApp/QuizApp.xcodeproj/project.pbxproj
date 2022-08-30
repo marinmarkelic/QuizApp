@@ -93,7 +93,6 @@
 		9CDADEFC28BE0CE000B6404B /* SearchSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDADEFB28BE0CE000B6404B /* SearchSelectionView.swift */; };
 		9CDADEFE28BE2D2600B6404B /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDADEFD28BE2D2600B6404B /* AppData.swift */; };
 		9CE188D128B7A1BB0034E07D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE188D028B7A1BB0034E07D /* ContentView.swift */; };
-		9CE188D928B91EAB0034E07D /* LazyViewSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 9CE188D828B91EAB0034E07D /* LazyViewSwiftUI */; };
 		9CFCC2F42885532A00B01343 /* QuizViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFCC2F32885532A00B01343 /* QuizViewModel.swift */; };
 		9CFCC2F82885547600B01343 /* QuizModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFCC2F72885547600B01343 /* QuizModels.swift */; };
 		9CFCC2FE2885871000B01343 /* QuizUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFCC2FD2885871000B01343 /* QuizUseCase.swift */; };
@@ -200,7 +199,6 @@
 				9C4807EA288AE033002D097D /* Resolver in Frameworks */,
 				9CDADEF628BE052C00B6404B /* UIPilot in Frameworks */,
 				9C19538E2876CF720051CEC6 /* SnapKit in Frameworks */,
-				9CE188D928B91EAB0034E07D /* LazyViewSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,7 +520,6 @@
 				9C25C89328882613000C4C90 /* SDWebImage */,
 				9C4807E9288AE033002D097D /* Resolver */,
 				9C668AB128AE8BA1001D6920 /* SDWebImageSwiftUI */,
-				9CE188D828B91EAB0034E07D /* LazyViewSwiftUI */,
 				9CDADEF528BE052C00B6404B /* UIPilot */,
 			);
 			productName = QuizApp;
@@ -559,7 +556,6 @@
 				9C25C89228882613000C4C90 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				9C4807E8288AE033002D097D /* XCRemoteSwiftPackageReference "Resolver" */,
 				9C668AB028AE8BA1001D6920 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
-				9CE188D728B91EAB0034E07D /* XCRemoteSwiftPackageReference "Lazy-View-SwiftUI" */,
 				9CDADEF428BE052C00B6404B /* XCRemoteSwiftPackageReference "UIPilot" */,
 			);
 			productRefGroup = 9C195368287584750051CEC6 /* Products */;
@@ -947,14 +943,6 @@
 				minimumVersion = 1.0.0;
 			};
 		};
-		9CE188D728B91EAB0034E07D /* XCRemoteSwiftPackageReference "Lazy-View-SwiftUI" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/joehinkle11/Lazy-View-SwiftUI";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -987,11 +975,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9CDADEF428BE052C00B6404B /* XCRemoteSwiftPackageReference "UIPilot" */;
 			productName = UIPilot;
-		};
-		9CE188D828B91EAB0034E07D /* LazyViewSwiftUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9CE188D728B91EAB0034E07D /* XCRemoteSwiftPackageReference "Lazy-View-SwiftUI" */;
-			productName = LazyViewSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

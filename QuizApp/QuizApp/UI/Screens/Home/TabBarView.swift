@@ -6,8 +6,6 @@ struct TabBarView: View {
     @EnvironmentObject var container: Resolver
     @EnvironmentObject var appData: AppData
 
-    @State var selectedTab: AppRoute = .quizzes
-
     var body: some View {
         TabView(selection: $appData.selectedTab) {
             QuizSelectionView()

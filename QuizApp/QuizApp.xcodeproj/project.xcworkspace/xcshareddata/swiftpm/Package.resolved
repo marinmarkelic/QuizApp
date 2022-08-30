@@ -10,15 +10,6 @@
       }
     },
     {
-      "identity" : "lazy-view-swiftui",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/joehinkle11/Lazy-View-SwiftUI",
-      "state" : {
-        "branch" : "master",
-        "revision" : "0f838ed8eb0beb3faab35aae225f2545a1dd5338"
-      }
-    },
-    {
       "identity" : "resolver",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/hmlongco/Resolver",

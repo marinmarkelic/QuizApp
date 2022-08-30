@@ -1,6 +1,5 @@
 import SwiftUI
 import Resolver
-import LazyViewSwiftUI
 import UIPilot
 
 struct SolvingQuizView: View {
