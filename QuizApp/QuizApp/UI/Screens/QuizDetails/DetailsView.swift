@@ -2,10 +2,14 @@ import SwiftUI
 import SDWebImageSwiftUI
 import LazyViewSwiftUI
 import Resolver
+import UIPilot
 
 struct DetailsView: View {
 
     @EnvironmentObject var container: Resolver
+    @EnvironmentObject var quizzesPilot: UIPilot<QuizAppRoute>
+    @EnvironmentObject var searchPilot: UIPilot<SearchAppRoute>
+    @EnvironmentObject var shared: Shared
 
     let quiz: Quiz
 
@@ -28,21 +32,21 @@ struct DetailsView: View {
                 .padding(.vertical, 10)
                 .frame(height: 200)
 
-            NavigationLink(
-                destination:
-                    LazyView(SolvingQuizView(viewModel: container.resolve(SolvingQuizViewModel.self, args: quiz.id)))
-            ) {
-                Button(action: { }, label: {
-                    Text("Start Quiz")
-                        .foregroundColor(.purpleText)
-                        .font(.heading6)
-                        .maxWidth()
-                })
-                .padding()
-                .background(.white)
-                .cornerRadius(25)
-                .disabled(true)
-            }
+            Button(action: {
+                if shared.selectedTab == .quizzes {
+                    quizzesPilot.push(.solving(quiz.id))
+                } else if shared.selectedTab == .search {
+                    searchPilot.push(.solving(quiz.id))
+                }
+            }, label: {
+                Text("Start Quiz")
+                    .foregroundColor(.purpleText)
+                    .font(.heading6)
+                    .maxWidth()
+            })
+            .padding()
+            .background(.white)
+            .cornerRadius(25)
         }
         .maxWidth()
         .padding()

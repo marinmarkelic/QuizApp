@@ -87,6 +87,10 @@
 		9CC4D6E4287C6C8C0061F149 /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC4D6E3287C6C8C0061F149 /* LoginUseCase.swift */; };
 		9CC5FAE728B4D9AA0085254F /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC5FAE628B4D9AA0085254F /* QuestionView.swift */; };
 		9CC5FAE928B4ED760085254F /* TabBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CC5FAE828B4ED760085254F /* TabBarView.swift */; };
+		9CDADEF628BE052C00B6404B /* UIPilot in Frameworks */ = {isa = PBXBuildFile; productRef = 9CDADEF528BE052C00B6404B /* UIPilot */; };
+		9CDADEF828BE059000B6404B /* UIPilot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDADEF728BE059000B6404B /* UIPilot.swift */; };
+		9CDADEFA28BE05CF00B6404B /* QuizSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDADEF928BE05CF00B6404B /* QuizSelectionView.swift */; };
+		9CDADEFC28BE0CE000B6404B /* SearchSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDADEFB28BE0CE000B6404B /* SearchSelectionView.swift */; };
 		9CE188D128B7A1BB0034E07D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CE188D028B7A1BB0034E07D /* ContentView.swift */; };
 		9CE188D928B91EAB0034E07D /* LazyViewSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 9CE188D828B91EAB0034E07D /* LazyViewSwiftUI */; };
 		9CFCC2F42885532A00B01343 /* QuizViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CFCC2F32885532A00B01343 /* QuizViewModel.swift */; };
@@ -173,6 +177,9 @@
 		9CC4D6E3287C6C8C0061F149 /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
 		9CC5FAE628B4D9AA0085254F /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		9CC5FAE828B4ED760085254F /* TabBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarView.swift; sourceTree = "<group>"; };
+		9CDADEF728BE059000B6404B /* UIPilot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIPilot.swift; sourceTree = "<group>"; };
+		9CDADEF928BE05CF00B6404B /* QuizSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizSelectionView.swift; sourceTree = "<group>"; };
+		9CDADEFB28BE0CE000B6404B /* SearchSelectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSelectionView.swift; sourceTree = "<group>"; };
 		9CE188D028B7A1BB0034E07D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		9CFCC2F32885532A00B01343 /* QuizViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewModel.swift; sourceTree = "<group>"; };
 		9CFCC2F72885547600B01343 /* QuizModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizModels.swift; sourceTree = "<group>"; };
@@ -189,6 +196,7 @@
 				9C25C89428882613000C4C90 /* SDWebImage in Frameworks */,
 				9CC33B2B287D77E5002E9853 /* KeychainSwift in Frameworks */,
 				9C4807EA288AE033002D097D /* Resolver in Frameworks */,
+				9CDADEF628BE052C00B6404B /* UIPilot in Frameworks */,
 				9C19538E2876CF720051CEC6 /* SnapKit in Frameworks */,
 				9CE188D928B91EAB0034E07D /* LazyViewSwiftUI in Frameworks */,
 			);
@@ -363,6 +371,8 @@
 			children = (
 				9C20BAC7287EE642009378FB /* TabBarController.swift */,
 				9CC5FAE828B4ED760085254F /* TabBarView.swift */,
+				9CDADEF928BE05CF00B6404B /* QuizSelectionView.swift */,
+				9CDADEFB28BE0CE000B6404B /* SearchSelectionView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -448,6 +458,7 @@
 				9C01635928ACEB23004C7270 /* RoundedTextField.swift */,
 				9C42645F28AF858F008D4C20 /* SwiftUI+Extensions.swift */,
 				9C22EA8928B3D86600F8E069 /* UIKit+Extensions.swift */,
+				9CDADEF728BE059000B6404B /* UIPilot.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -509,6 +520,7 @@
 				9C4807E9288AE033002D097D /* Resolver */,
 				9C668AB128AE8BA1001D6920 /* SDWebImageSwiftUI */,
 				9CE188D828B91EAB0034E07D /* LazyViewSwiftUI */,
+				9CDADEF528BE052C00B6404B /* UIPilot */,
 			);
 			productName = QuizApp;
 			productReference = 9C195367287584750051CEC6 /* QuizApp.app */;
@@ -545,6 +557,7 @@
 				9C4807E8288AE033002D097D /* XCRemoteSwiftPackageReference "Resolver" */,
 				9C668AB028AE8BA1001D6920 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				9CE188D728B91EAB0034E07D /* XCRemoteSwiftPackageReference "Lazy-View-SwiftUI" */,
+				9CDADEF428BE052C00B6404B /* XCRemoteSwiftPackageReference "UIPilot" */,
 			);
 			productRefGroup = 9C195368287584750051CEC6 /* Products */;
 			projectDirPath = "";
@@ -633,12 +646,14 @@
 				9C4807E028899EF7002D097D /* DataSourceModels.swift in Sources */,
 				9CC4D6E2287C6AB30061F149 /* UserNetworkDataSource.swift in Sources */,
 				9C4807E22889A088002D097D /* NetworkModels.swift in Sources */,
+				9CDADEF828BE059000B6404B /* UIPilot.swift in Sources */,
 				9C01635628ACE1CC004C7270 /* GradientBackground.swift in Sources */,
 				9CC33B22287D6848002E9853 /* UserDatabaseDataSource.swift in Sources */,
 				9C08B86828981775001F56BD /* LeaderboardUseCase.swift in Sources */,
 				9C1953A9287716FE0051CEC6 /* ConstructViewsProtocol.swift in Sources */,
 				9C42646428AFA74D008D4C20 /* SearchView.swift in Sources */,
 				9CC4D6DD287C1C6B0061F149 /* RequestError.swift in Sources */,
+				9CDADEFA28BE05CF00B6404B /* QuizSelectionView.swift in Sources */,
 				9C4807E4288A996D002D097D /* ErrorView.swift in Sources */,
 				9C668AAD28AE84C8001D6920 /* QuizDetailsView.swift in Sources */,
 				9CADE93D28AD343500B04380 /* SettingsView.swift in Sources */,
@@ -650,6 +665,7 @@
 				9CC33B24287D6889002E9853 /* UserRepository.swift in Sources */,
 				9C25C8B22888428A000C4C90 /* UserModels.swift in Sources */,
 				9C42646A28AFBF23008D4C20 /* QuizListDifficultyView.swift in Sources */,
+				9CDADEFC28BE0CE000B6404B /* SearchSelectionView.swift in Sources */,
 				9CFCC2F42885532A00B01343 /* QuizViewModel.swift in Sources */,
 				9C22EA8228B3AE2F00F8E069 /* QuizResultView.swift in Sources */,
 				9C0481E2288FEFFD0095247C /* SolvingQuizUseCase.swift in Sources */,
@@ -919,6 +935,14 @@
 				kind = branch;
 			};
 		};
+		9CDADEF428BE052C00B6404B /* XCRemoteSwiftPackageReference "UIPilot" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/canopas/UIPilot";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 		9CE188D728B91EAB0034E07D /* XCRemoteSwiftPackageReference "Lazy-View-SwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/joehinkle11/Lazy-View-SwiftUI";
@@ -954,6 +978,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9CC33B29287D77E5002E9853 /* XCRemoteSwiftPackageReference "keychain-swift" */;
 			productName = KeychainSwift;
+		};
+		9CDADEF528BE052C00B6404B /* UIPilot */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9CDADEF428BE052C00B6404B /* XCRemoteSwiftPackageReference "UIPilot" */;
+			productName = UIPilot;
 		};
 		9CE188D828B91EAB0034E07D /* LazyViewSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;

@@ -1,10 +1,14 @@
 import SwiftUI
+import UIPilot
 
 struct QuizResultView: View {
 
     @EnvironmentObject var states: QuizStates
 
     @ObservedObject var viewModel: QuizResultViewModel
+    @EnvironmentObject var quizzesPilot: UIPilot<QuizAppRoute>
+    @EnvironmentObject var searchPilot: UIPilot<SearchAppRoute>
+    @EnvironmentObject var shared: Shared
 
     var body: some View {
         VStack {
@@ -16,7 +20,13 @@ struct QuizResultView: View {
 
             Spacer()
 
-            Button(action: { states.reset() }, label: {
+            Button(action: {
+                if shared.selectedTab == .quizzes {
+                    quizzesPilot.push(.all)
+                } else if shared.selectedTab == .search {
+                    searchPilot.push(.search)
+                }
+            }, label: {
                 Text("Finish Quiz")
                     .foregroundColor(.purpleText)
                     .font(.heading6)

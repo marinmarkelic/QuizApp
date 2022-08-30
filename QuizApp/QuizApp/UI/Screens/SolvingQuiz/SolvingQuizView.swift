@@ -1,10 +1,14 @@
 import SwiftUI
 import Resolver
 import LazyViewSwiftUI
+import UIPilot
 
 struct SolvingQuizView: View {
 
     @EnvironmentObject var container: Resolver
+    @EnvironmentObject var quizzesPilot: UIPilot<QuizAppRoute>
+    @EnvironmentObject var searchPilot: UIPilot<SearchAppRoute>
+    @EnvironmentObject var shared: Shared
 
     @ObservedObject var viewModel: SolvingQuizViewModel
 
@@ -20,14 +24,18 @@ struct SolvingQuizView: View {
                 }
                 .animation(.spring(), value: viewModel.currentQuestionIndex)
 
-            NavigationLink("", isActive: $viewModel.isFinished) {
-                LazyView(QuizResultView(viewModel: container.resolve(QuizResultViewModel.self, args: viewModel.result)))
-            }
         }
         .maxSize()
         .padding()
         .background(LinearGradient.background.ignoresSafeArea())
         .navigationBarTitle("PopQuiz")
+        .onChange(of: viewModel.result) { result in
+            if shared.selectedTab == .quizzes {
+                quizzesPilot.push(.finished(result))
+            } else if shared.selectedTab == .search {
+                searchPilot.push(.finished(result))
+            }
+        }
     }
 
 }

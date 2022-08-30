@@ -1,5 +1,6 @@
 import SwiftUI
 import Resolver
+import UIPilot
 
 struct ContentView: View {
 
@@ -32,6 +33,7 @@ struct ContentView: View {
         .environmentObject(container)
         .environmentObject(loginCheck)
         .environmentObject(QuizStates())
+        .environmentObject(Shared())
     }
 
 }

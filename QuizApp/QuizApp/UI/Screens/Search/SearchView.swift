@@ -6,7 +6,6 @@ struct SearchView: View {
     @ObservedObject var viewModel: SearchViewModel
 
     var body: some View {
-        NavigationView {
             VStack {
                 SearchBar(text: $viewModel.searchText)
                     .onSearchTap {
@@ -19,8 +18,8 @@ struct SearchView: View {
             .padding()
             .background(LinearGradient.background.ignoresSafeArea())
             .navigationBarTitle("PopQuiz")
+            .navigationBarBackButtonHidden(true)
         }
-    }
 
 }
 

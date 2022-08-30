@@ -1,11 +1,15 @@
 import SwiftUI
 import LazyViewSwiftUI
 import Resolver
+import UIPilot
 
 struct QuizListView: View {
 
     @EnvironmentObject var container: Resolver
     @EnvironmentObject var quizStates: QuizStates
+    @EnvironmentObject var quizzesPilot: UIPilot<QuizAppRoute>
+    @EnvironmentObject var searchPilot: UIPilot<SearchAppRoute>
+    @EnvironmentObject var shared: Shared
 
     let quizzes: [Quiz]
     let alwaysShowSections: Bool
@@ -29,20 +33,17 @@ struct QuizListView: View {
 
     var body: some View {
         ScrollView(showsIndicators: false) {
-            NavigationLink("", isActive: $quizStates.didSelectQuiz) {
-                LazyView(
-                    QuizDetailsView(
-                        viewModel: container.resolve(QuizDetailsViewModel.self, args: quizStates.selectedQuiz)))
-            }
-
             LazyVStack {
                 ForEach(sections) { section in
                     Section(content: {
                         ForEach(section.quizzes, id: \.id) { quiz in
                             QuizListCell(quiz: quiz)
                                 .onTapGesture {
-                                    quizStates.selectedQuiz = quiz
-                                    quizStates.didSelectQuiz = true
+                                    if shared.selectedTab == .quizzes {
+                                        quizzesPilot.push(.details(quiz))
+                                    } else if shared.selectedTab == .search {
+                                        searchPilot.push(.details(quiz))
+                                    }
                                 }
                         }
                     }, header: {

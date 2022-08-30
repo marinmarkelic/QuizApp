@@ -6,7 +6,6 @@ struct QuizView: View {
     @ObservedObject var viewModel: QuizViewModel
 
     var body: some View {
-        NavigationView {
             VStack {
                 CategorySlider(categories: viewModel.categories)
                     .onCategoryTap {
@@ -23,8 +22,8 @@ struct QuizView: View {
                 viewModel.loadCategories()
             }
             .navigationBarTitle("PopQuiz")
+            .navigationBarBackButtonHidden(true)
         }
-    }
 
 }
 

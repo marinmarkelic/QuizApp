@@ -8,9 +8,10 @@ class SolvingQuizViewModel: ObservableObject {
     @Published var currentQuestionIndex: Int = 0
     @Published var progressText: String = ""
     @Published var errorMessage: String = ""
-    @Published var isFinished: Bool = false
 
-    var result: QuizResult?
+    var isFinished: Bool = false
+
+    @Published var result: QuizResult = .empty
 
     private var id: Int!
 
