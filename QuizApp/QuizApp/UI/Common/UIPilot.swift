@@ -9,19 +9,19 @@ enum AppRoute: Equatable {
 enum QuizAppRoute: Equatable {
 
     case all
-    case details(_ quiz: Quiz)
-    case leaderboard(_ id: Int)
-    case solving(_ quizId: Int)
-    case finished(_ results: QuizResult)
+    case details(Quiz)
+    case leaderboard(Int)
+    case solving(Int)
+    case finished(QuizResult)
 
 }
 
 enum SearchAppRoute: Equatable {
 
     case search
-    case details(_ quiz: Quiz)
-    case leaderboard(_ id: Int)
-    case solving(_ quizId: Int)
-    case finished(_ results: QuizResult)
+    case details(Quiz)
+    case leaderboard(Int)
+    case solving(Int)
+    case finished(QuizResult)
 
 }
