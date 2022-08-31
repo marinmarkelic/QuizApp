@@ -15,22 +15,38 @@ protocol QuizRepositoryProtocol {
 class QuizRepository: QuizRepositoryProtocol {
 
     private let quizNetworkDataSource: QuizNetworkDataSourceProtocol
+    private let quizDatabaseDataSource: QuizDatabaseDataSourceProtocol
 
-    init(quizNetworkDataSource: QuizNetworkDataSourceProtocol) {
+    init(quizNetworkDataSource: QuizNetworkDataSourceProtocol, quizDatabaseDataSource: QuizDatabaseDataSourceProtocol) {
         self.quizNetworkDataSource = quizNetworkDataSource
+        self.quizDatabaseDataSource = quizDatabaseDataSource
     }
 
     func fetchQuizzes(for category: CategoryRepoModel) async throws -> [QuizRepoModel] {
-        let quizzes = try await quizNetworkDataSource.fetchQuizzes(
-            for: CategoryDataModel(rawValue: category.rawValue)!)
-        return quizzes
-            .map { QuizRepoModel($0) }
+        do {
+            let quizzes = try await quizNetworkDataSource
+                .fetchQuizzes(for: CategoryDataModel(rawValue: category.rawValue)!)
+                .map { QuizRepoModel($0) }
+            quizDatabaseDataSource.save(quizzes: quizzes.map { QuizDatabaseModel($0) })
+            return quizzes
+        } catch _ {
+            let quizzes = quizDatabaseDataSource
+                .fetchQuizzes()
+                .map { QuizRepoModel($0) }
+                .filter { $0.category == category}
+            return quizzes
+        }
     }
 
     func fetchAllQuizzes() async throws -> [QuizRepoModel] {
-        let quizzes = try await quizNetworkDataSource.fetchAllQuizzes()
-        return quizzes
-            .map { QuizRepoModel($0) }
+        do {
+            let quizzes = try await quizNetworkDataSource.fetchAllQuizzes().map { QuizRepoModel($0) }
+            quizDatabaseDataSource.save(quizzes: quizzes.map { QuizDatabaseModel($0) })
+            return quizzes
+        } catch _ {
+            let quizzes = quizDatabaseDataSource.fetchQuizzes().map { QuizRepoModel($0) }
+            return quizzes
+        }
     }
 
     func fetchLeaderboard(for id: Int) async throws -> LeaderboardRepoModel {

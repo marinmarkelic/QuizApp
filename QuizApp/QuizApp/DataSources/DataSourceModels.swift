@@ -1,3 +1,51 @@
+import RealmSwift
+
+class QuizDatabaseModel: Object {
+
+    @Persisted var id: Int
+    @Persisted var name: String
+    @Persisted var desc: String
+    @Persisted var category: String
+    @Persisted var difficulty: String
+    @Persisted var imageUrl: String
+    @Persisted var numberOfQuestions: Int
+
+    convenience init(_ model: QuizRepoModel) {
+        self.init()
+
+        id = model.id
+        name = model.name
+        desc = model.description
+        category = model.category.rawValue
+        difficulty = model.difficulty.rawValue
+        imageUrl = model.imageUrl
+        numberOfQuestions = model.numberOfQuestions
+    }
+
+    func update(from model: QuizDatabaseModel) {
+        name = model.name
+        desc = model.desc
+        category = model.category
+        difficulty = model.difficulty
+        imageUrl = model.imageUrl
+        numberOfQuestions = model.numberOfQuestions
+    }
+
+}
+
+extension QuizRepoModel {
+
+    init(_ model: QuizDatabaseModel) {
+        id = model.id
+        name = model.name
+        description = model.desc
+        category = CategoryRepoModel(rawValue: model.category)!
+        difficulty = DifficultyRepoModel(rawValue: model.difficulty)!
+        imageUrl = model.imageUrl
+        numberOfQuestions = model.numberOfQuestions
+    }
+}
+
 struct LoginResponseDataModel {
 
     let accessToken: String
