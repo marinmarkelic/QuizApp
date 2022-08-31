@@ -50,6 +50,7 @@
 		9C327E55289AC6A4003787C0 /* SourceSansPro-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9C42E0C12881A74700B2B9FF /* SourceSansPro-Bold.ttf */; };
 		9C327E57289AC7CF003787C0 /* Combine+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C327E56289AC7CF003787C0 /* Combine+Extensions.swift */; };
 		9C327E59289ACBD0003787C0 /* UIControl+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C327E58289ACBD0003787C0 /* UIControl+Extensions.swift */; };
+		9C411BE328BF4D5A0049D021 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 9C411BE228BF4D5A0049D021 /* RealmSwift */; };
 		9C42646028AF858F008D4C20 /* SwiftUI+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C42645F28AF858F008D4C20 /* SwiftUI+Extensions.swift */; };
 		9C42646428AFA74D008D4C20 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C42646328AFA74D008D4C20 /* SearchView.swift */; };
 		9C42646628AFBEDD008D4C20 /* QuizListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9C42646528AFBEDD008D4C20 /* QuizListView.swift */; };
@@ -195,6 +196,7 @@
 			files = (
 				9C668AB228AE8BA1001D6920 /* SDWebImageSwiftUI in Frameworks */,
 				9C25C89428882613000C4C90 /* SDWebImage in Frameworks */,
+				9C411BE328BF4D5A0049D021 /* RealmSwift in Frameworks */,
 				9CC33B2B287D77E5002E9853 /* KeychainSwift in Frameworks */,
 				9C4807EA288AE033002D097D /* Resolver in Frameworks */,
 				9CDADEF628BE052C00B6404B /* UIPilot in Frameworks */,
@@ -521,6 +523,7 @@
 				9C4807E9288AE033002D097D /* Resolver */,
 				9C668AB128AE8BA1001D6920 /* SDWebImageSwiftUI */,
 				9CDADEF528BE052C00B6404B /* UIPilot */,
+				9C411BE228BF4D5A0049D021 /* RealmSwift */,
 			);
 			productName = QuizApp;
 			productReference = 9C195367287584750051CEC6 /* QuizApp.app */;
@@ -557,6 +560,7 @@
 				9C4807E8288AE033002D097D /* XCRemoteSwiftPackageReference "Resolver" */,
 				9C668AB028AE8BA1001D6920 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				9CDADEF428BE052C00B6404B /* XCRemoteSwiftPackageReference "UIPilot" */,
+				9C411BE128BF4D5A0049D021 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = 9C195368287584750051CEC6 /* Products */;
 			projectDirPath = "";
@@ -911,6 +915,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		9C411BE128BF4D5A0049D021 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		9C4807E8288AE033002D097D /* XCRemoteSwiftPackageReference "Resolver" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hmlongco/Resolver";
@@ -955,6 +967,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 9C25C89228882613000C4C90 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
+		};
+		9C411BE228BF4D5A0049D021 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 9C411BE128BF4D5A0049D021 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
 		};
 		9C4807E9288AE033002D097D /* Resolver */ = {
 			isa = XCSwiftPackageProductDependency;
