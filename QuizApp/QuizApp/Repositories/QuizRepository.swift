@@ -29,12 +29,14 @@ class QuizRepository: QuizRepositoryProtocol {
                 .map { QuizRepoModel($0) }
             quizDatabaseDataSource.save(quizzes: quizzes.map { QuizDatabaseModel($0) })
             return quizzes
-        } catch _ {
+        } catch RequestError.disconnectedError {
             let quizzes = quizDatabaseDataSource
                 .fetchQuizzes()
                 .map { QuizRepoModel($0) }
                 .filter { $0.category == category}
             return quizzes
+        } catch let err {
+            throw err
         }
     }
 
@@ -43,9 +45,11 @@ class QuizRepository: QuizRepositoryProtocol {
             let quizzes = try await quizNetworkDataSource.fetchAllQuizzes().map { QuizRepoModel($0) }
             quizDatabaseDataSource.save(quizzes: quizzes.map { QuizDatabaseModel($0) })
             return quizzes
-        } catch _ {
+        } catch RequestError.disconnectedError {
             let quizzes = quizDatabaseDataSource.fetchQuizzes().map { QuizRepoModel($0) }
             return quizzes
+        } catch let err {
+            throw err
         }
     }
 
