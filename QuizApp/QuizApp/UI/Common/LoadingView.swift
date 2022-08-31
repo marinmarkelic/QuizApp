@@ -19,7 +19,7 @@ struct LoadingView: View {
                 ForEach(0..<numberOfCircles, id: \.self) { index in
                     Circle()
                         .fill(.white)
-                        .frame(width: 20, height: 20, alignment: .trailing)
+                        .frame(width: 20, height: 20, alignment: .center)
                         .scaleEffect(toggleAnimation ? 1.1 : 0.6)
                         .animation(
                             .easeInOut(duration: animationDuration)
