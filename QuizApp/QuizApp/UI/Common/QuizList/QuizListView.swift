@@ -9,6 +9,7 @@ struct QuizListView: View {
     @EnvironmentObject var appData: AppData
 
     let quizzes: [Quiz]
+    let errorMessage: String
     let alwaysShowSections: Bool
 
     private var sections: [QuizSection] {
@@ -23,12 +24,21 @@ struct QuizListView: View {
         return value
     }
 
-    init(quizzes: [Quiz], alwaysShowSections: Bool = true) {
+    init(quizzes: [Quiz], errorMessage: String, alwaysShowSections: Bool = true) {
         self.quizzes = quizzes
+        self.errorMessage = errorMessage
         self.alwaysShowSections = alwaysShowSections
     }
 
     var body: some View {
+        if errorMessage.isEmpty {
+            content
+        } else {
+            ErrorView(message: errorMessage)
+        }
+    }
+
+    private var content: some View {
         ScrollView(showsIndicators: false) {
             LazyVStack {
                 ForEach(sections) { section in

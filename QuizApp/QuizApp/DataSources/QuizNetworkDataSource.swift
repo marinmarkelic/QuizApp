@@ -28,6 +28,7 @@ class QuizNetworkDataSource: QuizNetworkDataSourceProtocol {
     }
 
     func fetchAllQuizzes() async throws -> [QuizResponseDataModel] {
+        throw RequestError.dataCodingError
         let quizzes = try await networkClient.fetchAllQuizzes()
         return quizzes
             .map { QuizResponseDataModel($0) }

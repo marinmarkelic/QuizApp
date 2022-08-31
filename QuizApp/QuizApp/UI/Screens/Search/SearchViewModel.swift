@@ -5,8 +5,7 @@ class SearchViewModel: ObservableObject {
     @Published var searchText: String = ""
 
     @Published var quizzes: [Quiz] = []
-    @Published var fetchingErrorMessage: String = ""
-    @Published var noQuizzesErrorMessage: String = ""
+    @Published var errorMessage: String = ""
 
     private var useCase: QuizUseCaseProtocol!
 
@@ -33,14 +32,9 @@ class SearchViewModel: ObservableObject {
                         .sorted { $0.difficulty < $1.difficulty }
                 }
 
-                fetchingErrorMessage = ""
-                noQuizzesErrorMessage = self.quizzes.isEmpty ?
-                "No quizzes found." :
-                ""
-
+                errorMessage = ""
             } catch _ {
-                noQuizzesErrorMessage = ""
-                fetchingErrorMessage = """
+                errorMessage = """
 Quizzes couldn't be loaded.
 Please try again.
 """
