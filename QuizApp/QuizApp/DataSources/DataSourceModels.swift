@@ -33,19 +33,6 @@ class QuizDatabaseModel: Object {
 
 }
 
-extension QuizRepoModel {
-
-    init(_ model: QuizDatabaseModel) {
-        id = model.id
-        name = model.name
-        description = model.desc
-        category = CategoryRepoModel(rawValue: model.category)!
-        difficulty = DifficultyRepoModel(rawValue: model.difficulty)!
-        imageUrl = model.imageUrl
-        numberOfQuestions = model.numberOfQuestions
-    }
-}
-
 struct LoginResponseDataModel {
 
     let accessToken: String

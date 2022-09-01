@@ -4,8 +4,6 @@ struct CircularLoadingView: View {
 
     @State private var toggleAnimation: Bool = false
 
-    var radius: Double = 10
-
     var body: some View {
         VStack {
             Spacer()

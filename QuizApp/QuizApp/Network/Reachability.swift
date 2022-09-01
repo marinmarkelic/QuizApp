@@ -3,7 +3,6 @@ import SystemConfiguration
 public class Reachability {
 
     class func isConnectedToNetwork() -> Bool {
-
         var zeroAddress = sockaddr_in(
             sin_len: 0,
             sin_family: 0,
@@ -30,7 +29,6 @@ public class Reachability {
         let ret = (isReachable && !needsConnection)
 
         return ret
-
     }
 
 }

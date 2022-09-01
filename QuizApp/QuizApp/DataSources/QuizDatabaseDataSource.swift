@@ -32,15 +32,6 @@ class QuizDatabaseDataSource: QuizDatabaseDataSourceProtocol {
                 }
             }
         }
-
-    }
-
-    func delete() {
-        guard let realm = try? Realm() else { return }
-
-        try? realm.write {
-            realm.deleteAll()
-        }
     }
 
 }
