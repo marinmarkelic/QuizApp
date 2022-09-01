@@ -10,18 +10,6 @@ class QuizDatabaseModel: Object {
     @Persisted var imageUrl: String
     @Persisted var numberOfQuestions: Int
 
-    convenience init(_ model: QuizRepoModel) {
-        self.init()
-
-        id = model.id
-        name = model.name
-        desc = model.description
-        category = model.category.rawValue
-        difficulty = model.difficulty.rawValue
-        imageUrl = model.imageUrl
-        numberOfQuestions = model.numberOfQuestions
-    }
-
     func update(from model: QuizDatabaseModel) {
         name = model.name
         desc = model.desc
