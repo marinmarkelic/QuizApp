@@ -27,7 +27,7 @@ struct UserInputView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 15) {
             if isErrorTextShown {
-                Text(isErrorTextShown ? " " : "")
+                Text("")
                     .lineLimit(nil)
                     .frame(maxWidth: .infinity)
                     .multilineTextAlignment(.center)
@@ -63,7 +63,7 @@ struct UserInputView: View {
         .padding()
         .onChange(of: errorText) { text in
             withAnimation {
-                // This is needed because we set ErrorText to " " when there is no error
+                // This is needed because we set errorText to " " when there is no error
                 // to make the animation smooth
                 isErrorTextShown = !text.trimmingCharacters(in: .whitespaces).isEmpty
             }
