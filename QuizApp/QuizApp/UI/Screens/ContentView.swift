@@ -15,7 +15,7 @@ struct ContentView: View {
             case .notLoggedIn:
                 LoginView(viewModel: container.resolve())
             case .unknown:
-                LoadingView(numberOfCircles: 3, animationDuration: 0.6)
+                CircularLoadingView()
                     .onAppear {
                         checkLoginStatus()
                     }

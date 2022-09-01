@@ -19,13 +19,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         appDependencies = AppDependencies()
         appData = AppData()
 
-//        let viewController = UIHostingController(
-//            rootView:
-//                ContentView()
-//                .environmentObject(appDependencies.container)
-//                .environmentObject(appData))
-
-        let viewController = UIHostingController(rootView: CircularLoadingView())
+        let viewController = UIHostingController(
+            rootView:
+                ContentView()
+                .environmentObject(appDependencies.container)
+                .environmentObject(appData))
 
         window.rootViewController = viewController
         window.makeKeyAndVisible()

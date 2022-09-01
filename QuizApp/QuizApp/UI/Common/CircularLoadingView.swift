@@ -14,9 +14,9 @@ struct CircularLoadingView: View {
                 Circle()
                     .trim(from: 0, to: 0.7)
                     .stroke(.white, lineWidth: 2)
-                    .frame(width: 15, height: 15)
+                    .frame(width: 20, height: 20)
                     .rotationEffect(Angle(degrees: toggleAnimation ? 360 : 0))
-                    .animation(.easeInOut.repeatForever(autoreverses: false), value: toggleAnimation)
+                    .animation(.linear.repeatForever(autoreverses: false), value: toggleAnimation)
             }
 
             Spacer()
