@@ -4,7 +4,7 @@ import SwiftUI
 class LoginViewModel: ObservableObject {
 
     @Published var isLoginButtonEnabled = false
-    @Published var errorText = ""
+    @Published var errorText = " "
     @Published var email = ""
     @Published var password = ""
 
@@ -43,7 +43,7 @@ class LoginViewModel: ObservableObject {
         Task {
             do {
                 _ = try await useCase.logIn(username: email, password: password)
-                errorText = ""
+                errorText = " "
                 completion(true)
             } catch let error as RequestError {
                 showError(error)
@@ -65,7 +65,7 @@ class LoginViewModel: ObservableObject {
 
     private func checkInputValidity() {
         isLoginButtonEnabled = !password.isEmpty && isValidEmail(email)
-        errorText = ""
+        errorText = " "
     }
 
     private func isValidEmail(_ email: String) -> Bool {
