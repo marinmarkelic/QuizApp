@@ -33,7 +33,7 @@ class QuizRepository: QuizRepositoryProtocol {
             let quizzes = quizDatabaseDataSource
                 .fetchQuizzes()
                 .map { QuizRepoModel($0) }
-                .filter { $0.category == category}
+                .filter { $0.category == category }
             return quizzes
         } catch let err {
             throw err

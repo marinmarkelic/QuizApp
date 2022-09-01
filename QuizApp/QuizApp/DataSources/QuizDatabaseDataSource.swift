@@ -28,7 +28,7 @@ class QuizDatabaseDataSource: QuizDatabaseDataSourceProtocol {
 
                     savedQuiz.update(from: quiz)
                 } else {
-                    realm.add(quizzes)
+                    realm.add(quiz)
                 }
             }
         }
