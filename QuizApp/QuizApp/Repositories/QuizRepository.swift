@@ -28,12 +28,13 @@ class QuizRepository: QuizRepositoryProtocol {
                 .fetchQuizzes(for: CategoryDataModel(rawValue: category.rawValue)!)
                 .map { QuizRepoModel($0) }
             quizDatabaseDataSource.save(quizzes: quizzes.map { QuizDatabaseModel($0) })
+
             return quizzes
         } catch RequestError.disconnectedError {
             let quizzes = quizDatabaseDataSource
-                .fetchQuizzes()
+                .fetchQuizzes(for: category.rawValue)
                 .map { QuizRepoModel($0) }
-                .filter { $0.category == category }
+
             return quizzes
         } catch let err {
             throw err
