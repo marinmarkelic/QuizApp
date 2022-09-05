@@ -21,7 +21,7 @@ class QuizDatabaseDataSource: QuizDatabaseDataSourceProtocol {
     func fetchQuizzes(for category: String) -> [QuizDatabaseModel] {
         guard let realm = try? Realm() else { return [] }
 
-        return Array(realm.objects(QuizDatabaseModel.self)).filter { $0.category == category }
+        return Array(realm.objects(QuizDatabaseModel.self).where { $0.category == category })
     }
 
     func save(quizzes: [QuizDatabaseModel]) {
@@ -31,7 +31,7 @@ class QuizDatabaseDataSource: QuizDatabaseDataSourceProtocol {
 
         try? realm.write {
             for quiz in quizzes {
-                if let savedQuiz = savedQuizzes.first(where: {$0.id == quiz.id}) {
+                if let savedQuiz = savedQuizzes.first(where: { $0.id == quiz.id }) {
                     savedQuiz.update(from: quiz)
                     continue
                 }
