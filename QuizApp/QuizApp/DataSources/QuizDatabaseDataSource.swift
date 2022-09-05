@@ -27,16 +27,9 @@ class QuizDatabaseDataSource: QuizDatabaseDataSourceProtocol {
     func save(quizzes: [QuizDatabaseModel]) {
         guard let realm = try? Realm() else { return }
 
-        let savedQuizzes = realm.objects(QuizDatabaseModel.self)
-
         try? realm.write {
             for quiz in quizzes {
-                if let savedQuiz = savedQuizzes.first(where: { $0.id == quiz.id }) {
-                    savedQuiz.update(from: quiz)
-                    continue
-                }
-
-                realm.add(quiz)
+                realm.add(quiz, update: .modified)
             }
         }
     }
