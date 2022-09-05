@@ -123,6 +123,10 @@ class AppDependencies {
 
     private func registerViewModels(in container: Resolver) {
         container
+            .register { ContentViewModel(dataSource: container.resolve(), secureStorage: container.resolve()) }
+            .scope(.unique)
+
+        container
             .register { LoginViewModel(useCase: container.resolve()) }
             .scope(.unique)
 

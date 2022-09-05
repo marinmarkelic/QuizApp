@@ -20,9 +20,7 @@ struct LoginView: View {
                 errorText: viewModel.errorText,
                 isLoginButtonEnabled: viewModel.isLoginButtonEnabled)
             .onLoginTap {
-                viewModel.pressedLoginButton { value in
-                        appData.loginStatus = value ? .loggedIn : .notLoggedIn
-                }
+                viewModel.pressedLoginButton(appData: appData)
             }
 
             Spacer()
