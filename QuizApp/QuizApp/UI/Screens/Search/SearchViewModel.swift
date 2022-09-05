@@ -8,11 +8,9 @@ class SearchViewModel: ObservableObject {
     @Published var fetchingErrorMessage: String = ""
     @Published var noQuizzesErrorMessage: String = ""
 
-    private var router: AppRouterProtocol!
     private var useCase: QuizUseCaseProtocol!
 
-    init(router: AppRouterProtocol, useCase: QuizUseCaseProtocol) {
-        self.router = router
+    init(useCase: QuizUseCaseProtocol) {
         self.useCase = useCase
     }
 
@@ -52,10 +50,6 @@ Please try again.
 
     func updatedSearchText(with text: String) {
         searchText = text
-    }
-
-    func showQuizDetails(with quiz: Quiz) {
-        router.showQuizDetails(with: quiz)
     }
 
 }

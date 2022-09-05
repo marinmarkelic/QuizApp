@@ -1,11 +1,12 @@
 import UIKit
 import Resolver
+import SwiftUI
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    private var router: AppRouterProtocol!
     private var appDependencies: AppDependencies!
+    private var appData: AppData!
 
     var window: UIWindow?
 
@@ -16,9 +17,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let window = UIWindow(frame: UIScreen.main.bounds)
 
         appDependencies = AppDependencies()
+        appData = AppData()
 
-        router = appDependencies.appRouter
-        router.start(in: window)
+        let container = appDependencies.container
+
+        let viewController = UIHostingController(
+            rootView:
+                ContentView(viewModel: container.resolve())
+                .environmentObject(container)
+                .environmentObject(appData))
+
+        window.rootViewController = viewController
+        window.makeKeyAndVisible()
 
         self.window = window
         return true

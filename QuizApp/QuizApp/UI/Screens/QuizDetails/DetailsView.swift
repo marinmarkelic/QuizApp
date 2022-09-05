@@ -1,16 +1,15 @@
 import SwiftUI
 import SDWebImageSwiftUI
+import Resolver
+import UIPilot
 
 struct DetailsView: View {
 
+    @EnvironmentObject var quizzesPilot: UIPilot<QuizAppRoute>
+    @EnvironmentObject var searchPilot: UIPilot<SearchAppRoute>
+    @EnvironmentObject var appData: AppData
+
     let quiz: Quiz
-
-    let onStartQuizTap: () -> Void
-
-    init(quiz: Quiz, onStartQuizTap: @escaping () -> Void = {}) {
-        self.quiz = quiz
-        self.onStartQuizTap = onStartQuizTap
-    }
 
     var body: some View {
         VStack {
@@ -31,7 +30,13 @@ struct DetailsView: View {
                 .padding(.vertical, 10)
                 .frame(height: 200)
 
-            Button(action: { onStartQuizTap() }, label: {
+            Button(action: {
+                if appData.selectedTab == .quizzes {
+                    quizzesPilot.push(.solving(quiz.id))
+                } else if appData.selectedTab == .search {
+                    searchPilot.push(.solving(quiz.id))
+                }
+            }, label: {
                 Text("Start Quiz")
                     .foregroundColor(.purpleText)
                     .font(.heading6)
@@ -45,10 +50,7 @@ struct DetailsView: View {
         .padding()
         .background(.white.opacity(0.3))
         .cornerRadius(10)
-    }
-
-    func onStartQuizTap(_ onStartQuizTap: @escaping () -> Void = {}) -> DetailsView {
-        DetailsView(quiz: quiz, onStartQuizTap: onStartQuizTap)
+        .navigationBarTitle("PopQuiz")
     }
 
 }

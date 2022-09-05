@@ -2,6 +2,8 @@ import SwiftUI
 
 struct SettingsView: View {
 
+    @EnvironmentObject var appData: AppData
+
     @ObservedObject var viewModel: UserViewModel
 
     var body: some View {
@@ -10,6 +12,7 @@ struct SettingsView: View {
                 userInfo: viewModel.userInfo)
             .onLogoutTap {
                 viewModel.logOut()
+                appData.loginStatus = .unknown
             }
             .onNameChange {
                 viewModel.save()

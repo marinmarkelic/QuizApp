@@ -1,5 +1,5 @@
 import Combine
-import UIKit
+import SwiftUI
 
 class LoginViewModel: ObservableObject {
 
@@ -8,13 +8,11 @@ class LoginViewModel: ObservableObject {
     @Published var email = ""
     @Published var password = ""
 
-    private var router: AppRouterProtocol!
     private var useCase: LoginUseCaseProtocol!
 
     private var cancellables = Set<AnyCancellable>()
 
-    init(router: AppRouterProtocol, useCase: LoginUseCaseProtocol) {
-        self.router = router
+    init(useCase: LoginUseCaseProtocol) {
         self.useCase = useCase
 
         bindViewModel()
@@ -41,15 +39,17 @@ class LoginViewModel: ObservableObject {
     }
 
     @MainActor
-    func pressedLoginButton() {
+    func pressedLoginButton(appData: AppData) {
         Task {
             do {
                 _ = try await useCase.logIn(username: email, password: password)
-
                 errorText = ""
-                router.showHome()
+                appData.loginStatus = .loggedIn
             } catch let error as RequestError {
                 showError(error)
+                appData.loginStatus = .loggedOut
+            } catch {
+                appData.loginStatus = .loggedOut
             }
         }
     }

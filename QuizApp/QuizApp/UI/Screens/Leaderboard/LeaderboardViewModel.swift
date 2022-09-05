@@ -5,16 +5,14 @@ class LeaderboardViewModel: ObservableObject {
     private var id: Int!
 
     private var useCase: LeaderboardUseCaseProtocol!
-    private var router: AppRouterProtocol!
 
     @Published var leaderboard: Leaderboard = .empty
     @Published var fetchingErrorMessage: String = ""
     @Published var noPlayersErrorMessage: String = ""
 
-    init(id: Int, useCase: LeaderboardUseCaseProtocol, router: AppRouterProtocol) {
+    init(id: Int, useCase: LeaderboardUseCaseProtocol) {
         self.id = id
         self.useCase = useCase
-        self.router = router
     }
 
     init() {}
@@ -40,10 +38,6 @@ Please try again.
 """
             }
         }
-    }
-
-    func pressedClose() {
-        router.goBack()
     }
 
 }

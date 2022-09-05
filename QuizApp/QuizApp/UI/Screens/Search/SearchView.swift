@@ -6,27 +6,20 @@ struct SearchView: View {
     @ObservedObject var viewModel: SearchViewModel
 
     var body: some View {
-        VStack {
-            content
-                .padding()
-        }
-        .maxWidth()
-        .background(LinearGradient.background.ignoresSafeArea())
-    }
+            VStack {
+                SearchBar(text: $viewModel.searchText)
+                    .onSearchTap {
+                        viewModel.fetchQuizzes()
+                    }
 
-    private var content: some View {
-        VStack {
-            SearchBar(text: $viewModel.searchText)
-                .onSearchTap {
-                    viewModel.fetchQuizzes()
-                }
-
-            QuizListView(quizzes: viewModel.quizzes)
-                .onQuizTap { quiz in
-                    viewModel.showQuizDetails(with: quiz)
-                }
+                QuizListView(quizzes: viewModel.quizzes)
+            }
+            .maxWidth()
+            .padding()
+            .background(LinearGradient.background.ignoresSafeArea())
+            .navigationBarTitle("PopQuiz")
+            .navigationBarBackButtonHidden(true)
         }
-    }
 
 }
 

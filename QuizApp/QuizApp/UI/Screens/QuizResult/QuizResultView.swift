@@ -1,8 +1,12 @@
 import SwiftUI
+import UIPilot
 
 struct QuizResultView: View {
 
     @ObservedObject var viewModel: QuizResultViewModel
+    @EnvironmentObject var quizzesPilot: UIPilot<QuizAppRoute>
+    @EnvironmentObject var searchPilot: UIPilot<SearchAppRoute>
+    @EnvironmentObject var appData: AppData
 
     var body: some View {
         VStack {
@@ -14,7 +18,13 @@ struct QuizResultView: View {
 
             Spacer()
 
-            Button(action: { viewModel.exitQuiz() }, label: {
+            Button(action: {
+                if appData.selectedTab == .quizzes {
+                    quizzesPilot.push(.all)
+                } else if appData.selectedTab == .search {
+                    searchPilot.push(.search)
+                }
+            }, label: {
                 Text("Finish Quiz")
                     .foregroundColor(.purpleText)
                     .font(.heading6)
@@ -28,6 +38,7 @@ struct QuizResultView: View {
         .maxSize()
         .padding()
         .background(LinearGradient.background.ignoresSafeArea())
+        .navigationBarBackButtonHidden(true)
     }
 
 }

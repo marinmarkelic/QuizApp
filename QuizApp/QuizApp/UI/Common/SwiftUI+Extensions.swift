@@ -48,4 +48,18 @@ extension View {
         }
     }
 
+    // MARK: - Navigation
+    func navigationBarTitle(_ title: String) -> some View {
+        self
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationTitle(title)
+            .toolbar {
+            ToolbarItem(placement: .principal) {
+                HStack(alignment: .center) {
+                    Text(title).font(.heading1)
+                }
+            }
+        }
+    }
+
 }

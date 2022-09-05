@@ -1,6 +1,12 @@
 import SwiftUI
+import Resolver
+import UIPilot
 
 struct SolvingQuizView: View {
+
+    @EnvironmentObject var quizzesPilot: UIPilot<QuizAppRoute>
+    @EnvironmentObject var searchPilot: UIPilot<SearchAppRoute>
+    @EnvironmentObject var appData: AppData
 
     @ObservedObject var viewModel: SolvingQuizViewModel
 
@@ -15,10 +21,19 @@ struct SolvingQuizView: View {
                     viewModel.selectedAnswer(with: $0)
                 }
                 .animation(.spring(), value: viewModel.currentQuestionIndex)
+
         }
         .maxSize()
         .padding()
         .background(LinearGradient.background.ignoresSafeArea())
+        .navigationBarTitle("PopQuiz")
+        .onChange(of: viewModel.result) { result in
+            if appData.selectedTab == .quizzes {
+                quizzesPilot.push(.finished(result))
+            } else if appData.selectedTab == .search {
+                searchPilot.push(.finished(result))
+            }
+        }
     }
 
 }
