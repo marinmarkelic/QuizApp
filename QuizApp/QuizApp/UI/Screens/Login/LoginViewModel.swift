@@ -39,17 +39,17 @@ class LoginViewModel: ObservableObject {
     }
 
     @MainActor
-    func pressedLoginButton(_ completion: @escaping (Bool) -> Void) {
+    func pressedLoginButton(appData: AppData) {
         Task {
             do {
                 _ = try await useCase.logIn(username: email, password: password)
-                errorText = " "
-                completion(true)
+                errorText = ""
+                appData.loginStatus = .loggedIn
             } catch let error as RequestError {
                 showError(error)
-                completion(false)
+                appData.loginStatus = .loggedOut
             } catch {
-                completion(false)
+                appData.loginStatus = .loggedOut
             }
         }
     }

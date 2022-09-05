@@ -19,10 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         appDependencies = AppDependencies()
         appData = AppData()
 
+        let container = appDependencies.container
+
         let viewController = UIHostingController(
             rootView:
-                ContentView()
-                .environmentObject(appDependencies.container)
+                ContentView(viewModel: container.resolve())
+                .environmentObject(container)
                 .environmentObject(appData))
 
         window.rootViewController = viewController

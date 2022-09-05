@@ -10,7 +10,7 @@ class AppData: ObservableObject {
 enum LoginStatus {
 
     case unknown
-    case notLoggedIn
+    case loggedOut
     case loggedIn
 
 }
