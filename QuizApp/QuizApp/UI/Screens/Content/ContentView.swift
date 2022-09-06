@@ -16,7 +16,7 @@ struct ContentView: View {
             case .loggedOut:
                 LoginView(viewModel: container.resolve())
             case .unknown:
-                Text("Checking access token")
+                CircularLoadingView()
                     .onAppear { viewModel.checkLoginStatus(appData: appData) }
             }
         }

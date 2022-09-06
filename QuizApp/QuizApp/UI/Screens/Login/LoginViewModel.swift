@@ -4,7 +4,7 @@ import SwiftUI
 class LoginViewModel: ObservableObject {
 
     @Published var isLoginButtonEnabled = false
-    @Published var errorText = ""
+    @Published var errorText = " "
     @Published var email = ""
     @Published var password = ""
 
@@ -65,7 +65,7 @@ class LoginViewModel: ObservableObject {
 
     private func checkInputValidity() {
         isLoginButtonEnabled = !password.isEmpty && isValidEmail(email)
-        errorText = ""
+        errorText = " "
     }
 
     private func isValidEmail(_ email: String) -> Bool {

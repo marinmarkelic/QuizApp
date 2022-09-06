@@ -12,7 +12,7 @@ struct SearchView: View {
                         viewModel.fetchQuizzes()
                     }
 
-                QuizListView(quizzes: viewModel.quizzes)
+                QuizListView(quizzes: viewModel.quizzes, errorMessage: viewModel.errorMessage)
             }
             .maxWidth()
             .padding()

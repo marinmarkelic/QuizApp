@@ -68,6 +68,11 @@ class AppDependencies {
             .scope(.application)
 
         container
+            .register { QuizDatabaseDataSource() }
+            .implements(QuizDatabaseDataSourceProtocol.self)
+            .scope(.application)
+
+        container
             .register { UserDatabaseDataSource(secureStorage: container.resolve()) }
             .implements(UserDatabaseDataSourceProtocol.self)
             .scope(.application)
@@ -84,7 +89,9 @@ class AppDependencies {
             .scope(.application)
 
         container
-            .register { QuizRepository(quizNetworkDataSource: container.resolve()) }
+            .register {
+                QuizRepository(quizNetworkDataSource: container.resolve(), quizDatabaseDataSource: container.resolve())
+            }
             .implements(QuizRepositoryProtocol.self)
             .scope(.application)
     }

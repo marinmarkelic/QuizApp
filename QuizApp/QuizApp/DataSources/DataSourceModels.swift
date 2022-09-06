@@ -1,3 +1,26 @@
+import RealmSwift
+
+class QuizDatabaseModel: Object {
+
+    @Persisted(primaryKey: true) var id: Int
+    @Persisted var name: String
+    @Persisted var desc: String
+    @Persisted var category: String
+    @Persisted var difficulty: String
+    @Persisted var imageUrl: String
+    @Persisted var numberOfQuestions: Int
+
+    func update(from model: QuizDatabaseModel) {
+        name = model.name
+        desc = model.desc
+        category = model.category
+        difficulty = model.difficulty
+        imageUrl = model.imageUrl
+        numberOfQuestions = model.numberOfQuestions
+    }
+
+}
+
 struct LoginResponseDataModel {
 
     let accessToken: String

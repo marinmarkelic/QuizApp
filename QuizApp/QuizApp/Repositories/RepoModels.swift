@@ -54,6 +54,35 @@ extension QuizRepoModel {
 
 }
 
+extension QuizRepoModel {
+
+    init(_ model: QuizDatabaseModel) {
+        id = model.id
+        name = model.name
+        description = model.desc
+        category = CategoryRepoModel(rawValue: model.category)!
+        difficulty = DifficultyRepoModel(rawValue: model.difficulty)!
+        imageUrl = model.imageUrl
+        numberOfQuestions = model.numberOfQuestions
+    }
+}
+
+extension QuizDatabaseModel {
+
+    convenience init(_ model: QuizRepoModel) {
+        self.init()
+
+        id = model.id
+        name = model.name
+        desc = model.description
+        category = model.category.rawValue
+        difficulty = model.difficulty.rawValue
+        imageUrl = model.imageUrl
+        numberOfQuestions = model.numberOfQuestions
+    }
+
+}
+
 enum CategoryRepoModel: String {
 
     case sport = "SPORT"

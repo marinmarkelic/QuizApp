@@ -12,7 +12,10 @@ struct QuizView: View {
                     viewModel.changeCategory(for: $0.type)
                 }
 
-            QuizListView(quizzes: viewModel.quizzes, alwaysShowSections: false)
+            QuizListView(
+                quizzes: viewModel.quizzes,
+                errorMessage: viewModel.errorMessage,
+                alwaysShowSections: false)
         }
         .maxWidth()
         .maxHeight()

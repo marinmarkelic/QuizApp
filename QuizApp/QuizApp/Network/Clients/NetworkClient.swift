@@ -5,12 +5,18 @@ class NetworkClient {
     private let baseUrl: String
     private let secureStorage: SecureStorage
 
+    private var isConnected: Bool {
+        Reachability.isConnectedToNetwork()
+    }
+
     init(secureStorage: SecureStorage, baseUrl: String) {
         self.secureStorage = secureStorage
         self.baseUrl = baseUrl
     }
 
     func get(path: String) async throws {
+        if !isConnected { throw RequestError.disconnectedError }
+
         guard let url = URL(string: "\(baseUrl)\(path)") else {
             throw RequestError.invalidURLError
         }
@@ -26,6 +32,8 @@ class NetworkClient {
     }
 
     func get<Response: Decodable>(path: String) async throws -> Response {
+        if !isConnected { throw RequestError.disconnectedError }
+
         guard let url = URL(string: "\(baseUrl)\(path)") else {
             throw RequestError.invalidURLError
         }
@@ -50,6 +58,8 @@ class NetworkClient {
         path: String,
         body: RequestModel
     ) async throws -> Response {
+        if !isConnected { throw RequestError.disconnectedError }
+
         guard let url = URL(string: "\(baseUrl)\(path)") else {
             throw RequestError.invalidURLError
         }
@@ -79,6 +89,8 @@ class NetworkClient {
         path: String,
         body: RequestModel
     ) async throws -> Response {
+        if !isConnected { throw RequestError.disconnectedError }
+
         guard let url = URL(string: "\(baseUrl)\(path)") else {
             throw RequestError.invalidURLError
         }
@@ -105,6 +117,8 @@ class NetworkClient {
     }
 
     func handle(urlRequest: URLRequest) async throws -> (Data, URLResponse) {
+        if !isConnected { throw RequestError.disconnectedError }
+
         guard let (data, response) = try? await URLSession.shared.data(for: urlRequest) else {
             throw RequestError.serverError
         }

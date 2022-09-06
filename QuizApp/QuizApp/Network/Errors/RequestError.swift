@@ -1,5 +1,6 @@
 enum RequestError: Error {
 
+    case disconnectedError
     case invalidURLError
     case dataCodingError
     case unauthorisedError
