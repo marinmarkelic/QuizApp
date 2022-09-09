@@ -24,14 +24,7 @@ class LoginViewModel: ObservableObject {
 
     private func bindViewModel() {
         $email
-            .removeDuplicates()
-            .sink { [weak self] _ in
-                self?.checkInputValidity()
-            }
-            .store(in: &cancellables)
-
-        $password
-            .removeDuplicates()
+            .combineLatest($password)
             .sink { [weak self] _ in
                 self?.checkInputValidity()
             }
