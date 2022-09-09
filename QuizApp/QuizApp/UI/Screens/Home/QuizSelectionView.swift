@@ -23,10 +23,13 @@ struct QuizSelectionView: View {
             QuizView(viewModel: container.resolve())
         case .details(let quiz):
             QuizDetailsView(viewModel: container.resolve(args: quiz))
+                .addChevronBackButton(pilot)
         case .leaderboard(let id):
             LeaderboardView(viewModel: container.resolve(args: id))
+                .addXBackButton(pilot)
         case .solving(let quizId):
             SolvingQuizView(viewModel: container.resolve(args: quizId))
+                .addChevronBackButton(pilot)
         case .finished(let results):
             QuizResultView(viewModel: container.resolve(args: results))
         }

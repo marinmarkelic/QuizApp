@@ -1,4 +1,5 @@
 import SwiftUI
+import UIPilot
 
 extension View {
 
@@ -60,6 +61,27 @@ extension View {
                 }
             }
         }
+    }
+
+    // MARK: Navigation bar
+    func addChevronBackButton<RouteStruct: Equatable>(_ pilot: UIPilot<RouteStruct>) -> some View {
+        self.navigationBarBackButtonHidden(true)
+        .navigationBarItems(
+            leading:
+                Image(systemName: "chevron.left")
+                .onTapGesture { pilot.pop() }
+            ,
+            trailing: EmptyView())
+    }
+
+    func addXBackButton<RouteStruct: Equatable>(_ pilot: UIPilot<RouteStruct>) -> some View {
+        self.navigationBarBackButtonHidden(true)
+        .navigationBarItems(
+            leading: EmptyView()
+            ,
+            trailing:
+                Image(systemName: "xmark")
+                .onTapGesture { pilot.pop() })
     }
 
 }
