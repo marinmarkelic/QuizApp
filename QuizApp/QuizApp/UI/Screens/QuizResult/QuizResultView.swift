@@ -8,14 +8,14 @@ struct QuizResultView: View {
     @EnvironmentObject var searchPilot: UIPilot<SearchAppRoute>
     @EnvironmentObject var appData: AppData
 
-    @State private var score: Double = 0
+    @State private var score: Int = 0
 
     var body: some View {
         VStack {
             Spacer()
 
             Color.clear
-                .modifier(AnimatableNumberModifier(number: score, postfix: viewModel.text))
+                .modifier(NumberView(number: score, postfix: viewModel.text))
                 .onAppear {
                     withAnimation {
                         score = viewModel.score
@@ -47,27 +47,6 @@ struct QuizResultView: View {
         .navigationBarBackButtonHidden(true)
         .onAppear {
         }
-    }
-
-}
-
-struct AnimatableNumberModifier: AnimatableModifier {
-
-    var number: Double
-    var postfix: String = ""
-
-    var animatableData: Double {
-        get { number }
-        set { number = newValue }
-    }
-
-    func body(content: Content) -> some View {
-        content
-            .overlay(
-                Text("\(Int(number))\(postfix)")
-                    .font(.score)
-                    .foregroundColor(.white)
-            )
     }
 
 }
