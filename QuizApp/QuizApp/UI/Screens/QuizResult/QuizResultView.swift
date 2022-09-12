@@ -8,13 +8,19 @@ struct QuizResultView: View {
     @EnvironmentObject var searchPilot: UIPilot<SearchAppRoute>
     @EnvironmentObject var appData: AppData
 
+    @State private var score: Double = 0
+
     var body: some View {
         VStack {
             Spacer()
 
-            Text(viewModel.text)
-                .font(.score)
-                .foregroundColor(.white)
+            Color.clear
+                .animatingOverlay(for: score, postfix: viewModel.text)
+                .onAppear {
+                    withAnimation {
+                        score = viewModel.score
+                    }
+                }
 
             Spacer()
 
@@ -39,6 +45,29 @@ struct QuizResultView: View {
         .padding()
         .background(LinearGradient.background.ignoresSafeArea())
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+        }
+    }
+
+}
+
+struct AnimatableNumberModifier: AnimatableModifier {
+
+    var number: Double
+    var postfix: String = ""
+
+    var animatableData: Double {
+        get { number }
+        set { number = newValue }
+    }
+
+    func body(content: Content) -> some View {
+        content
+            .overlay(
+                Text("\(Int(number))\(postfix)")
+                    .font(.score)
+                    .foregroundColor(.white)
+            )
     }
 
 }
@@ -47,6 +76,14 @@ struct QuizResultViewPreview: PreviewProvider {
 
     static var previews: some View {
         QuizResultView(viewModel: QuizResultViewModel())
+    }
+
+}
+
+extension View {
+
+    func animatingOverlay(for number: Double, postfix: String) -> some View {
+        modifier(AnimatableNumberModifier(number: number, postfix: postfix))
     }
 
 }

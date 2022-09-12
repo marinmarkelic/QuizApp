@@ -2,6 +2,7 @@ import Combine
 
 class QuizResultViewModel: ObservableObject {
 
+    @Published var score: Double = 0
     @Published var text: String = ""
 
     private var result: QuizResult!
@@ -18,7 +19,8 @@ class QuizResultViewModel: ObservableObject {
     init() {}
 
     private func setText() {
-        text = "\(result.correctQuestions)/\(result.totalQuestions)"
+        score = Double(result.correctQuestions)
+        text = "/\(result.totalQuestions)"
     }
 
     func exitQuiz() {
