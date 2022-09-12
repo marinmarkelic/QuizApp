@@ -15,7 +15,7 @@ struct QuizResultView: View {
             Spacer()
 
             Color.clear
-                .animatingOverlay(for: score, postfix: viewModel.text)
+                .modifier(AnimatableNumberModifier(number: score, postfix: viewModel.text))
                 .onAppear {
                     withAnimation {
                         score = viewModel.score
@@ -76,14 +76,6 @@ struct QuizResultViewPreview: PreviewProvider {
 
     static var previews: some View {
         QuizResultView(viewModel: QuizResultViewModel())
-    }
-
-}
-
-extension View {
-
-    func animatingOverlay(for number: Double, postfix: String) -> some View {
-        modifier(AnimatableNumberModifier(number: number, postfix: postfix))
     }
 
 }
