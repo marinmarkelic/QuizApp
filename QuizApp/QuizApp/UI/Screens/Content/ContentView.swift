@@ -17,6 +17,8 @@ struct ContentView: View {
                 LoginView(viewModel: container.resolve())
             case .unknown:
                 CircularLoadingView()
+                    .maxSize()
+                    .background(LinearGradient.background.ignoresSafeArea())
                     .onAppear { viewModel.checkLoginStatus(appData: appData) }
             }
         }

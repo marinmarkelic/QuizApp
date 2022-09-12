@@ -2,6 +2,8 @@ import SwiftUI
 
 struct CircularLoadingView: View {
 
+    var color: Color = .white
+
     @State private var toggleAnimation: Bool = false
 
     var body: some View {
@@ -10,15 +12,13 @@ struct CircularLoadingView: View {
 
             Circle()
                 .trim(from: 0, to: 0.7)
-                .stroke(.white, lineWidth: 2)
+                .stroke(color, lineWidth: 2)
                 .frame(width: 20, height: 20)
                 .rotationEffect(Angle(degrees: toggleAnimation ? 360 : 0))
                 .animation(.linear.repeatForever(autoreverses: false), value: toggleAnimation)
 
             Spacer()
         }
-        .maxSize()
-        .background(LinearGradient.background.ignoresSafeArea())
         .onAppear {
             toggleAnimation.toggle()
         }

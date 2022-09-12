@@ -32,7 +32,7 @@ class LoginViewModel: ObservableObject {
     }
 
     @MainActor
-    func pressedLoginButton(appData: AppData) {
+    func pressedLoginButton(appData: AppData, isLoginLoadingShowed: Binding<Bool>) {
         Task {
             do {
                 _ = try await useCase.logIn(username: email, password: password)
@@ -40,9 +40,9 @@ class LoginViewModel: ObservableObject {
                 appData.loginStatus = .loggedIn
             } catch let error as RequestError {
                 showError(error)
-                appData.loginStatus = .loggedOut
+                isLoginLoadingShowed.wrappedValue = false
             } catch {
-                appData.loginStatus = .loggedOut
+                isLoginLoadingShowed.wrappedValue = false
             }
         }
     }

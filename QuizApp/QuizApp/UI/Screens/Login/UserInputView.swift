@@ -6,16 +6,17 @@ struct UserInputView: View {
     let password: Binding<String>
     let errorText: String
     let isLoginButtonEnabled: Bool
-    let onLoginTap: () -> Void
+    let onLoginTap: (_ isLoginLoadingShowed: Binding<Bool>) -> Void
 
     @State private var isErrorTextShown: Bool = false
+    @State private var isLoginLoadingShowed: Bool = false
 
     init(
         username: Binding<String>,
         password: Binding<String>,
         errorText: String,
         isLoginButtonEnabled: Bool,
-        onLoginTap: @escaping () -> Void = { }
+        onLoginTap: @escaping (Binding<Bool>) -> Void = { _ in }
     ) {
         self.username = username
         self.password = password
@@ -48,10 +49,26 @@ struct UserInputView: View {
                     .animation(.easeOut, value: isErrorTextShown)
             }
 
-            Button(action: { onLoginTap() }, label: {
-                Text("Login")
-                    .foregroundColor(.purpleText)
-                    .font(.heading6)
+            Button(
+                action: {
+                    withAnimation {
+                        isLoginLoadingShowed = true
+                    }
+
+                    onLoginTap($isLoginLoadingShowed)
+                },
+                label: {
+                    HStack {
+                        if isLoginLoadingShowed {
+                            CircularLoadingView(color: .purpleText)
+                                .frame(width: 20, height: 20, alignment: .trailing)
+                                .foregroundColor(.purpleText)
+                        }
+
+                        Text("Login")
+                            .foregroundColor(.purpleText)
+                            .font(.heading6)
+                    }
                     .frame(maxWidth: .infinity)
             })
             .disabled(!isLoginButtonEnabled)
@@ -71,7 +88,7 @@ struct UserInputView: View {
 
     }
 
-    func onLoginTap(_ onLoginTap: @escaping () -> Void) -> UserInputView {
+    func onLoginTap(_ onLoginTap: @escaping (Binding<Bool>) -> Void) -> UserInputView {
         UserInputView(
             username: username,
             password: password,
